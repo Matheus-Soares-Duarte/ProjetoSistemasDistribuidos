@@ -25,10 +25,10 @@ A pretenção é realizar o desenvolvimento deste jogo em forma de aplicativo na
    -1 banco de dados, controlado pelo servidor, que fará o salvamento dos dados da partida, para garantir a confiabilidade da partida e salvamento do estado da mesma.<br>
 <br>
 # Testes:<br>
-<b>teste de concorrência:</b> serão feito acessos com com 2, 3, 4 e 5 pessoas, mostrando o funcionamento do aplicativo com diferentes quantidades de pessoas, demostrando que diversas pessoas podem entrar na mesma partida, sempre que alguem entre na partida ele se tornará o último da mesa a receber cartas e tomar ações.<br>
+<b>Teste de Concorrência:</b> serão feito acessos com com 2, 3, 4 e 5 pessoas, mostrando o funcionamento do aplicativo com diferentes quantidades de pessoas, demostrando que diversas pessoas podem entrar na mesma partida, sempre que alguem entre na partida ele se tornará o último da mesa a receber cartas e tomar ações.<br>
 <br>
-<b>teste de recuperação de falhas:</b><br>
+<b>Teste de Recuperação de Falhas:</b><br>
    -reiniciaremos o servidor para demonstrar que ao ligar novamente a partida que estava sendo executada estará no mesmo estado antes do desligamento, caso todos os jogadores ainda estiverem online.<br>
    -reiniciaremos a internet de um jogador, para desmontrar que o servidor esperará por 20 segundos antes de considerar que o jogador abandonou a partida, caso ele entre novamente na sala antes do termino do tempo, suas cartas, pontos de rodada e posição na mesa ainda estaram salvos como antes do deligamento.<br>
 <br>
-<b>demonstração de funcionalidades:</b> durante a execução da partida mostraremos o banco de dados para que seja possível visualizar que o mesmo está constantemente sendo alimentado pelo servidor, por informações tanto das cartas dos jogadores(seus pontos na rodada), seus pontos de rodada(rodadas ganhas pelo jogador), posição dos jogadores na mesa e de qual jogador e a vez de selecionar uma ação.<br>
+<b>Demonstração de Funcionalidades:</b> durante a execução da partida mostraremos o banco de dados para que seja possível visualizar que o mesmo está constantemente sendo alimentado pelo servidor, por informações tanto das cartas dos jogadores(seus pontos na rodada), seus pontos de rodada(rodadas ganhas pelo jogador), posição dos jogadores na mesa e de qual jogador e a vez de selecionar uma ação.<br>
