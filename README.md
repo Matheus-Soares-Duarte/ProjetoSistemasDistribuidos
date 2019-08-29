@@ -1,6 +1,6 @@
 # ProjetoSistemasDistribuidos
-<i>Entrega 0 da disciplina de Sistemas Distribuidos, ao qual será entregue uma implementação do jogo chamado 21.</i><br>
-<br>
+<i>Entrega 0 da disciplina de Sistemas Distribuidos, ao qual será entregue uma implementação do jogo chamado 21.</i>
+
 # O Jogo Vinte e Um:
    Emplementarei um jogo de 21 simples, sem apostas, onde o jogo terá entre 2 e 5 jogadores e será feito com uso de apenas um baralho (52 cartas, sem coringas), nesse jogo o naipe das cartas não interferem no jogo.<br>
    O objetivo do jogo é completar o valor de 21 pontos, sendo que quem o fizer será o vencedor da rodada, em caso de empate todos que completem 21 pontos na rodada serão considerados vencedores e receberam o ponto de rodada.<br>
