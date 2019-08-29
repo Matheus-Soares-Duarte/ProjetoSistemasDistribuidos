@@ -25,7 +25,7 @@ A pretenção é realizar o desenvolvimento deste jogo em forma de aplicativo na
    * 2 a 5 clientes, que atuarão como jogadores, ou seja, terão as ações de compra e passe e poderão ganhar a rodada e ganhar pontos de rodada.<br>
    * 1 banco de dados, controlado pelo servidor, que fará o salvamento dos dados da partida, para garantir a confiabilidade da partida e salvamento do estado da mesma.<br>
 
-## Testes:<br>
+## Lista de Testes:<br>
 * <b>Teste de Concorrência:</b> serão feito acessos com com 2, 3, 4 e 5 pessoas, mostrando o funcionamento do aplicativo com diferentes quantidades de pessoas, demostrando que diversas pessoas podem entrar na mesma partida, sempre que alguem entre na partida ele se tornará o último da mesa a receber cartas e tomar ações.<br>
 
 * <b>Teste de Recuperação de Falhas:</b><br>
