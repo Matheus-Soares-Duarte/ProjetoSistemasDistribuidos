@@ -9,7 +9,8 @@
 # Ações:
 Cada jogador terá duas ações possíveis em sua vez, elas são:<br>
 * <b>Comprar:</b> onde o Dealer entrega mais uma carta para o jogador, essa ação é possível até que ele passe a vez ou o mesmo estoure, ou seja, valor passe de 21 pontos e nesse caso a vez é passada automaticamente.<br>
-* <b>Passar:</b> essa ação implica em dar seguência no jogo, possibilitando ação aos próximos jogadores, seguindo a sequência de entrada na sala, sendo que quando não haja próximo jogador a rodada é encerrada.<br><br>
+* <b>Passar:</b> essa ação implica em dar seguência no jogo, possibilitando ação aos próximos jogadores, seguindo a sequência de entrada na sala, sendo que quando não haja próximo jogador a rodada é encerrada.<br>
+
 Além disso ele terá uma ação possível a todo momento na partida, sendo ela:<br>
 * <b>Sair do Jogo:</b> ao seleciona lá o jogador sai tanto da rodada em que está, quanto da sala e do próprio aplicativo.<br>
 
