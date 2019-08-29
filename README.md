@@ -2,9 +2,9 @@
 <i>Entrega 0 da disciplina de Sistemas Distribuidos, ao qual será entregue uma implementação do jogo chamado 21.</i>
 
 # O Jogo Vinte e Um:
-   Emplementarei um jogo de 21 simples, sem apostas, onde o jogo terá entre 2 e 5 jogadores e será feito com uso de apenas um baralho (52 cartas, sem coringas), nesse jogo o naipe das cartas não interferem no jogo.<br>
+   Emplementarei um jogo de 21 simples, sem apostas, onde o jogo terá entre 2 e 5 jogadores e será feito com uso de apenas um baralho (52 cartas, sem coringas), nesse jogo o naipe das cartas não interferem no jogo.
    O objetivo do jogo é completar o valor de 21 pontos, sendo que quem o fizer será o vencedor da rodada, em caso de empate todos que completem 21 pontos na rodada serão considerados vencedores e receberam o ponto de rodada.<br>
-   No inicio da partida o Dealer (que nessa aplicação será o servidor e não participará da partida como jogador) entregará duas cartas de forma aleatória para cada jogador (maquina cliente que conectou na sala), sendo a ordem de entrega a ordem de chegada na sala.<br>
+   No inicio da partida o Dealer (que nessa aplicação será o servidor e não participará da partida como jogador) entregará duas cartas de forma aleatória para cada jogador (maquina cliente que conectou na sala), sendo a ordem de entrega a ordem de chegada na sala.
 
 # Ações:
 Cada jogador terá duas ações possíveis em sua vez, elas são:<br>
