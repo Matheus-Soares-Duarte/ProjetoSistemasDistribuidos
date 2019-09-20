@@ -35,7 +35,7 @@ public class Baralho<naipes>
         for(int qtd=0; qtd<quantidadeBaralhos; qtd++)
         {
             for(int i=0; i<4; i++){
-                cartas.add(new Carta("As",naipes[i], 1));
+                cartas.add(new Carta("ÁS",naipes[i], 1));
                 for(int j=2; j<=10; j++)
                     cartas.add(new Carta(String.valueOf(j), naipes[i], j));
                 cartas.add(new Carta("J",naipes[i], 10));
@@ -45,10 +45,10 @@ public class Baralho<naipes>
         }
     }
 
-    void mostraCartas()
+    void mostrarCartas()
     {
         for(Carta c : cartas)
-            System.out.printf("%s\n", c.getCarta());
+            System.out.println(c.getCarta());
     }
 
     void embaralhar()

@@ -11,16 +11,21 @@ public class Carta
         setValor(valor);
     }
 
-    void setLetra(String l){
-        this.letra = l;
+    //setters
+    void setLetra(String letra){
+        this.letra = letra;
     }
-    void setNaipe(String n){
-        this.naipe = n;
+    void setNaipe(String naipe){
+        this.naipe = naipe;
     }
-    void setValor(int v){
-        this.valor = v;
+    void setValor(int valor){
+        this.valor = valor;
     }
 
+    //getters
+    String getCarta(){
+        return getLetra()+" de "+getNaipe();
+    }
     String getLetra(){
         return this.letra;
     }
@@ -29,9 +34,5 @@ public class Carta
     }
     int getValor(){
         return this.valor;
-    }
-
-    String getCarta(){
-        return getLetra()+" de "+getNaipe();
     }
 }
