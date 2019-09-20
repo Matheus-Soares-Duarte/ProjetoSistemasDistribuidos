@@ -26,7 +26,7 @@ public class Mesa {
                 for (Jogador jogador : jogadores) {
                     for (int i = 0; i < 2; i++) {
                         jogador.setCarta(baralho.entregarCarta());
-                        jogador.setValor(jogador.getValor() + jogador.getCarta().getValor());
+                        jogador.setPontos(jogador.getPontos() + jogador.getCarta().getValor());
                         if (jogador.getCarta().getValor() == 1) {
                             jogador.setAs(true);
                         }
@@ -57,7 +57,7 @@ public class Mesa {
         int i=1;
         System.out.println("--------SCORE--------");
         for (Jogador jogador : jogadores){
-            System.out.println("-Jogador nº "+i+" ("+jogador.getNome()+"): "+jogador.getPontosRodada()+" Vitorias.");
+            System.out.println("-Jogador nº "+i+" ("+jogador.getNome()+"): "+jogador.getVitorias()+" Vitorias.");
             i++;
         }
     }
@@ -65,11 +65,11 @@ public class Mesa {
     void verificarVitoria(){
         int maiorValor = 0;
         for (Jogador jogador : jogadores){
-            if (jogador.getValor()>maiorValor)
-                maiorValor = jogador.getValor();
+            if (jogador.getPontos()>maiorValor)
+                maiorValor = jogador.getPontos();
         }
         for (Jogador jogador : jogadores){
-            if (jogador.getValor()==maiorValor)
+            if (jogador.getPontos()==maiorValor)
                 jogador.addVitoria();
         }
     }

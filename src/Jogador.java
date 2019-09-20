@@ -6,16 +6,16 @@ public class Jogador {
     private String nome;
     private List<Carta> cartas = new ArrayList<Carta>();
     private boolean as;
-    private int valor;
-    private int pontosRodada;
+    private int pontos;
+    private int vitorias;
     //private int idMesa;
 
     public Jogador(String ip, String nome){
         setIp(ip);
         setNome(nome);
         setAs(false);
-        setValor(0);
-        setPontosRodada(0);
+        setPontos(0);
+        setVitorias(0);
     }
 
     //setters
@@ -31,10 +31,10 @@ public class Jogador {
     void setNome(String nome){
         this.nome = nome;
     }
-    void setValor(int valor){
-        this.valor = valor;
+    void setPontos(int valor){
+        this.pontos = valor;
     }
-    void setPontosRodada(int pontos){ this.pontosRodada = pontos; }
+    void setVitorias(int valor){ this.vitorias = valor; }
 
     //getters
     boolean getAs(){ return this.as; }
@@ -44,21 +44,21 @@ public class Jogador {
     String getNome(){
         return this.nome;
     }
-    int getValor(){
-        if(this.getAs()==true && this.valor+10<=21)
-            return this.valor+10;
-        return this.valor;
+    int getPontos(){
+        if(this.getAs()==true && this.pontos+10<=21)
+            return this.pontos+10;
+        return this.pontos;
     }
-    int getPontosRodada(){
-        return this.pontosRodada;
+    int getVitorias(){
+        return this.vitorias;
     }
 
     //funções proprias
-    void addVitoria(){ setPontosRodada( getPontosRodada()+1 ); }
+    void addVitoria(){ setVitorias( getVitorias()+1 ); }
 
     void devolverCartas(){
         cartas.clear();
-        setValor(0);
+        setPontos(0);
         setAs(false);
     }
 
@@ -67,7 +67,7 @@ public class Jogador {
         for (Carta carta : cartas){
             System.out.print(carta.getCarta() + " - ");
         }
-        System.out.println("Totalizando: "+getValor()+" pontos.");
+        System.out.println("Totalizando: "+getPontos()+" pontos.");
     }
 
     void comprarCarta(){}
