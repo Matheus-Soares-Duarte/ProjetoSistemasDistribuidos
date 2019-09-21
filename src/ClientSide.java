@@ -1,6 +1,3 @@
-
-import menus.menuInicial;
-
 import java.util.Scanner;
 
 public class ClientSide {

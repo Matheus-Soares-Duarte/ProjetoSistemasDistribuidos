@@ -1,8 +1,4 @@
-package menus;
 import java.util.Scanner;
-
-import entidades.player;
-
 
 public class menuInicial {
     public void RunMenuInicial(Jogador p){
