@@ -5,7 +5,7 @@ import entidades.player;
 
 
 public class menuInicial {
-    public void RunMenuInicial(player p){
+    public void RunMenuInicial(Jogador p){
         System.out.println("Ola: "+ p.getNome());
         System.out.println("criar uma sala '-criar <numero da sala>'");
         System.out.println("entrar em uma sala exixtente '-entrar <numero da sala>'");
