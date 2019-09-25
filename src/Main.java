@@ -1,3 +1,5 @@
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +31,16 @@ public class Main {
 //            cartas.remove(cartas.size()-1);
 //        }
 
-        Jogador j1 = new Jogador("1.1.1.1","Fulano");
-        Jogador j2 = new Jogador("2.2.2.2","Ciclano");
-        Mesa m1 = new Mesa(1, j1);
-        m1.iniciarJogo();
-        m1.setJogador(j2);
-        m1.iniciarJogo();
+//        Jogador j1 = new Jogador("1.1.1.1","Fulano");
+//        Jogador j2 = new Jogador("2.2.2.2","Ciclano");
+//        Mesa m1 = new Mesa(1, j1);
+//        m1.iniciarJogo();
+//        m1.setJogador(j2);
+//        m1.iniciarJogo();
+
+        Servidor servidor = new Servidor();
+        ClientSide c1 = new ClientSide(servidor);
+        ClientSide c2 = new ClientSide(servidor);
 
     }
 }
