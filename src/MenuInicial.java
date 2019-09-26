@@ -1,12 +1,12 @@
 import java.util.Scanner;
 
-public class menuInicial {
+public class MenuInicial {
 //    private final String comandoCriar = "-criar" ;
 //    private final String comandoEntrar = "-entrar" ;
     Scanner sc = new Scanner(System.in);
 
     public void RunMenuInicial(Servidor servidor, Jogador jogador){
-        System.out.println("Ola: "+ jogador.getNome());
+        System.out.println("Ola "+ jogador.getNome()+", Seja Bem Vindo!");
         boolean comandoOK = false;
 
         while(comandoOK == false) {
