@@ -13,19 +13,19 @@ public class Cliente {
 //
 //        sc.close();
 //    }
-
-    public Cliente (Servidor servidor){
-        try {
-            Scanner sc = new Scanner(System.in);
-
-            System.out.print("Digite um nome: ");
-            String nome = sc.nextLine();
-            Jogador jogador = new Jogador(InetAddress.getLocalHost().getHostAddress(), nome);
-
-            MenuInicial m = new MenuInicial();
-            m.RunMenuInicial(servidor, jogador);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-    }
+//
+//    public Cliente (Servidor servidor){
+//        try {
+//            Scanner sc = new Scanner(System.in);
+//
+//            System.out.print("Digite um nome: ");
+//            String nome = sc.nextLine();
+//            Jogador jogador = new Jogador(InetAddress.getLocalHost().getHostAddress(), nome);
+//
+//            Menu m = new Menu();
+//            m.menuInicial(servidor, jogador);
+//        } catch (UnknownHostException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

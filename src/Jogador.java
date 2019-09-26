@@ -1,12 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Jogador {
-    private final String comandoComprar = "-comprar" ;
-    private final String comandoPassar = "-passar" ;
-    private final String comandoSair = "-sair" ;
-
     private String ip;
     private String nome;
     private List<Carta> cartas = new ArrayList<Carta>();
@@ -15,11 +10,10 @@ public class Jogador {
     private int vitorias;
     private int partidas;
     private Mesa mesa;
-    Scanner sc = new Scanner(System.in);
+    private Menu menu = new Menu();
 
-    public Jogador(String ip, String nome){
-        setIp(ip);
-        setNome(nome);
+    public Jogador(Servidor servidor){
+        this.getMenu().menuInicial(servidor, this);
         setAs(false);
         setPontos(0);
         setVitorias(0);
@@ -28,7 +22,7 @@ public class Jogador {
 
     //setters
     void setAs(boolean as){ this.as = as; }
-    void setCarta(Carta carta){ this.cartas.add(carta); }
+    void setCartas(List<Carta> cartas){ this.cartas = cartas; }
     void setIp(String ip){ this.ip = ip; }
     void setMesa(Mesa mesa){ this.mesa = mesa; }
     void setNome(String nome){ this.nome = nome; }
@@ -38,9 +32,9 @@ public class Jogador {
 
     //getters
     boolean getAs(){ return this.as; }
-    Carta getCarta(){ return cartas.get( cartas.size()-1 ); }
     List<Carta> getCartas(){ return cartas; }
     String getIp(){ return this.ip; }
+    Menu getMenu(){ return this.menu; }
     Mesa getMesa(){ return this.mesa; }
     String getNome(){ return this.nome; }
     int getPontos(){
@@ -54,6 +48,7 @@ public class Jogador {
     //funções proprias
     void addVitoria(){ setVitorias( getVitorias()+1 ); }
     void addPartida(){ setPartidas( getPartidas()+1 ); }
+    void addCarta(Carta carta){ this.cartas.add(carta); }
 
     void devolverCartas(){
         cartas.clear();
@@ -62,14 +57,30 @@ public class Jogador {
     }
 
     void mostrarCartas(){
-        System.out.print("O jogador " + this.getNome() + " está com as cartas: ");
+        System.out.print("CARTAS: ");
         for (Carta carta : cartas){
-            System.out.print(carta.getCarta() + " - ");
+            System.out.print(carta.getCarta());
+            if(carta!=this.getCartas().get(this.getCartas().size()-1)){
+                System.out.print(" - ");
+            } else {
+                System.out.print(".");
+            }
+
         }
-        System.out.println("Totalizando: "+getPontos()+" pontos.");
+        System.out.println("\nSOMA DE PONTOS: "+getPontos()+" Pontos.");
     }
 
-    void comprarCarta(){}
-    void passarVez(){}
-    void sairDaMesa(){}
+    void fazerEscolha(){ this.getMenu().menuEscolha( this.getMesa(), this); }
+
+    Carta comprarCarta(){
+        Carta carta = this.getMesa().getBaralho().entregarCarta();
+        this.addCarta(carta);
+        this.setPontos(this.getPontos() + carta.getValor());
+        if (carta.getValor() == 1) {
+            this.setAs(true);
+        }
+        return carta;
+    }
+
+    void sairDaMesa(){ this.getMesa().retirarJogador(this); }
 }

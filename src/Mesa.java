@@ -21,6 +21,7 @@ public class Mesa {
 
     void addJogador(Jogador jogador){
         this.getJogadores().add(jogador);
+        jogador.setMesa(this);
         if(this.getJogadores().size()!=1) {
             System.out.println("O Jogador " + jogador.getNome() + " acaba de entrar nesta partida!");
         }
@@ -33,45 +34,46 @@ public class Mesa {
         System.out.println("\n--------------INICIANDO JOGO--------------");
 
         while(this.getJogadores().size()>1){
-//        if(jogadores.size()>1) {
-//            for (int r = 0; r < 3; r++) {
-                System.out.println("\n--------INICIANDO RODADA--------");
-                this.reiniciarRodada();
+            System.out.println("\n--------INICIANDO RODADA--------");
+            this.reiniciarRodada();
 
-                for (Jogador jogador : this.getJogadores()) {
-                    for (int i = 0; i < 2; i++) {
-                        jogador.setCarta(baralho.entregarCarta());
-                        jogador.setPontos(jogador.getPontos() + jogador.getCarta().getValor());
-                        if (jogador.getCarta().getValor() == 1) {
-                            jogador.setAs(true);
-                        }
-                    }
-                    jogador.mostrarCartas();
-                }
-                this.verificarVitoria();
-                this.score();
-            //}
+            for (Jogador jogador : this.getJogadores() ) {
+                for (int i=0; i<2; i++) { jogador.comprarCarta(); }
+            }
+
+            for ( Jogador jogador : this.getJogadores() ) { jogador.fazerEscolha(); }
+            this.verificarVitoria();
+            this.score();
         }
 
-        if(jogadores.size()<2){
+        if(this.getJogadores().size()<2){
             System.out.println("Não existem jogadores suficientes na mesa para iniciar a rodada.");
         }
     }
 
     void reiniciarRodada(){
-        for (Jogador jogador : jogadores){
+        for (Jogador jogador : this.getJogadores() ){
             for (Carta carta : jogador.getCartas()) {
-                baralho.addCarta(carta);
+                this.getBaralho().addCarta(carta);
             }
             jogador.devolverCartas();
         }
-        baralho.embaralhar();
+        this.getBaralho().embaralhar();
+    }
+
+    void retirarJogador(Jogador jogador){
+        int index = this.getJogadores().indexOf(jogador);
+        if(index>=0){
+            System.out.println("O Jogador "+jogador.getNome()+" acaba de abandonar a partida.");
+            this.getJogadores().remove(index);
+            jogador.setMesa(null);
+        }
     }
 
     void score(){
         int i=1;
         System.out.println("--------SCORE--------");
-        for (Jogador jogador : jogadores){
+        for ( Jogador jogador : this.getJogadores() ){
             System.out.println("-Jogador nº "+i+" ("+jogador.getNome()+"): "+jogador.getVitorias()+" Vitorias em "+jogador.getPartidas()+" Partidas.");
             i++;
         }
@@ -79,14 +81,16 @@ public class Mesa {
 
     void verificarVitoria(){
         int maiorValor = 0;
-        for (Jogador jogador : jogadores){
-            if (jogador.getPontos()>maiorValor)
+        for ( Jogador jogador : this.getJogadores() ){
+            if (jogador.getPontos()<=21 && jogador.getPontos()>maiorValor)
                 maiorValor = jogador.getPontos();
         }
-        for (Jogador jogador : jogadores){
+        for ( Jogador jogador : this.getJogadores() ){
             jogador.addPartida();
-            if (jogador.getPontos()==maiorValor)
+            if (jogador.getPontos()==maiorValor) {
+                System.out.println("VITORIA DE "+jogador.getNome()+" COM "+jogador.getPontos()+" PONTOS!");
                 jogador.addVitoria();
+            }
         }
     }
 }

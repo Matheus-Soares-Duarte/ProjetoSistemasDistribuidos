@@ -11,7 +11,7 @@ public class Servidor {
 
     boolean addJogador(int numero, Jogador jogador){
         int index = buscaMesa(numero);
-        if(index!=-1){
+        if(index>=0){
             this.getMesas().get(index).addJogador(jogador);
             return true;
         } else {
@@ -34,25 +34,12 @@ public class Servidor {
         if(index==-1){
             Mesa mesa = new Mesa(numero, jogador);
             this.addMesas(mesa);
+            jogador.setMesa(mesa);
             System.out.println("A sala de numero "+numero+" foi criada com sucesso!");
             return true;
         } else {
             System.out.println("A sala de numero "+numero+" ja foi criada!");
             return false;
         }
-    }
-
-    boolean retiraJogador(int numero, Jogador jogador){
-        int indexMesa = buscaMesa(numero);
-        if(indexMesa!=-1){
-            int indexJogador = this.getMesas().get(indexMesa).getJogadores().indexOf(jogador);
-            if(indexJogador>=0) {
-                this.getMesas().get(indexMesa).getJogadores().remove(indexJogador);
-                return true;
-            }
-        } else {
-            System.out.println("A sala de numero "+numero+" não existe!");
-        }
-        return false;
     }
 }

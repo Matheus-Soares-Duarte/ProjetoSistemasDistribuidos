@@ -39,8 +39,8 @@ public class Main {
 //        m1.iniciarJogo();
 
         Servidor servidor = new Servidor();
-        ClientSide c1 = new ClientSide(servidor);
-        ClientSide c2 = new ClientSide(servidor);
+        Jogador j1 = new Jogador(servidor);
+        Jogador j2 = new Jogador(servidor);
 
     }
 }
