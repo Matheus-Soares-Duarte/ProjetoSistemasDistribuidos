@@ -16,10 +16,10 @@ public class ConexaoServidor {
             final int portaMulticast = 8888;
             try {
                 DatagramSocket socket = new DatagramSocket();
+                String ipServidor = InetAddress.getLocalHost().getHostAddress();
+                outBuf = (ipServidor).getBytes();
+                InetAddress address = InetAddress.getByName("224.2.2.3");
                 while (true) {
-                    String ipServidor = InetAddress.getLocalHost().getHostAddress();
-                    outBuf = (ipServidor).getBytes();
-                    InetAddress address = InetAddress.getByName("224.2.2.3");
                     DatagramPacket outPacket = new DatagramPacket(outBuf, outBuf.length, address, portaMulticast);
                     socket.send(outPacket);
                     try { Thread.sleep(500); }catch (InterruptedException ie) {}
