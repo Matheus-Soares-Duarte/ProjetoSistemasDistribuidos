@@ -21,7 +21,7 @@ public class Mesa {
 
     void addJogador(Jogador jogador){
         this.getJogadores().add(jogador);
-        jogador.setMesa(this);
+        jogador.setMesa(this.getId());
         if(this.getJogadores().size()!=1) {
             System.out.println("O Jogador " + jogador.getNome() + " acaba de entrar nesta partida!");
         }
@@ -37,11 +37,11 @@ public class Mesa {
             System.out.println("\n--------INICIANDO RODADA--------");
             this.reiniciarRodada();
 
-            for (Jogador jogador : this.getJogadores() ) {
-                for (int i=0; i<2; i++) { jogador.comprarCarta(); }
-            }
+//            for (Jogador jogador : this.getJogadores() ) {
+//                for (int i=0; i<2; i++) { jogador.comprarCarta(); }
+//            }
 
-            for ( Jogador jogador : this.getJogadores() ) { jogador.fazerEscolha(); }
+//            for ( Jogador jogador : this.getJogadores() ) { jogador.fazerEscolha(); }
             this.verificarVitoria();
             this.score();
         }
@@ -66,7 +66,7 @@ public class Mesa {
         if(index>=0){
             System.out.println("O Jogador "+jogador.getNome()+" acaba de abandonar a partida.");
             this.getJogadores().remove(index);
-            jogador.setMesa(null);
+//            jogador.setMesa(null);
         }
     }
 

@@ -10,7 +10,7 @@ public class Jogador implements Serializable {
     private int pontos;
     private int vitorias;
     private int partidas;
-    private Mesa mesa;
+    private int mesa;
     private Menu menu = new Menu();
 
     public Jogador(ConexaoCliente cliente){
@@ -25,7 +25,7 @@ public class Jogador implements Serializable {
     void setAs(boolean as){ this.as = as; }
     void setCartas(List<Carta> cartas){ this.cartas = cartas; }
     void setIp(String ip){ this.ip = ip; }
-    void setMesa(Mesa mesa){ this.mesa = mesa; }
+    void setMesa(int mesa){ this.mesa = mesa; }
     void setNome(String nome){ this.nome = nome; }
     void setPontos(int pontos){ this.pontos = pontos; }
     void setVitorias(int vitorias){ this.vitorias = vitorias; }
@@ -36,7 +36,7 @@ public class Jogador implements Serializable {
     List<Carta> getCartas(){ return cartas; }
     String getIp(){ return this.ip; }
     Menu getMenu(){ return this.menu; }
-    Mesa getMesa(){ return this.mesa; }
+    int getMesa(){ return this.mesa; }
     String getNome(){ return this.nome; }
     int getPontos(){
         if(this.getAs()==true && this.pontos+10<=21)
@@ -71,17 +71,17 @@ public class Jogador implements Serializable {
         System.out.println("\nSOMA DE PONTOS: "+getPontos()+" Pontos.");
     }
 
-    void fazerEscolha(){ this.getMenu().escolha( this.getMesa(), this); }
+//    void fazerEscolha(){ this.getMenu().escolha( this.getMesa(), this); }
 
-    Carta comprarCarta(){
-        Carta carta = this.getMesa().getBaralho().entregarCarta();
-        this.addCarta(carta);
-        this.setPontos(this.getPontos() + carta.getValor());
-        if (carta.getValor() == 1) {
-            this.setAs(true);
-        }
-        return carta;
-    }
+//    Carta comprarCarta(){
+//        Carta carta = this.getMesa().getBaralho().entregarCarta();
+//        this.addCarta(carta);
+//        this.setPontos(this.getPontos() + carta.getValor());
+//        if (carta.getValor() == 1) {
+//            this.setAs(true);
+//        }
+//        return carta;
+//    }
 
-    void sairDaMesa(){ this.getMesa().retirarJogador(this); }
+//    void sairDaMesa(){ this.getMesa().retirarJogador(this); }
 }
