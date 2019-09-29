@@ -6,17 +6,23 @@ import java.util.List;
 
 public class ConexaoServidor {
     private int portaTCP;
-    private List<Socket> clientes;
-    private List<Mesa> mesas = new ArrayList<Mesa>();
+    private static List<Socket> clientes;
+    private static List<Jogador> jogadores;
+    private static List<Mesa> mesas = new ArrayList<Mesa>();
 
     public ConexaoServidor (int porta) {
         this.portaTCP = porta;
         this.clientes = new ArrayList<Socket>();
+        this.jogadores = new ArrayList<Jogador>();
     }
 
     void setMesas(List<Mesa> mesas){ this.mesas = mesas; }
+    List<Socket> getClientes(){ return this.clientes; }
+    List<Jogador> getJogadores(){ return this.jogadores; }
     List<Mesa> getMesas(){ return this.mesas; }
 
+    void addCliente(Socket socket){ this.clientes.add(socket); }
+    void addJogador(Jogador jogador){ this.jogadores.add(jogador); }
     void addMesas(Mesa mesa){ this.mesas.add(mesa); }
 
     boolean addJogador(int numero, Jogador jogador){
@@ -30,6 +36,15 @@ public class ConexaoServidor {
         }
     }
 
+    int buscaJogador(String ip){
+        for (Jogador jogador : this.getJogadores() ){
+            if(jogador.getIp().equals(ip)){
+                return this.getJogadores().indexOf(jogador);
+            }
+        }
+        return -1;
+    }
+
     int buscaMesa(int numero){
         for (Mesa mesa : this.getMesas()){
             if(mesa.getId() == numero){
@@ -39,17 +54,15 @@ public class ConexaoServidor {
         return -1;
     }
 
-    boolean criarMesa(int numero, Jogador jogador){
+    String criarMesa(int numero, Jogador jogador){
         int index = buscaMesa(numero);
         if(index==-1){
             Mesa mesa = new Mesa(numero, jogador);
             this.addMesas(mesa);
-            jogador.setMesa(mesa);
-            System.out.println("A sala de numero "+numero+" foi criada com sucesso!");
-            return true;
+            jogador.setMesa(numero);
+            return "A sala de numero "+numero+" foi criada com sucesso!";
         } else {
-            System.out.println("A sala de numero "+numero+" ja foi criada!");
-            return false;
+            return "A sala de numero "+numero+" ja foi criada!";
         }
     }
 
@@ -80,7 +93,7 @@ public class ConexaoServidor {
             System.out.println("Nova conexão com o cliente " + cliente.getInetAddress().getHostAddress() );
 
             // adiciona socket do cliente à lista
-            this.clientes.add(cliente);
+            this.addCliente(cliente);
 
             // cria tratador de cliente numa nova thread
             TrataCliente tc = new TrataCliente(cliente, this);
@@ -102,22 +115,26 @@ public class ConexaoServidor {
                     mensagemResposta = new Mensagem("String", "Comando inválido");
                     saida.writeObject(mensagemResposta);
                 }
-                if (com[0].equals("criar")) {
-                    //ps.println("criando"); //Mesa m = new Mesa(Integer.parseInt(com[1]), )
-                    mensagemResposta = new Mensagem("String", "Sala Criada!");
+                else if (com[0].equals("criar")) {
+                    int numero = Integer.parseInt(com[1]);
+                    int index = buscaJogador( socket.getInetAddress().toString().replace("/", "") );
+                    if(index>=0){
+                        Jogador jogador = this.getJogadores().get(index);
+                        mensagemResposta = new Mensagem("String", this.criarMesa(numero, jogador));
+                    } else {
+                        mensagemResposta = new Mensagem("String", "Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!");
+                    }
                     saida.writeObject(mensagemResposta);
                 } else if (com[0].equals("entrar")) {
                     mensagemResposta = new Mensagem("String", "Entrando na Sala!");
                     saida.writeObject(mensagemResposta);
-                    //ps.println("entrando");//addJogador
                 } else {
                     mensagemResposta = new Mensagem("String", "Entrando na Sala!");
                     saida.writeObject(mensagemResposta);
-//                    ps.println("Comando não encontrado");
                 }
             } else if(tipo.equals("Jogador")){
-                mensagemResposta = new Mensagem("String", "Jogador Recebido com sucesso!");
-                saida.writeObject(mensagemResposta);
+                Jogador jogador = (Jogador)mensagemRecebida.getObjeto();
+                this.addJogador( jogador );
             }
 
         } catch (IOException e) {
