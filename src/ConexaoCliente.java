@@ -54,7 +54,7 @@ public class ConexaoCliente {
                         jogador.getMenu().escolhaInicial(this);
                     }
                 } else if( com[0].equals("Sucesso") ){
-                    System.out.println(com[2]);
+                    System.out.println(com[1]);
                 } else {
                     System.out.println(com[1]);
                 }
