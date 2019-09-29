@@ -58,11 +58,15 @@ public class ConexaoServidor {
         System.out.println("Mensagem do cliente "+cliente.getInetAddress()+"="+msg+".");
         try {
             PrintStream ps = new PrintStream(cliente.getOutputStream());
-            if(msg.equals("criar")){
-                ps.println("Criando sala");
+            String com[] = msg.split(":");
+            if(com.length > 2){
+                ps.println("Comando inválido");
             }
-            else if(msg.equals("entrar")){
-                ps.println("Entrando na sala");
+            if(com[0].equals("-criar")){
+                ps.println("criando"); //Mesa m = new Mesa(Integer.parseInt(com[1]), )
+            }
+            else if(com[0].equals("-entrar")){
+                ps.println("entrando");//addJogador
             }else{
                 ps.println("Comando não encontrado");
             }

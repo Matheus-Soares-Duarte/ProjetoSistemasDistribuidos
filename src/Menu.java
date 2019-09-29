@@ -29,7 +29,6 @@ public class Menu {
                         comandoOK=servidor.addJogador(numero, jogador);
                         break;
                     default:
-                        //throw new IllegalStateException("Unexpected value: " + comando);
                         System.out.println("Unexpected value: " + comando);
                         System.out.println("Por favor entre com um comando valido!");
                 }

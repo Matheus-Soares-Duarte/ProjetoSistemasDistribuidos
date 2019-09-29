@@ -8,6 +8,7 @@ public class ConexaoCliente {
     String buscaServidor(){
         String ipServidor="";
         try {
+            //conecta via UPD para pegar o IP do servidor do jogo
             MulticastSocket socket = new MulticastSocket(8888);
             InetAddress address = InetAddress.getByName("224.2.2.3");
             socket.joinGroup(address);
@@ -38,9 +39,9 @@ public class ConexaoCliente {
         PrintStream saida = null;
         try {
             saida = new PrintStream(socket.getOutputStream());
-            while (true) {
+
                 saida.println(mensagem);
-            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

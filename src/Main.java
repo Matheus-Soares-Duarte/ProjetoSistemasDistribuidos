@@ -4,7 +4,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+/*public class Main {
     public static void main(String[] args) {
 //        System.out.println("CRIANDO BARALHO:");
 //        Baralho b = new Baralho();
@@ -45,3 +45,4 @@ public class Main {
 
     }
 }
+*/
