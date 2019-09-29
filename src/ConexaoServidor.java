@@ -37,9 +37,9 @@ public class ConexaoServidor {
         }
     }
 
-    int buscaJogador(String ip){
+    int buscaJogador(Socket socket){
         for (Jogador jogador : this.getJogadores() ){
-            if(jogador.getIp().equals(ip)){
+            if(jogador.getSocket().equals(socket)){
                 return this.getJogadores().indexOf(jogador);
             }
         }
@@ -115,7 +115,7 @@ public class ConexaoServidor {
                 if (com[0].equals("criar")) {
                     int numero = Integer.parseInt(com[1]);
                     System.out.println("Tentando criar Sala "+numero);
-                    int index = buscaJogador( socket.getInetAddress().toString().replace("/", "") );
+                    int index = buscaJogador( socket );
                     if(index>=0){
                         Jogador jogador = this.getJogadores().get(index);
                         resposta = this.criarMesa(numero, jogador);
@@ -127,7 +127,7 @@ public class ConexaoServidor {
                     out.writeObject(mensagemResposta);
                 } else if (com[0].equals("entrar")) {
                     int numero = Integer.parseInt(com[1]);
-                    int index = buscaJogador( socket.getInetAddress().toString().replace("/", "") );
+                    int index = buscaJogador( socket );
                     if(index>=0){
                         Jogador jogador = this.getJogadores().get(index);
                         resposta = this.addJogadorMesa(numero, jogador);
