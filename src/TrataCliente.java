@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class TrataCliente implements Runnable {
     private Socket cliente;

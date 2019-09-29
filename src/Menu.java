@@ -13,8 +13,8 @@ public class Menu implements Serializable {
             jogador.setNome(nome);
             jogador.setIp(InetAddress.getLocalHost().getHostAddress());
             System.out.println("Ola "+ jogador.getNome()+", Seja Bem Vindo!");
-            Mensagem mensagem1 = new Mensagem("Jogador", jogador);
-            cliente.enviaMesagem(mensagem1);
+            Mensagem mensagem = new Mensagem("Jogador", jogador);
+            cliente.enviaMesagem(mensagem);
 
             boolean comandoOK = false;
 
@@ -24,7 +24,7 @@ public class Menu implements Serializable {
                 System.out.print("COMANDO: ");
                 String comando = sc.next().toLowerCase();
                 int numero = sc.nextInt();
-                Mensagem mensagem = new Mensagem("String", comando+":"+numero);
+                mensagem = new Mensagem("String", comando+":"+numero);
 
                 switch (comando) {
                     case "criar":
