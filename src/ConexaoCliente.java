@@ -6,6 +6,7 @@ public class ConexaoCliente {
     Socket socket = null;
     ObjectOutputStream out;
     ObjectInputStream in;
+    Jogador jogador;
 
     String buscaServidor(){
         String ipServidor="";
@@ -32,10 +33,35 @@ public class ConexaoCliente {
             in = new ObjectInputStream(socket.getInputStream());
 
             System.out.println("O cliente "+ InetAddress.getLocalHost().getHostAddress()+" se conectou ao servidor "+ipServidor+"!");
-            Recebedor recebedor = new Recebedor(in);
+            Recebedor recebedor = new Recebedor(this);
             new Thread(recebedor).start();
+
+            jogador = new Jogador(this);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    void analisaMesagem(Mensagem mensagem){
+        String tipo = mensagem.getTipo();
+        switch (tipo){
+            case "String" :
+                String conteudo = (String) mensagem.getObjeto();
+                String com[] = conteudo.split(":");
+                if( com[0].equals("Erro") ){
+                    if(com[1].equals("Inicial")){
+                        System.out.println(com[2]);
+                        jogador.getMenu().escolhaInicial(this);
+                    }
+                } else if( com[0].equals("Sucesso") ){
+                    System.out.println(com[2]);
+                } else {
+                    System.out.println(com[1]);
+                }
+                break;
+            default:
+                System.out.println("Tipo de mensagem não encontrada!");
+                break;
         }
     }
 

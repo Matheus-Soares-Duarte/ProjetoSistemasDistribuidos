@@ -31,9 +31,9 @@ public class ConexaoServidor {
         if(index>=0){
             this.getMesas().get(index).addJogador(jogador);
             System.out.println("O Jogador " + jogador.getNome() + " acaba de entrar na sala "+numero+"!");
-            return "Bem vindo a Sala "+numero+"!";
+            return "Sucesso:Bem vindo a Sala "+numero+"!";
         } else {
-            return "A Sala "+numero+" não existe!";
+            return "Erro:Inicial:A Sala "+numero+" não existe!";
         }
     }
 
@@ -61,9 +61,9 @@ public class ConexaoServidor {
             Mesa mesa = new Mesa(numero, jogador);
             this.addMesas(mesa);
             jogador.setMesa(numero);
-            return "A sala de numero "+numero+" foi criada com sucesso!";
+            return "Sucesso:A sala de numero "+numero+" foi criada com sucesso!";
         } else {
-            return "A sala de numero "+numero+" ja foi criada!";
+            return "Erro:Inicial:A sala de numero "+numero+" ja foi criada!";
         }
     }
 
@@ -119,9 +119,9 @@ public class ConexaoServidor {
                     if(index>=0){
                         Jogador jogador = this.getJogadores().get(index);
                         resposta = this.criarMesa(numero, jogador);
-                        System.out.println(resposta+" Existem "+getMesas().size()+" Salas abertas neste Servidor.");
+                        System.out.println(resposta+" Existe(em) "+getMesas().size()+" Sala(s) aberta(s) neste Servidor.");
                     } else {
-                        resposta = "Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!";
+                        resposta = "Erro:Inicial:Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!";
                     }
                     mensagemResposta = new Mensagem("String", resposta);
                     out.writeObject(mensagemResposta);
@@ -132,12 +132,12 @@ public class ConexaoServidor {
                         Jogador jogador = this.getJogadores().get(index);
                         resposta = this.addJogadorMesa(numero, jogador);
                     } else {
-                        resposta = "Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!";
+                        resposta = "Erro:Inicial:Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!";
                     }
                     mensagemResposta = new Mensagem("String", resposta);
                     out.writeObject(mensagemResposta);
                 } else {
-                    mensagemResposta = new Mensagem("String", "Comando ainda não tratado!");
+                    mensagemResposta = new Mensagem("String", "Erro:Inicial:Comando ainda não tratado!");
                     out.writeObject(mensagemResposta);
                 }
             } else if(tipo.equals("Jogador")){

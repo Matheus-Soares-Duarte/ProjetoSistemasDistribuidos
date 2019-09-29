@@ -16,37 +16,43 @@ public class Menu implements Serializable {
             Mensagem mensagem = new Mensagem("Jogador", jogador);
             cliente.enviaMesagem(mensagem);
 
-            boolean comandoOK = false;
+            this.escolhaInicial(cliente);
 
-            while(comandoOK == false) {
-                System.out.println("\n-Para criar uma sala digite 'criar <numero da sala>'");
-                System.out.println("-Para entrar em uma sala existente digite 'entrar <numero da sala>'");
-                System.out.print("COMANDO: ");
-                String comando = sc.next().toLowerCase();
-                int numero = sc.nextInt();
-                mensagem = new Mensagem("String", comando+":"+numero);
-
-                switch (comando) {
-                    case "criar":
-                        cliente.enviaMesagem(mensagem);
-                        comandoOK=true;
-                        break;
-                    case "entrar":
-                        cliente.enviaMesagem(mensagem);
-                        comandoOK=true;
-                        break;
-                    default:
-                        //throw new IllegalStateException("Unexpected value: " + comando);
-                        System.out.println("Unexpected value: " + comando);
-                        System.out.println("Por favor entre com um comando valido!");
-                }
-            }
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
     }
 
-    public void escolha(Mesa mesa, Jogador jogador){
+    public void escolhaInicial(ConexaoCliente cliente) {
+        boolean comandoOK = false;
+
+        while(comandoOK == false) {
+            System.out.println("\n-Para criar uma sala digite 'criar <numero da sala>'");
+            System.out.println("-Para entrar em uma sala existente digite 'entrar <numero da sala>'");
+            System.out.print("COMANDO: ");
+            String comando = sc.next().toLowerCase();
+            int numero = sc.nextInt();
+            Mensagem mensagem = new Mensagem("String", comando+":"+numero);
+
+            switch (comando) {
+                case "criar":
+                    cliente.enviaMesagem(mensagem);
+                    comandoOK=true;
+                    break;
+                case "entrar":
+                    cliente.enviaMesagem(mensagem);
+                    comandoOK=true;
+                    break;
+                default:
+                    //throw new IllegalStateException("Unexpected value: " + comando);
+                    System.out.println("Unexpected value: " + comando);
+                    System.out.println("Por favor entre com um comando valido!");
+            }
+        }
+
+    }
+
+        public void escolha(Mesa mesa, Jogador jogador){
 //        boolean terminaLoop = false;
 //
 //        while(terminaLoop == false) {

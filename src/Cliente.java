@@ -5,6 +5,5 @@ public class Cliente {
         ConexaoCliente conexao = new ConexaoCliente();
         String ipServidor = conexao.buscaServidor();
         conexao.criarSocketTCP(ipServidor, PORTA);
-        Jogador jogador = new Jogador(conexao);
     }
 }
