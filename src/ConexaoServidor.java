@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.PrintStream;
 import java.net.*;
 import java.util.ArrayList;
@@ -91,6 +92,13 @@ public class ConexaoServidor {
     public void respondeMensagem(Socket cliente, Mensagem mensagem) {
 //        System.out.println("Mensagem do cliente "+cliente.getInetAddress()+"="+mensagem+".");
         try {
+            ObjectInputStream in = new ObjectInputStream(cliente.getInputStream());
+            Mensagem mensagem1 = (Mensagem) in.readObject();
+            if(mensagem1.getTipo() == ""){
+
+            }else if(mensagem1.getTipo() == ""){
+
+            }
             PrintStream ps = new PrintStream(cliente.getOutputStream());
             String tipo = mensagem.getTipo();
             if(tipo.equals("String")) {
@@ -110,7 +118,7 @@ public class ConexaoServidor {
 
             }
 
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

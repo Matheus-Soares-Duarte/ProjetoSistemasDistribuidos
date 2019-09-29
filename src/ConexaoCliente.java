@@ -36,8 +36,8 @@ public class ConexaoCliente {
 
     void enviaMesagem(Mensagem mensagem){
         try {
-            PrintStream saida = new PrintStream(socket.getOutputStream());
-            saida.println(mensagem);
+            ObjectOutputStream saida = new ObjectOutputStream(socket.getOutputStream());
+            saida.writeObject(mensagem);
         } catch (IOException e) {
             e.printStackTrace();
         }
