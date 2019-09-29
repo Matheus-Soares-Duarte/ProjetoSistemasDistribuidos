@@ -12,12 +12,11 @@ public class Recebedor implements Runnable {
     public void run() {
         // recebe msgs do servidor e imprime na tela
         try {
-            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-            Mensagem mensagem;
             while (true) {
-                mensagem = (Mensagem) in.readObject();
+                ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+                Mensagem mensagem = (Mensagem) in.readObject();
                 String tipo = mensagem.getTipo();
-                if(tipo=="String"){
+                if(tipo.equals("String") || tipo.equals("Jogador")){
                     System.out.println((String)mensagem.getObjeto());
                 }
             }
