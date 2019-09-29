@@ -14,9 +14,10 @@ public class TrataCliente implements Runnable {
 
     public void run() {
         try {
+            ObjectInputStream in = new ObjectInputStream(cliente.getInputStream());
+            Mensagem mensagem;
             while (true) {
-                ObjectInputStream in = new ObjectInputStream(cliente.getInputStream());
-                Mensagem mensagem = (Mensagem) in.readObject();
+                mensagem = (Mensagem) in.readObject();
                 servidor.respondeMensagem(cliente, mensagem);
             }
         } catch (IOException e) {
