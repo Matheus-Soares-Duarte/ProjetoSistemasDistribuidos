@@ -10,10 +10,10 @@ public class Jogador {
     private int vitorias;
     private int partidas;
     private Mesa mesa;
-    private Menu menu = new Menu();
+    private MenuCliente menu = new MenuCliente();
 
-    public Jogador(Servidor servidor){
-        this.getMenu().menuInicial(servidor, this);
+    public Jogador(ConexaoCliente cliente){
+        this.getMenu().inicio(cliente, this);
         setAs(false);
         setPontos(0);
         setVitorias(0);
@@ -34,7 +34,7 @@ public class Jogador {
     boolean getAs(){ return this.as; }
     List<Carta> getCartas(){ return cartas; }
     String getIp(){ return this.ip; }
-    Menu getMenu(){ return this.menu; }
+    MenuCliente getMenu(){ return this.menu; }
     Mesa getMesa(){ return this.mesa; }
     String getNome(){ return this.nome; }
     int getPontos(){
@@ -70,7 +70,7 @@ public class Jogador {
         System.out.println("\nSOMA DE PONTOS: "+getPontos()+" Pontos.");
     }
 
-    void fazerEscolha(){ this.getMenu().menuEscolha( this.getMesa(), this); }
+    void fazerEscolha(){ this.getMenu().escolha( this.getMesa(), this); }
 
     Carta comprarCarta(){
         Carta carta = this.getMesa().getBaralho().entregarCarta();
