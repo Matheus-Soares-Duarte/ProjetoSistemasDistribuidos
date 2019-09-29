@@ -22,9 +22,6 @@ public class Mesa {
     void addJogador(Jogador jogador){
         this.getJogadores().add(jogador);
         jogador.setMesa(this.getId());
-        if(this.getJogadores().size()!=1) {
-            System.out.println("O Jogador " + jogador.getNome() + " acaba de entrar nesta partida!");
-        }
         if(this.getJogadores().size() == 2){
             this.iniciarJogo();
         }
