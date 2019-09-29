@@ -85,7 +85,7 @@ public class ConexaoServidor {
 
     public void executa () throws IOException {
         ServerSocket servidor = new ServerSocket(this.portaTCP);
-        System.out.println("Porta "+this.portaTCP+" aberta!");
+        System.out.println("Servidor Iniciado no IP "+InetAddress.getLocalHost().getHostAddress()+" e Porta "+this.portaTCP+". Esperando Conexões!");
 
         while (true) {
             // aceita um cliente
@@ -117,6 +117,7 @@ public class ConexaoServidor {
                 }
                 else if (com[0].equals("criar")) {
                     int numero = Integer.parseInt(com[1]);
+                    System.out.println("Tentando criar mesa "+numero);
                     int index = buscaJogador( socket.getInetAddress().toString().replace("/", "") );
                     if(index>=0){
                         Jogador jogador = this.getJogadores().get(index);
