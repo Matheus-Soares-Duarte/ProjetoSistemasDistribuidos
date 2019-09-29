@@ -1,6 +1,5 @@
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.PrintStream;
+import java.io.ObjectOutputStream;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,36 +88,39 @@ public class ConexaoServidor {
         }
     }
 
-    public void respondeMensagem(Socket cliente, Mensagem mensagem) {
+    public void respondeMensagem(Socket socket, Mensagem mensagemRecebida) {
 //        System.out.println("Mensagem do cliente "+cliente.getInetAddress()+"="+mensagem+".");
         try {
-            ObjectInputStream in = new ObjectInputStream(cliente.getInputStream());
-            Mensagem mensagem1 = (Mensagem) in.readObject();
-            if(mensagem1.getTipo() == ""){
+            ObjectOutputStream saida = new ObjectOutputStream(socket.getOutputStream());
+            Mensagem mensagemResposta;
 
-            }else if(mensagem1.getTipo() == ""){
-
-            }
-            PrintStream ps = new PrintStream(cliente.getOutputStream());
-            String tipo = mensagem.getTipo();
+            String tipo = mensagemRecebida.getTipo();
             if(tipo.equals("String")) {
-                String conteudo = (String) mensagem.getObjeto();
+                String conteudo = (String) mensagemRecebida.getObjeto();
                 String com[] = conteudo.split(":");
                 if (com.length > 2) {
-                    ps.println("Comando inválido");
+                    mensagemResposta = new Mensagem("String", "Comando inválido");
+                    saida.writeObject(mensagemResposta);
                 }
                 if (com[0].equals("criar")) {
-                    ps.println("criando"); //Mesa m = new Mesa(Integer.parseInt(com[1]), )
+                    //ps.println("criando"); //Mesa m = new Mesa(Integer.parseInt(com[1]), )
+                    mensagemResposta = new Mensagem("String", "Sala Criada!");
+                    saida.writeObject(mensagemResposta);
                 } else if (com[0].equals("entrar")) {
-                    ps.println("entrando");//addJogador
+                    mensagemResposta = new Mensagem("String", "Entrando na Sala!");
+                    saida.writeObject(mensagemResposta);
+                    //ps.println("entrando");//addJogador
                 } else {
-                    ps.println("Comando não encontrado");
+                    mensagemResposta = new Mensagem("String", "Entrando na Sala!");
+                    saida.writeObject(mensagemResposta);
+//                    ps.println("Comando não encontrado");
                 }
             } else if(tipo.equals("Jogador")){
-
+                mensagemResposta = new Mensagem("String", "Jogador Recebido com sucesso!");
+                saida.writeObject(mensagemResposta);
             }
 
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

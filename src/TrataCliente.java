@@ -1,9 +1,9 @@
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class TrataCliente implements Runnable {
-
     private Socket cliente;
     private ConexaoServidor servidor;
 
@@ -13,16 +13,17 @@ public class TrataCliente implements Runnable {
     }
 
     public void run() {
-        Scanner s = null;
         try {
-            s = new Scanner(this.cliente.getInputStream());
-            while (s.hasNextLine()) {
-                servidor.respondeMensagem(cliente, s.nextLine());
+            ObjectInputStream in = new ObjectInputStream(cliente.getInputStream());
+            Mensagem mensagem;
+            while (true) {
+                mensagem = (Mensagem) in.readObject();
+                servidor.respondeMensagem(cliente, mensagem);
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            s.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -1,20 +1,30 @@
-import java.io.InputStream;
-import java.util.Scanner;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.Socket;
 
 public class Recebedor implements Runnable {
+    private Socket socket;
 
-    private InputStream servidor;
-
-    public Recebedor(InputStream servidor) {
-        this.servidor = servidor;
+    public Recebedor(Socket socket) {
+        this.socket = socket;
     }
 
     public void run() {
         // recebe msgs do servidor e imprime na tela
-        Scanner s = new Scanner(this.servidor);
-        while (s.hasNextLine()) {
-            System.out.print("Resposta do servidor: ");
-            System.out.println(s.nextLine());
+        try {
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+            Mensagem mensagem;
+            while (true) {
+                mensagem = (Mensagem) in.readObject();
+                String tipo = mensagem.getTipo();
+                if(tipo=="String"){
+                    System.out.println((String)mensagem.getObjeto());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }
