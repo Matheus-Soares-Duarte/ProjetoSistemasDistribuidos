@@ -35,12 +35,9 @@ public class ConexaoCliente {
     }
 
     void enviaMesagem(String mensagem){
-        PrintStream saida = null;
         try {
-            saida = new PrintStream(socket.getOutputStream());
-            while (true) {
-                saida.println(mensagem);
-            }
+            PrintStream saida = new PrintStream(socket.getOutputStream());
+            saida.println(mensagem);
         } catch (IOException e) {
             e.printStackTrace();
         }
