@@ -20,14 +20,15 @@ public class Menu {
                 System.out.print("COMANDO: ");
                 String comando = sc.next().toLowerCase();
                 int numero = sc.nextInt();
+                Mensagem mensagem = new Mensagem("String", comando+":"+numero);
 
                 switch (comando) {
                     case "criar":
-                        cliente.enviaMesagem(comando+":"+numero);
+                        cliente.enviaMesagem(mensagem);
                         comandoOK=true;
                         break;
                     case "entrar":
-                        cliente.enviaMesagem(comando+":"+numero);
+                        cliente.enviaMesagem(mensagem);
                         comandoOK=true;
                         break;
                     default:

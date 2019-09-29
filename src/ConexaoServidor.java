@@ -88,23 +88,28 @@ public class ConexaoServidor {
         }
     }
 
-    public void respondeMensagem(Socket cliente, String msg) {
-        // envia msg para todo mundo
-        System.out.println("Mensagem do cliente "+cliente.getInetAddress()+"="+msg+".");
+    public void respondeMensagem(Socket cliente, Mensagem mensagem) {
+//        System.out.println("Mensagem do cliente "+cliente.getInetAddress()+"="+mensagem+".");
         try {
             PrintStream ps = new PrintStream(cliente.getOutputStream());
-            String com[] = msg.split(":");
-            if(com.length > 2){
-                ps.println("Comando inválido");
+            String tipo = mensagem.getTipo();
+            if(tipo.equals("String")) {
+                String conteudo = (String) mensagem.getObjeto();
+                String com[] = conteudo.split(":");
+                if (com.length > 2) {
+                    ps.println("Comando inválido");
+                }
+                if (com[0].equals("criar")) {
+                    ps.println("criando"); //Mesa m = new Mesa(Integer.parseInt(com[1]), )
+                } else if (com[0].equals("entrar")) {
+                    ps.println("entrando");//addJogador
+                } else {
+                    ps.println("Comando não encontrado");
+                }
+            } else if(tipo.equals("Jogador")){
+
             }
-            if(com[0].equals("criar")){
-                ps.println("criando"); //Mesa m = new Mesa(Integer.parseInt(com[1]), )
-            }
-            else if(com[0].equals("entrar")){
-                ps.println("entrando");//addJogador
-            }else{
-                ps.println("Comando não encontrado");
-            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

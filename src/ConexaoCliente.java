@@ -34,7 +34,7 @@ public class ConexaoCliente {
         }
     }
 
-    void enviaMesagem(String mensagem){
+    void enviaMesagem(Mensagem mensagem){
         try {
             PrintStream saida = new PrintStream(socket.getOutputStream());
             saida.println(mensagem);
