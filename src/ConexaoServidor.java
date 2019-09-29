@@ -3,24 +3,23 @@ import java.io.ObjectOutputStream;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ConexaoServidor {
     private int portaTCP;
     private List<Mesa> mesas = new ArrayList<Mesa>();
-    private List<Socket> clientes;
-    private List<Jogador> jogadores;
+    private Map<Socket,Jogador> clientes;
 
     public ConexaoServidor (int porta) {
         this.portaTCP = porta;
     }
 
     void setMesas(List<Mesa> mesas){ this.mesas = mesas; }
-    List<Socket> getClientes(){ return this.clientes; }
-    List<Jogador> getJogadores(){ return this.jogadores; }
     List<Mesa> getMesas(){ return this.mesas; }
 
-    void addCliente(Socket socket){ this.clientes.add(socket); }
-    void addJogador(Jogador jogador){ this.jogadores.add(jogador); }
+    Map<Socket,Jogador> getClientes(){ return this.clientes; }
+
+    void addCliente(Socket socket, Jogador jogador){ this.clientes.put(socket, jogador); }
     void addMesas(Mesa mesa){ this.mesas.add(mesa); }
 
     boolean addJogadorMesa(int numero, Jogador jogador){
@@ -34,15 +33,6 @@ public class ConexaoServidor {
         }
     }
 
-    int buscaJogador(String ip){
-        for (Jogador jogador : this.getJogadores() ){
-            if(jogador.getIp().equals(ip)){
-                return this.getJogadores().indexOf(jogador);
-            }
-        }
-        return -1;
-    }
-
     int buscaMesa(int numero){
         for (Mesa mesa : this.getMesas()){
             if(mesa.getId() == numero){
@@ -54,10 +44,11 @@ public class ConexaoServidor {
 
     String criarMesa(int numero, Jogador jogador){
         int index = buscaMesa(numero);
+        String saida;
         if(index==-1){
             Mesa mesa = new Mesa(numero, jogador);
             this.addMesas(mesa);
-            jogador.setMesa(numero);
+            jogador.setMesa(mesa);
             return "A sala de numero "+numero+" foi criada com sucesso!";
         } else {
             return "A sala de numero "+numero+" ja foi criada!";
@@ -89,9 +80,6 @@ public class ConexaoServidor {
             Socket cliente = servidor.accept();
             System.out.println("Nova conexão com o cliente " + cliente.getInetAddress().getHostAddress() );
 
-            // adiciona socket do cliente à lista
-            this.addCliente(cliente);
-
             // cria tratador de cliente numa nova thread
             TrataCliente tc = new TrataCliente(cliente, this);
             new Thread(tc).start();
@@ -114,13 +102,8 @@ public class ConexaoServidor {
                 }
                 if (com[0].equals("criar")) {
                     int numero = Integer.parseInt(com[1]);
-                    int index = buscaJogador( socket.getInetAddress().toString() );
-                    if(index>=0){
-                        Jogador jogador = this.getJogadores().get(index);
-                        mensagemResposta = new Mensagem("String", this.criarMesa(numero, jogador));
-                    } else {
-                        mensagemResposta = new Mensagem("String", "Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!");
-                    }
+                    Jogador jogador = this.getClientes().get(socket);
+                    mensagemResposta = new Mensagem("String", this.criarMesa(numero, jogador));
                     saida.writeObject(mensagemResposta);
                 } else if (com[0].equals("entrar")) {
                     mensagemResposta = new Mensagem("String", "Entrando na Sala!");
@@ -130,7 +113,7 @@ public class ConexaoServidor {
                     saida.writeObject(mensagemResposta);
                 }
             } else if(tipo.equals("Jogador")){
-                this.addJogador((Jogador)mensagemRecebida.getObjeto() );
+                this.addCliente(socket, (Jogador)mensagemRecebida.getObjeto() );
 //                saida.writeObject(mensagemResposta);
             }
 
