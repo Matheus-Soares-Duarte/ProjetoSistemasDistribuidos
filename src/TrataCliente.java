@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class TrataCliente implements Runnable {
@@ -13,10 +14,11 @@ public class TrataCliente implements Runnable {
 
     public void run() {
         try {
+            ObjectOutputStream out = new ObjectOutputStream(cliente.getOutputStream());
+            ObjectInputStream in = new ObjectInputStream(cliente.getInputStream());
             while (true) {
-                ObjectInputStream in = new ObjectInputStream(cliente.getInputStream());
                 Mensagem mensagem = (Mensagem) in.readObject();
-                servidor.respondeMensagem(cliente, mensagem);
+                servidor.respondeMensagem(cliente, out, mensagem);
             }
         } catch (IOException e) {
             e.printStackTrace();

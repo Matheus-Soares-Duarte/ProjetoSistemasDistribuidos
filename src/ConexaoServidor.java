@@ -101,10 +101,9 @@ public class ConexaoServidor {
         }
     }
 
-    public void respondeMensagem(Socket socket, Mensagem mensagemRecebida) {
+    public void respondeMensagem(Socket socket, ObjectOutputStream saida, Mensagem mensagemRecebida) {
 //        System.out.println("Mensagem do cliente "+cliente.getInetAddress()+"="+mensagem+".");
         try {
-            ObjectOutputStream saida = new ObjectOutputStream(socket.getOutputStream());
             Mensagem mensagemResposta;
 
             String tipo = mensagemRecebida.getTipo();

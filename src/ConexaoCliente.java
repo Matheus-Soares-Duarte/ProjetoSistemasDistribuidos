@@ -4,6 +4,9 @@ import java.net.*;
 public class ConexaoCliente {
     byte[] inBuf = new byte[256];
     Socket socket = null;
+    ObjectOutputStream out;
+    ObjectInputStream in;
+
 
     String buscaServidor(){
         String ipServidor="";
@@ -26,8 +29,11 @@ public class ConexaoCliente {
     void criarSocketTCP(String ipServidor, int porta){
         try {
             socket = new Socket(ipServidor, porta);
+            out = new ObjectOutputStream(socket.getOutputStream());
+            in = new ObjectInputStream(socket.getInputStream());
+
             System.out.println("O cliente "+ InetAddress.getLocalHost().getHostAddress()+" se conectou ao servidor "+ipServidor+"!");
-            Recebedor recebedor = new Recebedor(socket);
+            Recebedor recebedor = new Recebedor(in);
             new Thread(recebedor).start();
         } catch (IOException e) {
             e.printStackTrace();
@@ -36,8 +42,7 @@ public class ConexaoCliente {
 
     void enviaMesagem(Mensagem mensagem){
         try {
-            ObjectOutputStream saida = new ObjectOutputStream(socket.getOutputStream());
-            saida.writeObject(mensagem);
+            out.writeObject(mensagem);
         } catch (IOException e) {
             e.printStackTrace();
         }
