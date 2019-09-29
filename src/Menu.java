@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
-public class Menu {
-    Scanner sc = new Scanner(System.in);
+public class Menu implements Serializable {
+    transient Scanner sc = new Scanner(System.in);
 
     public void inicio(ConexaoCliente cliente, Jogador jogador){
         try {
