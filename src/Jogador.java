@@ -10,7 +10,7 @@ public class Jogador {
     private int vitorias;
     private int partidas;
     private Mesa mesa;
-    private MenuCliente menu = new MenuCliente();
+    private Menu menu = new Menu();
 
     public Jogador(ConexaoCliente cliente){
         this.getMenu().inicio(cliente, this);
@@ -34,7 +34,7 @@ public class Jogador {
     boolean getAs(){ return this.as; }
     List<Carta> getCartas(){ return cartas; }
     String getIp(){ return this.ip; }
-    MenuCliente getMenu(){ return this.menu; }
+    Menu getMenu(){ return this.menu; }
     Mesa getMesa(){ return this.mesa; }
     String getNome(){ return this.nome; }
     int getPontos(){

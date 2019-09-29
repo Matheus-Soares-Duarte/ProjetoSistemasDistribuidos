@@ -27,8 +27,8 @@ public class ConexaoCliente {
         try {
             socket = new Socket(ipServidor, porta);
             System.out.println("O cliente "+ InetAddress.getLocalHost().getHostAddress()+" se conectou ao servidor "+ipServidor+"!");
-            Recebedor r = new Recebedor(socket.getInputStream());
-            new Thread(r).start();
+            Recebedor recebedor = new Recebedor(socket.getInputStream());
+            new Thread(recebedor).start();
         } catch (IOException e) {
             e.printStackTrace();
         }

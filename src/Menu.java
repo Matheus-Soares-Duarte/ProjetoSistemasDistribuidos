@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Menu {
     Scanner sc = new Scanner(System.in);
 
-    public void menuInicial(Servidor servidor, Jogador jogador){
+    public void inicio(ConexaoCliente cliente, Jogador jogador){
         try {
             System.out.print("\nDigite seu nome: ");
             String nome = sc.nextLine();
@@ -15,20 +15,23 @@ public class Menu {
             boolean comandoOK = false;
 
             while(comandoOK == false) {
-                System.out.println("\n-Para criar uma sala digite '-criar <numero da sala>'");
-                System.out.println("-Para entrar em uma sala existente digite '-entrar <numero da sala>'");
+                System.out.println("\n-Para criar uma sala digite 'criar <numero da sala>'");
+                System.out.println("-Para entrar em uma sala existente digite 'entrar <numero da sala>'");
                 System.out.print("COMANDO: ");
                 String comando = sc.next().toLowerCase();
                 int numero = sc.nextInt();
 
                 switch (comando) {
-                    case "-criar":
-                        comandoOK=servidor.criarMesa(numero, jogador);
+                    case "criar":
+                        cliente.enviaMesagem(comando+":"+numero);
+                        comandoOK=true;
                         break;
-                    case "-entrar":
-                        comandoOK=servidor.addJogador(numero, jogador);
+                    case "entrar":
+                        cliente.enviaMesagem(comando+":"+numero);
+                        comandoOK=true;
                         break;
                     default:
+                        //throw new IllegalStateException("Unexpected value: " + comando);
                         System.out.println("Unexpected value: " + comando);
                         System.out.println("Por favor entre com um comando valido!");
                 }
@@ -38,20 +41,20 @@ public class Menu {
         }
     }
 
-    public void menuEscolha(Mesa mesa, Jogador jogador){
+    public void escolha(Mesa mesa, Jogador jogador){
         boolean terminaLoop = false;
 
         while(terminaLoop == false) {
             System.out.println("\nVEZ DE ESCOLHA DO JOGADOR "+(mesa.getJogadores().indexOf(jogador)+1)+" ("+jogador.getNome()+"):");
             jogador.mostrarCartas();
-            System.out.println("-Para comprar mais uma carta digite '-comprar'");
-            System.out.println("-Para passar a vez digite '-passar'");
-            System.out.println("-Para sair da sala digite '-sair'");
+            System.out.println("-Para comprar mais uma carta digite 'comprar'");
+            System.out.println("-Para passar a vez digite 'passar'");
+            System.out.println("-Para sair da sala digite 'sair'");
             System.out.print("COMANDO: ");
             String comando = sc.next().toLowerCase();
 
             switch (comando) {
-                case "-comprar":
+                case "comprar":
                     Carta carta = jogador.comprarCarta();
                     System.out.println("A Carta comprada foi: "+carta.getCarta()+".");
                     jogador.mostrarCartas();
@@ -62,11 +65,11 @@ public class Menu {
                         terminaLoop = false;
                     }
                     break;
-                case "-passar":
+                case "passar":
                     System.out.println(jogador.getNome()+" PASSOU A VEZ.");
                     terminaLoop=true;
                     break;
-                case "-sair":
+                case "sair":
                     jogador.sairDaMesa();
                     terminaLoop=true;
                     break;
