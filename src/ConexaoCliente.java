@@ -7,7 +7,6 @@ public class ConexaoCliente {
     ObjectOutputStream out;
     ObjectInputStream in;
 
-
     String buscaServidor(){
         String ipServidor="";
         try {

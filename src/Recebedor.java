@@ -6,7 +6,6 @@ import java.net.Socket;
 public class Recebedor implements Runnable {
     ObjectInputStream in;
 
-
     public Recebedor(ObjectInputStream in) {
         this.in = in;
     }

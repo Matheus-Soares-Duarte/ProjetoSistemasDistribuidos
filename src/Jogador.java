@@ -20,9 +20,6 @@ public class Jogador implements Serializable {
     private ObjectInputStream in;
 
     public Jogador(ConexaoCliente cliente){
-        setSocket(cliente.socket);
-        setIn(cliente.in);
-        setOut(cliente.out);
         this.getMenu().inicio(cliente, this);
         setAs(false);
         setPontos(0);
@@ -86,8 +83,10 @@ public class Jogador implements Serializable {
         System.out.println("\nSOMA DE PONTOS: "+getPontos()+" Pontos.");
     }
 
-//    void fazerEscolha(){ this.getMenu().escolha( this.getMesa(), this); }
-//
+    void fazerEscolha(){
+//        this.getMenu().escolha( this.getMesa(), this);
+    }
+
 //    Carta comprarCarta(){
 //        Carta carta = this.getMesa().getBaralho().entregarCarta();
 //        this.addCarta(carta);
@@ -97,6 +96,8 @@ public class Jogador implements Serializable {
 //        }
 //        return carta;
 //    }
-//
-//    void sairDaMesa(){ this.getMesa().retirarJogador(this); }
+
+    void sairDaMesa(){
+//        this.getMesa().retirarJogador(this);
+    }
 }

@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.*;
 import java.util.ArrayList;
@@ -101,7 +102,7 @@ public class ConexaoServidor {
         }
     }
 
-    public void respondeMensagem(Socket socket, ObjectOutputStream saida, Mensagem mensagemRecebida) {
+    public void respondeMensagem(Socket socket, ObjectInputStream in, ObjectOutputStream out, Mensagem mensagemRecebida) {
 //        System.out.println("Mensagem do cliente "+cliente.getInetAddress()+"="+mensagem+".");
         try {
             Mensagem mensagemResposta;
@@ -112,7 +113,7 @@ public class ConexaoServidor {
                 String com[] = conteudo.split(":");
                 if (com.length > 2) {
                     mensagemResposta = new Mensagem("String", "Comando inválido");
-                    saida.writeObject(mensagemResposta);
+                    out.writeObject(mensagemResposta);
                 }
                 else if (com[0].equals("criar")) {
                     int numero = Integer.parseInt(com[1]);
@@ -120,23 +121,28 @@ public class ConexaoServidor {
                     int index = buscaJogador( socket.getInetAddress().toString().replace("/", "") );
                     if(index>=0){
                         Jogador jogador = this.getJogadores().get(index);
-                        mensagemResposta = new Mensagem("String", this.criarMesa(numero, jogador));
+                        String resposta = this.criarMesa(numero, jogador);
+                        System.out.println(resposta+" - Numero de mesas no servidor="+getMesas().size()+".");
+
+                        mensagemResposta = new Mensagem("String", resposta);
                     } else {
                         mensagemResposta = new Mensagem("String", "Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!");
                     }
-                    saida.writeObject(mensagemResposta);
+                    out.writeObject(mensagemResposta);
                 } else if (com[0].equals("entrar")) {
                     mensagemResposta = new Mensagem("String", "Entrando na Sala!");
-                    saida.writeObject(mensagemResposta);
+                    out.writeObject(mensagemResposta);
                 } else {
                     mensagemResposta = new Mensagem("String", "Entrando na Sala!");
-                    saida.writeObject(mensagemResposta);
+                    out.writeObject(mensagemResposta);
                 }
             } else if(tipo.equals("Jogador")){
                 Jogador jogador = (Jogador)mensagemRecebida.getObjeto();
+                jogador.setSocket(socket);
+                jogador.setOut(out);
+                jogador.setIn(in);
                 this.addJogador( jogador );
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
