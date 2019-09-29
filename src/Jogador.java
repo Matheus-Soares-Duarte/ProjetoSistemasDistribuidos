@@ -1,4 +1,7 @@
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +15,14 @@ public class Jogador implements Serializable {
     private int partidas;
     private int mesa;
     private Menu menu = new Menu();
+    private Socket socket;
+    private ObjectOutputStream out;
+    private ObjectInputStream in;
 
     public Jogador(ConexaoCliente cliente){
+        setSocket(cliente.socket);
+        setIn(cliente.in);
+        setOut(cliente.out);
         this.getMenu().inicio(cliente, this);
         setAs(false);
         setPontos(0);
@@ -24,25 +33,31 @@ public class Jogador implements Serializable {
     //setters
     void setAs(boolean as){ this.as = as; }
     void setCartas(List<Carta> cartas){ this.cartas = cartas; }
+    void setIn(ObjectInputStream in){ this.in = in; }
     void setIp(String ip){ this.ip = ip; }
     void setMesa(int mesa){ this.mesa = mesa; }
     void setNome(String nome){ this.nome = nome; }
-    void setPontos(int pontos){ this.pontos = pontos; }
-    void setVitorias(int vitorias){ this.vitorias = vitorias; }
+    void setOut(ObjectOutputStream out){ this.out = out; }
     void setPartidas(int partidas) { this.partidas = partidas; }
+    void setPontos(int pontos){ this.pontos = pontos; }
+    void setSocket(Socket socket) { this.socket = socket; }
+    void setVitorias(int vitorias){ this.vitorias = vitorias; }
 
     //getters
     boolean getAs(){ return this.as; }
     List<Carta> getCartas(){ return cartas; }
+    ObjectInputStream getIn(){ return this.in; }
     String getIp(){ return this.ip; }
     Menu getMenu(){ return this.menu; }
     int getMesa(){ return this.mesa; }
     String getNome(){ return this.nome; }
+    ObjectOutputStream getOut(){ return this.out; }
     int getPontos(){
         if(this.getAs()==true && this.pontos+10<=21)
             return this.pontos+10;
         return this.pontos;
     }
+    Socket getSocket(){ return this.socket; }
     int getVitorias(){ return this.vitorias; }
     int getPartidas(){ return this.partidas; }
 
