@@ -119,7 +119,12 @@ public class ConexaoServidor {
                     if(index>=0){
                         Jogador jogador = this.getJogadores().get(index);
                         resposta = this.criarMesa(numero, jogador);
-                        System.out.println(resposta+" Existe(em) "+getMesas().size()+" Sala(s) aberta(s) neste Servidor.");
+                        String textoResposta[] = resposta.split(":");
+                        if ( textoResposta[0].equals("Sucesso") ){
+                            System.out.println("CRIAÇÃO DE SALA: "+textoResposta[1]+" Existe(em) "+getMesas().size()+" Sala(s) aberta(s) neste Servidor.");
+                        } else {
+                            System.out.println("CRIAÇÃO DE SALA: "+textoResposta[2]+" Existe(em) "+getMesas().size()+" Sala(s) aberta(s) neste Servidor.");
+                        }
                     } else {
                         resposta = "Erro:Inicial:Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!";
                     }
