@@ -23,7 +23,8 @@ public class Mesa {
         this.getJogadores().add(jogador);
         jogador.setMesa(this.getId());
         if(this.getJogadores().size() == 2){
-            this.iniciarJogo();
+            Dealer dealer = new Dealer(this);
+            new Thread(dealer).start();
         }
     }
 
