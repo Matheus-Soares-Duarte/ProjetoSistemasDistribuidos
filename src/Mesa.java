@@ -6,20 +6,11 @@ public class Mesa {
     private List<Jogador> jogadores = new ArrayList<Jogador>();
     private Baralho baralho = new Baralho();
     private ConexaoServidor servidor;
-    private boolean acordado=false;
 
     public Mesa(int id, Jogador jogador, ConexaoServidor servidor){
         setId(id);
         setServidor(servidor);
         addJogador(jogador);
-    }
-
-    public boolean isAcordado() {
-        return acordado;
-    }
-
-    public void setAcordado(boolean acordado) {
-        this.acordado = acordado;
     }
 
     void setBaralho(Baralho baralho){ this.baralho = baralho; }
@@ -44,7 +35,6 @@ public class Mesa {
             mensagem = new Mensagem("String", "O Jogador "+jogador.getNome()+" acaba de entrar na sala "+this.getId()+"!");
             this.enviarMensagemTodos(mensagem);
             if(this.getJogadores().size() == 2){
-                setAcordado(true);
                 Dealer dealer = new Dealer(this);
                 new Thread(dealer).start();
             }
@@ -58,12 +48,10 @@ public class Mesa {
     }
 
     synchronized void acorda(){
-        setAcordado(true);
         notify();
     }
 
     synchronized void dorme(){
-        setAcordado(false);
         try {
             this.wait();
         } catch (InterruptedException e) {
