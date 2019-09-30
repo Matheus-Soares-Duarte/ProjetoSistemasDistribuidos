@@ -52,43 +52,45 @@ public class Menu implements Serializable {
 
     }
 
-        public void escolha(Mesa mesa, Jogador jogador){
-//        boolean terminaLoop = false;
-//
-//        while(terminaLoop == false) {
-//            System.out.println("\nVEZ DE ESCOLHA DO JOGADOR "+(mesa.getJogadores().indexOf(jogador)+1)+" ("+jogador.getNome()+"):");
-//            jogador.mostrarCartas();
-//            System.out.println("-Para comprar mais uma carta digite 'comprar'");
-//            System.out.println("-Para passar a vez digite 'passar'");
-//            System.out.println("-Para sair da sala digite 'sair'");
-//            System.out.print("COMANDO: ");
-//            String comando = sc.next().toLowerCase();
-//
-//            switch (comando) {
-//                case "comprar":
-////                    Carta carta = jogador.comprarCarta();
-//                    System.out.println("A Carta comprada foi: "+carta.getCarta()+".");
-//                    jogador.mostrarCartas();
-//                    if (jogador.getPontos()>21){
-//                        System.out.println(jogador.getNome()+" ESTOUROU COM "+jogador.getPontos()+" PONTOS.");
-//                        terminaLoop =  true;
-//                    } else{
-//                        terminaLoop = false;
-//                    }
-//                    break;
-//                case "passar":
-//                    System.out.println(jogador.getNome()+" PASSOU A VEZ.");
-//                    terminaLoop=true;
-//                    break;
-//                case "sair":
-//                    jogador.sairDaMesa();
-//                    terminaLoop=true;
-//                    break;
-//                default:
-//                    //throw new IllegalStateException("Unexpected value: " + comando);
-//                    System.out.println("Unexpected value: " + comando);
-//                    System.out.println("Por favor entre com um comando valido!");
-//            }
-//        }
+        public void escolha(Jogador jogador,ConexaoCliente cliente){
+        boolean terminaLoop = false;
+
+        while(terminaLoop == false) {
+            jogador.mostrarCartas();
+            System.out.println("-Para comprar mais uma carta digite 'comprar'");
+            System.out.println("-Para passar a vez digite 'passar'");
+            System.out.println("-Para sair da sala digite 'sair'");
+            System.out.print("COMANDO: ");
+            String comando = sc.next().toLowerCase();
+            Mensagem mensagem = new Mensagem("String",comando);
+
+            switch (comando) {
+                case "comprar":
+                    cliente.enviaMesagem(mensagem);
+                    terminaLoop=true;
+                case "passar":
+                    cliente.enviaMesagem(mensagem);
+                    System.out.println(jogador.getNome()+" PASSOU A VEZ.");
+                    terminaLoop=true;
+                    break;
+                case "sair":
+                    cliente.enviaMesagem(mensagem);
+                    jogador.sairDaMesa();
+                    terminaLoop=true;
+                    break;
+                default:
+                    //throw new IllegalStateException("Unexpected value: " + comando);
+                    System.out.println("Unexpected value: " + comando);
+                    System.out.println("Por favor entre com um comando valido!");
+            }
+        }
     }
 }
+//jogador.mostrarCartas();
+//        if (jogador.getPontos()>21){
+//        System.out.println(jogador.getNome()+" ESTOUROU COM "+jogador.getPontos()+" PONTOS.");
+//        terminaLoop =  true;
+//        } else{
+//        terminaLoop = false;
+//        }
+//        break;

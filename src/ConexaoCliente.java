@@ -60,9 +60,22 @@ public class ConexaoCliente {
                     System.out.println(com[1]);
                 }
                 break;
+            case "Carta":
+                Carta carta = (Carta) mensagem.getObjeto();
+                jogador.addCarta(carta);
+                jogador.mostrarCartas();
+                if (jogador.getPontos()>21){
+                    System.out.println(jogador.getNome()+" ESTOUROU COM "+jogador.getPontos()+" PONTOS.");
+                    Mensagem mensagemPassar = new Mensagem("String", "passar");
+                    this.enviaMesagem(mensagemPassar);
+                } else{
+                    jogador.getMenu().escolha(jogador,this);
+                }
+                break;
             default:
                 System.out.println("Tipo de mensagem não encontrada!");
                 break;
+
         }
     }
 
