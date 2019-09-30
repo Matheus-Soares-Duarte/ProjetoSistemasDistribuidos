@@ -134,6 +134,17 @@ public class ConexaoServidor {
                 }
                 mensagemResposta = new Mensagem("String", resposta);
                 this.enviaMesagem(mensagemResposta, out);
+            } else if (com[0].equals("passar")) {
+                int index = buscaJogador( socket );
+                if(index>=0){
+                    Jogador jogador = this.getJogadores().get(index);
+                    int indexMesa = buscaMesa(jogador.getMesa());
+                    this.getMesas().get(indexMesa).acorda();
+                } else {
+                    resposta = "Erro:Inicial:Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!";
+                    mensagemResposta = new Mensagem("String", resposta);
+                    this.enviaMesagem(mensagemResposta, out);
+                }
             } else {
                 mensagemResposta = new Mensagem("String", "Erro:Inicial:Comando ainda não tratado!");
                 this.enviaMesagem(mensagemResposta, out);

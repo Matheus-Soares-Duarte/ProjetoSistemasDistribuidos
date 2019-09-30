@@ -6,11 +6,20 @@ public class Mesa {
     private List<Jogador> jogadores = new ArrayList<Jogador>();
     private Baralho baralho = new Baralho();
     private ConexaoServidor servidor;
+    private boolean acordado=false;
 
     public Mesa(int id, Jogador jogador, ConexaoServidor servidor){
         setId(id);
         setServidor(servidor);
         addJogador(jogador);
+    }
+
+    public boolean isAcordado() {
+        return acordado;
+    }
+
+    public void setAcordado(boolean acordado) {
+        this.acordado = acordado;
     }
 
     void setBaralho(Baralho baralho){ this.baralho = baralho; }
@@ -35,6 +44,7 @@ public class Mesa {
             mensagem = new Mensagem("String", "O Jogador "+jogador.getNome()+" acaba de entrar na sala "+this.getId()+"!");
             this.enviarMensagemTodos(mensagem);
             if(this.getJogadores().size() == 2){
+                setAcordado(true);
                 Dealer dealer = new Dealer(this);
                 new Thread(dealer).start();
             }
@@ -47,43 +57,17 @@ public class Mesa {
         }
     }
 
-    void iniciarJogo(){
-        Mensagem mensagem;
-        mensagem = new Mensagem("String", "\n--------------INICIANDO JOGO--------------");
-        this.enviarMensagemTodos(mensagem);
+    synchronized void acorda(){
+        setAcordado(true);
+        notify();
+    }
 
-        while(this.getJogadores().size()>1){
-            mensagem = new Mensagem("String", "\n--------INICIANDO RODADA--------");
-            this.enviarMensagemTodos(mensagem);
-
-            this.reiniciarRodada();
-            for (Jogador jogador : this.getJogadores() ) {
-                for (int i=0; i<2; i++) {
-                    Carta carta = this.getBaralho().entregarCarta();
-                    mensagem = new Mensagem("CartaInicial", carta);
-                    getServidor().enviaMesagem(mensagem, jogador.getOut());
-                    jogador.addCarta(carta);
-                }
-            }
-
-            for ( Jogador jogador : this.getJogadores() ) {
-                mensagem = new Mensagem("String", "Vez do Jogador "+jogador.getNome()+".");
-                this.enviarMensagemTodos(mensagem);
-                mensagem = new Mensagem("String", "SuaVez");
-                getServidor().enviaMesagem(mensagem, jogador.getOut());
-                try {
-                    this.wait(20000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            this.verificarVitoria();
-            this.score();
-        }
-
-        if(this.getJogadores().size()<2){
-            mensagem = new Mensagem("String", "Erro:Não existem jogadores suficientes na mesa para iniciar a rodada.");
-            getServidor().enviaMesagem(mensagem, this.getJogadores().get(0).getOut());
+    synchronized void dorme(){
+        setAcordado(false);
+        try {
+            this.wait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
