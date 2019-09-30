@@ -83,21 +83,11 @@ public class Jogador implements Serializable {
         System.out.println("\nSOMA DE PONTOS: "+getPontos()+" Pontos.");
     }
 
-    void fazerEscolha(){
-//        this.getMenu().escolha( this.getMesa(), this);
-    }
-
-//    Carta comprarCarta(){
-//        Carta carta = this.getMesa().getBaralho().entregarCarta();
-//        this.addCarta(carta);
-//        this.setPontos(this.getPontos() + carta.getValor());
-//        if (carta.getValor() == 1) {
-//            this.setAs(true);
-//        }
-//        return carta;
-//    }
-
-    void sairDaMesa(){
-//        this.getMesa().retirarJogador(this);
+    void comprarCarta(Carta carta){
+        this.addCarta(carta);
+        this.setPontos(this.getPontos() + carta.getValor());
+        if (carta.getValor() == 1) {
+            this.setAs(true);
+        }
     }
 }

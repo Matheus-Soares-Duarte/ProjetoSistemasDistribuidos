@@ -44,6 +44,7 @@ public class ConexaoCliente {
 
     void analisaMesagem(Mensagem mensagem){
         String tipo = mensagem.getTipo();
+        Carta carta;
         switch (tipo){
             case "String" :
                 String conteudo = (String) mensagem.getObjeto();
@@ -52,16 +53,29 @@ public class ConexaoCliente {
                     if(com[1].equals("Inicial")){
                         System.out.println(com[2]);
                         jogador.getMenu().escolhaInicial(this);
+                    } else {
+                        System.out.println(com[1]);
                     }
                 } else if( com[0].equals("Sucesso") ){
-                    System.out.println(com[1]);
-                } else {
-                    System.out.println(com[1]);
+                    if(com[1].equals("Inicial")){
+                        System.out.println(com[2]);
+                        jogador.setMesa(Integer.parseInt(com[3]));
+                    } else {
+                        System.out.println(com[1]);
+                    }
+                } else if( com[0].equals("SuaVez") ){
+                    jogador.getMenu().escolha(jogador, this);
+                } else if( com[0].equals("Vitoria") ){
+                    jogador.addVitoria();
+                } else if( com[0].equals("ReiniciarRodada") ){
+                    jogador.devolverCartas();
+                }else {
+                    System.out.println(conteudo);
                 }
                 break;
             case "Carta":
-                Carta carta = (Carta) mensagem.getObjeto();
-                jogador.addCarta(carta);
+                carta = (Carta) mensagem.getObjeto();
+                jogador.comprarCarta(carta);
                 jogador.mostrarCartas();
                 if (jogador.getPontos()>21){
                     System.out.println(jogador.getNome()+" ESTOUROU COM "+jogador.getPontos()+" PONTOS.");
@@ -70,6 +84,10 @@ public class ConexaoCliente {
                 } else{
                     jogador.getMenu().escolha(jogador,this);
                 }
+                break;
+            case "CartaInicial":
+                carta = (Carta) mensagem.getObjeto();
+                jogador.comprarCarta(carta);
                 break;
             default:
                 System.out.println("Tipo de mensagem não encontrada!");

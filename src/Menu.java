@@ -68,14 +68,14 @@ public class Menu implements Serializable {
                 case "comprar":
                     cliente.enviaMesagem(mensagem);
                     terminaLoop=true;
+                    break;
                 case "passar":
                     cliente.enviaMesagem(mensagem);
-                    System.out.println(jogador.getNome()+" PASSOU A VEZ.");
+                    jogador.addPartida();
                     terminaLoop=true;
                     break;
                 case "sair":
                     cliente.enviaMesagem(mensagem);
-                    jogador.sairDaMesa();
                     terminaLoop=true;
                     break;
                 default:

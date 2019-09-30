@@ -1,5 +1,6 @@
-public class Carta
-{
+import java.io.Serializable;
+
+public class Carta implements Serializable {
     private String letra;
     private String naipe;
     private int valor;
