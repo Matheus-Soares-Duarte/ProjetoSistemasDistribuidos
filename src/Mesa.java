@@ -96,6 +96,7 @@ public class Mesa {
         for ( Jogador jogador : this.getJogadores() ){
             if (jogador.getPontos()<=21 && jogador.getPontos()>maiorValor)
                 maiorValor = jogador.getPontos();
+            System.out.println("aiorr valor:" + maiorValor) ;
         }
         for ( Jogador jogador : this.getJogadores() ){
             jogador.addPartida();
@@ -107,5 +108,12 @@ public class Mesa {
                 jogador.addVitoria();
             }
         }
+    }
+
+    void comprarCarta(Jogador jogador, String string){
+        Carta carta = this.getBaralho().entregarCarta();
+        Mensagem mensagem = new Mensagem(string, carta);
+        this.getServidor().enviaMesagem(mensagem, jogador.getOut());
+        jogador.comprarCarta(carta);
     }
 }

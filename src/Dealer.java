@@ -26,10 +26,7 @@ public class Dealer  implements Runnable {
             this.getMesa().reiniciarRodada();
             for (Jogador jogador : this.getMesa().getJogadores() ) {
                 for (int i=0; i<2; i++) {
-                    Carta carta = this.getMesa().getBaralho().entregarCarta();
-                    mensagem = new Mensagem("CartaInicial", carta);
-                    this.getMesa().getServidor().enviaMesagem(mensagem, jogador.getOut());
-                    jogador.addCarta(carta);
+                    this.getMesa().comprarCarta(jogador,"CartaInicial");
                 }
             }
 
