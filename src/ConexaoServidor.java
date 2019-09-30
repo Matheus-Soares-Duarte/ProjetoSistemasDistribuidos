@@ -72,14 +72,13 @@ public class ConexaoServidor {
         final int portaMulticast = 8888;
         try {
             DatagramSocket socket = new DatagramSocket();
-//            String ipServidor = "IpDoServidor21:"+InetAddress.getLocalHost().getHostAddress();
-            String ipServidor = InetAddress.getLocalHost().getHostAddress();
+            String ipServidor = "IpDoServidor21:"+InetAddress.getLocalHost().getHostAddress();
             outBuf = (ipServidor).getBytes();
             InetAddress address = InetAddress.getByName("224.2.2.3");
             while (true) {
                 DatagramPacket outPacket = new DatagramPacket(outBuf, outBuf.length, address, portaMulticast);
                 socket.send(outPacket);
-                try { Thread.sleep(500); }catch (InterruptedException ie) {}
+                try { Thread.sleep(2000); }catch (InterruptedException ie) {}
             }
         } catch (IOException ioe) { System.out.println(ioe); }
     }

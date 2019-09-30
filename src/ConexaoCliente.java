@@ -17,9 +17,16 @@ public class ConexaoCliente {
             System.out.println("Meu IP = "+InetAddress.getLocalHost().getHostAddress() );
             System.out.println("Tentando se Conectar ao Servidor." );
             DatagramPacket inPacket = new DatagramPacket(inBuf, inBuf.length);
-            socket.receive(inPacket);
-            ipServidor = new String(inBuf, 0, inPacket.getLength());
-            socket.leaveGroup(address);
+            while(true){
+                socket.receive(inPacket);
+                String mensagem = new String(inBuf, 0, inPacket.getLength());
+                String textoResposta[] = mensagem.split(":");
+                if(textoResposta[0].equals("IpDoServidor21")){
+                    ipServidor = textoResposta[1];
+                    socket.leaveGroup(address);
+                    break;
+                }
+            }
         }catch (IOException ioe) {
             System.out.println(ioe);
         }
