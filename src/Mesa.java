@@ -27,6 +27,10 @@ public class Mesa {
     int getId(){ return this.id; }
     List<Jogador> getJogadores(){ return this.jogadores; }
 
+    synchronized void acorda(){
+        notify();
+    }
+
     void addJogador(Jogador jogador){
         this.getJogadores().add(jogador);
         jogador.setMesa(this.getId());
@@ -41,21 +45,17 @@ public class Mesa {
         }
     }
 
-    void enviarMensagemTodos(Mensagem mensagem){
-        for (Jogador jogador : this.getJogadores() ){
-            getServidor().enviaMesagem(mensagem, jogador.getOut());
-        }
-    }
-
-    synchronized void acorda(){
-        notify();
-    }
-
     synchronized void dorme(){
         try {
             this.wait();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+
+    void enviarMensagemTodos(Mensagem mensagem){
+        for (Jogador jogador : this.getJogadores() ){
+            getServidor().enviaMesagem(mensagem, jogador.getOut());
         }
     }
 
