@@ -84,6 +84,7 @@ public class ConexaoCliente {
                 carta = (Carta) mensagem.getObjeto();
                 jogador.comprarCarta(carta);
                 if (jogador.getPontos()>21){
+                    jogador.mostrarCartas();
                     System.out.println(jogador.getNome()+" ESTOUROU COM "+jogador.getPontos()+" PONTOS.");
                     Mensagem mensagemPassar = new Mensagem("String", "passar");
                     this.enviaMesagem(mensagemPassar);
