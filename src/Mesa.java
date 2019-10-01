@@ -32,16 +32,21 @@ public class Mesa {
     }
 
     void addJogador(Jogador jogador){
-        this.getJogadores().add(jogador);
-        jogador.setMesa(this.getId());
         Mensagem mensagem;
-        if(this.getJogadores().size() != 1){
-            mensagem = new Mensagem("String", "O Jogador "+jogador.getNome()+" acaba de entrar na sala "+this.getId()+"!");
-            this.enviarMensagemTodos(mensagem);
-            if(this.getJogadores().size() == 2){
-                Dealer dealer = new Dealer(this);
-                new Thread(dealer).start();
+        if(this.getJogadores().size()<5){
+            this.getJogadores().add(jogador);
+            jogador.setMesa(this.getId());
+            if(this.getJogadores().size() != 1){
+                mensagem = new Mensagem("String", "O Jogador "+jogador.getNome()+" acaba de entrar na sala "+this.getId()+"!");
+                this.enviarMensagemTodos(mensagem);
+                if(this.getJogadores().size() == 2){
+                    Dealer dealer = new Dealer(this);
+                    new Thread(dealer).start();
+                }
             }
+        } else {
+            mensagem = new Mensagem("String", "Erro:Inicial:A sala "+this.getId()+" ja está cheia!");
+            this.getServidor().enviaMesagem(mensagem, jogador.getOut());
         }
     }
 
@@ -96,7 +101,6 @@ public class Mesa {
         for ( Jogador jogador : this.getJogadores() ){
             if (jogador.getPontos()<=21 && jogador.getPontos()>maiorValor)
                 maiorValor = jogador.getPontos();
-            System.out.println("aiorr valor:" + maiorValor) ;
         }
         for ( Jogador jogador : this.getJogadores() ){
             jogador.addPartida();
