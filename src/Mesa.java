@@ -42,6 +42,10 @@ public class Mesa {
                 if(this.getJogadores().size() == 2){
                     Dealer dealer = new Dealer(this);
                     new Thread(dealer).start();
+                } else if(this.getJogadores().size()>2) {
+                    for (int i=0; i<2; i++) {
+                        this.comprarCarta(jogador,"CartaInicial");
+                    }
                 }
             }
         } else {
