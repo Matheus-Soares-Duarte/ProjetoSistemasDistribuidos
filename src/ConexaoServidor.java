@@ -150,6 +150,7 @@ public class ConexaoServidor {
                 if(index>=0){
                     Jogador jogador = this.getJogadores().get(index);
                     int indexMesa = buscaMesa(jogador.getMesa());
+                    jogador.setJogou(true);
                     this.getMesas().get(indexMesa).acorda();
                 } else {
                     resposta = "Erro:Escolha:Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!";

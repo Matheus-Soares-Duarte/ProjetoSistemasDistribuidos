@@ -91,6 +91,7 @@ public class Jogador implements Serializable {
     void comprarCarta(Carta carta){
         this.addCarta(carta);
         this.setPontos(this.getPontos() + carta.getValor());
+        this.setJogou(false);
         if (carta.getValor() == 1) {
             this.setAs(true);
         }

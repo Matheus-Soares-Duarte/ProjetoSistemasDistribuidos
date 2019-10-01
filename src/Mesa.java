@@ -51,13 +51,21 @@ public class Mesa {
     }
 
     int buscaJogadorVez(){
-        for ( int i=0; i<this.getJogadores().size(); i++ ) {
+        int i;
+        for ( i=0; i<this.getJogadores().size(); i++ ) {
             Jogador jogador=this.getJogadores().get(i);
             if(jogador.getJogou()==false){
-                return i;
+                break;
             }
         }
-        return 0;
+        return i;
+    }
+
+    void comprarCarta(Jogador jogador, String string){
+        Carta carta = this.getBaralho().entregarCarta();
+        Mensagem mensagem = new Mensagem(string, carta);
+        this.getServidor().enviaMesagem(mensagem, jogador.getOut());
+        jogador.comprarCarta(carta);
     }
 
     synchronized void dorme(){
@@ -126,12 +134,5 @@ public class Mesa {
                 jogador.addVitoria();
             }
         }
-    }
-
-    void comprarCarta(Jogador jogador, String string){
-        Carta carta = this.getBaralho().entregarCarta();
-        Mensagem mensagem = new Mensagem(string, carta);
-        this.getServidor().enviaMesagem(mensagem, jogador.getOut());
-        jogador.comprarCarta(carta);
     }
 }
