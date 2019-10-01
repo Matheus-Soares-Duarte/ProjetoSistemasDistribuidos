@@ -156,6 +156,24 @@ public class ConexaoServidor {
                     mensagemResposta = new Mensagem("String", resposta);
                     this.enviaMesagem(mensagemResposta, out);
                 }
+            } else if(com[0].equals("sair")){
+                int index = buscaJogador(socket);
+                if(index>=0){
+                    Jogador jogador = this.getJogadores().get(index);
+                    int indexMesa = buscaMesa(jogador.getMesa());
+                    Mesa mesa = this.getMesas().get(indexMesa);
+                    mesa.retirarJogador(jogador);
+                    this.getMesas().get(indexMesa).acorda();
+                    if(mesa.getJogadores().size() < 1){
+                        this.mesas.remove(mesa);
+                    }
+                    mensagemResposta = new Mensagem("String", "Erro:Inicial:Você saiu da sala "+mesa.getId()+"!");
+                    this.enviaMesagem(mensagemResposta, out);
+                }else {
+                    resposta = "Erro:Escolha:Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!";
+                    mensagemResposta = new Mensagem("String", resposta);
+                    this.enviaMesagem(mensagemResposta, out);
+                }
             } else {
                 mensagemResposta = new Mensagem("String", "Erro:Comando ainda não tratado!");
                 this.enviaMesagem(mensagemResposta, out);
