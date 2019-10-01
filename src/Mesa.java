@@ -83,9 +83,9 @@ public class Mesa {
     void retirarJogador(Jogador jogador){
         int index = this.getJogadores().indexOf(jogador);
         if(index>=0){
-            Mensagem mensagem = new Mensagem("String","O Jogador "+jogador.getNome()+ " acaba de abandonar a partida.");
-            this.enviarMensagemTodos(mensagem);
+            System.out.println("O Jogador "+jogador.getNome()+" acaba de abandonar a partida.");
             this.getJogadores().remove(index);
+//            jogador.setMesa(null);
         }
     }
 
