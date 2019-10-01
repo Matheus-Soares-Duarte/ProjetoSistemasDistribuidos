@@ -14,16 +14,12 @@ public class Mesa {
     }
 
     void setBaralho(Baralho baralho){ this.baralho = baralho; }
-    void setServidor(ConexaoServidor servidor) {
-        this.servidor = servidor;
-    }
+    void setServidor(ConexaoServidor servidor) { this.servidor = servidor; }
     void setId(int id){ this.id = id; }
     void setJogadores(List<Jogador> jogadores){ this.jogadores = jogadores; }
 
     Baralho getBaralho(){ return this.baralho; }
-    ConexaoServidor getServidor() {
-        return servidor;
-    }
+    ConexaoServidor getServidor() { return servidor; }
     int getId(){ return this.id; }
     List<Jogador> getJogadores(){ return this.jogadores; }
 
@@ -54,6 +50,16 @@ public class Mesa {
         }
     }
 
+    int buscaJogadorVez(){
+        for ( int i=0; i<this.getJogadores().size(); i++ ) {
+            Jogador jogador=this.getJogadores().get(i);
+            if(jogador.getJogou()==false){
+                return i;
+            }
+        }
+        return 0;
+    }
+
     synchronized void dorme(){
         try {
             this.wait();
@@ -76,6 +82,7 @@ public class Mesa {
                 this.getBaralho().addCarta(carta);
             }
             jogador.devolverCartas();
+            jogador.setJogou(false);
         }
         this.getBaralho().embaralhar();
     }
@@ -87,6 +94,7 @@ public class Mesa {
             this.enviarMensagemTodos(mensagem);
             jogador.devolverCartas();
             jogador.setMesa(-1);
+            jogador.setJogou(false);
             this.getJogadores().remove(index);
         }
     }

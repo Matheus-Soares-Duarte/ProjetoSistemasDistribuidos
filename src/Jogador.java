@@ -6,10 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Jogador implements Serializable {
+    private boolean jogou;
+    private boolean as;
+    private List<Carta> cartas = new ArrayList<Carta>();
     private String ip;
     private String nome;
-    private List<Carta> cartas = new ArrayList<Carta>();
-    private boolean as;
     private int pontos;
     private int vitorias;
     private int partidas;
@@ -22,9 +23,10 @@ public class Jogador implements Serializable {
     public Jogador(ConexaoCliente cliente){
         this.getMenu().inicio(cliente, this);
         setAs(false);
-        setPontos(0);
-        setVitorias(0);
         setPartidas(0);
+        setPontos(0);
+        setJogou(false);
+        setVitorias(0);
     }
 
     //setters
@@ -32,6 +34,7 @@ public class Jogador implements Serializable {
     void setCartas(List<Carta> cartas){ this.cartas = cartas; }
     void setIn(ObjectInputStream in){ this.in = in; }
     void setIp(String ip){ this.ip = ip; }
+    public void setJogou(boolean jogou) { this.jogou = jogou; }
     void setMesa(int mesa){ this.mesa = mesa; }
     void setNome(String nome){ this.nome = nome; }
     void setOut(ObjectOutputStream out){ this.out = out; }
@@ -40,15 +43,18 @@ public class Jogador implements Serializable {
     void setSocket(Socket socket) { this.socket = socket; }
     void setVitorias(int vitorias){ this.vitorias = vitorias; }
 
+
     //getters
     boolean getAs(){ return this.as; }
     List<Carta> getCartas(){ return cartas; }
     ObjectInputStream getIn(){ return this.in; }
     String getIp(){ return this.ip; }
+    public boolean getJogou() { return jogou; }
     Menu getMenu(){ return this.menu; }
     int getMesa(){ return this.mesa; }
     String getNome(){ return this.nome; }
     ObjectOutputStream getOut(){ return this.out; }
+    int getPartidas(){ return this.partidas; }
     int getPontos(){
         if(this.getAs()==true && this.pontos+10<=21)
             return this.pontos+10;
@@ -56,7 +62,6 @@ public class Jogador implements Serializable {
     }
     Socket getSocket(){ return this.socket; }
     int getVitorias(){ return this.vitorias; }
-    int getPartidas(){ return this.partidas; }
 
     //funções proprias
     void addVitoria(){ setVitorias( getVitorias()+1 ); }

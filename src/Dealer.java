@@ -31,14 +31,31 @@ public class Dealer  implements Runnable {
                 }
             }
 
-            for ( int i=0; i<getMesa().getJogadores().size(); i++ ) {
+            int i =0;
+//            for ( int i=0; i<getMesa().getJogadores().size(); i++ ) {
+//                Jogador jogador=this.getMesa().getJogadores().get(i);
+//                mensagem = new Mensagem("String", "Vez do Jogador "+jogador.getNome()+".");
+//                this.getMesa().enviarMensagemTodos(mensagem);
+//                mensagem = new Mensagem("String", "SuaVez");
+//                jogador.setJogou(true);
+//                this.getMesa().getServidor().enviaMesagem(mensagem, jogador.getOut());
+//                this.getMesa().dorme();
+//                i = this.getMesa().buscaJogadorVez();
+//            }
+            while(true){
+                if(i== (this.getMesa().getJogadores().size()-1)){
+                    break;
+                }
                 Jogador jogador=this.getMesa().getJogadores().get(i);
+                jogador.setJogou(true);
                 mensagem = new Mensagem("String", "Vez do Jogador "+jogador.getNome()+".");
                 this.getMesa().enviarMensagemTodos(mensagem);
                 mensagem = new Mensagem("String", "SuaVez");
                 this.getMesa().getServidor().enviaMesagem(mensagem, jogador.getOut());
                 this.getMesa().dorme();
+                i = this.getMesa().buscaJogadorVez();
             }
+
             this.getMesa().verificarVitoria();
             this.getMesa().score();
         }
