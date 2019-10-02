@@ -31,19 +31,8 @@ public class Dealer  implements Runnable {
                 }
             }
 
-            int i =0;
-//            for ( int i=0; i<getMesa().getJogadores().size(); i++ ) {
-//                Jogador jogador=this.getMesa().getJogadores().get(i);
-//                mensagem = new Mensagem("String", "Vez do Jogador "+jogador.getNome()+".");
-//                this.getMesa().enviarMensagemTodos(mensagem);
-//                mensagem = new Mensagem("String", "SuaVez");
-//                jogador.setJogou(true);
-//                this.getMesa().getServidor().enviaMesagem(mensagem, jogador.getOut());
-//                this.getMesa().dorme();
-//                i = this.getMesa().buscaJogadorVez();
-//            }
             while(true){
-                i = this.getMesa().buscaJogadorVez();
+                int i = this.getMesa().buscaJogadorVez();
                 if( i==this.getMesa().getJogadores().size() ){
                     break;
                 }
@@ -59,9 +48,7 @@ public class Dealer  implements Runnable {
             this.getMesa().score();
         }
 
-        if(this.getMesa().getJogadores().size()<2){
-            mensagem = new Mensagem("String", "Erro:Não existem jogadores suficientes na mesa para iniciar a rodada.");
-            this.getMesa().getServidor().enviaMesagem(mensagem, this.getMesa().getJogadores().get(0).getOut());
-        }
+        mensagem = new Mensagem("String", "Erro:Não existem jogadores suficientes na mesa para iniciar a rodada.");
+        this.getMesa().getServidor().enviaMesagem(mensagem, this.getMesa().getJogadores().get(0).getOut());
     }
 }

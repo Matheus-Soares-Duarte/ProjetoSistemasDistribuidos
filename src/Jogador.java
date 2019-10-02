@@ -43,7 +43,6 @@ public class Jogador implements Serializable {
     void setSocket(Socket socket) { this.socket = socket; }
     void setVitorias(int vitorias){ this.vitorias = vitorias; }
 
-
     //getters
     boolean getAs(){ return this.as; }
     List<Carta> getCartas(){ return cartas; }
@@ -68,6 +67,15 @@ public class Jogador implements Serializable {
     void addPartida(){ setPartidas( getPartidas()+1 ); }
     void addCarta(Carta carta){ this.cartas.add(carta); }
 
+    void comprarCarta(Carta carta){
+        this.addCarta(carta);
+        this.setPontos(this.getPontos() + carta.getValor());
+        this.setJogou(false);
+        if (carta.getValor() == 1) {
+            this.setAs(true);
+        }
+    }
+
     void devolverCartas(){
         cartas.clear();
         setPontos(0);
@@ -86,14 +94,5 @@ public class Jogador implements Serializable {
 
         }
         System.out.println("\nSOMA DE PONTOS: "+getPontos()+" Pontos.");
-    }
-
-    void comprarCarta(Carta carta){
-        this.addCarta(carta);
-        this.setPontos(this.getPontos() + carta.getValor());
-        this.setJogou(false);
-        if (carta.getValor() == 1) {
-            this.setAs(true);
-        }
     }
 }
