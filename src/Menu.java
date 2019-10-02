@@ -15,9 +15,7 @@ public class Menu implements Serializable {
             System.out.println("Ola "+ jogador.getNome()+", Seja Bem Vindo!");
             Mensagem mensagem = new Mensagem("Jogador", jogador);
             cliente.enviaMesagem(mensagem);
-
             this.escolhaInicial(cliente);
-
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
@@ -34,25 +32,24 @@ public class Menu implements Serializable {
             int numero = sc.nextInt();
             Mensagem mensagem = new Mensagem("String", comando+":"+numero);
 
+            comandoOK=true;
             switch (comando) {
                 case "criar":
                     cliente.enviaMesagem(mensagem);
-                    comandoOK=true;
                     break;
                 case "entrar":
                     cliente.enviaMesagem(mensagem);
-                    comandoOK=true;
                     break;
                 default:
-                    //throw new IllegalStateException("Unexpected value: " + comando);
-                    System.out.println("Unexpected value: " + comando);
+                    comandoOK=false;
+                    System.out.println("Comando Invalido: " + comando);
                     System.out.println("Por favor entre com um comando valido!");
+                    break;
             }
         }
-
     }
 
-        public void escolha(Jogador jogador,ConexaoCliente cliente){
+    public void escolha(Jogador jogador,ConexaoCliente cliente){
         boolean terminaLoop = false;
 
         while(terminaLoop == false) {
@@ -64,33 +61,25 @@ public class Menu implements Serializable {
             String comando = sc.next().toLowerCase();
             Mensagem mensagem = new Mensagem("String",comando);
 
+            terminaLoop=true;
             switch (comando) {
                 case "comprar":
                     cliente.enviaMesagem(mensagem);
-                    terminaLoop=true;
                     break;
                 case "passar":
                     cliente.enviaMesagem(mensagem);
                     jogador.addPartida();
-                    terminaLoop=true;
                     break;
                 case "sair":
                     cliente.enviaMesagem(mensagem);
-                    terminaLoop=true;
+                    jogador.devolverCartas();
                     break;
                 default:
-                    //throw new IllegalStateException("Unexpected value: " + comando);
-                    System.out.println("Unexpected value: " + comando);
+                    terminaLoop=false;
+                    System.out.println("Comando Invalido: " + comando);
                     System.out.println("Por favor entre com um comando valido!");
+                    break;
             }
         }
     }
 }
-//jogador.mostrarCartas();
-//        if (jogador.getPontos()>21){
-//        System.out.println(jogador.getNome()+" ESTOUROU COM "+jogador.getPontos()+" PONTOS.");
-//        terminaLoop =  true;
-//        } else{
-//        terminaLoop = false;
-//        }
-//        break;

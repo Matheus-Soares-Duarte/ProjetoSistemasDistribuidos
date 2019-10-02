@@ -47,8 +47,9 @@ public class Dealer  implements Runnable {
             this.getMesa().verificarVitoria();
             this.getMesa().score();
         }
-
-        mensagem = new Mensagem("String", "Erro:Não existem jogadores suficientes na mesa para iniciar a rodada.");
-        this.getMesa().getServidor().enviaMesagem(mensagem, this.getMesa().getJogadores().get(0).getOut());
+        if(this.getMesa().getJogadores().size()==1){
+            mensagem = new Mensagem("String", "Erro:Não existem jogadores suficientes na mesa para iniciar a rodada.");
+            this.getMesa().getServidor().enviaMesagem(mensagem, this.getMesa().getJogadores().get(0).getOut());
+        }
     }
 }

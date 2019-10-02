@@ -30,7 +30,7 @@ public class ConexaoServidor {
         int index = buscaMesa(numero);
         if(index>=0){
             this.getMesas().get(index).addJogador(jogador);
-            System.out.println("ENTRADA NA SALA: O Jogador "+jogador.getNome()+" acaba de entrar na sala "+numero+"!");
+            System.out.println("ENTRADA NA SALA: O Jogador "+jogador.getNome()+" acaba de entrar na sala "+numero+"! Existe(em) "+this.getMesas().get(index).getJogadores().size()+" Jogador(es) nessa Sala.");
             return "Sucesso:Inicial:Bem vindo a Sala "+numero+"!:"+numero;
         } else {
             return "Erro:Inicial:A Sala "+numero+" não existe!";
@@ -61,8 +61,11 @@ public class ConexaoServidor {
             Mesa mesa = new Mesa(numero, jogador, this);
             this.addMesas(mesa);
             jogador.setMesa(numero);
+            System.out.println("CRIAÇÃO DE SALA: Sucesso ao tentar criar a sala "+numero+"! Existe(em) "+this.getMesas().size()+" Sala(s) aberta(s) neste Servidor.");
+            System.out.println("ENTRADA NA SALA: O Jogador "+jogador.getNome()+" acaba de entrar na sala "+numero+"! Existe(em) "+mesa.getJogadores().size()+" Jogador(es) nessa Sala.");
             return "Sucesso:Inicial:A sala de numero "+numero+" foi criada com sucesso!\nEsperando novos jogadores para iniciar o jogo!:"+numero;
         } else {
+            System.out.println("CRIAÇÃO DE SALA: Erro ao tentar criar a sala "+numero+"! Existe(em) "+this.getMesas().size()+" Sala(s) aberta(s) neste Servidor.");
             return "Erro:Inicial:A sala de numero "+numero+" ja foi criada!";
         }
     }
@@ -102,7 +105,6 @@ public class ConexaoServidor {
     }
 
     public void respondeMensagem(Socket socket, ObjectInputStream in, ObjectOutputStream out, Mensagem mensagemRecebida) {
-//        System.out.println("Mensagem do cliente "+cliente.getInetAddress()+"="+mensagem+".");
         Mensagem mensagemResposta;
 
         String tipo = mensagemRecebida.getTipo();
@@ -116,8 +118,6 @@ public class ConexaoServidor {
                 if(index>=0){
                     Jogador jogador = this.getJogadores().get(index);
                     resposta = this.criarMesa(numero, jogador);
-                    String textoResposta[] = resposta.split(":");
-                    System.out.println("CRIAÇÃO DE SALA: "+textoResposta[0]+" ao tentar criar a sala "+numero+"! Existe(em) "+getMesas().size()+" Sala(s) aberta(s) neste Servidor.");
                 } else {
                     resposta = "Erro:Inicial:Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!";
                 }
@@ -164,9 +164,11 @@ public class ConexaoServidor {
                     int indexMesa = buscaMesa(jogador.getMesa());
                     Mesa mesa = this.getMesas().get(indexMesa);
                     mesa.retirarJogador(jogador);
+                    System.out.println("SAIDA DA SALA: "+jogador.getNome()+" saiu da sala "+mesa.getId()+"! Existe(em) "+mesa.getJogadores().size()+" Jogador(es) nessa Sala.");
                     this.getMesas().get(indexMesa).acorda();
                     if(mesa.getJogadores().size() < 1){
                         this.mesas.remove(mesa);
+                        System.out.println("EXCLUSÃO DE SALA: A Sala "+mesa.getId()+" acaba de ser excluida, pois não existem jogadores nela! Existe(em) "+this.mesas.size()+" Sala(s) neste Servidor.");
                     }
                     mensagemResposta = new Mensagem("String", "Erro:Inicial:Você saiu da sala "+mesa.getId()+"!");
                     this.enviaMesagem(mensagemResposta, out);

@@ -80,6 +80,7 @@ public class Jogador implements Serializable {
         cartas.clear();
         setPontos(0);
         setAs(false);
+        setJogou(false);
     }
 
     void mostrarCartas(){
@@ -91,7 +92,6 @@ public class Jogador implements Serializable {
             } else {
                 System.out.print(".");
             }
-
         }
         System.out.println("\nSOMA DE PONTOS: "+getPontos()+" Pontos.");
     }

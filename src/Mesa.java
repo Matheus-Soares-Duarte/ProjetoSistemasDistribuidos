@@ -100,10 +100,13 @@ public class Mesa {
         if(index>=0){
             Mensagem mensagem = new Mensagem("String","O Jogador "+jogador.getNome()+ " acaba de abandonar a partida.");
             this.enviarMensagemTodos(mensagem);
+            for (Carta carta : jogador.getCartas()) {
+                this.getBaralho().addCarta(carta);
+            }
             jogador.devolverCartas();
             jogador.setMesa(-1);
-            jogador.setJogou(false);
             this.getJogadores().remove(index);
+            this.getBaralho().embaralhar();
         }
     }
 
