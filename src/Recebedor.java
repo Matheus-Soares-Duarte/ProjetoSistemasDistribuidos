@@ -4,18 +4,21 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class Recebedor implements Runnable {
-    ConexaoCliente cliente;
+    private ConexaoCliente cliente;
 
     public Recebedor(ConexaoCliente cliente) {
-        this.cliente = cliente;
+        this.setCliente(cliente);
     }
+
+    public ConexaoCliente getCliente() { return cliente; }
+    public void setCliente(ConexaoCliente cliente) { this.cliente = cliente; }
 
     public void run() {
         // recebe msgs do servidor e imprime na tela
         try {
             while (true) {
-                Mensagem mensagem = (Mensagem) cliente.in.readObject();
-                cliente.analisaMesagem(mensagem);
+                Mensagem mensagem = (Mensagem) this.getCliente().getIn().readObject();
+                this.getCliente().analisaMesagem(mensagem);
             }
         } catch (IOException e) {
             e.printStackTrace();

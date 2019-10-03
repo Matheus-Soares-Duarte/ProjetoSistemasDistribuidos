@@ -7,24 +7,26 @@ import java.util.List;
 
 public class ConexaoServidor {
     private int portaTCP;
-    private List<Socket> clientes;
     private List<Jogador> jogadores;
-    private List<Mesa> mesas = new ArrayList<Mesa>();
+    private List<Mesa> mesas;
 
     public ConexaoServidor (int porta) {
-        this.portaTCP = porta;
-        this.clientes = new ArrayList<Socket>();
-        this.jogadores = new ArrayList<Jogador>();
+        this.setPortaTCP( porta );
+        this.setJogadores( new ArrayList<Jogador>() );
+        this.setMesas( new ArrayList<Mesa>() );
     }
 
-    void setMesas(List<Mesa> mesas){ this.mesas = mesas; }
-    List<Socket> getClientes(){ return this.clientes; }
     List<Jogador> getJogadores(){ return this.jogadores; }
     List<Mesa> getMesas(){ return this.mesas; }
+    int getPortaTCP() { return portaTCP; }
 
-    void addCliente(Socket socket){ this.clientes.add(socket); }
-    void addJogador(Jogador jogador){ this.jogadores.add(jogador); }
-    void addMesas(Mesa mesa){ this.mesas.add(mesa); }
+    public void setJogadores(List<Jogador> jogadores) { this.jogadores = jogadores; }
+    public void setMesas(List<Mesa> mesas){ this.mesas = mesas; }
+    public void setPortaTCP(int portaTCP) { this.portaTCP = portaTCP; }
+
+    void addJogador(Jogador jogador){ this.getJogadores().add(jogador); }
+
+    void addMesas(Mesa mesa){ this.getMesas().add(mesa); }
 
     String addJogadorMesa(int numero, Jogador jogador){
         int index = buscaMesa(numero);
@@ -87,16 +89,13 @@ public class ConexaoServidor {
     }
 
     public void executa () throws IOException {
-        ServerSocket servidor = new ServerSocket(this.portaTCP);
-        System.out.println("Servidor Iniciado no IP "+InetAddress.getLocalHost().getHostAddress()+" e Porta "+this.portaTCP+".\nEsperando Conexões!");
+        ServerSocket servidor = new ServerSocket(this.getPortaTCP());
+        System.out.println("Servidor Iniciado no IP "+InetAddress.getLocalHost().getHostAddress()+" e Porta "+this.getPortaTCP()+".\nEsperando Conexões!");
 
         while (true) {
             // aceita um cliente
             Socket cliente = servidor.accept();
             System.out.println("Nova conexão com o cliente " + cliente.getInetAddress().getHostAddress() );
-
-            // adiciona socket do cliente à lista
-            this.addCliente(cliente);
 
             // cria tratador de cliente numa nova thread
             TrataCliente tc = new TrataCliente(cliente, this);
@@ -167,8 +166,8 @@ public class ConexaoServidor {
                     System.out.println("SAIDA DA SALA: "+jogador.getNome()+" saiu da sala "+mesa.getId()+"! Existe(em) "+mesa.getJogadores().size()+" Jogador(es) nessa Sala.");
                     this.getMesas().get(indexMesa).acorda();
                     if(mesa.getJogadores().size() < 1){
-                        this.mesas.remove(mesa);
-                        System.out.println("EXCLUSÃO DE SALA: A Sala "+mesa.getId()+" acaba de ser excluida, pois não existem jogadores nela! Existe(em) "+this.mesas.size()+" Sala(s) neste Servidor.");
+                        this.getMesas().remove(mesa);
+                        System.out.println("EXCLUSÃO DE SALA: A Sala "+mesa.getId()+" acaba de ser excluida, pois não existem jogadores nela! Existe(em) "+this.getMesas().size()+" Sala(s) neste Servidor.");
                     }
                     mensagemResposta = new Mensagem("String", "Erro:Inicial:Você saiu da sala "+mesa.getId()+"!");
                     this.enviaMesagem(mensagemResposta, out);
