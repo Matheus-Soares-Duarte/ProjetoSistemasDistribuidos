@@ -27,7 +27,7 @@ public class Mesa {
         notify();
     }
 
-    void addJogador(Jogador jogador){
+    boolean addJogador(Jogador jogador){
         Mensagem mensagem;
         if(this.getJogadores().size()<5){
             this.getJogadores().add(jogador);
@@ -44,9 +44,11 @@ public class Mesa {
                     }
                 }
             }
+            return true;
         } else {
             mensagem = new Mensagem("String", "Erro:Inicial:A sala "+this.getId()+" ja está cheia!");
             this.getServidor().enviaMesagem(mensagem, jogador.getOut());
+            return false;
         }
     }
 
@@ -98,8 +100,7 @@ public class Mesa {
     void retirarJogador(Jogador jogador){
         int index = this.getJogadores().indexOf(jogador);
         if(index>=0){
-            Mensagem mensagem = new Mensagem("String","O Jogador "+jogador.getNome()+ " acaba de abandonar a partida.");
-            this.enviarMensagemTodos(mensagem);
+            int indexVez = this.buscaJogadorVez();
             for (Carta carta : jogador.getCartas()) {
                 this.getBaralho().addCarta(carta);
             }
@@ -107,6 +108,11 @@ public class Mesa {
             jogador.setMesa(-1);
             this.getJogadores().remove(index);
             this.getBaralho().embaralhar();
+            Mensagem mensagem = new Mensagem("String","O Jogador "+jogador.getNome()+ " acaba de abandonar a partida.");
+            this.enviarMensagemTodos(mensagem);
+            if(index==indexVez){
+                this.acorda();
+            }
         }
     }
 

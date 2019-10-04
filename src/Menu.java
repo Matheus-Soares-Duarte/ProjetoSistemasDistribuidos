@@ -30,7 +30,7 @@ public class Menu implements Serializable {
             System.out.print("COMANDO: ");
             String comando = sc.next().toLowerCase();
             int numero = sc.nextInt();
-            Mensagem mensagem = new Mensagem("String", comando+":"+numero);
+            Mensagem mensagem = new Mensagem("String", "Inicial:"+comando+":"+numero);
 
             comandoOK=true;
             switch (comando) {
@@ -49,7 +49,7 @@ public class Menu implements Serializable {
         }
     }
 
-    public void escolha(Jogador jogador,ConexaoCliente cliente){
+    public void escolhaNaVez(Jogador jogador,ConexaoCliente cliente){
         boolean terminaLoop = false;
 
         while(terminaLoop == false) {
@@ -59,7 +59,7 @@ public class Menu implements Serializable {
             System.out.println("-Para sair da sala digite 'sair'");
             System.out.print("COMANDO: ");
             String comando = sc.next().toLowerCase();
-            Mensagem mensagem = new Mensagem("String",comando);
+            Mensagem mensagem = new Mensagem("String","NaVez:"+comando);
 
             terminaLoop=true;
             switch (comando) {

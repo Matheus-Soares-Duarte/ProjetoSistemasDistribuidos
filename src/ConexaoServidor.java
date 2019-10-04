@@ -31,8 +31,11 @@ public class ConexaoServidor {
     String addJogadorMesa(int numero, Jogador jogador){
         int index = buscaMesa(numero);
         if(index>=0){
-            this.getMesas().get(index).addJogador(jogador);
-            System.out.println("ENTRADA NA SALA: O Jogador "+jogador.getNome()+" acaba de entrar na sala "+numero+"! Existe(em) "+this.getMesas().get(index).getJogadores().size()+" Jogador(es) nessa Sala.");
+            if( this.getMesas().get(index).addJogador(jogador) ) {
+                System.out.println("ENTRADA NA SALA: O Jogador " + jogador.getNome() + " acaba de entrar na sala " + numero + "! Existe(em) " + this.getMesas().get(index).getJogadores().size() + " Jogador(es) nessa Sala.");
+            } else {
+                System.out.println("ENTRADA NA SALA: Erro na tentativa do Jogador " + jogador.getNome() + " entrar na sala " + numero + "! Pois existe(em) " + this.getMesas().get(index).getJogadores().size() + " Jogador(es) nessa Sala.");
+            }
             return "Sucesso:Inicial:Bem vindo a Sala "+numero+"!:"+numero;
         } else {
             return "Erro:Inicial:A Sala "+numero+" não existe!";
@@ -109,76 +112,66 @@ public class ConexaoServidor {
         String tipo = mensagemRecebida.getTipo();
         if(tipo.equals("String")) {
             String conteudo = (String) mensagemRecebida.getObjeto();
-            String com[] = conteudo.split(":");
-            String resposta;
-            if (com[0].equals("criar")) {
-                int numero = Integer.parseInt(com[1]);
-                int index = buscaJogador( socket );
-                if(index>=0){
-                    Jogador jogador = this.getJogadores().get(index);
-                    resposta = this.criarMesa(numero, jogador);
-                } else {
-                    resposta = "Erro:Inicial:Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!";
-                }
-                mensagemResposta = new Mensagem("String", resposta);
-                this.enviaMesagem(mensagemResposta, out);
-            } else if (com[0].equals("entrar")) {
-                int numero = Integer.parseInt(com[1]);
-                int index = buscaJogador( socket );
-                if(index>=0){
-                    Jogador jogador = this.getJogadores().get(index);
-                    resposta = this.addJogadorMesa(numero, jogador);
-                } else {
-                    resposta = "Erro:Inicial:Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!";
-                }
-                mensagemResposta = new Mensagem("String", resposta);
-                this.enviaMesagem(mensagemResposta, out);
-            } else if (com[0].equals("comprar")) {
-                int index = buscaJogador( socket );
-                if(index>=0){
-                    Jogador jogador = this.getJogadores().get(index);
-                    int indexMesa = buscaMesa(jogador.getMesa());
-                    this.getMesas().get(indexMesa).comprarCarta(jogador, "Carta");
-                } else {
-                    resposta = "Erro:Escolha:Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!";
-                    mensagemResposta = new Mensagem("String", resposta);
-                    this.enviaMesagem(mensagemResposta, out);
-                }
-            } else if (com[0].equals("passar")) {
-                int index = buscaJogador( socket );
-                if(index>=0){
-                    Jogador jogador = this.getJogadores().get(index);
-                    int indexMesa = buscaMesa(jogador.getMesa());
-                    jogador.setJogou(true);
-                    this.getMesas().get(indexMesa).acorda();
-                } else {
-                    resposta = "Erro:Escolha:Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!";
-                    mensagemResposta = new Mensagem("String", resposta);
-                    this.enviaMesagem(mensagemResposta, out);
-                }
-            } else if(com[0].equals("sair")){
-                int index = buscaJogador(socket);
-                if(index>=0){
-                    Jogador jogador = this.getJogadores().get(index);
-                    int indexMesa = buscaMesa(jogador.getMesa());
-                    Mesa mesa = this.getMesas().get(indexMesa);
-                    mesa.retirarJogador(jogador);
-                    System.out.println("SAIDA DA SALA: "+jogador.getNome()+" saiu da sala "+mesa.getId()+"! Existe(em) "+mesa.getJogadores().size()+" Jogador(es) nessa Sala.");
-                    this.getMesas().get(indexMesa).acorda();
-                    if(mesa.getJogadores().size() < 1){
-                        this.getMesas().remove(mesa);
-                        System.out.println("EXCLUSÃO DE SALA: A Sala "+mesa.getId()+" acaba de ser excluida, pois não existem jogadores nela! Existe(em) "+this.getMesas().size()+" Sala(s) neste Servidor.");
+            String conteudoSeparado[] = conteudo.split(":");
+            String resposta="";
+
+            int index = buscaJogador( socket );
+            if(index>=0) {
+                Jogador jogador = this.getJogadores().get(index);
+                int indexMesa = buscaMesa(jogador.getMesa());
+
+                if (conteudoSeparado[0].equals("Inicial")) {
+                    if (conteudoSeparado[1].equals("criar")) {
+                        int numero = Integer.parseInt(conteudoSeparado[2]);
+                        resposta = this.criarMesa(numero, jogador);
+                    } else if (conteudoSeparado[1].equals("entrar")) {
+                        int numero = Integer.parseInt(conteudoSeparado[2]);
+                        resposta = this.addJogadorMesa(numero, jogador);
                     }
-                    mensagemResposta = new Mensagem("String", "Erro:Inicial:Você saiu da sala "+mesa.getId()+"!");
-                    this.enviaMesagem(mensagemResposta, out);
-                }else {
-                    resposta = "Erro:Escolha:Desculpe, mas tivemos problemas para encontrar seu jogador, por favor reinicie o jogo!";
+
                     mensagemResposta = new Mensagem("String", resposta);
                     this.enviaMesagem(mensagemResposta, out);
+                } else if ( conteudoSeparado[0].equals("NaVez") ) {
+                    if ( conteudoSeparado[1].equals("comprar") ) {
+                        this.getMesas().get(indexMesa).comprarCarta(jogador, "Carta");
+                    } else if ( conteudoSeparado[1].equals("passar") ) {
+                        jogador.setJogou(true);
+                        this.getMesas().get(indexMesa).acorda();
+                    } else if ( conteudoSeparado[1].equals("sair") ) {
+                        if (indexMesa >= 0) {
+                            Mesa mesa = this.getMesas().get(indexMesa);
+                            mesa.retirarJogador(jogador);
+                            System.out.println("SAIDA DA SALA: " + jogador.getNome() + " saiu da sala " + mesa.getId() + "! Existe(em) " + mesa.getJogadores().size() + " Jogador(es) nessa Sala.");
+                            if (mesa.getJogadores().size() < 1) {
+                                this.getMesas().remove(mesa);
+                                System.out.println("EXCLUSÃO DE SALA: A Sala " + mesa.getId() + " acaba de ser excluida, pois não existem jogadores nela! Existe(em) " + this.getMesas().size() + " Sala(s) neste Servidor.");
+                            }
+                            mensagemResposta = new Mensagem("String", "Erro:Inicial:Você saiu da sala " + mesa.getId() + "!");
+                            this.enviaMesagem(mensagemResposta, out);
+                        }
+                    }
+                } else if( conteudoSeparado[0].equals("Jogo") ){
+                    if ( conteudoSeparado[1].equals("sair") ) {
+                        if (indexMesa >= 0) {
+                            Mesa mesa = this.getMesas().get(indexMesa);
+                            mesa.retirarJogador(jogador);
+                            System.out.println("SAIDA DA SALA: " + jogador.getNome() + " saiu da sala " + mesa.getId() + "! Existe(em) " + mesa.getJogadores().size() + " Jogador(es) nessa Sala.");
+                            if (mesa.getJogadores().size() == 0) {
+                                this.getMesas().remove(mesa);
+                                System.out.println("EXCLUSÃO DE SALA: A Sala " + mesa.getId() + " acaba de ser excluida, pois não existem jogadores nela! Existe(em) " + this.getMesas().size() + " Sala(s) neste Servidor.");
+                            }
+
+                            System.out.println("EXCLUSÃO DE JOGADOR: O Jogador de nome " + jogador.getNome() + " e IP " + socket.getInetAddress() + " acaba de sair deste Servidor.");
+                            this.getJogadores().get(index);
+                        }
+                    } else {
+                        mensagemResposta = new Mensagem("String", "Erro:Comando de Jogo ainda não tratado!");
+                        this.enviaMesagem(mensagemResposta, out);
+                    }
+                } else {
+                    mensagemResposta = new Mensagem("String", "Erro:Comando ainda não tratado!");
+                    this.enviaMesagem(mensagemResposta, out);
                 }
-            } else {
-                mensagemResposta = new Mensagem("String", "Erro:Comando ainda não tratado!");
-                this.enviaMesagem(mensagemResposta, out);
             }
         } else if(tipo.equals("Jogador")){
             Jogador jogador = (Jogador)mensagemRecebida.getObjeto();
@@ -186,6 +179,9 @@ public class ConexaoServidor {
             jogador.setOut(out);
             jogador.setIn(in);
             this.addJogador( jogador );
+        } else {
+            mensagemResposta = new Mensagem("String", "Erro:Tipo de Mensagem ainda não tratada!");
+            this.enviaMesagem(mensagemResposta, out);
         }
     }
 

@@ -20,6 +20,60 @@ public class ConexaoCliente {
     public void setOut(ObjectOutputStream out) { this.out = out; }
     public void setSocket(Socket socket) { this.socket = socket; }
 
+    void analisaMesagem(Mensagem mensagem){
+        String tipo = mensagem.getTipo();
+        Carta carta;
+        switch (tipo){
+            case "String" :
+                String conteudo = (String) mensagem.getObjeto();
+                String conteudoSeparado[] = conteudo.split(":");
+                if( conteudoSeparado[0].equals("Erro") ){
+                    if(conteudoSeparado[1].equals("Inicial")){
+                        System.out.println(conteudoSeparado[2]);
+                        this.getJogador().getMenu().escolhaInicial(this);
+                    } else {
+                        System.out.println(conteudoSeparado[1]);
+                    }
+                } else if( conteudoSeparado[0].equals("Sucesso") ){
+                    if(conteudoSeparado[1].equals("Inicial")){
+                        System.out.println(conteudoSeparado[2]);
+                        this.getJogador().setMesa(Integer.parseInt(conteudoSeparado[3]));
+                    } else {
+                        System.out.println(conteudoSeparado[1]);
+                    }
+                } else if( conteudoSeparado[0].equals("SuaVez") ){
+                    this.getJogador().getMenu().escolhaNaVez(this.getJogador(), this);
+                } else if( conteudoSeparado[0].equals("Vitoria") ){
+                    this.getJogador().addVitoria();
+                } else if( conteudoSeparado[0].equals("ReiniciarRodada") ){
+                    this.getJogador().devolverCartas();
+                }else {
+                    System.out.println(conteudo);
+                }
+                break;
+            case "Carta":
+                carta = (Carta) mensagem.getObjeto();
+                this.getJogador().comprarCarta(carta);
+                if (this.getJogador().getPontos()>21){
+                    this.getJogador().setJogou(true);
+                    this.getJogador().mostrarCartas();
+                    System.out.println(this.getJogador().getNome()+" ESTOUROU COM "+this.getJogador().getPontos()+" PONTOS.");
+                    Mensagem mensagemPassar = new Mensagem("String", "NaVez:passar");
+                    this.enviaMesagem(mensagemPassar);
+                } else{
+                    this.getJogador().getMenu().escolhaNaVez(this.getJogador(),this);
+                }
+                break;
+            case "CartaInicial":
+                carta = (Carta) mensagem.getObjeto();
+                this.getJogador().comprarCarta(carta);
+                break;
+            default:
+                System.out.println("Tipo de mensagem não encontrada!");
+                break;
+        }
+    }
+
     String buscaServidor(){
         String ipServidor="";
         try {
@@ -47,7 +101,7 @@ public class ConexaoCliente {
 
     void criarSocketTCP(String ipServidor, int porta){
         try {
-            socket = new Socket(ipServidor, porta);
+            Socket socket = new Socket(ipServidor, porta);
             this.setSocket(socket);
             this.setOut( new ObjectOutputStream(socket.getOutputStream()) );
             this.setIn( new ObjectInputStream(socket.getInputStream()) );
@@ -56,63 +110,9 @@ public class ConexaoCliente {
             Recebedor recebedor = new Recebedor(this);
             new Thread(recebedor).start();
 
-            jogador = new Jogador(this);
+            this.setJogador( new Jogador(this) );
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    void analisaMesagem(Mensagem mensagem){
-        String tipo = mensagem.getTipo();
-        Carta carta;
-        switch (tipo){
-            case "String" :
-                String conteudo = (String) mensagem.getObjeto();
-                String com[] = conteudo.split(":");
-                if( com[0].equals("Erro") ){
-                    if(com[1].equals("Inicial")){
-                        System.out.println(com[2]);
-                        this.getJogador().getMenu().escolhaInicial(this);
-                    } else {
-                        System.out.println(com[1]);
-                    }
-                } else if( com[0].equals("Sucesso") ){
-                    if(com[1].equals("Inicial")){
-                        System.out.println(com[2]);
-                        this.getJogador().setMesa(Integer.parseInt(com[3]));
-                    } else {
-                        System.out.println(com[1]);
-                    }
-                } else if( com[0].equals("SuaVez") ){
-                    this.getJogador().getMenu().escolha(this.getJogador(), this);
-                } else if( com[0].equals("Vitoria") ){
-                    this.getJogador().addVitoria();
-                } else if( com[0].equals("ReiniciarRodada") ){
-                    this.getJogador().devolverCartas();
-                }else {
-                    System.out.println(conteudo);
-                }
-                break;
-            case "Carta":
-                carta = (Carta) mensagem.getObjeto();
-                this.getJogador().comprarCarta(carta);
-                if (this.getJogador().getPontos()>21){
-                    this.getJogador().setJogou(true);
-                    this.getJogador().mostrarCartas();
-                    System.out.println(this.getJogador().getNome()+" ESTOUROU COM "+this.getJogador().getPontos()+" PONTOS.");
-                    Mensagem mensagemPassar = new Mensagem("String", "passar");
-                    this.enviaMesagem(mensagemPassar);
-                } else{
-                    this.getJogador().getMenu().escolha(this.getJogador(),this);
-                }
-                break;
-            case "CartaInicial":
-                carta = (Carta) mensagem.getObjeto();
-                this.getJogador().comprarCarta(carta);
-                break;
-            default:
-                System.out.println("Tipo de mensagem não encontrada!");
-                break;
         }
     }
 
