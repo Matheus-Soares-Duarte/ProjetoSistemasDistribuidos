@@ -19,12 +19,11 @@ public class Jogador implements Serializable {
     private ObjectOutputStream out;
     private ObjectInputStream in;
 
-    public Jogador(ConexaoCliente cliente){
-        this.getMenu().inicio(cliente, this);
+    public Jogador(){
         setAs(false);
+        setJogou(false);
         setPartidas(0);
         setPontos(0);
-        setJogou(false);
         setVitorias(0);
     }
 

@@ -3,22 +3,13 @@ import java.net.*;
 
 public class ConexaoCliente {
     private byte[] inBuf = new byte[256];
-    private Socket socket = null;
-    private ObjectOutputStream out;
-    private ObjectInputStream in;
     private Jogador jogador;
 
-    public ObjectInputStream getIn() { return in; }
     public byte[] getInBuf() { return inBuf; }
     public Jogador getJogador() { return jogador; }
-    public ObjectOutputStream getOut() { return out; }
-    public Socket getSocket() { return socket; }
 
-    public void setIn(ObjectInputStream in) { this.in = in; }
     public void setInBuf(byte[] inBuf) { this.inBuf = inBuf; }
     public void setJogador(Jogador jogador) { this.jogador = jogador; }
-    public void setOut(ObjectOutputStream out) { this.out = out; }
-    public void setSocket(Socket socket) { this.socket = socket; }
 
     void analisaMesagem(Mensagem mensagem){
         String tipo = mensagem.getTipo();
@@ -102,15 +93,20 @@ public class ConexaoCliente {
     void criarSocketTCP(String ipServidor, int porta){
         try {
             Socket socket = new Socket(ipServidor, porta);
-            this.setSocket(socket);
-            this.setOut( new ObjectOutputStream(socket.getOutputStream()) );
-            this.setIn( new ObjectInputStream(socket.getInputStream()) );
+            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
-            System.out.println("O cliente "+ InetAddress.getLocalHost().getHostAddress()+" se conectou ao servidor "+ipServidor+"!");
+            System.out.println("O cliente "+ InetAddress.getLocalHost().getHostAddress()+" se conectou ao servidor "+ipServidor+" na porta "+porta+"!");
+            Jogador jogador = new Jogador();
+            jogador.setSocket(socket);
+            jogador.setOut(out);
+            jogador.setIn(in);
+            this.setJogador( jogador );
+
             Recebedor recebedor = new Recebedor(this);
             new Thread(recebedor).start();
 
-            this.setJogador( new Jogador(this) );
+            this.getJogador().getMenu().inicio(this, this.getJogador());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -118,7 +114,7 @@ public class ConexaoCliente {
 
     void enviaMesagem(Mensagem mensagem){
         try {
-            this.getOut().writeObject(mensagem);
+            this.getJogador().getOut().writeObject(mensagem);
         } catch (IOException e) {
             e.printStackTrace();
         }

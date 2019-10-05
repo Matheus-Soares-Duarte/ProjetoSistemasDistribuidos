@@ -16,7 +16,7 @@ public class Recebedor implements Runnable {
     public void run() {
         try {
             while (true) {
-                Mensagem mensagem = (Mensagem) this.getCliente().getIn().readObject();
+                Mensagem mensagem = (Mensagem) this.getCliente().getJogador().getIn().readObject();
                 this.getCliente().analisaMesagem(mensagem);
             }
         } catch (IOException e) {
@@ -25,7 +25,7 @@ public class Recebedor implements Runnable {
             e.printStackTrace();
         } finally {
             try {
-                this.getCliente().getSocket().close();
+                this.getCliente().getJogador().getSocket().close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
