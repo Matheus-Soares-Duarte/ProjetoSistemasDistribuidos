@@ -160,10 +160,9 @@ public class ConexaoServidor {
                                 this.getMesas().remove(mesa);
                                 System.out.println("EXCLUSÃO DE SALA: A Sala " + mesa.getId() + " acaba de ser excluida, pois não existem jogadores nela! Existe(em) " + this.getMesas().size() + " Sala(s) neste Servidor.");
                             }
-
-                            System.out.println("EXCLUSÃO DE JOGADOR: O Jogador de nome " + jogador.getNome() + " e IP " + socket.getInetAddress() + " acaba de sair deste Servidor.");
-                            this.getJogadores().get(index);
                         }
+                        System.out.println("EXCLUSÃO DE JOGADOR: O Jogador de nome " + jogador.getNome() + " e IP " + socket.getInetAddress() + " acaba de sair deste Servidor.");
+                        this.getJogadores().remove(index);
                     } else {
                         mensagemResposta = new Mensagem("String", "Erro:Comando de Jogo ainda não tratado!");
                         this.enviaMesagem(mensagemResposta, out);

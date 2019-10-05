@@ -11,6 +11,7 @@ public class TrataCliente implements Runnable {
     private ObjectInputStream in;
 
     public TrataCliente(Socket socket, ConexaoServidor servidor) {
+        this.setReconexao(0);
         this.setSocket(socket);
         this.setServidor(servidor);
     }
@@ -58,7 +59,6 @@ public class TrataCliente implements Runnable {
                         ex.printStackTrace();
                     }
                 }
-//            e.printStackTrace();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }

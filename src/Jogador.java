@@ -9,7 +9,6 @@ public class Jogador implements Serializable {
     private boolean jogou;
     private boolean as;
     private List<Carta> cartas = new ArrayList<Carta>();
-    private String ip;
     private String nome;
     private int pontos;
     private int vitorias;
@@ -33,7 +32,6 @@ public class Jogador implements Serializable {
     void setAs(boolean as){ this.as = as; }
     void setCartas(List<Carta> cartas){ this.cartas = cartas; }
     void setIn(ObjectInputStream in){ this.in = in; }
-    void setIp(String ip){ this.ip = ip; }
     public void setJogou(boolean jogou) { this.jogou = jogou; }
     void setMesa(int mesa){ this.mesa = mesa; }
     void setNome(String nome){ this.nome = nome; }
@@ -47,7 +45,6 @@ public class Jogador implements Serializable {
     boolean getAs(){ return this.as; }
     List<Carta> getCartas(){ return cartas; }
     ObjectInputStream getIn(){ return this.in; }
-    String getIp(){ return this.ip; }
     public boolean getJogou() { return jogou; }
     Menu getMenu(){ return this.menu; }
     int getMesa(){ return this.mesa; }

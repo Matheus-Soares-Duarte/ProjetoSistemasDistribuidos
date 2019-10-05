@@ -1,24 +1,17 @@
 import java.io.Serializable;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class Menu implements Serializable {
     transient Scanner sc = new Scanner(System.in);
 
     public void inicio(ConexaoCliente cliente, Jogador jogador){
-        try {
-            System.out.print("\nDigite seu nome: ");
-            String nome = sc.nextLine();
-            jogador.setNome(nome);
-            jogador.setIp(InetAddress.getLocalHost().getHostAddress());
-            System.out.println("Ola "+ jogador.getNome()+", Seja Bem Vindo!");
-            Mensagem mensagem = new Mensagem("Jogador", jogador);
-            cliente.enviaMesagem(mensagem);
-            this.escolhaInicial(cliente);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
+        System.out.print("\nDigite seu nome: ");
+        String nome = sc.nextLine();
+        jogador.setNome(nome);
+        System.out.println("Ola "+ jogador.getNome()+", Seja Bem Vindo!");
+        Mensagem mensagem = new Mensagem("Jogador", jogador);
+        cliente.enviaMesagem(mensagem);
+        this.escolhaInicial(cliente);
     }
 
     public void escolhaInicial(ConexaoCliente cliente) {

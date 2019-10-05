@@ -14,7 +14,6 @@ public class Recebedor implements Runnable {
     public void setCliente(ConexaoCliente cliente) { this.cliente = cliente; }
 
     public void run() {
-        // recebe msgs do servidor e imprime na tela
         try {
             while (true) {
                 Mensagem mensagem = (Mensagem) this.getCliente().getIn().readObject();
@@ -24,6 +23,12 @@ public class Recebedor implements Runnable {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                this.getCliente().getSocket().close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
