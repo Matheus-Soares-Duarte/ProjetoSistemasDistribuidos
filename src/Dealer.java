@@ -40,7 +40,7 @@ public class Dealer  implements Runnable {
                 mensagem = new Mensagem("String", "Vez do Jogador "+jogador.getNome()+".");
                 this.getMesa().enviarMensagemTodos(mensagem);
                 mensagem = new Mensagem("String", "SuaVez");
-                this.getMesa().getServidor().enviaMesagem(mensagem, jogador.getOut());
+                this.getMesa().getServidor().enviaMesagem(mensagem, jogador.getOutServidor());
                 this.getMesa().dorme();
             }
 
@@ -49,7 +49,7 @@ public class Dealer  implements Runnable {
         }
         if(this.getMesa().getJogadores().size()==1){
             mensagem = new Mensagem("String", "Erro:Não existem jogadores suficientes na mesa para iniciar a rodada.");
-            this.getMesa().getServidor().enviaMesagem(mensagem, this.getMesa().getJogadores().get(0).getOut());
+            this.getMesa().getServidor().enviaMesagem(mensagem, this.getMesa().getJogadores().get(0).getOutServidor());
         }
     }
 }

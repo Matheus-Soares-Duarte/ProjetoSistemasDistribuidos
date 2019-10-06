@@ -4,7 +4,6 @@ import java.util.List;
 public class ManipuladorArquivo {
     public static void criarArquivo(String diretorio, String caminho){
         File file = new File(diretorio);
-
         if (file.exists()){
             file = new File(caminho);
             if (!file.exists()){
@@ -40,7 +39,21 @@ public class ManipuladorArquivo {
         }
         return null;
     }
-    public static List<Jogador> leitorArquivoMesas(String caminho) {
+
+    public static List<Mesa> leitorArquivoMesas(String caminho) {
+        File file = new File(caminho);
+        if(file.length()>0) {
+            try {
+                FileInputStream arquivo = new FileInputStream(caminho);
+                ObjectInputStream objeto = new ObjectInputStream(arquivo);
+                List<Mesa> listaMesas = (List<Mesa>) objeto.readObject();
+                arquivo.close();
+                objeto.close();
+                return listaMesas;
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
         return null;
     }
 
@@ -54,7 +67,8 @@ public class ManipuladorArquivo {
             e.printStackTrace();
         }
     }
-    public static void escritorLogMesas(String caminho, List<Jogador> jogadores){
+
+    public static void escritorLogMesas(String caminho, List<Mesa> mesas){
     }
 
 }

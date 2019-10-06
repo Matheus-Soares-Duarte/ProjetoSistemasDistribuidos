@@ -16,6 +16,9 @@ public class Recebedor implements Runnable {
     public void run() {
         try {
             while (true) {
+//                System.out.println(this.getCliente().getSocket());
+//                System.out.println(this.getCliente().getSocket().getChannel());
+//                System.out.println(this.getCliente().getSocket().getRemoteSocketAddress());
                 Mensagem mensagem = (Mensagem) this.getCliente().getIn().readObject();
                 this.getCliente().analisaMesagem(mensagem);
             }

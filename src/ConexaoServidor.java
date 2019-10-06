@@ -45,7 +45,7 @@ public class ConexaoServidor {
 
     int buscaJogador(Socket socket){
         for (Jogador jogador : this.getJogadores() ){
-            if(jogador.getSocket().equals(socket)){
+            if(jogador.getSocketServidor().equals(socket)){
                 return this.getJogadores().indexOf(jogador);
             }
         }
@@ -207,9 +207,9 @@ public class ConexaoServidor {
             }
         } else if(tipo.equals("Jogador")){
             Jogador jogador = (Jogador)mensagemRecebida.getObjeto();
-            jogador.setSocket(socket);
-            jogador.setOut(out);
-            jogador.setIn(in);
+            jogador.setSocketServidor(socket);
+            jogador.setOutServidor(out);
+            jogador.setInServidor(in);
             this.addJogador( jogador );
         } else {
             mensagemResposta = new Mensagem("String", "Erro:Tipo de Mensagem ainda não tratada!");

@@ -35,8 +35,7 @@ public class Menu implements Serializable {
                     break;
                 default:
                     comandoOK=false;
-                    System.out.println("Comando Invalido: " + comando);
-                    System.out.println("Por favor entre com um comando valido!");
+                    System.out.println("Comando Invalido: "+comando+". Por favor entre com um comando valido!");
                     break;
             }
         }
@@ -69,8 +68,7 @@ public class Menu implements Serializable {
                     break;
                 default:
                     terminaLoop=false;
-                    System.out.println("Comando Invalido: " + comando);
-                    System.out.println("Por favor entre com um comando valido!");
+                    System.out.println("Comando Invalido: "+comando+". Por favor entre com um comando valido!");
                     break;
             }
         }

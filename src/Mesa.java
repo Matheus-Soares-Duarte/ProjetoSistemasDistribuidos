@@ -47,7 +47,7 @@ public class Mesa {
             return true;
         } else {
             mensagem = new Mensagem("String", "Erro:Inicial:A sala "+this.getId()+" ja está cheia!");
-            this.getServidor().enviaMesagem(mensagem, jogador.getOut());
+            this.getServidor().enviaMesagem(mensagem, jogador.getOutServidor());
             return false;
         }
     }
@@ -66,7 +66,7 @@ public class Mesa {
     void comprarCarta(Jogador jogador, String string){
         Carta carta = this.getBaralho().entregarCarta();
         Mensagem mensagem = new Mensagem(string, carta);
-        this.getServidor().enviaMesagem(mensagem, jogador.getOut());
+        this.getServidor().enviaMesagem(mensagem, jogador.getOutServidor());
         jogador.comprarCarta(carta);
     }
 
@@ -80,7 +80,7 @@ public class Mesa {
 
     void enviarMensagemTodos(Mensagem mensagem){
         for (Jogador jogador : this.getJogadores() ){
-            getServidor().enviaMesagem(mensagem, jogador.getOut());
+            getServidor().enviaMesagem(mensagem, jogador.getOutServidor());
         }
     }
 
@@ -137,7 +137,7 @@ public class Mesa {
             jogador.addPartida();
             if (jogador.getPontos()==maiorValor) {
                 Mensagem mensagem = new Mensagem("String", "Vitoria");
-                this.getServidor().enviaMesagem(mensagem, jogador.getOut());
+                this.getServidor().enviaMesagem(mensagem, jogador.getOutServidor());
                 mensagem = new Mensagem("String", "VITORIA DE "+jogador.getNome()+" COM "+jogador.getPontos()+" PONTOS!");
                 this.enviarMensagemTodos(mensagem);
                 jogador.addVitoria();

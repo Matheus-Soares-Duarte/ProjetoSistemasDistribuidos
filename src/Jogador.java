@@ -11,6 +11,7 @@ public class Jogador implements Serializable {
     private List<Carta> cartas = new ArrayList<Carta>();
     private String nome;
     private int pontos;
+    private boolean emReconexão;
     private int vitorias;
     private int partidas;
     private int mesa;
@@ -26,6 +27,7 @@ public class Jogador implements Serializable {
         setAs(false);
         setPartidas(0);
         setPontos(0);
+        setEmReconexão(false);
         setJogou(false);
         setVitorias(0);
         //Inserir os setters para escrever so a classe jogador no arquivo
@@ -38,6 +40,7 @@ public class Jogador implements Serializable {
     //setters
     void setAs(boolean as){ this.as = as; }
     void setCartas(List<Carta> cartas){ this.cartas = cartas; }
+    void setEmReconexão(boolean emReconexão) { this.emReconexão = emReconexão; }
     void setInCliente(ObjectInputStream in){ this.inCliente = in; }
     void setInServidor(ObjectInputStream in){ this.inServidor = in; }
     public void setJogou(boolean jogou) { this.jogou = jogou; }
@@ -54,6 +57,7 @@ public class Jogador implements Serializable {
     //getters
     boolean getAs(){ return this.as; }
     List<Carta> getCartas(){ return cartas; }
+    boolean getEmReconexão() { return emReconexão; }
     ObjectInputStream getInCliente(){ return this.inCliente; }
     ObjectInputStream getInServidor(){ return this.inServidor; }
     public boolean getJogou() { return jogou; }
