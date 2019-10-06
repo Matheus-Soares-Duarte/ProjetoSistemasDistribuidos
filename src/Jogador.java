@@ -15,9 +15,12 @@ public class Jogador implements Serializable {
     private int partidas;
     private int mesa;
     private Menu menu = new Menu();
-    private transient Socket socket;
-    private transient ObjectOutputStream out;
-    private transient ObjectInputStream in;
+    private transient Socket socketCliente;
+    private transient ObjectOutputStream outCliente;
+    private transient ObjectInputStream inCliente;
+    private transient Socket socketServidor;
+    private transient ObjectOutputStream outServidor;
+    private transient ObjectInputStream inServidor;
 
     public Jogador(ConexaoCliente cliente){
         setAs(false);
@@ -26,42 +29,47 @@ public class Jogador implements Serializable {
         setJogou(false);
         setVitorias(0);
         //Inserir os setters para escrever so a classe jogador no arquivo
-        setSocket(cliente.getSocket());
-        setOut(cliente.getOut());
-        setIn(cliente.getIn());
+        setSocketCliente(cliente.getSocket());
+        setOutCliente(cliente.getOut());
+        setInCliente(cliente.getIn());
         this.getMenu().inicio(cliente, this);
-
     }
 
     //setters
     void setAs(boolean as){ this.as = as; }
     void setCartas(List<Carta> cartas){ this.cartas = cartas; }
-    void setIn(ObjectInputStream in){ this.in = in; }
+    void setInCliente(ObjectInputStream in){ this.inCliente = in; }
+    void setInServidor(ObjectInputStream in){ this.inServidor = in; }
     public void setJogou(boolean jogou) { this.jogou = jogou; }
     void setMesa(int mesa){ this.mesa = mesa; }
     void setNome(String nome){ this.nome = nome; }
-    void setOut(ObjectOutputStream out){ this.out = out; }
+    void setOutCliente(ObjectOutputStream out){ this.outCliente = out; }
+    void setOutServidor(ObjectOutputStream out){ this.outServidor = out; }
     void setPartidas(int partidas) { this.partidas = partidas; }
     void setPontos(int pontos){ this.pontos = pontos; }
-    void setSocket(Socket socket) { this.socket = socket; }
+    void setSocketCliente(Socket socket) { this.socketCliente = socket; }
+    void setSocketServidor(Socket socket) { this.socketServidor = socket; }
     void setVitorias(int vitorias){ this.vitorias = vitorias; }
 
     //getters
     boolean getAs(){ return this.as; }
     List<Carta> getCartas(){ return cartas; }
-    ObjectInputStream getIn(){ return this.in; }
+    ObjectInputStream getInCliente(){ return this.inCliente; }
+    ObjectInputStream getInServidor(){ return this.inServidor; }
     public boolean getJogou() { return jogou; }
     Menu getMenu(){ return this.menu; }
     int getMesa(){ return this.mesa; }
     String getNome(){ return this.nome; }
-    ObjectOutputStream getOut(){ return this.out; }
+    ObjectOutputStream getOutCliente(){ return this.outCliente; }
+    ObjectOutputStream getOutServidor(){ return this.outServidor; }
     int getPartidas(){ return this.partidas; }
     int getPontos(){
         if(this.getAs()==true && this.pontos+10<=21)
             return this.pontos+10;
         return this.pontos;
     }
-    Socket getSocket(){ return this.socket; }
+    Socket getSocketCliente(){ return this.socketCliente; }
+    Socket getSocketServidor(){ return this.socketServidor; }
     int getVitorias(){ return this.vitorias; }
 
     //funções proprias
