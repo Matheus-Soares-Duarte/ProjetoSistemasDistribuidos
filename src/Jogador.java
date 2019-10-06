@@ -15,17 +15,22 @@ public class Jogador implements Serializable {
     private int partidas;
     private int mesa;
     private Menu menu = new Menu();
-    private Socket socket;
-    private ObjectOutputStream out;
-    private ObjectInputStream in;
+    private transient Socket socket;
+    private transient ObjectOutputStream out;
+    private transient ObjectInputStream in;
 
     public Jogador(ConexaoCliente cliente){
-        this.getMenu().inicio(cliente, this);
         setAs(false);
         setPartidas(0);
         setPontos(0);
         setJogou(false);
         setVitorias(0);
+        //Inserir os setters para escrever so a classe jogador no arquivo
+        setSocket(cliente.getSocket());
+        setOut(cliente.getOut());
+        setIn(cliente.getIn());
+        this.getMenu().inicio(cliente, this);
+
     }
 
     //setters
