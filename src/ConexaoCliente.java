@@ -110,8 +110,6 @@ public class ConexaoCliente {
             Recebedor recebedor = new Recebedor(this);
             new Thread(recebedor).start();
 
-
-
             this.setJogador( new Jogador(this) );
         } catch (IOException e) {
             e.printStackTrace();
