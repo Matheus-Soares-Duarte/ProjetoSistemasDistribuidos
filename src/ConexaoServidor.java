@@ -3,6 +3,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 public class ConexaoServidor {
@@ -92,8 +93,8 @@ public class ConexaoServidor {
     }
 
     public void executa () throws IOException {
-        ServerSocket servidor = new ServerSocket(this.getPortaTCP());
-        System.out.println("Servidor Iniciado no IP "+InetAddress.getLocalHost().getHostAddress()+" e Porta "+this.getPortaTCP()+".\nEsperando Conexões!");
+        ServerSocket servidor = new ServerSocket(this.getPortaTCP(),30,InetAddress.getByName(getIpCorreto()));
+        System.out.println("Servidor Iniciado no IP "+getIpCorreto()+" e Porta "+this.getPortaTCP()+".\nEsperando Conexões!");
 
         while (true) {
             // aceita um cliente
@@ -104,6 +105,38 @@ public class ConexaoServidor {
             TrataCliente tc = new TrataCliente(cliente, this);
             new Thread(tc).start();
         }
+    }
+
+    public String getIpCorreto() throws SocketException {
+        String addrs = null;
+
+        if(System.getProperty("os.name").contains("Linux")){
+            Enumeration<NetworkInterface> em = NetworkInterface.getNetworkInterfaces();
+            while (em.hasMoreElements()) {
+                NetworkInterface i = (NetworkInterface) em.nextElement();
+                for (Enumeration en2 = i.getInetAddresses(); en2.hasMoreElements();) {
+                    InetAddress addr = (InetAddress) en2.nextElement();
+                    if (!addr.isLoopbackAddress()) {
+                        if (addr instanceof Inet4Address) {
+                             addrs = addr.getHostAddress();
+                        }
+                        if (addr instanceof Inet6Address) {
+                            if (true) {
+                                continue;
+                            }
+                            addrs = addr.getHostAddress();
+                        }
+                    }
+                }
+            }
+        }else{
+            try {
+                addrs = InetAddress.getLocalHost().getHostAddress();
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
+        }
+        return addrs;
     }
 
     public void respondeMensagem(Socket socket, ObjectInputStream in, ObjectOutputStream out, Mensagem mensagemRecebida) {
