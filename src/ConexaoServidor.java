@@ -1,15 +1,16 @@
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-public class ConexaoServidor {
+public class ConexaoServidor implements Serializable {
     private int portaTCP;
-    private List<Jogador> jogadores;
-    private List<Mesa> mesas;
+    private static List<Jogador> jogadores;
+    private static List<Mesa> mesas;
 
     public ConexaoServidor (int porta) {
         this.setPortaTCP( porta );
@@ -139,7 +140,7 @@ public class ConexaoServidor {
         return addrs;
     }
 
-    public void respondeMensagem(Socket socket, ObjectInputStream in, ObjectOutputStream out, Mensagem mensagemRecebida) {
+    public synchronized void respondeMensagem(Socket socket, ObjectInputStream in, ObjectOutputStream out, Mensagem mensagemRecebida) {
         Mensagem mensagemResposta;
 
         String tipo = mensagemRecebida.getTipo();
@@ -215,6 +216,16 @@ public class ConexaoServidor {
             mensagemResposta = new Mensagem("String", "Erro:Tipo de Mensagem ainda não tratada!");
             this.enviaMesagem(mensagemResposta, out);
         }
+
+        String logJogadoresServidor = "log\\logJogadoresServidor.txt";
+        String logMesasServidor = "log\\logMesasServidor.txt";
+        ManipuladorArquivo.escritorLogJogadores(logJogadoresServidor, this.getJogadores());
+        List<Jogador> testeJogadores = ManipuladorArquivo.leitorArquivoJogadores(logJogadoresServidor);
+        System.out.println(testeJogadores.size());
+        for(Jogador j: testeJogadores){
+            System.out.println("Jogador "+j.getNome()+" socket>"+j.getSocketServidor()+" in>"+j.getInServidor()+" out>"+j.getOutServidor());
+        }
+        ManipuladorArquivo.escritorLogMesas(logMesasServidor, this.getMesas());
     }
 
     void enviaMesagem(Mensagem mensagem, ObjectOutputStream out){

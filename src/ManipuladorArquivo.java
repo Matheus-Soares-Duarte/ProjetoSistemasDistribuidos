@@ -69,6 +69,14 @@ public class ManipuladorArquivo {
     }
 
     public static void escritorLogMesas(String caminho, List<Mesa> mesas){
+        try {
+            FileOutputStream arquivo = new FileOutputStream(caminho);
+            ObjectOutputStream objeto = new ObjectOutputStream(arquivo);
+            objeto.writeObject(mesas);
+            objeto.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

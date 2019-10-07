@@ -36,9 +36,6 @@ public class TrataCliente implements Runnable {
                 setOut(out);
                 setIn(in);
                 while (true) {
-//                    System.out.println(socket);
-//                    System.out.println(socket.getChannel());
-//                    System.out.println(socket.getRemoteSocketAddress());
                     Mensagem mensagem = (Mensagem) in.readObject();
                     if(this.getReconexao()>0){
                         System.out.println("Reconexão com o Cliente "+this.getSocket().getInetAddress()+" realizada com sucesso!");

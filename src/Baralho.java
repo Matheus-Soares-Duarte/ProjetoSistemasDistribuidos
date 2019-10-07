@@ -1,9 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Baralho<naipes>
-{
+public class Baralho implements Serializable{
     private int quantidadeBaralhos;
     private List<Carta> cartas = new ArrayList<Carta>();
     private String naipes[] = {"Paus", "Copas", "Espadas", "Ouros"};
