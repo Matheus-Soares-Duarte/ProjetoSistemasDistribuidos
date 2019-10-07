@@ -1,6 +1,6 @@
-import java.io.File;
+package main;
+
 import java.io.IOException;
-import java.util.List;
 
 public class Servidor {
     public static void main(String[] args) throws IOException {

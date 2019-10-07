@@ -1,3 +1,5 @@
+package main;
+
 public class Dealer  implements Runnable {
     private Mesa mesa;
 

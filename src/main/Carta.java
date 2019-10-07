@@ -1,3 +1,5 @@
+package main;
+
 import java.io.Serializable;
 
 public class Carta implements Serializable {
@@ -27,10 +29,10 @@ public class Carta implements Serializable {
     String getCarta(){
         return getLetra()+" de "+getNaipe();
     }
-    String getLetra(){
+    public String getLetra(){
         return this.letra;
     }
-    String getNaipe(){
+    public String getNaipe(){
         return this.naipe;
     }
     int getValor(){

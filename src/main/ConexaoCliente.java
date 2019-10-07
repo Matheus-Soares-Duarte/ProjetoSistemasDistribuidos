@@ -1,3 +1,5 @@
+package main;
+
 import java.io.*;
 import java.net.*;
 
@@ -74,7 +76,7 @@ public class ConexaoCliente {
         }
     }
 
-    String buscaServidor(){
+    public String buscaServidor(){
         String ipServidor="";
         try {
             MulticastSocket socket = new MulticastSocket(8888);
@@ -99,7 +101,7 @@ public class ConexaoCliente {
         return ipServidor;
     }
 
-    void criarSocketTCP(String ipServidor, int porta){
+    public void criarSocketTCP(String ipServidor, int porta){
         try {
             Socket socket = new Socket(ipServidor, porta);
             this.setSocket(socket);
