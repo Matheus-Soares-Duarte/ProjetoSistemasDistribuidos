@@ -84,7 +84,7 @@ public class ConexaoServidor implements Serializable {
         final int portaMulticast = 8888;
         try {
             DatagramSocket socket = new DatagramSocket();
-            String ipServidor = "IpDoServidor21:"+getIpCorreto();
+            String ipServidor = "IpDoServidor21:"+IpCorreto.getIpCorreto();
             outBuf = (ipServidor).getBytes();
             InetAddress address = InetAddress.getByName("224.2.2.3");
             while (true) {
@@ -96,8 +96,8 @@ public class ConexaoServidor implements Serializable {
     }
 
     public void executa () throws IOException {
-        ServerSocket servidor = new ServerSocket(this.getPortaTCP(),30,InetAddress.getByName(getIpCorreto()));
-        System.out.println("Servidor Iniciado no IP "+getIpCorreto()+" e Porta "+this.getPortaTCP()+".\nEsperando Conexões!");
+        ServerSocket servidor = new ServerSocket(this.getPortaTCP(),30,InetAddress.getByName(IpCorreto.getIpCorreto()));
+        System.out.println("Servidor Iniciado no IP "+IpCorreto.getIpCorreto()+" e Porta "+this.getPortaTCP()+".\nEsperando Conexões!");
 
         while (true) {
             // aceita um cliente
@@ -108,38 +108,6 @@ public class ConexaoServidor implements Serializable {
             TrataCliente tc = new TrataCliente(cliente, this);
             new Thread(tc).start();
         }
-    }
-
-    public static String getIpCorreto() throws SocketException {
-        String addrs = null;
-
-        if(System.getProperty("os.name").contains("Linux")){
-            Enumeration<NetworkInterface> em = NetworkInterface.getNetworkInterfaces();
-            while (em.hasMoreElements()) {
-                NetworkInterface i = (NetworkInterface) em.nextElement();
-                for (Enumeration en2 = i.getInetAddresses(); en2.hasMoreElements();) {
-                    InetAddress addr = (InetAddress) en2.nextElement();
-                    if (!addr.isLoopbackAddress()) {
-                        if (addr instanceof Inet4Address) {
-                             addrs = addr.getHostAddress();
-                        }
-                        if (addr instanceof Inet6Address) {
-                            if (true) {
-                                continue;
-                            }
-                            addrs = addr.getHostAddress();
-                        }
-                    }
-                }
-            }
-        }else{
-            try {
-                addrs = InetAddress.getLocalHost().getHostAddress();
-            } catch (UnknownHostException e) {
-                e.printStackTrace();
-            }
-        }
-        return addrs;
     }
 
     public synchronized void respondeMensagem(Socket socket, ObjectInputStream in, ObjectOutputStream out, Mensagem mensagemRecebida) {
@@ -219,15 +187,21 @@ public class ConexaoServidor implements Serializable {
             this.enviaMesagem(mensagemResposta, out);
         }
 
-        String logJogadoresServidor = "log\\logJogadoresServidor.txt";
-        String logMesasServidor = "log\\logMesasServidor.txt";
-        ManipuladorArquivo.escritorLogJogadores(logJogadoresServidor, this.getJogadores());
-        List<Jogador> testeJogadores = ManipuladorArquivo.leitorArquivoJogadores(logJogadoresServidor);
-        System.out.println(testeJogadores.size());
-        for(Jogador j: testeJogadores){
-            System.out.println("Jogador "+j.getNome()+" socket>"+j.getSocketServidor()+" in>"+j.getInServidor()+" out>"+j.getOutServidor());
-        }
-        ManipuladorArquivo.escritorLogMesas(logMesasServidor, this.getMesas());
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        String logJogadoresServidor = "log\\logJogadoresServidor.txt";
+//        String logMesasServidor = "log\\logMesasServidor.txt";
+//        ManipuladorArquivo.escritorLogJogadores(logJogadoresServidor, this.getJogadores());
+//        List<Jogador> testeJogadores = ManipuladorArquivo.leitorArquivoJogadores(logJogadoresServidor);
+//        System.out.println(testeJogadores.size());
+//        for(Jogador j: testeJogadores){
+//            System.out.println("Jogador "+j.getNome()+" socket>"+j.getSocketServidor()+" in>"+j.getInServidor()+" out>"+j.getOutServidor());
+//            j.mostrarCartas();
+//        }
+//        ManipuladorArquivo.escritorLogMesas(logMesasServidor, this.getMesas());
     }
 
     void enviaMesagem(Mensagem mensagem, ObjectOutputStream out){

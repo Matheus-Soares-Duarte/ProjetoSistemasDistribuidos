@@ -4,6 +4,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class Jogador implements Serializable {
     private int partidas;
     private int mesa;
     private Menu menu = new Menu();
+    private String ip;
     private transient Socket socketCliente;
     private transient ObjectOutputStream outCliente;
     private transient ObjectInputStream inCliente;
@@ -26,20 +28,23 @@ public class Jogador implements Serializable {
     private transient ObjectInputStream inServidor;
 
     public Jogador(ConexaoCliente cliente){
-        setAs(false);
-        setPartidas(0);
-        setPontos(0);
-        setEmReconexão(false);
-        setJogou(false);
-        setVitorias(0);
-        //Inserir os setters para escrever so a classe jogador no arquivo
-        setSocketCliente(cliente.getSocket());
-        setOutCliente(cliente.getOut());
-        setInCliente(cliente.getIn());
-        this.getMenu().inicio(cliente, this);
+        try {
+            setAs(false);
+            setPartidas(0);
+            setPontos(0);
+            setEmReconexão(false);
+            setJogou(false);
+            setIp(IpCorreto.getIpCorreto()+":"+ cliente.getSocket().getLocalPort());
+            setVitorias(0);
+            setSocketCliente(cliente.getSocket());
+            setOutCliente(cliente.getOut());
+            setInCliente(cliente.getIn());
+            this.getMenu().inicio(cliente, this);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
     }
     public Jogador(){
-        ;
     }
 
     //setters
@@ -48,6 +53,7 @@ public class Jogador implements Serializable {
     void setEmReconexão(boolean emReconexão) { this.emReconexão = emReconexão; }
     void setInCliente(ObjectInputStream in){ this.inCliente = in; }
     void setInServidor(ObjectInputStream in){ this.inServidor = in; }
+    void setIp(String ip){ this.ip = ip; }
     public void setJogou(boolean jogou) { this.jogou = jogou; }
     void setMesa(int mesa){ this.mesa = mesa; }
     void setNome(String nome){ this.nome = nome; }
@@ -65,6 +71,7 @@ public class Jogador implements Serializable {
     boolean getEmReconexão() { return emReconexão; }
     ObjectInputStream getInCliente(){ return this.inCliente; }
     ObjectInputStream getInServidor(){ return this.inServidor; }
+    String getIp(){ return this.ip; }
     public boolean getJogou() { return jogou; }
     Menu getMenu(){ return this.menu; }
     int getMesa(){ return this.mesa; }
