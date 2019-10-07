@@ -83,7 +83,7 @@ public class ConexaoServidor {
         final int portaMulticast = 8888;
         try {
             DatagramSocket socket = new DatagramSocket();
-            String ipServidor = "IpDoServidor21:"+InetAddress.getByName(getIpCorreto());
+            String ipServidor = "IpDoServidor21:"+getIpCorreto();
             outBuf = (ipServidor).getBytes();
             InetAddress address = InetAddress.getByName("224.2.2.3");
             while (true) {
