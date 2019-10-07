@@ -1,3 +1,5 @@
+package main;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -36,6 +38,9 @@ public class Jogador implements Serializable {
         setInCliente(cliente.getIn());
         this.getMenu().inicio(cliente, this);
     }
+    public Jogador(){
+        ;
+    }
 
     //setters
     void setAs(boolean as){ this.as = as; }
@@ -48,15 +53,15 @@ public class Jogador implements Serializable {
     void setNome(String nome){ this.nome = nome; }
     void setOutCliente(ObjectOutputStream out){ this.outCliente = out; }
     void setOutServidor(ObjectOutputStream out){ this.outServidor = out; }
-    void setPartidas(int partidas) { this.partidas = partidas; }
+    public void setPartidas(int partidas) { this.partidas = partidas; }
     void setPontos(int pontos){ this.pontos = pontos; }
     void setSocketCliente(Socket socket) { this.socketCliente = socket; }
     void setSocketServidor(Socket socket) { this.socketServidor = socket; }
-    void setVitorias(int vitorias){ this.vitorias = vitorias; }
+    public void setVitorias(int vitorias){ this.vitorias = vitorias; }
 
     //getters
-    boolean getAs(){ return this.as; }
-    List<Carta> getCartas(){ return cartas; }
+    public boolean getAs(){ return this.as; }
+    public List<Carta> getCartas(){ return cartas; }
     boolean getEmReconexão() { return emReconexão; }
     ObjectInputStream getInCliente(){ return this.inCliente; }
     ObjectInputStream getInServidor(){ return this.inServidor; }
@@ -66,22 +71,22 @@ public class Jogador implements Serializable {
     String getNome(){ return this.nome; }
     ObjectOutputStream getOutCliente(){ return this.outCliente; }
     ObjectOutputStream getOutServidor(){ return this.outServidor; }
-    int getPartidas(){ return this.partidas; }
-    int getPontos(){
+    public int getPartidas(){ return this.partidas; }
+    public int getPontos(){
         if(this.getAs()==true && this.pontos+10<=21)
             return this.pontos+10;
         return this.pontos;
     }
     Socket getSocketCliente(){ return this.socketCliente; }
     Socket getSocketServidor(){ return this.socketServidor; }
-    int getVitorias(){ return this.vitorias; }
+    public int getVitorias(){ return this.vitorias; }
 
     //funções proprias
-    void addVitoria(){ setVitorias( getVitorias()+1 ); }
-    void addPartida(){ setPartidas( getPartidas()+1 ); }
-    void addCarta(Carta carta){ this.cartas.add(carta); }
+    public void addVitoria(){ setVitorias( getVitorias()+1 ); }
+    public void addPartida(){ setPartidas( getPartidas()+1 ); }
+    public void addCarta(Carta carta){ this.cartas.add(carta); }
 
-    void comprarCarta(Carta carta){
+    public void comprarCarta(Carta carta){
         this.addCarta(carta);
         this.setPontos(this.getPontos() + carta.getValor());
         this.setJogou(false);
@@ -90,7 +95,7 @@ public class Jogador implements Serializable {
         }
     }
 
-    void devolverCartas(){
+    public void devolverCartas(){
         cartas.clear();
         setPontos(0);
         setAs(false);

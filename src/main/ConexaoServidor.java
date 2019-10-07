@@ -1,3 +1,5 @@
+package main;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -82,7 +84,7 @@ public class ConexaoServidor implements Serializable {
         final int portaMulticast = 8888;
         try {
             DatagramSocket socket = new DatagramSocket();
-            String ipServidor = "IpDoServidor21:"+InetAddress.getLocalHost().getHostAddress();
+            String ipServidor = "IpDoServidor21:"+InetAddress.getByName(getIpCorreto());
             outBuf = (ipServidor).getBytes();
             InetAddress address = InetAddress.getByName("224.2.2.3");
             while (true) {
@@ -108,7 +110,7 @@ public class ConexaoServidor implements Serializable {
         }
     }
 
-    public String getIpCorreto() throws SocketException {
+    public static String getIpCorreto() throws SocketException {
         String addrs = null;
 
         if(System.getProperty("os.name").contains("Linux")){
