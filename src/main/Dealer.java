@@ -42,7 +42,18 @@ public class Dealer  implements Runnable {
                 mensagem = new Mensagem("String", "Vez do Jogador "+jogador.getNome()+".");
                 this.getMesa().enviarMensagemTodos(mensagem);
                 mensagem = new Mensagem("String", "SuaVez");
-                this.getMesa().getServidor().enviaMesagem(mensagem, jogador.getOutServidor());
+                while(true) {
+                    if (!jogador.getEmReconexão()) {
+                        this.getMesa().getServidor().enviaMesagem(mensagem, jogador.getOutServidor());
+                        break;
+                    } else {
+                        try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
                 this.getMesa().dorme();
             }
 

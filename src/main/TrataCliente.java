@@ -54,7 +54,8 @@ public class TrataCliente implements Runnable {
                 }
                 else{
                     System.err.println((this.getReconexao()+1)+"º Erro na comunicação com o cliente " + getSocket().getInetAddress()+". Tentando reconexão novamente em 5 segundos.");
-                    this.setReconexao( this.getReconexao()+1 );
+                    Mensagem mensagem = new Mensagem("String", "Jogo:caiu");
+                    this.getServidor().respondeMensagem(this.getSocket(), this.getIn(), this.getOut(), mensagem);this.setReconexao( this.getReconexao()+1 );
                     try {
                         Thread.sleep(5000);
                     } catch (InterruptedException ex) {

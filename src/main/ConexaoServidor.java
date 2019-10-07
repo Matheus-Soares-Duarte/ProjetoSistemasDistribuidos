@@ -55,6 +55,15 @@ public class ConexaoServidor implements Serializable {
         return -1;
     }
 
+    int buscaJogadorIp(String ip){
+        for (Jogador jogador : this.getJogadores() ){
+            if(jogador.getIp().equals(ip)){
+                return this.getJogadores().indexOf(jogador);
+            }
+        }
+        return -1;
+    }
+
     int buscaMesa(int numero){
         for (Mesa mesa : this.getMesas()){
             if(mesa.getId() == numero){
@@ -155,7 +164,9 @@ public class ConexaoServidor implements Serializable {
                         }
                     }
                 } else if( conteudoSeparado[0].equals("Jogo") ){
-                    if ( conteudoSeparado[1].equals("sair") ) {
+                    if ( conteudoSeparado[1].equals("caiu") ) {
+                        jogador.setEmReconexão(true);
+                    } else if ( conteudoSeparado[1].equals("sair") ) {
                         if (indexMesa >= 0) {
                             Mesa mesa = this.getMesas().get(indexMesa);
                             mesa.retirarJogador(jogador);
@@ -182,7 +193,22 @@ public class ConexaoServidor implements Serializable {
             jogador.setOutServidor(out);
             jogador.setInServidor(in);
             this.addJogador( jogador );
-        } else {
+        }
+//        else if(tipo.equals("Reconexao")){
+//            Jogador jogador = (Jogador)mensagemRecebida.getObjeto();
+//            int indexJogador = buscaJogadorIp(jogador.getIp());
+//            if(indexJogador>=0){
+//                Jogador jogadorNaLista = this.getJogadores().get(indexJogador);
+//                jogadorNaLista.setEmReconexão(false);
+//                jogadorNaLista.setIp(jogador.getIp());
+//                jogadorNaLista.setSocketServidor(socket);
+//                jogadorNaLista.setOutServidor(out);
+//                jogadorNaLista.setInServidor(in);
+//                int indexMesa = buscaMesa(jogadorNaLista.getMesa());
+//            }
+//
+//        }
+        else {
             mensagemResposta = new Mensagem("String", "Erro:Tipo de Mensagem ainda não tratada!");
             this.enviaMesagem(mensagemResposta, out);
         }
@@ -199,6 +225,7 @@ public class ConexaoServidor implements Serializable {
 //        System.out.println(testeJogadores.size());
 //        for(Jogador j: testeJogadores){
 //            System.out.println("Jogador "+j.getNome()+" socket>"+j.getSocketServidor()+" in>"+j.getInServidor()+" out>"+j.getOutServidor());
+//            System.out.println(j.getIp());
 //            j.mostrarCartas();
 //        }
 //        ManipuladorArquivo.escritorLogMesas(logMesasServidor, this.getMesas());

@@ -82,7 +82,9 @@ public class Mesa implements Serializable {
 
     void enviarMensagemTodos(Mensagem mensagem){
         for (Jogador jogador : this.getJogadores() ){
-            getServidor().enviaMesagem(mensagem, jogador.getOutServidor());
+            if(!jogador.getEmReconexão()) {
+                getServidor().enviaMesagem(mensagem, jogador.getOutServidor());
+            }
         }
     }
 
