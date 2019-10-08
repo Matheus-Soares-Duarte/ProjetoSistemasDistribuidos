@@ -1,4 +1,4 @@
-package main;
+package main.java;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
