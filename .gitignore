@@ -1,7 +1,6 @@
 # Default ignored files
 /workspace.xml
 # Intellij
-.idea/
 *.iml
 *.iws
 # Maven
