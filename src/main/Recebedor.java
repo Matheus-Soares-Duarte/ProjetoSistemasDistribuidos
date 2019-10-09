@@ -7,6 +7,7 @@ public class Recebedor implements Runnable {
     private int reconexao;
 
     public Recebedor(ConexaoCliente cliente) {
+        setReconexao(0);
         this.setCliente(cliente);
     }
 
@@ -21,9 +22,6 @@ public class Recebedor implements Runnable {
             try {
                 while (true) {
                     Mensagem mensagem = (Mensagem) this.getCliente().getIn().readObject();
-                    if (this.getReconexao() > 0) {
-                        this.setReconexao(0);
-                    }
                     this.getCliente().analisaMesagem(mensagem);
                 }
             } catch (IOException e) {
@@ -33,11 +31,20 @@ public class Recebedor implements Runnable {
                 } else {
                     this.setReconexao(this.getReconexao() + 1);
                     System.err.println((this.getReconexao()) + "º Erro na comunicação com o servidor " + getCliente().getSocket().getInetAddress() + ". Tentando reconexão novamente em 5 segundos.");
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
+                    if(this.getReconexao()==1){
+                        this.getCliente().getJogador().setEmReconexão(true);
                     }
+
+                    if( this.getCliente().getJogador().getEmReconexão() ){
+                        try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                    Mensagem mensagem = new Mensagem("String", "ServidorCaiu:"+this.getCliente().getSocket().getInetAddress()+":"+this.getCliente().getSocket().getPort());
+                    this.getCliente().analisaMesagem(mensagem);
+
                 }
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();

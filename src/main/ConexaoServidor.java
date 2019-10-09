@@ -193,42 +193,40 @@ public class ConexaoServidor implements Serializable {
             jogador.setOutServidor(out);
             jogador.setInServidor(in);
             this.addJogador( jogador );
+        } else if(tipo.equals("Reconexao")){
+            Jogador jogador = (Jogador)mensagemRecebida.getObjeto();
+            int indexJogador = buscaJogadorIp(jogador.getIp());
+            if(indexJogador>=0){
+                Jogador jogadorNaLista = this.getJogadores().get(indexJogador);
+                jogadorNaLista.setIp(jogador.getIp());
+                jogadorNaLista.setSocketServidor(socket);
+                jogadorNaLista.setOutServidor(out);
+                jogadorNaLista.setInServidor(in);
+                jogadorNaLista.setEmReconexão(false);
+                int indexMesa = buscaMesa(jogadorNaLista.getMesa());
+            }
         }
-//        else if(tipo.equals("Reconexao")){
-//            Jogador jogador = (Jogador)mensagemRecebida.getObjeto();
-//            int indexJogador = buscaJogadorIp(jogador.getIp());
-//            if(indexJogador>=0){
-//                Jogador jogadorNaLista = this.getJogadores().get(indexJogador);
-//                jogadorNaLista.setEmReconexão(false);
-//                jogadorNaLista.setIp(jogador.getIp());
-//                jogadorNaLista.setSocketServidor(socket);
-//                jogadorNaLista.setOutServidor(out);
-//                jogadorNaLista.setInServidor(in);
-//                int indexMesa = buscaMesa(jogadorNaLista.getMesa());
-//            }
-//
-//        }
         else {
             mensagemResposta = new Mensagem("String", "Erro:Tipo de Mensagem ainda não tratada!");
             this.enviaMesagem(mensagemResposta, out);
         }
 
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        String logJogadoresServidor = "log\\logJogadoresServidor.txt";
-//        String logMesasServidor = "log\\logMesasServidor.txt";
-//        ManipuladorArquivo.escritorLogJogadores(logJogadoresServidor, this.getJogadores());
-//        List<Jogador> testeJogadores = ManipuladorArquivo.leitorArquivoJogadores(logJogadoresServidor);
-//        System.out.println(testeJogadores.size());
-//        for(Jogador j: testeJogadores){
-//            System.out.println("Jogador "+j.getNome()+" socket>"+j.getSocketServidor()+" in>"+j.getInServidor()+" out>"+j.getOutServidor());
-//            System.out.println(j.getIp());
-//            j.mostrarCartas();
-//        }
-//        ManipuladorArquivo.escritorLogMesas(logMesasServidor, this.getMesas());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String logJogadoresServidor = "log\\logJogadoresServidor.txt";
+        String logMesasServidor = "log\\logMesasServidor.txt";
+        ManipuladorArquivo.escritorLogJogadores(logJogadoresServidor, this.getJogadores());
+        List<Jogador> testeJogadores = ManipuladorArquivo.leitorArquivoJogadores(logJogadoresServidor);
+        System.out.println(testeJogadores.size());
+        for(Jogador j: testeJogadores){
+            System.out.println("Jogador "+j.getNome()+" socket>"+j.getSocketServidor()+" in>"+j.getInServidor()+" out>"+j.getOutServidor());
+            System.out.println(j.getIp());
+            j.mostrarCartas();
+        }
+        ManipuladorArquivo.escritorLogMesas(logMesasServidor, this.getMesas());
     }
 
     void enviaMesagem(Mensagem mensagem, ObjectOutputStream out){
