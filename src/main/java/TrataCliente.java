@@ -39,12 +39,13 @@ public class TrataCliente implements Runnable {
                 setIn(in);
                 while (true) {
                     Mensagem mensagem = (Mensagem) in.readObject();
+                    if(this.getReconexao()>0){
+                        System.out.println("Reconexão com o Cliente "+this.getSocket().getInetAddress()+" realizada com sucesso!");
+                        this.setReconexao(0);
+                    }
                     this.getServidor().respondeMensagem(getSocket(), in, out, mensagem);
                 }
             } catch (IOException e) {
-                if( this.getServidor().buscaJogador(this.getSocket()) == -1 ){
-                    break;
-                }
                 if (this.getReconexao()>=3) {
                     System.err.println("Desconectando o cliente " + getSocket().getInetAddress());
                     Mensagem mensagem = new Mensagem("String", "Jogo:sair");

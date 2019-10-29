@@ -49,19 +49,7 @@ public class ConexaoCliente {
                     this.getJogador().addVitoria();
                 } else if( conteudoSeparado[0].equals("ReiniciarRodada") ){
                     this.getJogador().devolverCartas();
-                } else if( conteudoSeparado[0].equals("ServidorCaiu") ){
-                    Socket socket;
-                    try {
-                        socket = new Socket(conteudoSeparado[1], Integer.parseInt(conteudoSeparado[2]) );
-                        this.setSocket(socket);
-                        this.setOut( new ObjectOutputStream(socket.getOutputStream()) );
-                        this.setIn( new ObjectInputStream(socket.getInputStream()) );
-                        Mensagem mensagemResposta=new Mensagem("Reconexao", this.getJogador());
-                        enviaMesagem(mensagemResposta);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } else {
+                }else {
                     System.out.println(conteudo);
                 }
                 break;
@@ -131,12 +119,10 @@ public class ConexaoCliente {
     }
 
     void enviaMesagem(Mensagem mensagem){
-        if(!this.getJogador().getEmReconexão()) {
-            try {
-                this.getOut().writeObject(mensagem);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            this.getOut().writeObject(mensagem);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
