@@ -1,7 +1,7 @@
-package tests;
+package test.java;
 
-import main.Carta;
-import main.Jogador;
+import main.java.Carta;
+import main.java.Jogador;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

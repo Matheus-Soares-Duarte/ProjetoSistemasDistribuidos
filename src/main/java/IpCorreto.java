@@ -1,4 +1,4 @@
-package main;
+package main.java;
 
 import java.net.*;
 import java.util.Enumeration;
