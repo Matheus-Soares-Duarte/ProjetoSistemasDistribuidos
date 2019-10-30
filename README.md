@@ -36,7 +36,7 @@ A pretenção é realizar o desenvolvimento deste jogo em forma de aplicativo na
 
 ## Instalações e execução do jogo Vinte e Um
 
-* Primeiramente entre na pasta, pelo terminal, onde deseja clonar este projeto, depois digite o seguinte comando abaixo:
+* Primeiramente entre na pasta, pelo terminal, onde deseja clonar este projeto, depois digite o seguinte comando:
 
     ```
     $ git clone https://github.com/Matheus-Soares-Duarte/ProjetoSistemasDistribuidos.git
