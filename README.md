@@ -44,7 +44,7 @@ A pretenção é realizar o desenvolvimento deste jogo em forma de aplicativo na
 
 * Em seguida, entre na pasta 'target' gerada após o comando interior e rode o seguinte comando:
 
-    java -jar Servidor-Executavel.jar
+    `java -jar Servidor-Executavel.jar`
 
 * E o cliente:
     
