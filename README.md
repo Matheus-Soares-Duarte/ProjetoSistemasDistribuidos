@@ -33,3 +33,20 @@ A pretenção é realizar o desenvolvimento deste jogo em forma de aplicativo na
    * reiniciaremos a internet de um jogador, para desmontrar que o servidor esperará por 20 segundos antes de considerar que o jogador abandonou a partida, caso ele entre novamente na sala antes do termino do tempo, suas cartas, pontos de rodada e posição na mesa ainda estaram salvos como antes do deligamento.<br>
 
 * <b>Demonstração de Funcionalidades:</b> durante a execução da partida mostraremos o banco de dados para que seja possível visualizar que o mesmo está constantemente sendo alimentado pelo servidor, por informações tanto das cartas dos jogadores(seus pontos na rodada), seus pontos de rodada(rodadas ganhas pelo jogador), posição dos jogadores na mesa e de qual jogador e a vez de selecionar uma ação.<br>
+
+## Instalações e execução do jogo Vinte e Um
+
+Primeiramente clone o repositório, certifique-se de possuir a [JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html) com o [maven](https://maven.apache.org/download.cgi) instalado e com as váriáveis de ambiente devidamente setadas (JAVA_HOME e M2_HOME).
+
+Na raíz do diretório clonado execute:
+
+    mvn clean install
+
+Em seguida, entre na pasta 'target' gerada após o comando interior e rode o seguinte comando:
+
+    java -jar Servidor-Executavel.jar
+
+E o cliente:
+    
+    java -jar Cliente-Executavel.jar
+
