@@ -40,7 +40,7 @@ A pretenção é realizar o desenvolvimento deste jogo em forma de aplicativo na
 
 * Na raíz do diretório clonado execute:
 
-    mvn clean install
+    `mvn clean install`
 
 * Em seguida, entre na pasta 'target' gerada após o comando interior e rode o seguinte comando:
 
@@ -48,5 +48,5 @@ A pretenção é realizar o desenvolvimento deste jogo em forma de aplicativo na
 
 * E o cliente:
     
-    java -jar Cliente-Executavel.jar
+    `java -jar Cliente-Executavel.jar`
 
