@@ -46,13 +46,19 @@ A pretenção é realizar o desenvolvimento deste jogo em forma de aplicativo na
 
 * Na raíz do diretório clonado execute:
 
-    `mvn clean install`
+    ```
+    mvn clean install
+    ```
 
 * Em seguida, entre na pasta 'target' gerada após o comando anterior ser executado e rode o seguinte comando:
 
-    `java -jar Servidor-Executavel.jar`
+    ```
+    java -jar Servidor-Executavel.jar
+    ```
 
 * E o cliente:
     
-    `java -jar Cliente-Executavel.jar`
+    ```
+    java -jar Cliente-Executavel.jar
+    ```
 
