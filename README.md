@@ -38,15 +38,15 @@ A pretenção é realizar o desenvolvimento deste jogo em forma de aplicativo na
 
 * Primeiramente clone o repositório, certifique-se de possuir a [JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html) com o [maven](https://maven.apache.org/download.cgi) instalado e com as váriáveis de ambiente devidamente setadas (JAVA_HOME e M2_HOME).
 
-Na raíz do diretório clonado execute:
+* Na raíz do diretório clonado execute:
 
     mvn clean install
 
-Em seguida, entre na pasta 'target' gerada após o comando interior e rode o seguinte comando:
+* Em seguida, entre na pasta 'target' gerada após o comando interior e rode o seguinte comando:
 
     java -jar Servidor-Executavel.jar
 
-E o cliente:
+* E o cliente:
     
     java -jar Cliente-Executavel.jar
 
