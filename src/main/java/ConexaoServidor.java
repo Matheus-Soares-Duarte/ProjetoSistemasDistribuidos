@@ -8,6 +8,7 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Properties;
 
 public class ConexaoServidor implements Serializable {
     private int portaTCP;
@@ -88,9 +89,10 @@ public class ConexaoServidor implements Serializable {
         }
     }
 
-    public void espalharServidor(){
+    public void espalharServidor() throws IOException {
         byte[] outBuf;
-        final int portaMulticast = 8888;
+        Properties p = new PropertiesSalvos().retornoProp();
+        final int portaMulticast = Integer.parseInt(p.getProperty("portaMulticast"));
         try {
             DatagramSocket socket = new DatagramSocket();
             String ipServidor = "IpDoServidor21:"+IpCorreto.getIpCorreto();

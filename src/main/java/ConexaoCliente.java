@@ -2,6 +2,7 @@ package main.java;
 
 import java.io.*;
 import java.net.*;
+import java.util.Properties;
 
 public class ConexaoCliente {
     private byte[] inBuf = new byte[256];
@@ -79,7 +80,10 @@ public class ConexaoCliente {
     public String buscaServidor(){
         String ipServidor="";
         try {
-            MulticastSocket socket = new MulticastSocket(8888);
+            Properties p = new PropertiesSalvos().retornoProp();
+            final int PORTASERVIDOR = Integer.parseInt(p.getProperty("PORTASERVIDOR"));
+            MulticastSocket socket = new MulticastSocket(PORTASERVIDOR);
+
             InetAddress address = InetAddress.getByName("224.2.2.3");
             socket.joinGroup(address);
             System.out.println("Meu IP = "+InetAddress.getLocalHost().getHostAddress() );

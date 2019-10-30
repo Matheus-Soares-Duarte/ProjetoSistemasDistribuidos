@@ -3,13 +3,16 @@ package main.java;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 public class Servidor {
     public static void main(String[] args) throws IOException {
-        String diretorio = "log";
-        String logJogadoresServidor = "log\\logJogadoresServidor.txt";
-        String logMesasServidor = "log\\logMesasServidor.txt";
-        final int PORTA = 12345;
+
+        Properties p = new PropertiesSalvos().retornoProp();
+        String diretorio = (p.getProperty("log"));
+        String logJogadoresServidor = (p.getProperty("Jogador"));
+        String logMesasServidor = (p.getProperty("Mesas"));
+        final int PORTA = Integer.parseInt(p.getProperty("PORTACLIENTE"));;
 
 //        ManipuladorArquivo.criarArquivo( diretorio, logJogadoresServidor );
 //        ManipuladorArquivo.criarArquivo( diretorio, logMesasServidor );
@@ -39,7 +42,13 @@ public class Servidor {
 //        }
 
         // inicia o servidor
-        new Thread(() -> { conexao.espalharServidor(); }).start();
+        new Thread(() -> {
+            try {
+                conexao.espalharServidor();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
         conexao.executa();
     }
 }
