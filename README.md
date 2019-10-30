@@ -36,7 +36,7 @@ A pretenção é realizar o desenvolvimento deste jogo em forma de aplicativo na
 
 ## Instalações e execução do jogo Vinte e Um
 
-Primeiramente clone o repositório, certifique-se de possuir a [JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html) com o [maven](https://maven.apache.org/download.cgi) instalado e com as váriáveis de ambiente devidamente setadas (JAVA_HOME e M2_HOME).
+* Primeiramente clone o repositório, certifique-se de possuir a [JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html) com o [maven](https://maven.apache.org/download.cgi) instalado e com as váriáveis de ambiente devidamente setadas (JAVA_HOME e M2_HOME).
 
 Na raíz do diretório clonado execute:
 
