@@ -42,7 +42,7 @@ A pretenção é realizar o desenvolvimento deste jogo em forma de aplicativo na
 
     `mvn clean install`
 
-* Em seguida, entre na pasta 'target' gerada após o comando interior e rode o seguinte comando:
+* Em seguida, entre na pasta 'target' gerada após o comando anterior ser executado e rode o seguinte comando:
 
     `java -jar Servidor-Executavel.jar`
 
