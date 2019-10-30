@@ -36,13 +36,13 @@ A pretenção é realizar o desenvolvimento deste jogo em forma de aplicativo na
 
 ## Instalações e execução do jogo Vinte e Um
 
-* Primeiramente entre na pasta, pelo terminal, onde deseja clonar este projeto, depois digite o seguinte comando:
+* Primeiramente certifique-se de possuir a [JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html) com o [maven](https://maven.apache.org/download.cgi) instalado e com as váriáveis de ambiente devidamente setadas (JAVA_HOME e M2_HOME).
+
+* Entre na pasta, pelo terminal, onde deseja clonar este projeto, depois digite o seguinte comando:
 
     ```
     git clone https://github.com/Matheus-Soares-Duarte/ProjetoSistemasDistribuidos.git
     ```
-
-* Certifique-se de possuir a [JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html) com o [maven](https://maven.apache.org/download.cgi) instalado e com as váriáveis de ambiente devidamente setadas (JAVA_HOME e M2_HOME).
 
 * Na raíz do diretório clonado execute:
 
