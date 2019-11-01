@@ -89,10 +89,9 @@ public class ConexaoServidor implements Serializable {
         }
     }
 
-    public void espalharServidor() throws IOException {
+    public void espalharServidor() {
         byte[] outBuf;
-        Properties p = new PropertiesSalvos().retornoProp();
-        final int portaMulticast = Integer.parseInt(p.getProperty("portaMulticast"));
+        final int portaMulticast = Integer.parseInt( ManipuladorArquivo.arquivoConfiguracao().getProperty("Porta.Multicast") );
         try {
             DatagramSocket socket = new DatagramSocket();
             String ipServidor = "IpDoServidor21:"+IpCorreto.getIpCorreto();

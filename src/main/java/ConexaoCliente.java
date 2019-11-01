@@ -80,14 +80,13 @@ public class ConexaoCliente {
     public String buscaServidor(){
         String ipServidor="";
         try {
-            Properties p = new PropertiesSalvos().retornoProp();
-            final int PORTASERVIDOR = Integer.parseInt(p.getProperty("PORTASERVIDOR"));
-            MulticastSocket socket = new MulticastSocket(PORTASERVIDOR);
+            final int portaMulticast = Integer.parseInt( ManipuladorArquivo.arquivoConfiguracao().getProperty("Porta.Multicast") );
+            MulticastSocket socket = new MulticastSocket(portaMulticast);
 
             InetAddress address = InetAddress.getByName("224.2.2.3");
             socket.joinGroup(address);
             System.out.println("Meu IP = "+InetAddress.getLocalHost().getHostAddress() );
-            System.out.println("Tentando se Conectar ao Servidor." );
+            System.out.println("Tentando se Conectar ao Servidor.");
             DatagramPacket inPacket = new DatagramPacket(this.getInBuf(), this.getInBuf().length);
             while(true){
                 socket.receive(inPacket);

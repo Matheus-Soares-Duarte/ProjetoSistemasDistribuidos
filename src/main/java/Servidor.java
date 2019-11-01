@@ -8,11 +8,11 @@ import java.util.Properties;
 public class Servidor {
     public static void main(String[] args) throws IOException {
 
-        Properties p = new PropertiesSalvos().retornoProp();
-        String diretorio = (p.getProperty("log"));
-        String logJogadoresServidor = (p.getProperty("Jogador"));
-        String logMesasServidor = (p.getProperty("Mesas"));
-        final int PORTA = Integer.parseInt(p.getProperty("PORTACLIENTE"));;
+//        Properties p =  ManipuladorArquivo.arquivoConfiguracao();
+//        String diretorio = (p.getProperty("log"));
+//        String logJogadoresServidor = (p.getProperty("Jogador"));
+//        String logMesasServidor = (p.getProperty("Mesas"));
+        final int PORTA = Integer.parseInt( ManipuladorArquivo.arquivoConfiguracao().getProperty("Porta.TCP") );
 
 //        ManipuladorArquivo.criarArquivo( diretorio, logJogadoresServidor );
 //        ManipuladorArquivo.criarArquivo( diretorio, logMesasServidor );
@@ -43,11 +43,7 @@ public class Servidor {
 
         // inicia o servidor
         new Thread(() -> {
-            try {
-                conexao.espalharServidor();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            conexao.espalharServidor();
         }).start();
         conexao.executa();
     }

@@ -3,6 +3,7 @@ package main.java;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class ManipuladorArquivo {
     public static void criarArquivo(String diretorio, String caminho){
@@ -25,60 +26,47 @@ public class ManipuladorArquivo {
             }
         }
     }
-    public static void criarProperties() throws IOException {
-        String arquivo = new String();
-        String diretorio =  new String();
-        arquivo = "..\\properties\\dados.properties";
-        diretorio = "..\\properties";
+    public static Properties arquivoConfiguracao(){
+        final String arquivo = "properties\\dados.properties";
+        final String diretorio =  "properties";
 
-        File file = new File(diretorio);
+        Properties properties = new Properties();
+        File file;
 
-        List<String> lista = new ArrayList<String>();
-        lista.add("PORTACLIENTE = 12345");
-        lista.add("PORTASERVIDOR = 8888");
-        lista.add("portaMulticast = 8888");
-        lista.add("log = log");
-        lista.add("Jogador = ..\\log\\logJogadoresServidor.txt");
-        lista.add("Mesas = ..\\log\\logMesasServidor.txt");
-
-        if(file.exists())
-        {
+        try {
             file = new File(diretorio);
+            if(!file.exists())
+            {
+                file.mkdir();
+            }
+
+            file = new File(arquivo);
             if(!file.exists()){
-                file = new File(arquivo);
                 file.createNewFile();
 
-                FileWriter fw = new FileWriter(arquivo ,true);
+                FileWriter fw = new FileWriter(arquivo);
                 BufferedWriter bw = new BufferedWriter(fw);
 
-                for(int i = 0;  i < lista.size(); i++)
-                {
-                    System.out.println(lista.get(i));
-
-                    bw.write(lista.get(i));
-                    bw.newLine();
-                }
-
+                bw.write("Porta.TCP = 12345\n");
+                bw.write("Porta.Multicast = 8888\n");
+                bw.write("Diretorio.Recuperacao = ..\\Recuperacao\n");
+                bw.write("Diretorio.RecuperacaoCliente = ..\\Recuperacao\\Clientes\n");
+                bw.write("Diretorio.RecuperacaoServidor = ..\\Recuperacao\\Servidor\n");
                 bw.close();
-            }
-        }else
-        {
-            new File(diretorio).mkdir();
-            new File(arquivo).createNewFile();
-
-            FileWriter fw = new FileWriter(arquivo ,true);
-            BufferedWriter bw = new BufferedWriter(fw);
-
-            for(int i = 0;  i < lista.size(); i++)
-            {
-                bw.write(lista.get(i));
-                bw.newLine();
+                fw.close();
             }
 
-            bw.close();
+            FileInputStream fileInputStream = new FileInputStream(arquivo);
+            properties.load(fileInputStream);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+        return properties;
     }
+
+
     public static List<Jogador> leitorArquivoJogadores(String caminho) {
         File file = new File(caminho);
         if(file.length()>0) {
