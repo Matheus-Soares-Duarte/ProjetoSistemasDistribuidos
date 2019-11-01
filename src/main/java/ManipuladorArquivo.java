@@ -6,6 +6,42 @@ import java.util.List;
 import java.util.Properties;
 
 public class ManipuladorArquivo {
+    public static Properties arquivoConfiguracao(){
+        final String arquivo   = "..\\properties\\dados.properties";
+        final String diretorio =  "..\\properties";
+        Properties properties = new Properties();
+        File file;
+
+        try {
+            file = new File(diretorio);
+            if(!file.exists())
+            {
+                file.mkdir();
+            }
+
+            file = new File(arquivo);
+            if(!file.exists()){
+                file.createNewFile();
+                FileWriter fw = new FileWriter(arquivo);
+                BufferedWriter bw = new BufferedWriter(fw);
+
+                bw.write("Porta.TCP = 12345\n");
+                bw.write("Porta.Multicast = 8888\n");
+                bw.write("Diretorio.Recuperacao = ..\\Recuperacao\n");
+                bw.write("Diretorio.RecuperacaoCliente = ..\\Recuperacao\\Clientes\n");
+                bw.write("Diretorio.RecuperacaoServidor = ..\\Recuperacao\\Servidor\n");
+                bw.close();
+                fw.close();
+            }
+            FileInputStream fileInputStream = new FileInputStream(arquivo);
+            properties.load(fileInputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return properties;
+    }
+
     public static void criarArquivo(String diretorio, String caminho){
         File file = new File(diretorio);
         if (file.exists()){
@@ -26,46 +62,6 @@ public class ManipuladorArquivo {
             }
         }
     }
-    public static Properties arquivoConfiguracao(){
-        final String arquivo = "properties\\dados.properties";
-        final String diretorio =  "properties";
-
-        Properties properties = new Properties();
-        File file;
-
-        try {
-            file = new File(diretorio);
-            if(!file.exists())
-            {
-                file.mkdir();
-            }
-
-            file = new File(arquivo);
-            if(!file.exists()){
-                file.createNewFile();
-
-                FileWriter fw = new FileWriter(arquivo);
-                BufferedWriter bw = new BufferedWriter(fw);
-
-                bw.write("Porta.TCP = 12345\n");
-                bw.write("Porta.Multicast = 8888\n");
-                bw.write("Diretorio.Recuperacao = ..\\Recuperacao\n");
-                bw.write("Diretorio.RecuperacaoCliente = ..\\Recuperacao\\Clientes\n");
-                bw.write("Diretorio.RecuperacaoServidor = ..\\Recuperacao\\Servidor\n");
-                bw.close();
-                fw.close();
-            }
-
-            FileInputStream fileInputStream = new FileInputStream(arquivo);
-            properties.load(fileInputStream);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return properties;
-    }
-
 
     public static List<Jogador> leitorArquivoJogadores(String caminho) {
         File file = new File(caminho);
