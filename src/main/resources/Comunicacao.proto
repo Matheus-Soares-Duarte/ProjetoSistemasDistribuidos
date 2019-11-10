@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+option java_package = "stubs";
+
+service Comunicacao{
+    rpc criarMesa(criarMesaRequest) returns(criarMesaResponse);
+    rpc entrarMesa(entrarMesaRequest) returns(entrarMesaResponse);
+    rpc sairMesa(sairMesaRequest) returns(sairMesaResponse);
+    rpc comprarCarta(comprarCartaRequest) returns(comprarCartaResponse);
+    rpc passarVez(passarVezRequest) returns(passarVezResponse);
+}
+
+//-----------------------
+//Função criarMesa
+message criarMesaRequest{
+    string nome = 1;
+    string mensagem = 2;
+}
+message criarMesaResponse{
+    int32 codigo = 1;
+    string mensagem = 2;
+}
+
+//-----------------------
+//Função entrarMesaRequest
+message entrarMesaRequest{
+    string nome = 1;
+    string mensagem = 2;
+}
+message entrarMesaResponse{
+    int32 codigo = 1;
+    string mensagem = 2;
+}
+
+//-----------------------
+//Função sairMesa
+message sairMesaRequest{
+    string nome = 1;
+    string mensagem = 2;
+}
+message sairMesaResponse{
+    int32 codigo = 1;
+    string mensagem = 2;
+}
+
+//-----------------------
+//Função comprarCarta
+message comprarCartaRequest{
+    string nome = 1;
+    string mensagem = 2;
+}
+message comprarCartaResponse{
+    int32 codigo = 1;
+    string mensagem = 2;
+}
+
+//-----------------------
+//Função passarVez
+message passarVezRequest{
+    string nome = 1;
+    string mensagem = 2;
+}
+message passarVezResponse{
+    int32 codigo = 1;
+    string mensagem = 2;
+}

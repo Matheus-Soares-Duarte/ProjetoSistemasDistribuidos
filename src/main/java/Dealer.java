@@ -1,5 +1,3 @@
-package main.java;
-
 public class Dealer  implements Runnable {
     private Mesa mesa;
 
