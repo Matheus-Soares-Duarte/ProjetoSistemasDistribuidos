@@ -3,7 +3,50 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class ManipuladorArquivo {
+public class ManipuladorArquivo
+{
+
+    public static boolean gravarStringLog(String comando, String caminho, String diretorio)  {
+        criarArquivo(diretorio,caminho);
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter(caminho,true);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            bw.write(comando);
+            bw.newLine();
+
+            bw.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    public static boolean gravarObjetoSnapShot(Object o, String caminho, String diretorio) throws IOException {
+        criarArquivo(diretorio,caminho);
+        FileOutputStream fos = null;
+        ObjectOutputStream obj = null;
+        try
+        {
+            fos = new FileOutputStream(caminho,true);
+            obj = new ObjectOutputStream(fos);
+
+            obj.writeObject(o);
+            obj.flush();
+
+            fos.close();
+            obj.close();
+            return true;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
     public static Properties arquivoConfiguracao(){
         final String arquivo   = "..\\properties\\dados.properties";
         final String diretorio =  "..\\properties";
