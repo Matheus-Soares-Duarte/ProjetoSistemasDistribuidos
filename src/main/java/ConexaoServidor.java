@@ -1,240 +1,186 @@
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import io.grpc.stub.StreamObserver;
+import stubs.ComunicacaoGrpc;
+import stubs.ComunicacaoOuterClass;
+
 import java.io.Serializable;
 import java.net.*;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
-public class ConexaoServidor implements Serializable {
+public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase implements Serializable {
+    private String chaveHash;
     private int portaTCP;
-    private static List<Jogador> jogadores;
     private static List<Mesa> mesas;
 
     public ConexaoServidor (int porta) {
+        try {
+            this.setChaveHash( ChaveHash.gerarChave(IpCorreto.getIpCorreto()+" "+porta) );
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
         this.setPortaTCP( porta );
-        this.setJogadores( new ArrayList<Jogador>() );
         this.setMesas( new ArrayList<Mesa>() );
     }
 
-    List<Jogador> getJogadores(){ return this.jogadores; }
-    List<Mesa> getMesas(){ return this.mesas; }
+    String getChaveHash() { return this.chaveHash; }
+    synchronized List<Mesa> getMesas(){ return this.mesas; }
     int getPortaTCP() { return portaTCP; }
 
-    public void setJogadores(List<Jogador> jogadores) { this.jogadores = jogadores; }
+    public void setChaveHash(String chaveHash){ this.chaveHash = chaveHash; }
     public void setMesas(List<Mesa> mesas){ this.mesas = mesas; }
     public void setPortaTCP(int portaTCP) { this.portaTCP = portaTCP; }
 
-    void addJogador(Jogador jogador){ this.getJogadores().add(jogador); }
-
-    void addMesas(Mesa mesa){ this.getMesas().add(mesa); }
-
-    String addJogadorMesa(int numero, Jogador jogador){
-        int index = buscaMesa(numero);
-        if(index>=0){
-            if( this.getMesas().get(index).addJogador(jogador) ) {
-                System.out.println("ENTRADA NA SALA: O Jogador " + jogador.getNome() + " acaba de entrar na sala " + numero + "! Existe(em) " + this.getMesas().get(index).getJogadores().size() + " Jogador(es) nessa Sala.");
-            } else {
-                System.out.println("ENTRADA NA SALA: Erro na tentativa do Jogador " + jogador.getNome() + " entrar na sala " + numero + "! Pois existe(em) " + this.getMesas().get(index).getJogadores().size() + " Jogador(es) nessa Sala.");
-            }
-            return "Sucesso:Inicial:Bem vindo a Sala "+numero+"!:"+numero;
-        } else {
-            return "Erro:Inicial:A Sala "+numero+" não existe!";
-        }
-    }
-
-    int buscaJogador(Socket socket){
-        for (Jogador jogador : this.getJogadores() ){
-            if(jogador.getSocketServidor().equals(socket)){
-                return this.getJogadores().indexOf(jogador);
-            }
-        }
-        return -1;
-    }
-
-    int buscaJogadorIp(String ip){
-        for (Jogador jogador : this.getJogadores() ){
-            if(jogador.getIp().equals(ip)){
-                return this.getJogadores().indexOf(jogador);
-            }
-        }
-        return -1;
-    }
-
-    int buscaMesa(int numero){
+    int buscaMesa(String chaveHashMesa){
         for (Mesa mesa : this.getMesas()){
-            if(mesa.getId() == numero){
+            if( mesa.getChaveHash().equals(chaveHashMesa) ){
                 return this.getMesas().indexOf(mesa);
             }
         }
         return -1;
     }
 
-    String criarMesa(int numero, Jogador jogador){
-        int index = buscaMesa(numero);
-        if(index==-1){
-            Mesa mesa = new Mesa(numero, jogador, this);
-            this.addMesas(mesa);
-            jogador.setMesa(numero);
-            System.out.println("CRIAÇÃO DE SALA: Sucesso ao tentar criar a sala "+numero+"! Existe(em) "+this.getMesas().size()+" Sala(s) aberta(s) neste Servidor.");
-            System.out.println("ENTRADA NA SALA: O Jogador "+jogador.getNome()+" acaba de entrar na sala "+numero+"! Existe(em) "+mesa.getJogadores().size()+" Jogador(es) nessa Sala.");
-            return "Sucesso:Inicial:A sala de numero "+numero+" foi criada com sucesso!\nEsperando novos jogadores para iniciar o jogo!:"+numero;
+    void removeMesa(Mesa mesa) {
+        if (mesa != null) {
+            this.getMesas().remove(mesa);
+            System.out.println("EXCLUSÃO DE SALA: A Sala " + mesa.getChaveHash() + " acaba de ser excluida, pois não existem jogadores nela! Existe(em) " + this.getMesas().size() + " Sala(s) neste Servidor.");
+        }
+    }
+
+    @Override
+    public void criarMesa(ComunicacaoOuterClass.criarMesaRequest request, StreamObserver<ComunicacaoOuterClass.criarMesaResponse> responseObserver) {
+        String chaveHashMesa = ChaveHash.gerarChave(request.getIp()+" "+request.getNome());
+        Mesa mesa = new Mesa(chaveHashMesa, this);
+        this.getMesas().add(mesa);
+        System.out.println("CRIAÇÃO DE SALA: Sucesso ao tentar criar a sala "+chaveHashMesa+"! Existe(em) "+this.getMesas().size()+" Sala(s) aberta(s) neste Servidor.");
+
+        ComunicacaoOuterClass.criarMesaResponse.Builder resposta = ComunicacaoOuterClass.criarMesaResponse.newBuilder();
+        String msg = "A sala de numero "+chaveHashMesa+" foi criada com sucesso!";
+        resposta.setCodigo(0).setMensagem(msg).setChaveHashMesa(chaveHashMesa);
+        responseObserver.onNext(resposta.build());
+
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void entrarMesa(ComunicacaoOuterClass.entrarMesaRequest request, StreamObserver<ComunicacaoOuterClass.informacoesJogoResponse> responseObserver) {
+        String chaveHashMesa = request.getChaveHashMesa();
+        Jogador jogador = new Jogador();
+        jogador.setIp( request.getIp() );
+        jogador.setNome( request.getNome() );
+        jogador.setPartidas( request.getPartidas() );
+        jogador.setVitorias( request.getVitorias() );
+        jogador.setResponseObserver(responseObserver);
+
+        int index = buscaMesa( chaveHashMesa );
+        ComunicacaoOuterClass.informacoesJogoResponse.Builder resposta = ComunicacaoOuterClass.informacoesJogoResponse.newBuilder();
+        if(index>=0){
+            if( this.getMesas().get(index).addJogador(jogador) ) {
+                System.out.println("ENTRADA NA SALA: O Jogador " + jogador.getNome() + " acaba de entrar na sala " + chaveHashMesa + "! " +
+                        "Existe(em) " + this.getMesas().get(index).getJogadores().size() + " Jogador(es) nessa Sala.");
+            } else {
+                System.err.println("ENTRADA NA SALA: Erro na tentativa do Jogador " + jogador.getNome() + " entrar na sala " + chaveHashMesa + "! " +
+                        "Pois ja existe(em) " + this.getMesas().get(index).getJogadores().size() + " Jogador(es) nessa Sala.");
+                resposta.setCodigo(-1).setMensagem("Erro: Sala com quantidade maxima de jogadores.");
+                responseObserver.onNext(resposta.build());
+            }
         } else {
-            System.out.println("CRIAÇÃO DE SALA: Erro ao tentar criar a sala "+numero+"! Existe(em) "+this.getMesas().size()+" Sala(s) aberta(s) neste Servidor.");
-            return "Erro:Inicial:A sala de numero "+numero+" ja foi criada!";
+            System.err.println("ENTRADA NA SALA: Erro na tentativa do Jogador "+jogador.getNome()+" entrar na sala "+chaveHashMesa+"! " +
+                    "Pois essa Sala não existe.");
+            resposta.setCodigo(-2).setMensagem("Erro: A Sala "+chaveHashMesa+" não existe!");
+            responseObserver.onNext(resposta.build());
         }
     }
 
-    public void espalharServidor() {
-        byte[] outBuf;
-        final int portaMulticast = Integer.parseInt( ManipuladorArquivo.arquivoConfiguracao().getProperty("Porta.Multicast") );
-        try {
-            DatagramSocket socket = new DatagramSocket();
-            String ipServidor = "IpDoServidor21:"+IpCorreto.getIpCorreto();
-            outBuf = (ipServidor).getBytes();
-            InetAddress address = InetAddress.getByName("224.2.2.3");
-            while (true) {
-                DatagramPacket outPacket = new DatagramPacket(outBuf, outBuf.length, address, portaMulticast);
-                socket.send(outPacket);
-                try { Thread.sleep(2000); }catch (InterruptedException ie) {}
+    @Override
+    public void comprarCarta(ComunicacaoOuterClass.requisicaoNaVezRequest request, StreamObserver<ComunicacaoOuterClass.comprarCartaResponse> responseObserver) {
+        String chaveHashMesa = request.getChaveHashMesa();
+        int indexMesa = buscaMesa( chaveHashMesa );
+        ComunicacaoOuterClass.comprarCartaResponse.Builder comprarCartaResponse = ComunicacaoOuterClass.comprarCartaResponse.newBuilder();
+
+        if(indexMesa>=0){
+            Mesa mesa = this.getMesas().get(indexMesa);
+            Jogador jogador = mesa.buscaJogador(request.getIp(), request.getNome());
+            if(jogador!=null){
+                Carta carta = mesa.getBaralho().entregarCarta();
+                jogador.comprarCarta(carta);
+                comprarCartaResponse
+                        .setCodigo(0)
+                        .setLetra(carta.getLetra())
+                        .setNaipe(carta.getNaipe())
+                        .setValor(carta.getValor())
+                        .build();
+            } else {
+                comprarCartaResponse
+                        .setCodigo(1)
+                        .setLetra("")
+                        .setNaipe("")
+                        .setValor(0)
+                        .build();
             }
-        } catch (IOException ioe) { System.out.println(ioe); }
-    }
-
-    public void executa () throws IOException {
-        ServerSocket servidor = new ServerSocket(this.getPortaTCP(),30,InetAddress.getByName(IpCorreto.getIpCorreto()));
-        System.out.println("Servidor Iniciado no IP "+IpCorreto.getIpCorreto()+" e Porta "+this.getPortaTCP()+".\nEsperando Conexões!");
-
-        while (true) {
-            // aceita um cliente
-            Socket cliente = servidor.accept();
-            System.out.println("Nova conexão com o cliente " + cliente.getInetAddress().getHostAddress() );
-
-            // cria tratador de cliente numa nova thread
-            TrataCliente tc = new TrataCliente(cliente, this);
-            new Thread(tc).start();
         }
+        responseObserver.onNext(comprarCartaResponse.build());
+        responseObserver.onCompleted();
     }
 
-    public synchronized void respondeMensagem(Socket socket, ObjectInputStream in, ObjectOutputStream out, Mensagem mensagemRecebida) {
-        Mensagem mensagemResposta;
+    @Override
+    public void passarVez(ComunicacaoOuterClass.requisicaoNaVezRequest request, StreamObserver<ComunicacaoOuterClass.passarVezResponse> responseObserver) {
+        String chaveHashMesa = request.getChaveHashMesa();
+        int indexMesa = buscaMesa( chaveHashMesa );
+        ComunicacaoOuterClass.passarVezResponse.Builder passarVezResponse = ComunicacaoOuterClass.passarVezResponse.newBuilder();
 
-        String tipo = mensagemRecebida.getTipo();
-        if(tipo.equals("String")) {
-            String conteudo = (String) mensagemRecebida.getObjeto();
-            String conteudoSeparado[] = conteudo.split(":");
-            String resposta="";
-
-            int index = buscaJogador( socket );
-            if(index>=0) {
-                Jogador jogador = this.getJogadores().get(index);
-                int indexMesa = buscaMesa(jogador.getMesa());
-
-                if (conteudoSeparado[0].equals("Inicial")) {
-                    if (conteudoSeparado[1].equals("criar")) {
-                        int numero = Integer.parseInt(conteudoSeparado[2]);
-                        resposta = this.criarMesa(numero, jogador);
-                    } else if (conteudoSeparado[1].equals("entrar")) {
-                        int numero = Integer.parseInt(conteudoSeparado[2]);
-                        resposta = this.addJogadorMesa(numero, jogador);
-                    }
-
-                    mensagemResposta = new Mensagem("String", resposta);
-                    this.enviaMesagem(mensagemResposta, out);
-                } else if ( conteudoSeparado[0].equals("NaVez") ) {
-                    if ( conteudoSeparado[1].equals("comprar") ) {
-                        this.getMesas().get(indexMesa).comprarCarta(jogador, "Carta");
-                    } else if ( conteudoSeparado[1].equals("passar") ) {
-                        jogador.setJogou(true);
-                        this.getMesas().get(indexMesa).acorda();
-                    } else if ( conteudoSeparado[1].equals("sair") ) {
-                        if (indexMesa >= 0) {
-                            Mesa mesa = this.getMesas().get(indexMesa);
-                            mesa.retirarJogador(jogador);
-                            System.out.println("SAIDA DA SALA: " + jogador.getNome() + " saiu da sala " + mesa.getId() + "! Existe(em) " + mesa.getJogadores().size() + " Jogador(es) nessa Sala.");
-                            if (mesa.getJogadores().size() < 1) {
-                                this.getMesas().remove(mesa);
-                                System.out.println("EXCLUSÃO DE SALA: A Sala " + mesa.getId() + " acaba de ser excluida, pois não existem jogadores nela! Existe(em) " + this.getMesas().size() + " Sala(s) neste Servidor.");
-                            }
-                            mensagemResposta = new Mensagem("String", "Erro:Inicial:Você saiu da sala " + mesa.getId() + "!");
-                            this.enviaMesagem(mensagemResposta, out);
-                        }
-                    }
-                } else if( conteudoSeparado[0].equals("Jogo") ){
-                    if ( conteudoSeparado[1].equals("caiu") ) {
-                        jogador.setEmReconexão(true);
-                    } else if ( conteudoSeparado[1].equals("sair") ) {
-                        if (indexMesa >= 0) {
-                            Mesa mesa = this.getMesas().get(indexMesa);
-                            mesa.retirarJogador(jogador);
-                            System.out.println("SAIDA DA SALA: " + jogador.getNome() + " saiu da sala " + mesa.getId() + "! Existe(em) " + mesa.getJogadores().size() + " Jogador(es) nessa Sala.");
-                            if (mesa.getJogadores().size() == 0) {
-                                this.getMesas().remove(mesa);
-                                System.out.println("EXCLUSÃO DE SALA: A Sala " + mesa.getId() + " acaba de ser excluida, pois não existem jogadores nela! Existe(em) " + this.getMesas().size() + " Sala(s) neste Servidor.");
-                            }
-                        }
-                        System.out.println("EXCLUSÃO DE JOGADOR: O Jogador de nome " + jogador.getNome() + " e IP " + socket.getInetAddress() + " acaba de sair deste Servidor.");
-                        this.getJogadores().remove(index);
-                    } else {
-                        mensagemResposta = new Mensagem("String", "Erro:Comando de Jogo ainda não tratado!");
-                        this.enviaMesagem(mensagemResposta, out);
-                    }
-                } else {
-                    mensagemResposta = new Mensagem("String", "Erro:Comando ainda não tratado!");
-                    this.enviaMesagem(mensagemResposta, out);
-                }
+        if(indexMesa>=0){
+            Mesa mesa = this.getMesas().get(indexMesa);
+            Jogador jogador = mesa.buscaJogador(request.getIp(), request.getNome());
+            if(jogador!=null){
+                jogador.setJogou(true);
+                mesa.acorda();
+                passarVezResponse
+                        .setCodigo(0)
+                        .setMensagem("Sucesso ao passar a vez.")
+                        .build();
+            } else {
+                passarVezResponse
+                        .setCodigo(1)
+                        .setMensagem("Erro ao encontrar seu jogador.")
+                        .build();
             }
-        } else if(tipo.equals("Jogador")){
-            Jogador jogador = (Jogador)mensagemRecebida.getObjeto();
-            jogador.setSocketServidor(socket);
-            jogador.setOutServidor(out);
-            jogador.setInServidor(in);
-            this.addJogador( jogador );
+        } else {
+            passarVezResponse
+                    .setCodigo(2)
+                    .setMensagem("Erro ao encontrar a Sala "+chaveHashMesa+".")
+                    .build();
         }
-//        else if(tipo.equals("Reconexao")){
-//            Jogador jogador = (Jogador)mensagemRecebida.getObjeto();
-//            int indexJogador = buscaJogadorIp(jogador.getIp());
-//            if(indexJogador>=0){
-//                Jogador jogadorNaLista = this.getJogadores().get(indexJogador);
-//                jogadorNaLista.setEmReconexão(false);
-//                jogadorNaLista.setIp(jogador.getIp());
-//                jogadorNaLista.setSocketServidor(socket);
-//                jogadorNaLista.setOutServidor(out);
-//                jogadorNaLista.setInServidor(in);
-//                int indexMesa = buscaMesa(jogadorNaLista.getMesa());
-//            }
-//
-//        }
-        else {
-            mensagemResposta = new Mensagem("String", "Erro:Tipo de Mensagem ainda não tratada!");
-            this.enviaMesagem(mensagemResposta, out);
-        }
-
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        String logJogadoresServidor = "log\\logJogadoresServidor.txt";
-//        String logMesasServidor = "log\\logMesasServidor.txt";
-//        ManipuladorArquivo.escritorLogJogadores(logJogadoresServidor, this.getJogadores());
-//        List<Jogador> testeJogadores = ManipuladorArquivo.leitorArquivoJogadores(logJogadoresServidor);
-//        System.out.println(testeJogadores.size());
-//        for(Jogador j: testeJogadores){
-//            System.out.println("Jogador "+j.getNome()+" socket>"+j.getSocketServidor()+" in>"+j.getInServidor()+" out>"+j.getOutServidor());
-//            System.out.println(j.getIp());
-//            j.mostrarCartas();
-//        }
-//        ManipuladorArquivo.escritorLogMesas(logMesasServidor, this.getMesas());
+        responseObserver.onNext(passarVezResponse.build());
+        responseObserver.onCompleted();
     }
 
-    void enviaMesagem(Mensagem mensagem, ObjectOutputStream out){
-        try {
-            out.writeObject(mensagem);
-        } catch (IOException e) {
-            e.printStackTrace();
+    @Override
+    public void sairMesa(ComunicacaoOuterClass.requisicaoNaVezRequest request, StreamObserver<ComunicacaoOuterClass.sairMesaResponse> responseObserver) {
+        String chaveHashMesa = request.getChaveHashMesa();
+        int indexMesa = buscaMesa( chaveHashMesa );
+        ComunicacaoOuterClass.sairMesaResponse.Builder sairMesaResponse = ComunicacaoOuterClass.sairMesaResponse.newBuilder();
+
+        if(indexMesa>=0){
+            Mesa mesa = this.getMesas().get(indexMesa);
+            Jogador jogador = mesa.buscaJogador(request.getIp(), request.getNome());
+            if(jogador!=null && mesa.retirarJogador(jogador)){
+                System.err.println("SAIDA DA SALA: " + jogador.getNome() + " saiu da sala " + mesa.getChaveHash() + "! Existe(em) " + mesa.getJogadores().size() + " Jogador(es) nessa Sala.");
+                sairMesaResponse
+                        .setCodigo(0)
+                        .setMensagem("Sucesso ao sair da mesa.")
+                        .build();
+            } else {
+                sairMesaResponse
+                        .setCodigo(1)
+                        .setMensagem("Erro ao encontrar seu jogador.")
+                        .build();
+            }
+        } else {
+            sairMesaResponse
+                    .setCodigo(2)
+                    .setMensagem("Erro ao encontrar a Sala "+chaveHashMesa+".")
+                    .build();
         }
+        responseObserver.onNext(sairMesaResponse.build());
+        responseObserver.onCompleted();
     }
 }

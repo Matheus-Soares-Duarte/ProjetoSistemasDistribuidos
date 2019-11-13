@@ -9,68 +9,66 @@ public class Menu implements Serializable {
         String nome = sc.nextLine();
         jogador.setNome(nome);
         System.out.println("Ola "+ jogador.getNome()+", Seja Bem Vindo!");
-        Mensagem mensagem = new Mensagem("Jogador", jogador);
-        cliente.enviaMesagem(mensagem);
         this.escolhaInicial(cliente);
     }
 
     public void escolhaInicial(ConexaoCliente cliente) {
-        boolean comandoOK = false;
-
-        while(comandoOK == false) {
-            System.out.println("\n-Para criar uma sala digite 'criar <numero da sala>'");
-            System.out.println("-Para entrar em uma sala existente digite 'entrar <numero da sala>'");
+        while(true) {
+            System.out.println("\n-Para criar uma sala digite 'criar sala'");
+            System.out.println("-Para entrar em uma sala existente digite 'entrar <identificador da sala>'");
+            System.out.println("-Para sair do jogo digite 'sair do jogo'");
             System.out.print("COMANDO: ");
-            String comando = sc.next().toLowerCase();
-            int numero = sc.nextInt();
-            Mensagem mensagem = new Mensagem("String", "Inicial:"+comando+":"+numero);
+            String linha = sc.nextLine().toLowerCase();
+            String conteudoSeparado[] = linha.split(" ");
 
-            comandoOK=true;
-            switch (comando) {
-                case "criar":
-                    cliente.enviaMesagem(mensagem);
+            if(conteudoSeparado.length<=3) {
+                if(linha.equals("criar sala")){
+                    stubs.ComunicacaoOuterClass.criarMesaRequest criarMesaRequest = stubs.ComunicacaoOuterClass.criarMesaRequest.newBuilder()
+                            .setIp(cliente.getJogador().getIp())
+                            .setNome(cliente.getJogador().getNome())
+                            .build();
+                    cliente.realizaRequisicao(conteudoSeparado[0], criarMesaRequest);
                     break;
-                case "entrar":
-                    cliente.enviaMesagem(mensagem);
+                } else if(conteudoSeparado.length==2 && conteudoSeparado[0].equals("entrar")){
+                    stubs.ComunicacaoOuterClass.entrarMesaRequest entrarMesaRequest = stubs.ComunicacaoOuterClass.entrarMesaRequest.newBuilder()
+                            .setChaveHashMesa(conteudoSeparado[1])
+                            .setIp(cliente.getJogador().getIp())
+                            .setNome(cliente.getJogador().getNome())
+                            .setVitorias(cliente.getJogador().getVitorias())
+                            .setPartidas(cliente.getJogador().getPartidas())
+                            .build();
+                    cliente.realizaRequisicao(conteudoSeparado[0], entrarMesaRequest);
                     break;
-                default:
-                    comandoOK=false;
-                    System.out.println("Comando Invalido: "+comando+". Por favor entre com um comando valido!");
+                } else if(linha.equals("sair do jogo")){
+                    cliente.realizaRequisicao(linha, "");
                     break;
+                }
             }
+            System.err.println("Comando Invalido: " + linha + ". Por favor entre com um comando valido!");
         }
     }
 
     public void escolhaNaVez(Jogador jogador,ConexaoCliente cliente){
-        boolean terminaLoop = false;
+        String comando = "";
 
-        while(terminaLoop == false) {
-            jogador.mostrarCartas();
+        while(true) {
             System.out.println("-Para comprar mais uma carta digite 'comprar'");
             System.out.println("-Para passar a vez digite 'passar'");
             System.out.println("-Para sair da sala digite 'sair'");
             System.out.print("COMANDO: ");
-            String comando = sc.next().toLowerCase();
-            Mensagem mensagem = new Mensagem("String","NaVez:"+comando);
+            comando = sc.next().toLowerCase();
 
-            terminaLoop=true;
-            switch (comando) {
-                case "comprar":
-                    cliente.enviaMesagem(mensagem);
-                    break;
-                case "passar":
-                    cliente.enviaMesagem(mensagem);
-                    jogador.addPartida();
-                    break;
-                case "sair":
-                    cliente.enviaMesagem(mensagem);
-                    jogador.devolverCartas();
-                    break;
-                default:
-                    terminaLoop=false;
-                    System.out.println("Comando Invalido: "+comando+". Por favor entre com um comando valido!");
-                    break;
+            if( comando.equals("comprar") || comando.equals("passar") || comando.equals("sair") ) {
+                break;
+            } else {
+                System.err.println("Comando Invalido: " + comando + ". Por favor entre com um comando valido!");
             }
         }
+        stubs.ComunicacaoOuterClass.requisicaoNaVezRequest requisicaoNaVezRequest = stubs.ComunicacaoOuterClass.requisicaoNaVezRequest.newBuilder()
+                .setChaveHashMesa(jogador.getChaveHashMesa())
+                .setIp(cliente.getJogador().getIp())
+                .setNome(cliente.getJogador().getNome())
+                .build();
+        cliente.realizaRequisicao(comando, requisicaoNaVezRequest);
     }
 }

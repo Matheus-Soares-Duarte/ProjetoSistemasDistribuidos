@@ -1,8 +1,7 @@
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import io.grpc.stub.StreamObserver;
+import stubs.ComunicacaoOuterClass;
+
 import java.io.Serializable;
-import java.net.Socket;
-import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,75 +14,60 @@ public class Jogador implements Serializable {
     private boolean emReconexão;
     private int vitorias;
     private int partidas;
-    private int mesa;
+    private String chaveHashMesa;
     private Menu menu = new Menu();
     private String ip;
-    private transient Socket socketCliente;
-    private transient ObjectOutputStream outCliente;
-    private transient ObjectInputStream inCliente;
-    private transient Socket socketServidor;
-    private transient ObjectOutputStream outServidor;
-    private transient ObjectInputStream inServidor;
+    private StreamObserver<ComunicacaoOuterClass.informacoesJogoResponse> responseObserver;
 
-    public Jogador(ConexaoCliente cliente){
-        try {
-            setAs(false);
-            setPartidas(0);
-            setPontos(0);
-            setEmReconexão(false);
-            setJogou(false);
-            setIp(IpCorreto.getIpCorreto()+":"+ cliente.getSocket().getLocalPort());
-            setVitorias(0);
-            setSocketCliente(cliente.getSocket());
-            setOutCliente(cliente.getOut());
-            setInCliente(cliente.getIn());
-            this.getMenu().inicio(cliente, this);
-        } catch (SocketException e) {
-            e.printStackTrace();
-        }
+    public Jogador(String ip){
+        setAs(false);
+        setPartidas(0);
+        setPontos(0);
+        setEmReconexão(false);
+        setJogou(false);
+        setIp(ip);
+        setVitorias(0);
     }
     public Jogador(){
+        setAs(false);
+        setPartidas(0);
+        setPontos(0);
+        setEmReconexão(false);
+        setJogou(false);
+        setVitorias(0);
     }
 
     //setters
     void setAs(boolean as){ this.as = as; }
     void setCartas(List<Carta> cartas){ this.cartas = cartas; }
     void setEmReconexão(boolean emReconexão) { this.emReconexão = emReconexão; }
-    void setInCliente(ObjectInputStream in){ this.inCliente = in; }
-    void setInServidor(ObjectInputStream in){ this.inServidor = in; }
     void setIp(String ip){ this.ip = ip; }
     public void setJogou(boolean jogou) { this.jogou = jogou; }
-    void setMesa(int mesa){ this.mesa = mesa; }
+    void setChaveHashMesa(String chaveHashMesa){ this.chaveHashMesa = chaveHashMesa; }
     void setNome(String nome){ this.nome = nome; }
-    void setOutCliente(ObjectOutputStream out){ this.outCliente = out; }
-    void setOutServidor(ObjectOutputStream out){ this.outServidor = out; }
     public void setPartidas(int partidas) { this.partidas = partidas; }
     void setPontos(int pontos){ this.pontos = pontos; }
-    void setSocketCliente(Socket socket) { this.socketCliente = socket; }
-    void setSocketServidor(Socket socket) { this.socketServidor = socket; }
+    void setResponseObserver(StreamObserver<ComunicacaoOuterClass.informacoesJogoResponse> responseObserver) { this.responseObserver = responseObserver; }
     public void setVitorias(int vitorias){ this.vitorias = vitorias; }
+
 
     //getters
     public boolean getAs(){ return this.as; }
     public List<Carta> getCartas(){ return cartas; }
     boolean getEmReconexão() { return emReconexão; }
-    ObjectInputStream getInCliente(){ return this.inCliente; }
-    ObjectInputStream getInServidor(){ return this.inServidor; }
     String getIp(){ return this.ip; }
     public boolean getJogou() { return jogou; }
     Menu getMenu(){ return this.menu; }
-    int getMesa(){ return this.mesa; }
+    String getChaveHashMesa(){ return this.chaveHashMesa; }
     String getNome(){ return this.nome; }
-    ObjectOutputStream getOutCliente(){ return this.outCliente; }
-    ObjectOutputStream getOutServidor(){ return this.outServidor; }
     public int getPartidas(){ return this.partidas; }
     public int getPontos(){
         if(this.getAs()==true && this.pontos+10<=21)
             return this.pontos+10;
         return this.pontos;
     }
-    Socket getSocketCliente(){ return this.socketCliente; }
-    Socket getSocketServidor(){ return this.socketServidor; }
+
+    StreamObserver<ComunicacaoOuterClass.informacoesJogoResponse> getResponseObserver() { return this.responseObserver; }
     public int getVitorias(){ return this.vitorias; }
 
     //funções proprias
@@ -108,8 +92,9 @@ public class Jogador implements Serializable {
     }
 
     void mostrarCartas(){
-        System.out.print("CARTAS: ");
-        for (Carta carta : cartas){
+        System.out.println("--------CARTAS--------");
+        System.out.print("> ");
+        for (Carta carta : this.getCartas()){
             System.out.print(carta.getCarta());
             if(carta!=this.getCartas().get(this.getCartas().size()-1)){
                 System.out.print(" - ");
@@ -117,6 +102,7 @@ public class Jogador implements Serializable {
                 System.out.print(".");
             }
         }
-        System.out.println("\nSOMA DE PONTOS: "+getPontos()+" Pontos.");
+        System.out.println("\n> SOMA DE PONTOS: "+getPontos()+" Pontos.");
+        System.out.println("---------------------");
     }
 }

@@ -4,63 +4,66 @@ option java_package = "stubs";
 
 service Comunicacao{
     rpc criarMesa(criarMesaRequest) returns(criarMesaResponse);
-    rpc entrarMesa(entrarMesaRequest) returns(entrarMesaResponse);
-    rpc sairMesa(sairMesaRequest) returns(sairMesaResponse);
-    rpc comprarCarta(comprarCartaRequest) returns(comprarCartaResponse);
-    rpc passarVez(passarVezRequest) returns(passarVezResponse);
+    rpc entrarMesa(entrarMesaRequest) returns(stream informacoesJogoResponse);
+    rpc comprarCarta(requisicaoNaVezRequest) returns(comprarCartaResponse);
+    rpc passarVez(requisicaoNaVezRequest) returns(passarVezResponse);
+    rpc sairMesa(requisicaoNaVezRequest) returns(sairMesaResponse);
 }
 
 //-----------------------
-//Função criarMesa
+//-----REQUISIÇÕES-------
+//-----------------------
+//Função entrarMesa
 message criarMesaRequest{
-    string nome = 1;
-    string mensagem = 2;
+    string chaveHashRemetente = 1;
+    string ip = 2;
+    string nome = 3;
 }
+//Função entrarMesa
+message entrarMesaRequest{
+    string chaveHashMesa = 1;
+    string chaveHashRemetente = 2;
+    string ip = 3;
+    string nome = 4;
+    int32 vitorias = 5;
+    int32 partidas = 6;
+}
+//Funções comprarCarta, passarVez e sairMesa
+message requisicaoNaVezRequest{
+    string chaveHashMesa = 1;
+    string chaveHashRemetente = 2;
+    string ip = 3;
+    string nome = 4;
+}
+
+//-----------------------
+//------RESPOSTAS--------
+//-----------------------
+//Função criarMesa
 message criarMesaResponse{
     int32 codigo = 1;
     string mensagem = 2;
+    string chaveHashMesa = 3;
 }
-
-//-----------------------
-//Função entrarMesaRequest
-message entrarMesaRequest{
-    string nome = 1;
-    string mensagem = 2;
-}
-message entrarMesaResponse{
+//Função informacoesJogo
+message informacoesJogoResponse{
     int32 codigo = 1;
     string mensagem = 2;
 }
-
-//-----------------------
-//Função sairMesa
-message sairMesaRequest{
-    string nome = 1;
-    string mensagem = 2;
-}
-message sairMesaResponse{
-    int32 codigo = 1;
-    string mensagem = 2;
-}
-
-//-----------------------
 //Função comprarCarta
-message comprarCartaRequest{
-    string nome = 1;
-    string mensagem = 2;
-}
 message comprarCartaResponse{
     int32 codigo = 1;
-    string mensagem = 2;
+    string letra = 2;
+    string naipe = 3;
+    int32 valor = 4;
 }
-
-//-----------------------
 //Função passarVez
-message passarVezRequest{
-    string nome = 1;
+message passarVezResponse{
+    int32 codigo = 1;
     string mensagem = 2;
 }
-message passarVezResponse{
+//Função sairMesa
+message sairMesaResponse{
     int32 codigo = 1;
     string mensagem = 2;
 }

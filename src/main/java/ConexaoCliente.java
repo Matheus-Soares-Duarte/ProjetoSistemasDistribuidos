@@ -1,129 +1,196 @@
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import io.grpc.StatusRuntimeException;
+import stubs.ComunicacaoGrpc;
+import stubs.ComunicacaoOuterClass;
+
 import java.io.*;
 import java.net.*;
+import java.util.Iterator;
 import java.util.Properties;
 
+import static java.lang.Thread.sleep;
+
 public class ConexaoCliente {
-    private byte[] inBuf = new byte[256];
-    private Socket socket = null;
-    private ObjectOutputStream out;
-    private ObjectInputStream in;
     private Jogador jogador;
+    private int porta;
+    private ComunicacaoGrpc.ComunicacaoBlockingStub servidor;
 
-    public ObjectInputStream getIn() { return in; }
-    public byte[] getInBuf() { return inBuf; }
-    public Jogador getJogador() { return jogador; }
-    public ObjectOutputStream getOut() { return out; }
-    public Socket getSocket() { return socket; }
-
-    public void setIn(ObjectInputStream in) { this.in = in; }
-    public void setInBuf(byte[] inBuf) { this.inBuf = inBuf; }
-    public void setJogador(Jogador jogador) { this.jogador = jogador; }
-    public void setOut(ObjectOutputStream out) { this.out = out; }
-    public void setSocket(Socket socket) { this.socket = socket; }
-
-    void analisaMesagem(Mensagem mensagem){
-        String tipo = mensagem.getTipo();
-        Carta carta;
-        switch (tipo){
-            case "String" :
-                String conteudo = (String) mensagem.getObjeto();
-                String conteudoSeparado[] = conteudo.split(":");
-                if( conteudoSeparado[0].equals("Erro") ){
-                    if(conteudoSeparado[1].equals("Inicial")){
-                        System.out.println(conteudoSeparado[2]);
-                        this.getJogador().getMenu().escolhaInicial(this);
-                    } else {
-                        System.out.println(conteudoSeparado[1]);
-                    }
-                } else if( conteudoSeparado[0].equals("Sucesso") ){
-                    if(conteudoSeparado[1].equals("Inicial")){
-                        System.out.println(conteudoSeparado[2]);
-                        this.getJogador().setMesa(Integer.parseInt(conteudoSeparado[3]));
-                    } else {
-                        System.out.println(conteudoSeparado[1]);
-                    }
-                } else if( conteudoSeparado[0].equals("SuaVez") ){
-                    this.getJogador().getMenu().escolhaNaVez(this.getJogador(), this);
-                } else if( conteudoSeparado[0].equals("Vitoria") ){
-                    this.getJogador().addVitoria();
-                } else if( conteudoSeparado[0].equals("ReiniciarRodada") ){
-                    this.getJogador().devolverCartas();
-                }else {
-                    System.out.println(conteudo);
-                }
-                break;
-            case "Carta":
-                carta = (Carta) mensagem.getObjeto();
-                this.getJogador().comprarCarta(carta);
-                if (this.getJogador().getPontos()>21){
-                    this.getJogador().setJogou(true);
-                    this.getJogador().mostrarCartas();
-                    System.out.println(this.getJogador().getNome()+" ESTOUROU COM "+this.getJogador().getPontos()+" PONTOS.");
-                    Mensagem mensagemPassar = new Mensagem("String", "NaVez:passar");
-                    this.enviaMesagem(mensagemPassar);
-                } else{
-                    this.getJogador().getMenu().escolhaNaVez(this.getJogador(),this);
-                }
-                break;
-            case "CartaInicial":
-                carta = (Carta) mensagem.getObjeto();
-                this.getJogador().comprarCarta(carta);
-                break;
-            default:
-                System.out.println("Tipo de mensagem não encontrada!");
-                break;
-        }
+    public ConexaoCliente(int porta){
+        this.setPorta(porta);
     }
 
-    public String buscaServidor(){
-        String ipServidor="";
-        try {
-            final int portaMulticast = Integer.parseInt( ManipuladorArquivo.arquivoConfiguracao().getProperty("Porta.Multicast") );
-            MulticastSocket socket = new MulticastSocket(portaMulticast);
+    public Jogador getJogador() { return jogador; }
+    public int getPorta() { return porta; }
+    public ComunicacaoGrpc.ComunicacaoBlockingStub getServidor() { return servidor; }
 
-            InetAddress address = InetAddress.getByName("224.2.2.3");
-            socket.joinGroup(address);
-            System.out.println("Meu IP = "+InetAddress.getLocalHost().getHostAddress() );
-            System.out.println("Tentando se Conectar ao Servidor.");
-            DatagramPacket inPacket = new DatagramPacket(this.getInBuf(), this.getInBuf().length);
-            while(true){
-                socket.receive(inPacket);
-                String mensagem = new String(this.getInBuf(), 0, inPacket.getLength());
-                String textoResposta[] = mensagem.split(":");
-                if(textoResposta[0].equals("IpDoServidor21")){
-                    ipServidor = textoResposta[1];
-                    socket.leaveGroup(address);
-                    break;
+    public void setJogador(Jogador jogador) { this.jogador = jogador; }
+    public void setPorta(int porta) { this.porta = porta; }
+    public void setServidor(ComunicacaoGrpc.ComunicacaoBlockingStub servidor) { this.servidor = servidor; }
+
+    public void criarConexaoGRPC(String ipServidor, int porta){
+        int loop = 0;
+        while (loop < 3) {
+            try {
+                String ip = IpCorreto.getIpCorreto();
+                ManagedChannel canal = ManagedChannelBuilder.forAddress(ipServidor, porta).usePlaintext().build();
+                ComunicacaoGrpc.ComunicacaoBlockingStub servidor = ComunicacaoGrpc.newBlockingStub(canal);
+                this.setServidor(servidor);
+                System.out.println("O cliente " + ip + " se conectou ao servidor " + ipServidor + "!");
+
+                this.setJogador(new Jogador(ip));
+                this.getJogador().getMenu().inicio(this, this.getJogador());
+
+                loop = 0;
+                break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (StatusRuntimeException e) {
+                loop++;
+                switch (e.getStatus().getCode()) {
+                    case UNAVAILABLE:
+                        System.err.println("Sistema Indisponivel no momento. "+loop+" Tentativa de reenvio.");
+                        try {
+                            sleep(10000);
+                        } catch (InterruptedException ex) {
+                        }
+                        break;
+                    default:
+                        System.err.println("Erro não tratado "+e.getStatus().getCode()+". "+loop+" Tentativa de reenvio.");
+                        break;
                 }
             }
-        }catch (IOException ioe) {
-            System.out.println(ioe);
-        }
-        return ipServidor;
-    }
-
-    public void criarSocketTCP(String ipServidor, int porta){
-        try {
-            Socket socket = new Socket(ipServidor, porta);
-            this.setSocket(socket);
-            this.setOut( new ObjectOutputStream(socket.getOutputStream()) );
-            this.setIn( new ObjectInputStream(socket.getInputStream()) );
-
-            System.out.println("O cliente "+ InetAddress.getLocalHost().getHostAddress()+" se conectou ao servidor "+ipServidor+"!");
-            Recebedor recebedor = new Recebedor(this);
-            new Thread(recebedor).start();
-
-            this.setJogador( new Jogador(this) );
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
-    void enviaMesagem(Mensagem mensagem){
-        try {
-            this.getOut().writeObject(mensagem);
-        } catch (IOException e) {
-            e.printStackTrace();
+    void realizaRequisicao(String tipo, Object request){
+        int loop = 0;
+        while (loop < 3) {
+            try {
+                switch (tipo){
+                    case "criar":
+                        ComunicacaoOuterClass.criarMesaResponse criarMesaResponse = this.getServidor().criarMesa((ComunicacaoOuterClass.criarMesaRequest) request);
+                        System.out.println(criarMesaResponse.getMensagem());
+                        if (criarMesaResponse.getCodigo()==0){
+                            stubs.ComunicacaoOuterClass.entrarMesaRequest entrarMesaRequest = stubs.ComunicacaoOuterClass.entrarMesaRequest.newBuilder()
+                                    .setChaveHashMesa(criarMesaResponse.getChaveHashMesa())
+                                    .setIp(((ComunicacaoOuterClass.criarMesaRequest) request).getIp())
+                                    .setNome(((ComunicacaoOuterClass.criarMesaRequest) request).getNome())
+                                    .setVitorias(this.getJogador().getVitorias())
+                                    .setPartidas(this.getJogador().getPartidas())
+                                    .build();
+                            this.realizaRequisicao("entrar", entrarMesaRequest);
+                        } else {
+                            this.getJogador().getMenu().escolhaInicial(this);
+                        }
+                        break;
+                    case "entrar":
+                        Iterator<ComunicacaoOuterClass.informacoesJogoResponse> informacoesJogoResponse = this.getServidor().entrarMesa((ComunicacaoOuterClass.entrarMesaRequest) request);
+                        this.getJogador().setChaveHashMesa(((ComunicacaoOuterClass.entrarMesaRequest) request).getChaveHashMesa());
+
+                        stubs.ComunicacaoOuterClass.requisicaoNaVezRequest requisicaoNaVezRequest = stubs.ComunicacaoOuterClass.requisicaoNaVezRequest.newBuilder()
+                                .setChaveHashMesa(((ComunicacaoOuterClass.entrarMesaRequest) request).getChaveHashMesa())
+                                .setIp(((ComunicacaoOuterClass.entrarMesaRequest) request).getIp())
+                                .setNome(((ComunicacaoOuterClass.entrarMesaRequest) request).getNome())
+                                .build();
+
+                        for (Iterator<ComunicacaoOuterClass.informacoesJogoResponse> it = informacoesJogoResponse; it.hasNext(); ) {
+                            ComunicacaoOuterClass.informacoesJogoResponse resposta = it.next();
+                            if(resposta.getCodigo()==4){ //reiniciar rodada
+                                this.getJogador().devolverCartas();
+                            } else if(resposta.getCodigo()==3){ //comprar cartas iniciais
+                                for(int i=0; i<2; i++){
+                                    this.realizaRequisicao("comprar", requisicaoNaVezRequest);
+                                }
+                                this.getJogador().mostrarCartas();
+                            } else if(resposta.getCodigo()==2){ //vez do jogador
+                                System.out.println("Sua Vez de Jogar.");
+                                this.getJogador().getMenu().escolhaNaVez(this.getJogador(), this);
+                            } else if(resposta.getCodigo()==1) { //vitoria
+                                this.getJogador().addVitoria();
+                            } else if(resposta.getCodigo()==0) { //mensagem de mudança na mesa
+                                System.out.println(resposta.getMensagem());
+                            } else {
+                                System.err.println(resposta.getMensagem());
+                                this.getJogador().setChaveHashMesa("");
+                                this.getJogador().getMenu().escolhaInicial(this);
+                            }
+                        }
+                        break;
+                    case "sair do jogo":
+                        System.out.println("Obrigado por jogar. Saindo do jogo.");
+                        System.exit(0);
+                        break;
+                    case "comprar":
+                        ComunicacaoOuterClass.comprarCartaResponse comprarCartaResponse = this.getServidor().comprarCarta((ComunicacaoOuterClass.requisicaoNaVezRequest) request);
+                        if (comprarCartaResponse.getCodigo()==0){
+                            Carta carta = new Carta(comprarCartaResponse.getLetra(), comprarCartaResponse.getNaipe(), comprarCartaResponse.getValor());
+                            this.getJogador().comprarCarta(carta);
+
+                            if(this.getJogador().getCartas().size() > 2){
+                                this.getJogador().mostrarCartas();
+
+                                if (this.getJogador().getPontos()>21){
+                                    this.getJogador().setJogou(true);
+
+                                    System.out.println(this.getJogador().getNome()+" ESTOUROU COM "+this.getJogador().getPontos()+" PONTOS.");
+                                    request = stubs.ComunicacaoOuterClass.requisicaoNaVezRequest.newBuilder()
+                                            .setIp(this.getJogador().getIp())
+                                            .setNome(this.getJogador().getNome())
+                                            .setChaveHashMesa(this.getJogador().getChaveHashMesa())
+                                            .build();
+                                    this.realizaRequisicao("passar", request);
+                                } else {
+                                    this.getJogador().getMenu().escolhaNaVez(this.getJogador(),this);
+                                }
+                            }
+                        } else {
+                            this.getJogador().getMenu().escolhaNaVez(this.getJogador(), this);
+                        }
+                        break;
+                    case "passar":
+                        ComunicacaoOuterClass.passarVezResponse passarVezResponse = this.getServidor().passarVez((ComunicacaoOuterClass.requisicaoNaVezRequest) request);
+                        if (passarVezResponse.getCodigo()==0){
+                            this.getJogador().setJogou(true);
+                            this.getJogador().addPartida();
+                        } else {
+                            System.err.println(passarVezResponse.getMensagem());
+                            this.getJogador().getMenu().escolhaNaVez(this.getJogador(), this);
+                        }
+                        break;
+                    case "sair":
+                        ComunicacaoOuterClass.sairMesaResponse sairMesaResponse = this.getServidor().sairMesa((ComunicacaoOuterClass.requisicaoNaVezRequest) request);
+                        if (sairMesaResponse.getCodigo()==0){
+                            this.getJogador().devolverCartas();
+                            this.getJogador().setChaveHashMesa("");
+                            System.out.println(sairMesaResponse.getMensagem());
+                            this.getJogador().getMenu().escolhaInicial(this);
+                        } else {
+                            this.getJogador().getMenu().escolhaNaVez(this.getJogador(), this);
+                        }
+                        break;
+                    default:
+                        System.err.println("Mensagem gRPC não esperada.");
+                        break;
+                }
+
+                loop = 0;
+                break;
+            } catch (StatusRuntimeException e) {
+                loop++;
+                switch (e.getStatus().getCode()) {
+                    case UNAVAILABLE:
+                        System.err.println("Sistema Indisponivel no momento. "+loop+" Tentativa de reenvio.");
+                        try {
+                            sleep(10000);
+                        } catch (InterruptedException ex) {
+                        }
+                        break;
+                    default:
+                        System.err.println("Erro não tratado "+e.getStatus().getCode()+". "+loop+" Tentativa de reenvio.");
+                        break;
+                }
+            }
         }
     }
 }
