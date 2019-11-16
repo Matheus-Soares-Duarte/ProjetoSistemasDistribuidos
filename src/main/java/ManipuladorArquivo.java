@@ -48,8 +48,9 @@ public class ManipuladorArquivo
     }
 
     public static Properties arquivoConfiguracao(){
-        final String arquivo   = "..\\properties\\dados.properties";
-        final String diretorio =  "..\\properties";
+        final File diretorioProjeto = new File(System.getProperty("user.dir"));
+        final String arquivo   = diretorioProjeto+"\\properties\\dados.properties";
+        final String diretorio =  diretorioProjeto+"\\properties";
         Properties properties = new Properties();
         File file;
 
@@ -66,11 +67,12 @@ public class ManipuladorArquivo
                 FileWriter fw = new FileWriter(arquivo);
                 BufferedWriter bw = new BufferedWriter(fw);
 
+                bw.write("Diretorio.Recuperacao = "+diretorioProjeto+"\\Recuperacao\n");
+                bw.write("Diretorio.RecuperacaoCliente = "+diretorioProjeto+"\\Recuperacao\\Clientes\n");
+                bw.write("Diretorio.RecuperacaoServidor = "+diretorioProjeto+"\\Recuperacao\\Servidor\n");
+                bw.write("Ip.Servidor = \n");
                 bw.write("Porta.TCP = 12345\n");
                 bw.write("Porta.Multicast = 8888\n");
-                bw.write("Diretorio.Recuperacao = ..\\Recuperacao\n");
-                bw.write("Diretorio.RecuperacaoCliente = ..\\Recuperacao\\Clientes\n");
-                bw.write("Diretorio.RecuperacaoServidor = ..\\Recuperacao\\Servidor\n");
                 bw.close();
                 fw.close();
             }
