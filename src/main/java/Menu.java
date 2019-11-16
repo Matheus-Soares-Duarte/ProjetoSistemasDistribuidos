@@ -2,9 +2,8 @@ import java.io.Serializable;
 import java.util.Scanner;
 
 public class Menu implements Serializable {
-    static transient Scanner sc = new Scanner(System.in);
-
     public void inicio(ConexaoCliente cliente, Jogador jogador){
+        Scanner sc = new Scanner(System.in);
         System.out.print("\nDigite seu nome: ");
         String nome = sc.nextLine();
         jogador.setNome(nome);
@@ -14,6 +13,7 @@ public class Menu implements Serializable {
 
     public void escolhaInicial(ConexaoCliente cliente) {
         while(true) {
+            Scanner sc = new Scanner(System.in);
             System.out.println("\n-Para criar uma sala digite 'criar sala'");
             System.out.println("-Para entrar em uma sala existente digite 'entrar <identificador da sala>'");
             System.out.println("-Para sair do jogo digite 'sair do jogo'");
@@ -52,6 +52,7 @@ public class Menu implements Serializable {
         String comando = "";
 
         while(true) {
+            Scanner sc = new Scanner(System.in);
             System.out.println("-Para comprar mais uma carta digite 'comprar'");
             System.out.println("-Para passar a vez digite 'passar'");
             System.out.println("-Para sair da sala digite 'sair'");

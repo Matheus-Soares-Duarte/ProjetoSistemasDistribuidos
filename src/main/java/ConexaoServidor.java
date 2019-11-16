@@ -41,7 +41,7 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
     void removeMesa(Mesa mesa) {
         if (mesa != null) {
             this.getMesas().remove(mesa);
-            System.out.println("EXCLUSÃO DE SALA: A Sala " + mesa.getChaveHash() + " acaba de ser excluida, pois não existem jogadores nela! Existe(em) " + this.getMesas().size() + " Sala(s) neste Servidor.");
+            System.err.println("EXCLUSÃO DE SALA: A Sala " + mesa.getChaveHash() + " acaba de ser excluida, pois não existem jogadores nela! Existe(em) " + this.getMesas().size() + " Sala(s) neste Servidor.");
         }
     }
 

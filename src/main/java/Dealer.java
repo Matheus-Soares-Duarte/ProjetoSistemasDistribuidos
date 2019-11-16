@@ -20,6 +20,7 @@ public class Dealer  implements Runnable {
         while (true) {
             while (true) {
                 if(this.getMesa().getJogadores().size() > 1){
+                    this.getMesa().setIniciada(true);
                     break;
                 }
                 this.getMesa().dorme();
@@ -64,7 +65,8 @@ public class Dealer  implements Runnable {
             this.getMesa().score();
 
             if(this.getMesa().getJogadores().size() == 1) {
-                resposta.setCodigo(0).setMensagem("Erro:Não existem jogadores suficientes na mesa para iniciar a rodada.").build();
+                this.getMesa().setIniciada(false);
+                resposta.setCodigo(0).setMensagem("Erro: Não existem jogadores suficientes na mesa para iniciar a rodada.").build();
                 this.getMesa().enviarResposta(resposta.build(), this.getMesa().getJogadores().get(0));
             }
         }

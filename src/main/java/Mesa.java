@@ -9,10 +9,12 @@ public class Mesa implements Serializable {
     private List<Jogador> jogadores = new ArrayList<Jogador>();
     private Baralho baralho = new Baralho();
     private ConexaoServidor servidor;
+    private boolean iniciada;
 
     public Mesa(String chaveHash, ConexaoServidor servidor){
         this.setChaveHash(chaveHash);
         this.setServidor(servidor);
+        this.setIniciada(false);
 
         Dealer dealer = new Dealer(this);
         new Thread(dealer).start();
@@ -20,11 +22,13 @@ public class Mesa implements Serializable {
 
     void setBaralho(Baralho baralho){ this.baralho = baralho; }
     void setChaveHash(String chaveHash){ this.chaveHash = chaveHash; }
+    void setIniciada(boolean iniciada){ this.iniciada = iniciada; }
     void setServidor(ConexaoServidor servidor) { this.servidor = servidor; }
     void setJogadores(List<Jogador> jogadores){ this.jogadores = jogadores; }
 
     Baralho getBaralho(){ return this.baralho; }
     String getChaveHash() { return this.chaveHash; }
+    Boolean getIniciada() { return this.iniciada; }
     ConexaoServidor getServidor() { return servidor; }
     List<Jogador> getJogadores(){ return this.jogadores; }
 
@@ -41,15 +45,16 @@ public class Mesa implements Serializable {
                 resposta.setCodigo(0).setMensagem("Esperando novos jogadores para iniciar o jogo!").build();
                 this.enviarResposta(resposta.build(), jogador);
             } else {
+                if (this.getIniciada()) {
+                    resposta.setCodigo(3).setMensagem("Comprar Cartas Iniciais").build();
+                    this.enviarResposta(resposta.build(), jogador);
+                }
+
                 if (this.getJogadores().size() > 1) {
                     resposta.setCodigo(0).setMensagem("O Jogador " + jogador.getNome() + " acaba de entrar na sala " + this.getChaveHash() + "!").build();
                     this.enviarRespostaTodos(resposta.build());
                 }
-                if (this.getJogadores().size() > 2) {
-                    resposta.setCodigo(3).setMensagem("Comprar Cartas Iniciais").build();
-                    this.enviarResposta(resposta.build(), jogador);
-                }
-                if (this.getJogadores().size() == 2) {
+                if (this.getJogadores().size() == 2 && !this.getIniciada()) {
                     this.acorda();
                 }
             }
