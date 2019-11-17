@@ -48,9 +48,9 @@ public class ManipuladorArquivo
     }
 
     public static Properties arquivoConfiguracao(){
-        final File diretorioProjeto = new File(System.getProperty("user.dir"));
-        final String arquivo   = diretorioProjeto+"\\properties\\dados.properties";
+        final File diretorioProjeto = new File(System.getProperty("user.dir").replace("\\target", ""));
         final String diretorio =  diretorioProjeto+"\\properties";
+        final String arquivo   = diretorio+"\\dados.properties";
         Properties properties = new Properties();
         File file;
 
@@ -106,16 +106,16 @@ public class ManipuladorArquivo
         }
     }
 
-    public static List<Jogador> leitorArquivoJogadores(String caminho) {
+    public static Object recuperarObjetoDoArquivo(String caminho) {
         File file = new File(caminho);
         if(file.length()>0) {
             try {
                 FileInputStream arquivo = new FileInputStream(caminho);
-                ObjectInputStream objeto = new ObjectInputStream(arquivo);
-                List<Jogador> listaJogadores = (List<Jogador>) objeto.readObject();
+                ObjectInputStream objectInputStream = new ObjectInputStream(arquivo);
+                Object objeto = objectInputStream.readObject();
                 arquivo.close();
-                objeto.close();
-                return listaJogadores;
+                objectInputStream.close();
+                return objeto;
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
@@ -123,40 +123,12 @@ public class ManipuladorArquivo
         return null;
     }
 
-    public static List<Mesa> leitorArquivoMesas(String caminho) {
-        File file = new File(caminho);
-        if(file.length()>0) {
-            try {
-                FileInputStream arquivo = new FileInputStream(caminho);
-                ObjectInputStream objeto = new ObjectInputStream(arquivo);
-                List<Mesa> listaMesas = (List<Mesa>) objeto.readObject();
-                arquivo.close();
-                objeto.close();
-                return listaMesas;
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
-    }
-
-    public static void escritorLogJogadores(String caminho, List<Jogador> jogadores){
+    public static void escreverObjetoNoArquivo(String caminho, Object objeto){
         try {
             FileOutputStream arquivo = new FileOutputStream(caminho);
-            ObjectOutputStream objeto = new ObjectOutputStream(arquivo);
-            objeto.writeObject(jogadores);
-            objeto.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void escritorLogMesas(String caminho, List<Mesa> mesas){
-        try {
-            FileOutputStream arquivo = new FileOutputStream(caminho);
-            ObjectOutputStream objeto = new ObjectOutputStream(arquivo);
-            objeto.writeObject(mesas);
-            objeto.flush();
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(arquivo);
+            objectOutputStream.writeObject(objeto);
+            objectOutputStream.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
