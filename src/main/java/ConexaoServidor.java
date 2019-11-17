@@ -8,6 +8,7 @@ import java.util.*;
 
 public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase implements Serializable {
     private String chaveHash;
+    private boolean escreverSnapshoot;
     private int portaTCP;
     private static List<Mesa> mesas;
 
@@ -22,10 +23,12 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
     }
 
     String getChaveHash() { return this.chaveHash; }
+    boolean getEscreverSnapshot() { return escreverSnapshoot; }
     synchronized List<Mesa> getMesas(){ return this.mesas; }
     int getPortaTCP() { return portaTCP; }
 
     public void setChaveHash(String chaveHash){ this.chaveHash = chaveHash; }
+    public void setEscreverSnapshoot(boolean escreverSnapshoot) { this.escreverSnapshoot = escreverSnapshoot; }
     public void setMesas(List<Mesa> mesas){ this.mesas = mesas; }
     public void setPortaTCP(int portaTCP) { this.portaTCP = portaTCP; }
 

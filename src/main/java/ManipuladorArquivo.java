@@ -1,50 +1,21 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
-public class ManipuladorArquivo
-{
-
-    public static boolean gravarStringLog(String comando, String caminho, String diretorio)  {
-        criarArquivo(diretorio,caminho);
-        FileWriter fw = null;
-        try {
-            fw = new FileWriter(caminho,true);
-            BufferedWriter bw = new BufferedWriter(fw);
-
-            bw.write(comando);
-            bw.newLine();
-
-            bw.close();
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+public class ManipuladorArquivo {
+    public static void apagarMenores(String diretorio, int numero){
+        File diretorioDeRecuperacao = new File(diretorio);
+        if(diretorioDeRecuperacao!=null) {
+            File[] arquivos = diretorioDeRecuperacao.listFiles();
+            if (arquivos!=null){
+                for(int i=arquivos.length-1; i>=0; i--){
+                    File arquivo = arquivos[i];
+                    int numeroArquivo = Integer.parseInt(arquivo.getName().replace(".log", "").replace(".snapshot", ""));
+                    if(numeroArquivo<=numero) {
+                        arquivos[i].delete();
+                    }
+                }
+            }
         }
-
-    }
-
-    public static boolean gravarObjetoSnapShot(Object o, String caminho, String diretorio) throws IOException {
-        criarArquivo(diretorio,caminho);
-        FileOutputStream fos = null;
-        ObjectOutputStream obj = null;
-        try
-        {
-            fos = new FileOutputStream(caminho,true);
-            obj = new ObjectOutputStream(fos);
-
-            obj.writeObject(o);
-            obj.flush();
-
-            fos.close();
-            obj.close();
-            return true;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        }
-
     }
 
     public static Properties arquivoConfiguracao(){
@@ -67,9 +38,9 @@ public class ManipuladorArquivo
                 FileWriter fw = new FileWriter(arquivo);
                 BufferedWriter bw = new BufferedWriter(fw);
 
-                bw.write("Diretorio.Recuperacao = "+diretorioProjeto+"\\Recuperacao\n");
-                bw.write("Diretorio.RecuperacaoCliente = "+diretorioProjeto+"\\Recuperacao\\Clientes\n");
-                bw.write("Diretorio.RecuperacaoServidor = "+diretorioProjeto+"\\Recuperacao\\Servidor\n");
+                bw.write("Diretorio.Recuperacao = recuperacao\n");
+                bw.write("Diretorio.RecuperacaoCliente = Cliente\n");
+                bw.write("Diretorio.RecuperacaoServidor = Servidor\n");
                 bw.write("Ip.Servidor = \n");
                 bw.write("Porta.TCP = 12345\n");
                 bw.write("Porta.Multicast = 8888\n");
@@ -85,7 +56,43 @@ public class ManipuladorArquivo
         return properties;
     }
 
-    public static void criarArquivo(String diretorio, String caminho){
+    public static int buscaUltimoNumero(String diretorio, String extensao){
+        int numero=-1;
+        File diretorioDeRecuperacao = new File(diretorio);
+        if(diretorioDeRecuperacao!=null) {
+            File[] arquivos = diretorioDeRecuperacao.listFiles();
+            if (arquivos!=null && arquivos.length!=0){
+                for(int i=0; i<arquivos.length; i++){
+                    if(arquivos[i].getName().endsWith(extensao)){
+                        int numeroLog = Integer.parseInt(arquivos[i].getName().replace(extensao, ""));
+                        if(numeroLog > numero){
+                            numero=numeroLog;
+                        }
+                    }
+                }
+            }
+        }
+        return numero;
+    }
+
+    public static int contadorAparicoes(String diretorio, String extensao){
+        int numero=0;
+        File diretorioDeRecuperacao = new File(diretorio);
+        if(diretorioDeRecuperacao!=null) {
+            File[] arquivos = diretorioDeRecuperacao.listFiles();
+            if (arquivos!=null && arquivos.length!=0){
+                for(int i=0; i<arquivos.length; i++){
+                    if(arquivos[i].getName().endsWith(extensao)){
+                        numero++;
+                    }
+                }
+            }
+        }
+        return numero;
+    }
+
+    public static void criarArquivo(String diretorio, String nomeArquivo){
+        String caminho = diretorio+"\\"+nomeArquivo;
         File file = new File(diretorio);
         if (file.exists()){
             file = new File(caminho);
@@ -106,6 +113,52 @@ public class ManipuladorArquivo
         }
     }
 
+    public static void criarDiretorio(String diretorio){
+        final File diretorioProjeto = new File(System.getProperty("user.dir").replace("\\target", ""));
+        File file = new File(diretorioProjeto+"\\"+diretorio);
+        if (!file.exists()){
+            new File(diretorio).mkdir();
+        }
+    }
+
+    public static void escreverObjetoNoArquivo(String caminho, Object objeto){
+        try {
+            FileOutputStream arquivo = new FileOutputStream(caminho, true);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(arquivo);
+            objectOutputStream.writeObject(objeto);
+            objectOutputStream.writeObject("\n");
+            objectOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void escreverLog(Object objeto, String diretorio, String mensagem, boolean escreverSnapshot)  {
+        int numero = ManipuladorArquivo.buscaUltimoNumero(diretorio, ".log");
+
+        String caminho = diretorio+"\\"+numero+".log";
+        ManipuladorArquivo.escreverObjetoNoArquivo(caminho, mensagem);
+
+        if(escreverSnapshot) {
+            ManipuladorArquivo.escreverSnapShot(objeto, diretorio, numero);
+        }
+    }
+
+    public static void escreverSnapShot(Object objeto, String diretorio, int numero) {
+        String nomeArquivo = numero+".snapshot";
+        String caminho = diretorio+"\\"+nomeArquivo;
+        ManipuladorArquivo.criarArquivo(diretorio, nomeArquivo);
+        ManipuladorArquivo.escreverObjetoNoArquivo(caminho, objeto);
+        numero++;
+        ManipuladorArquivo.criarArquivo(diretorio, numero+".log");
+
+        int qtdLog = ManipuladorArquivo.contadorAparicoes(diretorio, ".log");
+        int qtdSnapshot = ManipuladorArquivo.contadorAparicoes(diretorio, ".snapshot");
+        if (qtdLog > 4 || qtdSnapshot > 3) {
+            ManipuladorArquivo.apagarMenores(diretorio, numero - 3);
+        }
+    }
+
     public static Object recuperarObjetoDoArquivo(String caminho) {
         File file = new File(caminho);
         if(file.length()>0) {
@@ -122,16 +175,4 @@ public class ManipuladorArquivo
         }
         return null;
     }
-
-    public static void escreverObjetoNoArquivo(String caminho, Object objeto){
-        try {
-            FileOutputStream arquivo = new FileOutputStream(caminho);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(arquivo);
-            objectOutputStream.writeObject(objeto);
-            objectOutputStream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

@@ -17,7 +17,7 @@ public class Jogador implements Serializable {
     private String chaveHashMesa;
     private Menu menu = new Menu();
     private String ip;
-    private StreamObserver<ComunicacaoOuterClass.informacoesJogoResponse> responseObserver;
+    private transient StreamObserver<ComunicacaoOuterClass.informacoesJogoResponse> responseObserver;
 
     public Jogador(String ip){
         setAs(false);

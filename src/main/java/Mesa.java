@@ -41,6 +41,9 @@ public class Mesa implements Serializable {
         if(this.getJogadores().size()<5){
             this.getJogadores().add(jogador);
             jogador.setChaveHashMesa(this.getChaveHash());
+            resposta.setCodigo(5).setMensagem("Sucesso ao entrar na mesa!").build();
+            this.enviarResposta(resposta.build(), jogador);
+
             if(this.getJogadores().size() == 1){
                 resposta.setCodigo(0).setMensagem("Esperando novos jogadores para iniciar o jogo!").build();
                 this.enviarResposta(resposta.build(), jogador);
@@ -110,10 +113,6 @@ public class Mesa implements Serializable {
     }
 
     void reiniciarRodada(){
-        ComunicacaoOuterClass.informacoesJogoResponse.Builder resposta = ComunicacaoOuterClass.informacoesJogoResponse.newBuilder();
-        resposta.setCodigo(4).setMensagem("ReiniciarRodada").build();
-        this.enviarRespostaTodos(resposta.build());
-
         for (Jogador jogador : this.getJogadores() ){
             for (Carta carta : jogador.getCartas()) {
                 this.getBaralho().addCarta(carta);
