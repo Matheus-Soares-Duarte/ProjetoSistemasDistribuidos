@@ -161,20 +161,20 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
             responseObserver.onNext(resposta.build());
         }
     }
-//
-//    synchronized void escreverNoArquivo(String mensagemLog){
-//        String diretorio = this.getDiretorioRecuperacao()+"\\"+this.getDiretorioRecuperacaoServidor();
-//        ManipuladorArquivo.criarDiretorio(this.getDiretorioRecuperacao());
-//        ManipuladorArquivo.criarDiretorio(diretorio);
-//
-//        if(this.getEscreverSnapshot()) {
-//            ManipuladorArquivo.escreverLog(this, diretorio, mensagemLog, true);
-//            this.setEscreverSnapshot(false);
-//            this.acorda();
-//        } else{
-//            ManipuladorArquivo.escreverLog(this, diretorio, mensagemLog, false);
-//        }
-//    }
+
+    synchronized void escreverNoArquivo(String mensagemLog){
+        String diretorio = this.getDiretorioRecuperacao()+"\\"+this.getDiretorioRecuperacaoServidor();
+        ManipuladorArquivo.criarDiretorio(this.getDiretorioRecuperacao());
+        ManipuladorArquivo.criarDiretorio(diretorio);
+
+        if(this.getEscreverSnapshot()) {
+            ManipuladorArquivo.escreverLog(this, diretorio, mensagemLog, true);
+            this.setEscreverSnapshot(false);
+            this.acorda();
+        } else{
+            ManipuladorArquivo.escreverLog(this, diretorio, mensagemLog, false);
+        }
+    }
 
     @Override
     public void passarVez(ComunicacaoOuterClass.requisicaoNaVezRequest request, StreamObserver<ComunicacaoOuterClass.passarVezResponse> responseObserver) {
