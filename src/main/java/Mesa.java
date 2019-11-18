@@ -29,7 +29,7 @@ public class Mesa implements Serializable {
     void setServidor(ConexaoServidor servidor) { this.servidor = servidor; }
     void setJogadores(List<Jogador> jogadores){ this.jogadores = jogadores; }
 
-    Baralho getBaralho(){ return this.baralho; }
+    synchronized Baralho getBaralho(){ return this.baralho; }
     String getChaveHash() { return this.chaveHash; }
     Boolean getIniciada() { return this.iniciada; }
     ConexaoServidor getServidor() { return servidor; }

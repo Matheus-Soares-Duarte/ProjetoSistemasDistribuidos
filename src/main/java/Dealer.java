@@ -57,7 +57,7 @@ public class Dealer  implements Runnable {
                 }
             }
             if(this.getMesa().getJogadores().size() == 0) {
-                this.getMesa().getServidor().removeMesa(this.getMesa());
+                this.getMesa().getServidor().removerMesa(this.getMesa());
                 break;
             }
 

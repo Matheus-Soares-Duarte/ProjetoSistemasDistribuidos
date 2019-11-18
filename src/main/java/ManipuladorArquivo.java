@@ -2,15 +2,20 @@ import java.io.*;
 import java.util.Properties;
 
 public class ManipuladorArquivo {
-    public static void apagarMenores(String diretorio, int numero){
+    public synchronized static void apagarMenores(String diretorio, int numero){
         File diretorioDeRecuperacao = new File(diretorio);
+
+        System.out.println(diretorio);
+
         if(diretorioDeRecuperacao!=null) {
             File[] arquivos = diretorioDeRecuperacao.listFiles();
             if (arquivos!=null){
                 for(int i=arquivos.length-1; i>=0; i--){
                     File arquivo = arquivos[i];
                     int numeroArquivo = Integer.parseInt(arquivo.getName().replace(".log", "").replace(".snapshot", ""));
-                    if(numeroArquivo<numero) {
+//                    System.out.println(numero +" - "+numeroArquivo);
+                    if(numeroArquivo<=numero) {
+//                        System.out.println("DELETANDO "+arquivos[i].getName());
                         arquivos[i].delete();
                     }
                 }
@@ -44,6 +49,7 @@ public class ManipuladorArquivo {
                 bw.write("Ip.Servidor = \n");
                 bw.write("Porta.TCP = 12345\n");
                 bw.write("Porta.Multicast = 8888\n");
+                bw.write("Tempo.Snapshot = 30\n");
                 bw.close();
                 fw.close();
             }
@@ -133,7 +139,7 @@ public class ManipuladorArquivo {
         }
     }
 
-    public static void escreverLog(Object objeto, String diretorio, String mensagem, boolean escreverSnapshot)  {
+    public synchronized static void escreverLog(Object objeto, String diretorio, String mensagem, boolean escreverSnapshot)  {
         int numero = ManipuladorArquivo.buscaUltimoNumero(diretorio, ".log");
         if(numero==-1){
             numero++;
@@ -144,23 +150,22 @@ public class ManipuladorArquivo {
         ManipuladorArquivo.escreverObjetoNoArquivo(caminho, mensagem);
 
         if(escreverSnapshot) {
-            ManipuladorArquivo.escreverSnapShot(objeto, diretorio, numero);
+            ManipuladorArquivo.escreverSnapshot(objeto, diretorio, numero);
         }
     }
 
-    public static void escreverSnapShot(Object objeto, String diretorio, int numero) {
+    public synchronized static void escreverSnapshot(Object objeto, String diretorio, int numero) {
         String nomeArquivo = numero+".snapshot";
         String caminho = diretorio+"\\"+nomeArquivo;
         ManipuladorArquivo.criarArquivo(diretorio, nomeArquivo);
         ManipuladorArquivo.escreverObjetoNoArquivo(caminho, objeto);
-        numero++;
-        ManipuladorArquivo.criarArquivo(diretorio, numero+".log");
-
         int qtdLog = ManipuladorArquivo.contadorAparicoes(diretorio, ".log");
         int qtdSnapshot = ManipuladorArquivo.contadorAparicoes(diretorio, ".snapshot");
-        if (qtdLog > 4 || qtdSnapshot > 3) {
+        if (qtdLog > 3 || qtdSnapshot > 3) {
             ManipuladorArquivo.apagarMenores(diretorio, numero - 3);
         }
+        numero++;
+        ManipuladorArquivo.criarArquivo(diretorio, numero+".log");
     }
 
     public static Object recuperarObjetoDoArquivo(String caminho) {

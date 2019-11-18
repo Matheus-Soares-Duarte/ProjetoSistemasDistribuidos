@@ -41,23 +41,16 @@ public class ConexaoCliente implements Serializable {
     public void setPorta(int porta) { this.porta = porta; }
     public void setServidor(ComunicacaoGrpc.ComunicacaoBlockingStub servidor) { this.servidor = servidor; }
 
-    public void criarConexaoGRPC(String ipServidor, int porta){
+    public void criarCanalGRPC(String ipServidor){
         int loop = 0;
         while (loop < 3) {
             try {
-                String ip = IpCorreto.getIpCorreto();
-                ManagedChannel canal = ManagedChannelBuilder.forAddress(ipServidor, porta).usePlaintext().build();
+                ManagedChannel canal = ManagedChannelBuilder.forAddress(ipServidor, this.getPorta()).usePlaintext().build();
                 ComunicacaoGrpc.ComunicacaoBlockingStub servidor = ComunicacaoGrpc.newBlockingStub(canal);
                 this.setServidor(servidor);
-                System.out.println("O cliente " + ip + " se conectou ao servidor " + ipServidor + "!");
-
-                this.setJogador(new Jogador(ip));
-                this.getJogador().getMenu().inicio(this, this.getJogador());
-
+                System.out.println("Conectado ao servidor " + ipServidor + "!");
                 loop = 0;
                 break;
-            } catch (IOException e) {
-                e.printStackTrace();
             } catch (StatusRuntimeException e) {
                 loop++;
                 switch (e.getStatus().getCode()) {
@@ -76,8 +69,24 @@ public class ConexaoCliente implements Serializable {
         }
     }
 
-    void escreverNoArquivo(String tipo, boolean escreverSnapshoot){
-        String mensagemLog = this.getJogador().getIp()+":"+this.getJogador().getNome()+":"+this.getJogador().getChaveHashMesa()+":"+tipo;
+    public void criarConexaoGRPC(String ipServidor){
+        int loop = 0;
+        while (loop < 3) {
+            try {
+                this.criarCanalGRPC(ipServidor);
+                this.setJogador( new Jogador(IpCorreto.getIpCorreto()) );
+                this.getJogador().getMenu().inicio(this, this.getJogador());
+
+                loop = 0;
+                break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    synchronized void escreverNoArquivo(String tipo, boolean escreverSnapshoot){
+        String mensagemLog = this.getJogador().getIp()+":"+this.getJogador().getNome()+":"+tipo+":"+this.getJogador().getChaveHashMesa();
         String diretorio = this.getDiretorioRecuperacao()+"\\"+this.getDiretorioRecuperacaoCliente();
         ManipuladorArquivo.criarDiretorio(this.getDiretorioRecuperacao());
         ManipuladorArquivo.criarDiretorio(diretorio);
