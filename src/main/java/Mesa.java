@@ -1,8 +1,11 @@
+import io.grpc.StatusRuntimeException;
 import stubs.ComunicacaoOuterClass;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.Thread.sleep;
 
 public class Mesa implements Serializable {
     private String chaveHash;
@@ -98,17 +101,55 @@ public class Mesa implements Serializable {
         }
     }
 
-    void enviarResposta(ComunicacaoOuterClass.informacoesJogoResponse resposta, Jogador jogador){
-        if(jogador!=null && !jogador.getEmReconexão() && jogador.getResponseObserver()!=null) {
-            jogador.getResponseObserver().onNext(resposta);
+    boolean enviarResposta(ComunicacaoOuterClass.informacoesJogoResponse resposta, Jogador jogador){
+        int loop = 0;
+        while (true) {
+            try {
+                if(jogador!=null && jogador.getResponseObserver()!=null) {
+                    jogador.getResponseObserver().onNext(resposta);
+                }
+                loop=0;
+                jogador.setEmReconexão(false);
+                return true;
+            } catch (StatusRuntimeException e) {
+                loop++;
+                jogador.setEmReconexão(true);
+                if(loop>3){
+                   this.retirarJogador(jogador);
+                   return false;
+                }
+                switch (e.getStatus().getCode()) {
+                    case UNAVAILABLE:
+                        System.err.println("ERRO DE COMUNICAÇÃO: Cliente Indisponivel no momento. "+loop+" Tentativa de reenvio.");
+                        try {
+                            sleep(10000);
+                        } catch (InterruptedException ex) { }
+                        break;
+                    case CANCELLED:
+                        System.err.println("ERRO DE COMUNICAÇÃO: Cliente Indisponivel no momento. "+loop+" Tentativa de reenvio.");
+                        try {
+                            sleep(10000);
+                        } catch (InterruptedException ex) { }
+                        break;
+                    default:
+                        System.err.println("ERRO DE COMUNICAÇÃO: Erro não tratado "+e.getStatus().getCode()+". "+loop+" Tentativa de reenvio.");
+                        break;
+                }
+            }
         }
     }
 
     void enviarRespostaTodos(ComunicacaoOuterClass.informacoesJogoResponse resposta){
-        for (Jogador jogador : this.getJogadores() ){
-            if(!jogador.getEmReconexão()) {
-                this.enviarResposta(resposta, jogador);
+        int i=0;
+        while (true){
+            if(i == this.getJogadores().size()){
+                break;
             }
+            Jogador jogador = this.getJogadores().get(i);
+            if(!this.enviarResposta(resposta, jogador)){
+                    i--;
+            }
+            i++;
         }
     }
 
@@ -132,10 +173,10 @@ public class Mesa implements Serializable {
             }
             jogador.devolverCartas();
             jogador.setChaveHashMesa("");
-            jogador.getResponseObserver().onCompleted();
             this.getJogadores().remove(jogador);
             this.getBaralho().embaralhar();
 
+            System.err.println("SAIDA DA SALA: " + jogador.getNome() + " saiu da sala " + this.getChaveHash() + "! Existe(em) " + this.getJogadores().size() + " Jogador(es) nessa Sala.");
             ComunicacaoOuterClass.informacoesJogoResponse.Builder resposta = ComunicacaoOuterClass.informacoesJogoResponse.newBuilder();
             resposta.setCodigo(0).setMensagem("O Jogador "+jogador.getNome()+ " acaba de abandonar a partida.").build();
             this.enviarRespostaTodos(resposta.build());

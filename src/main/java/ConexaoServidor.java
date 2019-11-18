@@ -166,7 +166,7 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
             Mesa mesa = this.getMesas().get(indexMesa);
             Jogador jogador = mesa.buscaJogador(request.getIp(), request.getNome());
             if(jogador!=null && mesa.retirarJogador(jogador)){
-                System.err.println("SAIDA DA SALA: " + jogador.getNome() + " saiu da sala " + mesa.getChaveHash() + "! Existe(em) " + mesa.getJogadores().size() + " Jogador(es) nessa Sala.");
+                jogador.getResponseObserver().onCompleted();
                 sairMesaResponse
                         .setCodigo(0)
                         .setMensagem("Sucesso ao sair da mesa.")

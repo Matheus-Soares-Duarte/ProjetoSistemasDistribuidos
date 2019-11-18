@@ -10,7 +10,7 @@ public class ManipuladorArquivo {
                 for(int i=arquivos.length-1; i>=0; i--){
                     File arquivo = arquivos[i];
                     int numeroArquivo = Integer.parseInt(arquivo.getName().replace(".log", "").replace(".snapshot", ""));
-                    if(numeroArquivo<=numero) {
+                    if(numeroArquivo<numero) {
                         arquivos[i].delete();
                     }
                 }
@@ -135,6 +135,10 @@ public class ManipuladorArquivo {
 
     public static void escreverLog(Object objeto, String diretorio, String mensagem, boolean escreverSnapshot)  {
         int numero = ManipuladorArquivo.buscaUltimoNumero(diretorio, ".log");
+        if(numero==-1){
+            numero++;
+            ManipuladorArquivo.criarArquivo(diretorio, numero+".log");
+        }
 
         String caminho = diretorio+"\\"+numero+".log";
         ManipuladorArquivo.escreverObjetoNoArquivo(caminho, mensagem);
