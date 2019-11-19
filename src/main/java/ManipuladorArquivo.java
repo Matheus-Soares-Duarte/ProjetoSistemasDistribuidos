@@ -4,18 +4,13 @@ import java.util.Properties;
 public class ManipuladorArquivo {
     public synchronized static void apagarMenores(String diretorio, int numero){
         File diretorioDeRecuperacao = new File(diretorio);
-
-        System.out.println(diretorio);
-
         if(diretorioDeRecuperacao!=null) {
             File[] arquivos = diretorioDeRecuperacao.listFiles();
             if (arquivos!=null){
                 for(int i=arquivos.length-1; i>=0; i--){
                     File arquivo = arquivos[i];
                     int numeroArquivo = Integer.parseInt(arquivo.getName().replace(".log", "").replace(".snapshot", ""));
-//                    System.out.println(numero +" - "+numeroArquivo);
                     if(numeroArquivo<=numero) {
-//                        System.out.println("DELETANDO "+arquivos[i].getName());
                         arquivos[i].delete();
                     }
                 }
