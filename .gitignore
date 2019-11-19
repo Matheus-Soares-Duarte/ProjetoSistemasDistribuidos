@@ -4,7 +4,7 @@
 *.iml
 *.iws
 # Maven
-log/
-target/
 .idea/
 properties/
+recuperacao/
+target/
