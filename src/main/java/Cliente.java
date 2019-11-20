@@ -3,6 +3,6 @@ public class Cliente {
         String ipServidor = IpCorreto.buscaServidor();
 
         ConexaoCliente conexao = new ConexaoCliente();
-        conexao.criarConexaoGRPC(ipServidor, conexao.getPorta());
+        conexao.criarConexaoGRPC(ipServidor);
     }
 }
