@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -197,14 +198,14 @@ public class ManipuladorArquivo {
         }
         return null;
     }
-    public static Vector recuperarStringDoArquivo(String caminho)
+    public static ArrayList<String> recuperarStringDoArquivo(String caminho)
     {
         File file = new File(caminho);
         if(file.length()>0) {
             try {
                 FileReader fr = new FileReader(caminho);
                 BufferedReader br = new BufferedReader(fr);
-                Vector t = new Vector();
+                ArrayList<String> t = new ArrayList();
                 while (br.ready()) {
                     t.add(br.readLine());
                 }

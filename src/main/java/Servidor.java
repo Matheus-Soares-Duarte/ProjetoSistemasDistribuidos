@@ -1,6 +1,7 @@
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -9,7 +10,7 @@ public class Servidor {
         final int portaMulticast  = Integer.parseInt( ManipuladorArquivo.arquivoConfiguracao().getProperty("Porta.Multicast") );
         ConexaoServidor conexao   = null;
         Properties properties     = ManipuladorArquivo.arquivoConfiguracao();
-        Vector vetor_comandos_log = null;
+        ArrayList<String> ArrayList_comandos_log = null;
 
         String diretorio              = properties.getProperty("Diretorio.Recuperacao");
         String diretorioServidor      = properties.getProperty("Diretorio.RecuperacaoServidor");
@@ -23,6 +24,7 @@ public class Servidor {
          if(ultimoNumeroSnapShot >= 0)
         {
             conexao = (ConexaoServidor) ManipuladorArquivo.recuperarObjetoDoArquivo(diretorio+"\\"+diretorioServidor+"\\"+ultimoNumeroSnapShot + extensaoSnapShot);
+            System.out.println("Dentro do primeiro if(ultimoNumeroSnapShot >= 0)");
         }else
         {
             conexao = new ConexaoServidor();
@@ -33,8 +35,10 @@ public class Servidor {
 //            for(int i = ultimoNumeroSnapShot + 1 ; i <= ultimoNumeroLog ; i++)
 //            {
 //                //ler linha por linha executar no servidor
-//                vetor_comandos_log = ManipuladorArquivo.recuperarStringDoArquivo(diretorio + "\\" + diretorioServidor + "\\" + ultimoNumeroLog + extensaoLog);
-//
+//                ArrayList_comandos_log = ManipuladorArquivo.recuperarStringDoArquivo(diretorio + "\\" + diretorioServidor + "\\" + i + extensaoLog);
+//                for (int j = 0; j < ArrayList_comandos_log.size(); j++){
+//                    System.out.println(ArrayList_comandos_log.get(j));
+//                }
 //            }
 //
 //        }
