@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.Properties;
+import java.util.Vector;
 
 public class ManipuladorArquivo {
     public synchronized static void apagarMenores(String diretorio, int numero){
@@ -45,6 +46,8 @@ public class ManipuladorArquivo {
                 bw.write("Porta.TCP = 12345\n");
                 bw.write("Porta.Multicast = 8888\n");
                 bw.write("Tempo.Snapshot = 30\n");
+                bw.write("extensaoLog = .log\n");
+                bw.write("extensaoSnapShot = .snapshot\n");
                 bw.close();
                 fw.close();
             }
@@ -134,6 +137,15 @@ public class ManipuladorArquivo {
         }
     }
 
+    public static void escreverStringNoArquivo(String caminho, String s) throws IOException {
+        FileWriter fw = new FileWriter(caminho,true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(s);
+        bw.newLine();
+        bw.close();
+    }
+
+
     public synchronized static void escreverLog(Object objeto, String diretorio, String mensagem, boolean escreverSnapshot)  {
         int numero = ManipuladorArquivo.buscaUltimoNumero(diretorio, ".log");
         if(numero==-1){
@@ -142,7 +154,13 @@ public class ManipuladorArquivo {
         }
 
         String caminho = diretorio+"\\"+numero+".log";
-        ManipuladorArquivo.escreverObjetoNoArquivo(caminho, mensagem);
+        try
+        {
+            ManipuladorArquivo.escreverStringNoArquivo(caminho, mensagem);
+        } catch (IOException e) {
+            System.out.println("Erro na escrita do log");
+            e.printStackTrace();
+        }
 
         if(escreverSnapshot) {
             ManipuladorArquivo.escreverSnapshot(objeto, diretorio, numero);
@@ -174,6 +192,24 @@ public class ManipuladorArquivo {
                 objectInputStream.close();
                 return objeto;
             } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+    public static Vector recuperarStringDoArquivo(String caminho)
+    {
+        File file = new File(caminho);
+        if(file.length()>0) {
+            try {
+                FileReader fr = new FileReader(caminho);
+                BufferedReader br = new BufferedReader(fr);
+                Vector t = new Vector();
+                while (br.ready()) {
+                    t.add(br.readLine());
+                }
+                return t;
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

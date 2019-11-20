@@ -23,7 +23,7 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
             e.printStackTrace();
         }
         Properties properties = ManipuladorArquivo.arquivoConfiguracao();
-        this.setDiretorioRecuperacao( properties.getProperty("Diretorio.Recuperacao") );
+        this.setDiretorioRecuperacao( properties.getProperty("Diretorio.Recuperacao"));
         this.setDiretorioRecuperacaoServidor( properties.getProperty("Diretorio.RecuperacaoServidor") );
         this.setIpServidor( properties.getProperty("Ip.Servidor") );
         this.setPorta( Integer.parseInt(properties.getProperty("Porta.TCP")) );
