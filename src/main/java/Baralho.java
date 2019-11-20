@@ -8,6 +8,7 @@ public class Baralho implements Serializable{
     private List<Carta> cartas = new ArrayList<Carta>();
     private String naipes[] = {"Paus", "Copas", "Espadas", "Ouros"};
 
+
     public Baralho(){
         setQuantidade(1);
         criaBaralho(1);
@@ -27,6 +28,8 @@ public class Baralho implements Serializable{
     int getQuantidadeCartas(){
         return this.cartas.size();
     }
+
+    public List<Carta> getList(){return this.cartas; }
 
     void addCarta(Carta carta){ this.cartas.add(carta); }
 
