@@ -3,11 +3,11 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 public class ChaveHash {
-    public static String gerarChave(String stringBase) {
+    public static String gerarChave(String stringBase, int qtdBytes) {
         Date hoje = new Date();
         stringBase += " "+hoje.toString();
         byte[] hash = gerarHash(stringBase,"MD5");
-        String chave = gerarHexa(hash);
+        String chave = gerarHexa(hash, qtdBytes);
         return chave;
     }
 
@@ -21,9 +21,9 @@ public class ChaveHash {
         }
     }
 
-    private static String gerarHexa(byte[] bytes) {
+    public static String gerarHexa(byte[] bytes, int qtdBytes) {
         StringBuilder s = new StringBuilder();
-        for (int i = 0; i < bytes.length; i++) {
+        for (int i = 0; i < qtdBytes; i++) {
             int parteAlta = ((bytes[i] >> 4) & 0xf) << 4;
             int parteBaixa = bytes[i] & 0xf;
             if (parteAlta == 0) s.append('0');

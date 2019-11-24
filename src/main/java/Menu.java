@@ -24,8 +24,10 @@ public class Menu implements Serializable {
             if(conteudoSeparado.length<=3) {
                 if(linha.equals("criar sala")){
                     stubs.ComunicacaoOuterClass.criarMesaRequest criarMesaRequest = stubs.ComunicacaoOuterClass.criarMesaRequest.newBuilder()
+                            .setChaveHashMesa("")
                             .setIp(cliente.getJogador().getIp())
                             .setNome(cliente.getJogador().getNome())
+                            .setRealiza(false)
                             .build();
                     cliente.realizaRequisicao(conteudoSeparado[0], criarMesaRequest);
                     break;
@@ -34,8 +36,9 @@ public class Menu implements Serializable {
                             .setChaveHashMesa(conteudoSeparado[1])
                             .setIp(cliente.getJogador().getIp())
                             .setNome(cliente.getJogador().getNome())
-                            .setVitorias(cliente.getJogador().getVitorias())
                             .setPartidas(cliente.getJogador().getPartidas())
+                            .setRealiza(false)
+                            .setVitorias(cliente.getJogador().getVitorias())
                             .build();
                     cliente.realizaRequisicao(conteudoSeparado[0], entrarMesaRequest);
                     break;
@@ -69,6 +72,7 @@ public class Menu implements Serializable {
                 .setChaveHashMesa(jogador.getChaveHashMesa())
                 .setIp(cliente.getJogador().getIp())
                 .setNome(cliente.getJogador().getNome())
+                .setRealiza(false)
                 .build();
         cliente.realizaRequisicao(comando, requisicaoNaVezRequest);
     }

@@ -27,6 +27,68 @@ public final class ComunicacaoGrpc {
   public static final String SERVICE_NAME = "Comunicacao";
 
   // Static method descriptors that strictly reflect the proto.
+  private static volatile io.grpc.MethodDescriptor<stubs.ComunicacaoOuterClass.atualizarFingerTableRequest,
+      stubs.ComunicacaoOuterClass.atualizarFingerTableResponse> getAtualizarFingerTableMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "atualizarFingerTable",
+      requestType = stubs.ComunicacaoOuterClass.atualizarFingerTableRequest.class,
+      responseType = stubs.ComunicacaoOuterClass.atualizarFingerTableResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<stubs.ComunicacaoOuterClass.atualizarFingerTableRequest,
+      stubs.ComunicacaoOuterClass.atualizarFingerTableResponse> getAtualizarFingerTableMethod() {
+    io.grpc.MethodDescriptor<stubs.ComunicacaoOuterClass.atualizarFingerTableRequest, stubs.ComunicacaoOuterClass.atualizarFingerTableResponse> getAtualizarFingerTableMethod;
+    if ((getAtualizarFingerTableMethod = ComunicacaoGrpc.getAtualizarFingerTableMethod) == null) {
+      synchronized (ComunicacaoGrpc.class) {
+        if ((getAtualizarFingerTableMethod = ComunicacaoGrpc.getAtualizarFingerTableMethod) == null) {
+          ComunicacaoGrpc.getAtualizarFingerTableMethod = getAtualizarFingerTableMethod =
+              io.grpc.MethodDescriptor.<stubs.ComunicacaoOuterClass.atualizarFingerTableRequest, stubs.ComunicacaoOuterClass.atualizarFingerTableResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "atualizarFingerTable"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  stubs.ComunicacaoOuterClass.atualizarFingerTableRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  stubs.ComunicacaoOuterClass.atualizarFingerTableResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ComunicacaoMethodDescriptorSupplier("atualizarFingerTable"))
+              .build();
+        }
+      }
+    }
+    return getAtualizarFingerTableMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<stubs.ComunicacaoOuterClass.requisicaoNaVezRequest,
+      stubs.ComunicacaoOuterClass.comprarCartaResponse> getComprarCartaMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "comprarCarta",
+      requestType = stubs.ComunicacaoOuterClass.requisicaoNaVezRequest.class,
+      responseType = stubs.ComunicacaoOuterClass.comprarCartaResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<stubs.ComunicacaoOuterClass.requisicaoNaVezRequest,
+      stubs.ComunicacaoOuterClass.comprarCartaResponse> getComprarCartaMethod() {
+    io.grpc.MethodDescriptor<stubs.ComunicacaoOuterClass.requisicaoNaVezRequest, stubs.ComunicacaoOuterClass.comprarCartaResponse> getComprarCartaMethod;
+    if ((getComprarCartaMethod = ComunicacaoGrpc.getComprarCartaMethod) == null) {
+      synchronized (ComunicacaoGrpc.class) {
+        if ((getComprarCartaMethod = ComunicacaoGrpc.getComprarCartaMethod) == null) {
+          ComunicacaoGrpc.getComprarCartaMethod = getComprarCartaMethod =
+              io.grpc.MethodDescriptor.<stubs.ComunicacaoOuterClass.requisicaoNaVezRequest, stubs.ComunicacaoOuterClass.comprarCartaResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "comprarCarta"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  stubs.ComunicacaoOuterClass.requisicaoNaVezRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  stubs.ComunicacaoOuterClass.comprarCartaResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ComunicacaoMethodDescriptorSupplier("comprarCarta"))
+              .build();
+        }
+      }
+    }
+    return getComprarCartaMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<stubs.ComunicacaoOuterClass.criarMesaRequest,
       stubs.ComunicacaoOuterClass.criarMesaResponse> getCriarMesaMethod;
 
@@ -89,35 +151,35 @@ public final class ComunicacaoGrpc {
     return getEntrarMesaMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<stubs.ComunicacaoOuterClass.requisicaoNaVezRequest,
-      stubs.ComunicacaoOuterClass.comprarCartaResponse> getComprarCartaMethod;
+  private static volatile io.grpc.MethodDescriptor<stubs.ComunicacaoOuterClass.informarResponsavelHashRequest,
+      stubs.ComunicacaoOuterClass.informarResponsavelHashResponse> getInformarResponsavelHashMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "comprarCarta",
-      requestType = stubs.ComunicacaoOuterClass.requisicaoNaVezRequest.class,
-      responseType = stubs.ComunicacaoOuterClass.comprarCartaResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "informarResponsavelHash",
+      requestType = stubs.ComunicacaoOuterClass.informarResponsavelHashRequest.class,
+      responseType = stubs.ComunicacaoOuterClass.informarResponsavelHashResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<stubs.ComunicacaoOuterClass.requisicaoNaVezRequest,
-      stubs.ComunicacaoOuterClass.comprarCartaResponse> getComprarCartaMethod() {
-    io.grpc.MethodDescriptor<stubs.ComunicacaoOuterClass.requisicaoNaVezRequest, stubs.ComunicacaoOuterClass.comprarCartaResponse> getComprarCartaMethod;
-    if ((getComprarCartaMethod = ComunicacaoGrpc.getComprarCartaMethod) == null) {
+  public static io.grpc.MethodDescriptor<stubs.ComunicacaoOuterClass.informarResponsavelHashRequest,
+      stubs.ComunicacaoOuterClass.informarResponsavelHashResponse> getInformarResponsavelHashMethod() {
+    io.grpc.MethodDescriptor<stubs.ComunicacaoOuterClass.informarResponsavelHashRequest, stubs.ComunicacaoOuterClass.informarResponsavelHashResponse> getInformarResponsavelHashMethod;
+    if ((getInformarResponsavelHashMethod = ComunicacaoGrpc.getInformarResponsavelHashMethod) == null) {
       synchronized (ComunicacaoGrpc.class) {
-        if ((getComprarCartaMethod = ComunicacaoGrpc.getComprarCartaMethod) == null) {
-          ComunicacaoGrpc.getComprarCartaMethod = getComprarCartaMethod =
-              io.grpc.MethodDescriptor.<stubs.ComunicacaoOuterClass.requisicaoNaVezRequest, stubs.ComunicacaoOuterClass.comprarCartaResponse>newBuilder()
+        if ((getInformarResponsavelHashMethod = ComunicacaoGrpc.getInformarResponsavelHashMethod) == null) {
+          ComunicacaoGrpc.getInformarResponsavelHashMethod = getInformarResponsavelHashMethod =
+              io.grpc.MethodDescriptor.<stubs.ComunicacaoOuterClass.informarResponsavelHashRequest, stubs.ComunicacaoOuterClass.informarResponsavelHashResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "comprarCarta"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "informarResponsavelHash"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  stubs.ComunicacaoOuterClass.requisicaoNaVezRequest.getDefaultInstance()))
+                  stubs.ComunicacaoOuterClass.informarResponsavelHashRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  stubs.ComunicacaoOuterClass.comprarCartaResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new ComunicacaoMethodDescriptorSupplier("comprarCarta"))
+                  stubs.ComunicacaoOuterClass.informarResponsavelHashResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ComunicacaoMethodDescriptorSupplier("informarResponsavelHash"))
               .build();
         }
       }
     }
-    return getComprarCartaMethod;
+    return getInformarResponsavelHashMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<stubs.ComunicacaoOuterClass.requisicaoNaVezRequest,
@@ -211,6 +273,20 @@ public final class ComunicacaoGrpc {
 
     /**
      */
+    public void atualizarFingerTable(stubs.ComunicacaoOuterClass.atualizarFingerTableRequest request,
+        io.grpc.stub.StreamObserver<stubs.ComunicacaoOuterClass.atualizarFingerTableResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getAtualizarFingerTableMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void comprarCarta(stubs.ComunicacaoOuterClass.requisicaoNaVezRequest request,
+        io.grpc.stub.StreamObserver<stubs.ComunicacaoOuterClass.comprarCartaResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getComprarCartaMethod(), responseObserver);
+    }
+
+    /**
+     */
     public void criarMesa(stubs.ComunicacaoOuterClass.criarMesaRequest request,
         io.grpc.stub.StreamObserver<stubs.ComunicacaoOuterClass.criarMesaResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getCriarMesaMethod(), responseObserver);
@@ -225,9 +301,9 @@ public final class ComunicacaoGrpc {
 
     /**
      */
-    public void comprarCarta(stubs.ComunicacaoOuterClass.requisicaoNaVezRequest request,
-        io.grpc.stub.StreamObserver<stubs.ComunicacaoOuterClass.comprarCartaResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getComprarCartaMethod(), responseObserver);
+    public void informarResponsavelHash(stubs.ComunicacaoOuterClass.informarResponsavelHashRequest request,
+        io.grpc.stub.StreamObserver<stubs.ComunicacaoOuterClass.informarResponsavelHashResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getInformarResponsavelHashMethod(), responseObserver);
     }
 
     /**
@@ -247,6 +323,20 @@ public final class ComunicacaoGrpc {
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
+            getAtualizarFingerTableMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                stubs.ComunicacaoOuterClass.atualizarFingerTableRequest,
+                stubs.ComunicacaoOuterClass.atualizarFingerTableResponse>(
+                  this, METHODID_ATUALIZAR_FINGER_TABLE)))
+          .addMethod(
+            getComprarCartaMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                stubs.ComunicacaoOuterClass.requisicaoNaVezRequest,
+                stubs.ComunicacaoOuterClass.comprarCartaResponse>(
+                  this, METHODID_COMPRAR_CARTA)))
+          .addMethod(
             getCriarMesaMethod(),
             asyncUnaryCall(
               new MethodHandlers<
@@ -261,12 +351,12 @@ public final class ComunicacaoGrpc {
                 stubs.ComunicacaoOuterClass.informacoesJogoResponse>(
                   this, METHODID_ENTRAR_MESA)))
           .addMethod(
-            getComprarCartaMethod(),
+            getInformarResponsavelHashMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                stubs.ComunicacaoOuterClass.requisicaoNaVezRequest,
-                stubs.ComunicacaoOuterClass.comprarCartaResponse>(
-                  this, METHODID_COMPRAR_CARTA)))
+                stubs.ComunicacaoOuterClass.informarResponsavelHashRequest,
+                stubs.ComunicacaoOuterClass.informarResponsavelHashResponse>(
+                  this, METHODID_INFORMAR_RESPONSAVEL_HASH)))
           .addMethod(
             getPassarVezMethod(),
             asyncUnaryCall(
@@ -305,6 +395,22 @@ public final class ComunicacaoGrpc {
 
     /**
      */
+    public void atualizarFingerTable(stubs.ComunicacaoOuterClass.atualizarFingerTableRequest request,
+        io.grpc.stub.StreamObserver<stubs.ComunicacaoOuterClass.atualizarFingerTableResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getAtualizarFingerTableMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void comprarCarta(stubs.ComunicacaoOuterClass.requisicaoNaVezRequest request,
+        io.grpc.stub.StreamObserver<stubs.ComunicacaoOuterClass.comprarCartaResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getComprarCartaMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void criarMesa(stubs.ComunicacaoOuterClass.criarMesaRequest request,
         io.grpc.stub.StreamObserver<stubs.ComunicacaoOuterClass.criarMesaResponse> responseObserver) {
       asyncUnaryCall(
@@ -321,10 +427,10 @@ public final class ComunicacaoGrpc {
 
     /**
      */
-    public void comprarCarta(stubs.ComunicacaoOuterClass.requisicaoNaVezRequest request,
-        io.grpc.stub.StreamObserver<stubs.ComunicacaoOuterClass.comprarCartaResponse> responseObserver) {
+    public void informarResponsavelHash(stubs.ComunicacaoOuterClass.informarResponsavelHashRequest request,
+        io.grpc.stub.StreamObserver<stubs.ComunicacaoOuterClass.informarResponsavelHashResponse> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(getComprarCartaMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getInformarResponsavelHashMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -364,6 +470,20 @@ public final class ComunicacaoGrpc {
 
     /**
      */
+    public stubs.ComunicacaoOuterClass.atualizarFingerTableResponse atualizarFingerTable(stubs.ComunicacaoOuterClass.atualizarFingerTableRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getAtualizarFingerTableMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public stubs.ComunicacaoOuterClass.comprarCartaResponse comprarCarta(stubs.ComunicacaoOuterClass.requisicaoNaVezRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getComprarCartaMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
     public stubs.ComunicacaoOuterClass.criarMesaResponse criarMesa(stubs.ComunicacaoOuterClass.criarMesaRequest request) {
       return blockingUnaryCall(
           getChannel(), getCriarMesaMethod(), getCallOptions(), request);
@@ -379,9 +499,9 @@ public final class ComunicacaoGrpc {
 
     /**
      */
-    public stubs.ComunicacaoOuterClass.comprarCartaResponse comprarCarta(stubs.ComunicacaoOuterClass.requisicaoNaVezRequest request) {
+    public stubs.ComunicacaoOuterClass.informarResponsavelHashResponse informarResponsavelHash(stubs.ComunicacaoOuterClass.informarResponsavelHashRequest request) {
       return blockingUnaryCall(
-          getChannel(), getComprarCartaMethod(), getCallOptions(), request);
+          getChannel(), getInformarResponsavelHashMethod(), getCallOptions(), request);
     }
 
     /**
@@ -419,10 +539,10 @@ public final class ComunicacaoGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<stubs.ComunicacaoOuterClass.criarMesaResponse> criarMesa(
-        stubs.ComunicacaoOuterClass.criarMesaRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<stubs.ComunicacaoOuterClass.atualizarFingerTableResponse> atualizarFingerTable(
+        stubs.ComunicacaoOuterClass.atualizarFingerTableRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(getCriarMesaMethod(), getCallOptions()), request);
+          getChannel().newCall(getAtualizarFingerTableMethod(), getCallOptions()), request);
     }
 
     /**
@@ -431,6 +551,22 @@ public final class ComunicacaoGrpc {
         stubs.ComunicacaoOuterClass.requisicaoNaVezRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getComprarCartaMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<stubs.ComunicacaoOuterClass.criarMesaResponse> criarMesa(
+        stubs.ComunicacaoOuterClass.criarMesaRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getCriarMesaMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<stubs.ComunicacaoOuterClass.informarResponsavelHashResponse> informarResponsavelHash(
+        stubs.ComunicacaoOuterClass.informarResponsavelHashRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getInformarResponsavelHashMethod(), getCallOptions()), request);
     }
 
     /**
@@ -450,11 +586,13 @@ public final class ComunicacaoGrpc {
     }
   }
 
-  private static final int METHODID_CRIAR_MESA = 0;
-  private static final int METHODID_ENTRAR_MESA = 1;
-  private static final int METHODID_COMPRAR_CARTA = 2;
-  private static final int METHODID_PASSAR_VEZ = 3;
-  private static final int METHODID_SAIR_MESA = 4;
+  private static final int METHODID_ATUALIZAR_FINGER_TABLE = 0;
+  private static final int METHODID_COMPRAR_CARTA = 1;
+  private static final int METHODID_CRIAR_MESA = 2;
+  private static final int METHODID_ENTRAR_MESA = 3;
+  private static final int METHODID_INFORMAR_RESPONSAVEL_HASH = 4;
+  private static final int METHODID_PASSAR_VEZ = 5;
+  private static final int METHODID_SAIR_MESA = 6;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -473,6 +611,14 @@ public final class ComunicacaoGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_ATUALIZAR_FINGER_TABLE:
+          serviceImpl.atualizarFingerTable((stubs.ComunicacaoOuterClass.atualizarFingerTableRequest) request,
+              (io.grpc.stub.StreamObserver<stubs.ComunicacaoOuterClass.atualizarFingerTableResponse>) responseObserver);
+          break;
+        case METHODID_COMPRAR_CARTA:
+          serviceImpl.comprarCarta((stubs.ComunicacaoOuterClass.requisicaoNaVezRequest) request,
+              (io.grpc.stub.StreamObserver<stubs.ComunicacaoOuterClass.comprarCartaResponse>) responseObserver);
+          break;
         case METHODID_CRIAR_MESA:
           serviceImpl.criarMesa((stubs.ComunicacaoOuterClass.criarMesaRequest) request,
               (io.grpc.stub.StreamObserver<stubs.ComunicacaoOuterClass.criarMesaResponse>) responseObserver);
@@ -481,9 +627,9 @@ public final class ComunicacaoGrpc {
           serviceImpl.entrarMesa((stubs.ComunicacaoOuterClass.entrarMesaRequest) request,
               (io.grpc.stub.StreamObserver<stubs.ComunicacaoOuterClass.informacoesJogoResponse>) responseObserver);
           break;
-        case METHODID_COMPRAR_CARTA:
-          serviceImpl.comprarCarta((stubs.ComunicacaoOuterClass.requisicaoNaVezRequest) request,
-              (io.grpc.stub.StreamObserver<stubs.ComunicacaoOuterClass.comprarCartaResponse>) responseObserver);
+        case METHODID_INFORMAR_RESPONSAVEL_HASH:
+          serviceImpl.informarResponsavelHash((stubs.ComunicacaoOuterClass.informarResponsavelHashRequest) request,
+              (io.grpc.stub.StreamObserver<stubs.ComunicacaoOuterClass.informarResponsavelHashResponse>) responseObserver);
           break;
         case METHODID_PASSAR_VEZ:
           serviceImpl.passarVez((stubs.ComunicacaoOuterClass.requisicaoNaVezRequest) request,
@@ -554,9 +700,11 @@ public final class ComunicacaoGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new ComunicacaoFileDescriptorSupplier())
+              .addMethod(getAtualizarFingerTableMethod())
+              .addMethod(getComprarCartaMethod())
               .addMethod(getCriarMesaMethod())
               .addMethod(getEntrarMesaMethod())
-              .addMethod(getComprarCartaMethod())
+              .addMethod(getInformarResponsavelHashMethod())
               .addMethod(getPassarVezMethod())
               .addMethod(getSairMesaMethod())
               .build();

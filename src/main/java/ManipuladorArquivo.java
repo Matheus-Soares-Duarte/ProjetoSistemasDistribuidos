@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
-import java.util.Vector;
 
 public class ManipuladorArquivo {
     public synchronized static void apagarMenores(String diretorio, int numero){
@@ -44,8 +43,9 @@ public class ManipuladorArquivo {
                 bw.write("Diretorio.RecuperacaoCliente = Cliente\n");
                 bw.write("Diretorio.RecuperacaoServidor = Servidor\n");
                 bw.write("Ip.Servidor = \n");
+                bw.write("Porta.Servidor = 12345\n");
                 bw.write("Porta.TCP = 12345\n");
-                bw.write("Porta.Multicast = 8888\n");
+                bw.write("Quantidade.BytesHash = 16\n");
                 bw.write("Tempo.Snapshot = 30\n");
                 bw.write("extensaoLog = .log\n");
                 bw.write("extensaoSnapShot = .snapshot\n");

@@ -48,7 +48,7 @@ public class ConexaoCliente implements Serializable {
                 ManagedChannel canal = ManagedChannelBuilder.forAddress(ipServidor, this.getPorta()).usePlaintext().build();
                 ComunicacaoGrpc.ComunicacaoBlockingStub servidor = ComunicacaoGrpc.newBlockingStub(canal);
                 this.setServidor(servidor);
-                System.out.println("Conectado ao servidor " + ipServidor + "!");
+                System.out.println("Conectado ao servidor "+ipServidor+" na porta "+this.getPorta()+"!");
                 loop = 0;
                 break;
             } catch (StatusRuntimeException e) {
@@ -106,8 +106,9 @@ public class ConexaoCliente implements Serializable {
                                     .setChaveHashMesa(criarMesaResponse.getChaveHashMesa())
                                     .setIp(((ComunicacaoOuterClass.criarMesaRequest) request).getIp())
                                     .setNome(((ComunicacaoOuterClass.criarMesaRequest) request).getNome())
-                                    .setVitorias(this.getJogador().getVitorias())
                                     .setPartidas(this.getJogador().getPartidas())
+                                    .setRealiza(false)
+                                    .setVitorias(this.getJogador().getVitorias())
                                     .build();
                             this.escreverNoArquivo(tipo, false);
                             this.realizaRequisicao("entrar", entrarMesaRequest);
@@ -123,6 +124,7 @@ public class ConexaoCliente implements Serializable {
                                 .setChaveHashMesa(((ComunicacaoOuterClass.entrarMesaRequest) request).getChaveHashMesa())
                                 .setIp(((ComunicacaoOuterClass.entrarMesaRequest) request).getIp())
                                 .setNome(((ComunicacaoOuterClass.entrarMesaRequest) request).getNome())
+                                .setRealiza(false)
                                 .build();
 
                         for (Iterator<ComunicacaoOuterClass.informacoesJogoResponse> it = informacoesJogoResponse; it.hasNext(); ) {
@@ -172,9 +174,10 @@ public class ConexaoCliente implements Serializable {
 
                                     System.out.println(this.getJogador().getNome()+" ESTOUROU COM "+this.getJogador().getPontos()+" PONTOS.");
                                     request = stubs.ComunicacaoOuterClass.requisicaoNaVezRequest.newBuilder()
+                                            .setChaveHashMesa(this.getJogador().getChaveHashMesa())
                                             .setIp(this.getJogador().getIp())
                                             .setNome(this.getJogador().getNome())
-                                            .setChaveHashMesa(this.getJogador().getChaveHashMesa())
+                                            .setRealiza(false)
                                             .build();
                                     this.realizaRequisicao("passar", request);
                                 } else {

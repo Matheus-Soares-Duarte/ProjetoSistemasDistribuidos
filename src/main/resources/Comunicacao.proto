@@ -3,9 +3,11 @@ syntax = "proto3";
 option java_package = "stubs";
 
 service Comunicacao{
+    rpc atualizarFingerTable(atualizarFingerTableRequest) returns(atualizarFingerTableResponse);
+    rpc comprarCarta(requisicaoNaVezRequest) returns(comprarCartaResponse);
     rpc criarMesa(criarMesaRequest) returns(criarMesaResponse);
     rpc entrarMesa(entrarMesaRequest) returns(stream informacoesJogoResponse);
-    rpc comprarCarta(requisicaoNaVezRequest) returns(comprarCartaResponse);
+    rpc informarResponsavelHash(informarResponsavelHashRequest) returns(informarResponsavelHashResponse);
     rpc passarVez(requisicaoNaVezRequest) returns(passarVezResponse);
     rpc sairMesa(requisicaoNaVezRequest) returns(sairMesaResponse);
 }
@@ -13,40 +15,47 @@ service Comunicacao{
 //-----------------------
 //-----REQUISIÇÕES-------
 //-----------------------
-//Função entrarMesa
+//Função atualizarFingerTable
+message atualizarFingerTableRequest{
+    string chaveHashAntigo = 1;
+    string chaveHashNovo = 2;
+    string ipNovo = 3;
+    int32 portaNovo = 4;
+}
+//Função criarMesa
 message criarMesaRequest{
-    string chaveHashRemetente = 1;
+    string chaveHashMesa = 1;
     string ip = 2;
     string nome = 3;
+    bool realiza = 4;
 }
 //Função entrarMesa
 message entrarMesaRequest{
     string chaveHashMesa = 1;
-    string chaveHashRemetente = 2;
-    string ip = 3;
-    string nome = 4;
-    int32 vitorias = 5;
-    int32 partidas = 6;
+    string ip = 2;
+    string nome = 3;
+    int32 partidas = 4;
+    bool realiza = 5;
+    int32 vitorias = 6;
+}
+//Função informarResponsavelHash
+message informarResponsavelHashRequest{
+    string chaveHashRequisicao = 1;
+    string chaveHashNovo = 2;
 }
 //Funções comprarCarta, passarVez e sairMesa
 message requisicaoNaVezRequest{
     string chaveHashMesa = 1;
-    string chaveHashRemetente = 2;
-    string ip = 3;
-    string nome = 4;
+    string ip = 2;
+    string nome = 3;
+    bool realiza = 4;
 }
 
 //-----------------------
 //------RESPOSTAS--------
 //-----------------------
-//Função criarMesa
-message criarMesaResponse{
-    int32 codigo = 1;
-    string mensagem = 2;
-    string chaveHashMesa = 3;
-}
-//Função informacoesJogo
-message informacoesJogoResponse{
+//Função atualizarFingerTable
+message atualizarFingerTableResponse{
     int32 codigo = 1;
     string mensagem = 2;
 }
@@ -56,6 +65,23 @@ message comprarCartaResponse{
     string letra = 2;
     string naipe = 3;
     int32 valor = 4;
+}
+//Função criarMesa
+message criarMesaResponse{
+    string chaveHashMesa = 1;
+    int32 codigo = 2;
+    string mensagem = 3;
+}
+//Função informacoesJogo
+message informacoesJogoResponse{
+    int32 codigo = 1;
+    string mensagem = 2;
+}
+//Função informarResponsavelHash
+message informarResponsavelHashResponse{
+    string chaveHash = 1;
+    string ip = 2;
+    int32 porta = 3;
 }
 //Função passarVez
 message passarVezResponse{

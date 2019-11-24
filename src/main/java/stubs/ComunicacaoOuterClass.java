@@ -14,19 +14,920 @@ public final class ComunicacaoOuterClass {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
+  public interface atualizarFingerTableRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:atualizarFingerTableRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string chaveHashAntigo = 1;</code>
+     */
+    java.lang.String getChaveHashAntigo();
+    /**
+     * <code>string chaveHashAntigo = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getChaveHashAntigoBytes();
+
+    /**
+     * <code>string chaveHashNovo = 2;</code>
+     */
+    java.lang.String getChaveHashNovo();
+    /**
+     * <code>string chaveHashNovo = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getChaveHashNovoBytes();
+
+    /**
+     * <code>string ipNovo = 3;</code>
+     */
+    java.lang.String getIpNovo();
+    /**
+     * <code>string ipNovo = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getIpNovoBytes();
+
+    /**
+     * <code>int32 portaNovo = 4;</code>
+     */
+    int getPortaNovo();
+  }
+  /**
+   * <pre>
+   *-----------------------
+   *-----REQUISIÇÕES-------
+   *-----------------------
+   *Função atualizarFingerTable
+   * </pre>
+   *
+   * Protobuf type {@code atualizarFingerTableRequest}
+   */
+  public  static final class atualizarFingerTableRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:atualizarFingerTableRequest)
+      atualizarFingerTableRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use atualizarFingerTableRequest.newBuilder() to construct.
+    private atualizarFingerTableRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private atualizarFingerTableRequest() {
+      chaveHashAntigo_ = "";
+      chaveHashNovo_ = "";
+      ipNovo_ = "";
+      portaNovo_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private atualizarFingerTableRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              chaveHashAntigo_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              chaveHashNovo_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              ipNovo_ = s;
+              break;
+            }
+            case 32: {
+
+              portaNovo_ = input.readInt32();
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return stubs.ComunicacaoOuterClass.internal_static_atualizarFingerTableRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return stubs.ComunicacaoOuterClass.internal_static_atualizarFingerTableRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              stubs.ComunicacaoOuterClass.atualizarFingerTableRequest.class, stubs.ComunicacaoOuterClass.atualizarFingerTableRequest.Builder.class);
+    }
+
+    public static final int CHAVEHASHANTIGO_FIELD_NUMBER = 1;
+    private volatile java.lang.Object chaveHashAntigo_;
+    /**
+     * <code>string chaveHashAntigo = 1;</code>
+     */
+    public java.lang.String getChaveHashAntigo() {
+      java.lang.Object ref = chaveHashAntigo_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        chaveHashAntigo_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string chaveHashAntigo = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getChaveHashAntigoBytes() {
+      java.lang.Object ref = chaveHashAntigo_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        chaveHashAntigo_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CHAVEHASHNOVO_FIELD_NUMBER = 2;
+    private volatile java.lang.Object chaveHashNovo_;
+    /**
+     * <code>string chaveHashNovo = 2;</code>
+     */
+    public java.lang.String getChaveHashNovo() {
+      java.lang.Object ref = chaveHashNovo_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        chaveHashNovo_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string chaveHashNovo = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getChaveHashNovoBytes() {
+      java.lang.Object ref = chaveHashNovo_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        chaveHashNovo_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int IPNOVO_FIELD_NUMBER = 3;
+    private volatile java.lang.Object ipNovo_;
+    /**
+     * <code>string ipNovo = 3;</code>
+     */
+    public java.lang.String getIpNovo() {
+      java.lang.Object ref = ipNovo_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        ipNovo_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string ipNovo = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIpNovoBytes() {
+      java.lang.Object ref = ipNovo_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ipNovo_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PORTANOVO_FIELD_NUMBER = 4;
+    private int portaNovo_;
+    /**
+     * <code>int32 portaNovo = 4;</code>
+     */
+    public int getPortaNovo() {
+      return portaNovo_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getChaveHashAntigoBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, chaveHashAntigo_);
+      }
+      if (!getChaveHashNovoBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, chaveHashNovo_);
+      }
+      if (!getIpNovoBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, ipNovo_);
+      }
+      if (portaNovo_ != 0) {
+        output.writeInt32(4, portaNovo_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getChaveHashAntigoBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, chaveHashAntigo_);
+      }
+      if (!getChaveHashNovoBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, chaveHashNovo_);
+      }
+      if (!getIpNovoBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, ipNovo_);
+      }
+      if (portaNovo_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, portaNovo_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof stubs.ComunicacaoOuterClass.atualizarFingerTableRequest)) {
+        return super.equals(obj);
+      }
+      stubs.ComunicacaoOuterClass.atualizarFingerTableRequest other = (stubs.ComunicacaoOuterClass.atualizarFingerTableRequest) obj;
+
+      boolean result = true;
+      result = result && getChaveHashAntigo()
+          .equals(other.getChaveHashAntigo());
+      result = result && getChaveHashNovo()
+          .equals(other.getChaveHashNovo());
+      result = result && getIpNovo()
+          .equals(other.getIpNovo());
+      result = result && (getPortaNovo()
+          == other.getPortaNovo());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CHAVEHASHANTIGO_FIELD_NUMBER;
+      hash = (53 * hash) + getChaveHashAntigo().hashCode();
+      hash = (37 * hash) + CHAVEHASHNOVO_FIELD_NUMBER;
+      hash = (53 * hash) + getChaveHashNovo().hashCode();
+      hash = (37 * hash) + IPNOVO_FIELD_NUMBER;
+      hash = (53 * hash) + getIpNovo().hashCode();
+      hash = (37 * hash) + PORTANOVO_FIELD_NUMBER;
+      hash = (53 * hash) + getPortaNovo();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(stubs.ComunicacaoOuterClass.atualizarFingerTableRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *-----------------------
+     *-----REQUISIÇÕES-------
+     *-----------------------
+     *Função atualizarFingerTable
+     * </pre>
+     *
+     * Protobuf type {@code atualizarFingerTableRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:atualizarFingerTableRequest)
+        stubs.ComunicacaoOuterClass.atualizarFingerTableRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return stubs.ComunicacaoOuterClass.internal_static_atualizarFingerTableRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return stubs.ComunicacaoOuterClass.internal_static_atualizarFingerTableRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                stubs.ComunicacaoOuterClass.atualizarFingerTableRequest.class, stubs.ComunicacaoOuterClass.atualizarFingerTableRequest.Builder.class);
+      }
+
+      // Construct using stubs.ComunicacaoOuterClass.atualizarFingerTableRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        chaveHashAntigo_ = "";
+
+        chaveHashNovo_ = "";
+
+        ipNovo_ = "";
+
+        portaNovo_ = 0;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return stubs.ComunicacaoOuterClass.internal_static_atualizarFingerTableRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public stubs.ComunicacaoOuterClass.atualizarFingerTableRequest getDefaultInstanceForType() {
+        return stubs.ComunicacaoOuterClass.atualizarFingerTableRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public stubs.ComunicacaoOuterClass.atualizarFingerTableRequest build() {
+        stubs.ComunicacaoOuterClass.atualizarFingerTableRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public stubs.ComunicacaoOuterClass.atualizarFingerTableRequest buildPartial() {
+        stubs.ComunicacaoOuterClass.atualizarFingerTableRequest result = new stubs.ComunicacaoOuterClass.atualizarFingerTableRequest(this);
+        result.chaveHashAntigo_ = chaveHashAntigo_;
+        result.chaveHashNovo_ = chaveHashNovo_;
+        result.ipNovo_ = ipNovo_;
+        result.portaNovo_ = portaNovo_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof stubs.ComunicacaoOuterClass.atualizarFingerTableRequest) {
+          return mergeFrom((stubs.ComunicacaoOuterClass.atualizarFingerTableRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(stubs.ComunicacaoOuterClass.atualizarFingerTableRequest other) {
+        if (other == stubs.ComunicacaoOuterClass.atualizarFingerTableRequest.getDefaultInstance()) return this;
+        if (!other.getChaveHashAntigo().isEmpty()) {
+          chaveHashAntigo_ = other.chaveHashAntigo_;
+          onChanged();
+        }
+        if (!other.getChaveHashNovo().isEmpty()) {
+          chaveHashNovo_ = other.chaveHashNovo_;
+          onChanged();
+        }
+        if (!other.getIpNovo().isEmpty()) {
+          ipNovo_ = other.ipNovo_;
+          onChanged();
+        }
+        if (other.getPortaNovo() != 0) {
+          setPortaNovo(other.getPortaNovo());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        stubs.ComunicacaoOuterClass.atualizarFingerTableRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (stubs.ComunicacaoOuterClass.atualizarFingerTableRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object chaveHashAntigo_ = "";
+      /**
+       * <code>string chaveHashAntigo = 1;</code>
+       */
+      public java.lang.String getChaveHashAntigo() {
+        java.lang.Object ref = chaveHashAntigo_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          chaveHashAntigo_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string chaveHashAntigo = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getChaveHashAntigoBytes() {
+        java.lang.Object ref = chaveHashAntigo_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          chaveHashAntigo_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string chaveHashAntigo = 1;</code>
+       */
+      public Builder setChaveHashAntigo(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        chaveHashAntigo_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string chaveHashAntigo = 1;</code>
+       */
+      public Builder clearChaveHashAntigo() {
+        
+        chaveHashAntigo_ = getDefaultInstance().getChaveHashAntigo();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string chaveHashAntigo = 1;</code>
+       */
+      public Builder setChaveHashAntigoBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        chaveHashAntigo_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object chaveHashNovo_ = "";
+      /**
+       * <code>string chaveHashNovo = 2;</code>
+       */
+      public java.lang.String getChaveHashNovo() {
+        java.lang.Object ref = chaveHashNovo_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          chaveHashNovo_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string chaveHashNovo = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getChaveHashNovoBytes() {
+        java.lang.Object ref = chaveHashNovo_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          chaveHashNovo_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string chaveHashNovo = 2;</code>
+       */
+      public Builder setChaveHashNovo(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        chaveHashNovo_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string chaveHashNovo = 2;</code>
+       */
+      public Builder clearChaveHashNovo() {
+        
+        chaveHashNovo_ = getDefaultInstance().getChaveHashNovo();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string chaveHashNovo = 2;</code>
+       */
+      public Builder setChaveHashNovoBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        chaveHashNovo_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object ipNovo_ = "";
+      /**
+       * <code>string ipNovo = 3;</code>
+       */
+      public java.lang.String getIpNovo() {
+        java.lang.Object ref = ipNovo_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          ipNovo_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string ipNovo = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIpNovoBytes() {
+        java.lang.Object ref = ipNovo_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ipNovo_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string ipNovo = 3;</code>
+       */
+      public Builder setIpNovo(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        ipNovo_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ipNovo = 3;</code>
+       */
+      public Builder clearIpNovo() {
+        
+        ipNovo_ = getDefaultInstance().getIpNovo();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ipNovo = 3;</code>
+       */
+      public Builder setIpNovoBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        ipNovo_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int portaNovo_ ;
+      /**
+       * <code>int32 portaNovo = 4;</code>
+       */
+      public int getPortaNovo() {
+        return portaNovo_;
+      }
+      /**
+       * <code>int32 portaNovo = 4;</code>
+       */
+      public Builder setPortaNovo(int value) {
+        
+        portaNovo_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 portaNovo = 4;</code>
+       */
+      public Builder clearPortaNovo() {
+        
+        portaNovo_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:atualizarFingerTableRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:atualizarFingerTableRequest)
+    private static final stubs.ComunicacaoOuterClass.atualizarFingerTableRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new stubs.ComunicacaoOuterClass.atualizarFingerTableRequest();
+    }
+
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<atualizarFingerTableRequest>
+        PARSER = new com.google.protobuf.AbstractParser<atualizarFingerTableRequest>() {
+      @java.lang.Override
+      public atualizarFingerTableRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new atualizarFingerTableRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<atualizarFingerTableRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<atualizarFingerTableRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public stubs.ComunicacaoOuterClass.atualizarFingerTableRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface criarMesaRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:criarMesaRequest)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string chaveHashRemetente = 1;</code>
+     * <code>string chaveHashMesa = 1;</code>
      */
-    java.lang.String getChaveHashRemetente();
+    java.lang.String getChaveHashMesa();
     /**
-     * <code>string chaveHashRemetente = 1;</code>
+     * <code>string chaveHashMesa = 1;</code>
      */
     com.google.protobuf.ByteString
-        getChaveHashRemetenteBytes();
+        getChaveHashMesaBytes();
 
     /**
      * <code>string ip = 2;</code>
@@ -47,13 +948,15 @@ public final class ComunicacaoOuterClass {
      */
     com.google.protobuf.ByteString
         getNomeBytes();
+
+    /**
+     * <code>bool realiza = 4;</code>
+     */
+    boolean getRealiza();
   }
   /**
    * <pre>
-   *-----------------------
-   *-----REQUISIÇÕES-------
-   *-----------------------
-   *Função entrarMesa
+   *Função criarMesa
    * </pre>
    *
    * Protobuf type {@code criarMesaRequest}
@@ -68,9 +971,10 @@ public final class ComunicacaoOuterClass {
       super(builder);
     }
     private criarMesaRequest() {
-      chaveHashRemetente_ = "";
+      chaveHashMesa_ = "";
       ip_ = "";
       nome_ = "";
+      realiza_ = false;
     }
 
     @java.lang.Override
@@ -100,7 +1004,7 @@ public final class ComunicacaoOuterClass {
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              chaveHashRemetente_ = s;
+              chaveHashMesa_ = s;
               break;
             }
             case 18: {
@@ -113,6 +1017,11 @@ public final class ComunicacaoOuterClass {
               java.lang.String s = input.readStringRequireUtf8();
 
               nome_ = s;
+              break;
+            }
+            case 32: {
+
+              realiza_ = input.readBool();
               break;
             }
             default: {
@@ -147,34 +1056,34 @@ public final class ComunicacaoOuterClass {
               stubs.ComunicacaoOuterClass.criarMesaRequest.class, stubs.ComunicacaoOuterClass.criarMesaRequest.Builder.class);
     }
 
-    public static final int CHAVEHASHREMETENTE_FIELD_NUMBER = 1;
-    private volatile java.lang.Object chaveHashRemetente_;
+    public static final int CHAVEHASHMESA_FIELD_NUMBER = 1;
+    private volatile java.lang.Object chaveHashMesa_;
     /**
-     * <code>string chaveHashRemetente = 1;</code>
+     * <code>string chaveHashMesa = 1;</code>
      */
-    public java.lang.String getChaveHashRemetente() {
-      java.lang.Object ref = chaveHashRemetente_;
+    public java.lang.String getChaveHashMesa() {
+      java.lang.Object ref = chaveHashMesa_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        chaveHashRemetente_ = s;
+        chaveHashMesa_ = s;
         return s;
       }
     }
     /**
-     * <code>string chaveHashRemetente = 1;</code>
+     * <code>string chaveHashMesa = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getChaveHashRemetenteBytes() {
-      java.lang.Object ref = chaveHashRemetente_;
+        getChaveHashMesaBytes() {
+      java.lang.Object ref = chaveHashMesa_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        chaveHashRemetente_ = b;
+        chaveHashMesa_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -249,6 +1158,15 @@ public final class ComunicacaoOuterClass {
       }
     }
 
+    public static final int REALIZA_FIELD_NUMBER = 4;
+    private boolean realiza_;
+    /**
+     * <code>bool realiza = 4;</code>
+     */
+    public boolean getRealiza() {
+      return realiza_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -263,14 +1181,17 @@ public final class ComunicacaoOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getChaveHashRemetenteBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, chaveHashRemetente_);
+      if (!getChaveHashMesaBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, chaveHashMesa_);
       }
       if (!getIpBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, ip_);
       }
       if (!getNomeBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, nome_);
+      }
+      if (realiza_ != false) {
+        output.writeBool(4, realiza_);
       }
       unknownFields.writeTo(output);
     }
@@ -281,14 +1202,18 @@ public final class ComunicacaoOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (!getChaveHashRemetenteBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, chaveHashRemetente_);
+      if (!getChaveHashMesaBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, chaveHashMesa_);
       }
       if (!getIpBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, ip_);
       }
       if (!getNomeBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, nome_);
+      }
+      if (realiza_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, realiza_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -306,12 +1231,14 @@ public final class ComunicacaoOuterClass {
       stubs.ComunicacaoOuterClass.criarMesaRequest other = (stubs.ComunicacaoOuterClass.criarMesaRequest) obj;
 
       boolean result = true;
-      result = result && getChaveHashRemetente()
-          .equals(other.getChaveHashRemetente());
+      result = result && getChaveHashMesa()
+          .equals(other.getChaveHashMesa());
       result = result && getIp()
           .equals(other.getIp());
       result = result && getNome()
           .equals(other.getNome());
+      result = result && (getRealiza()
+          == other.getRealiza());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -323,12 +1250,15 @@ public final class ComunicacaoOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + CHAVEHASHREMETENTE_FIELD_NUMBER;
-      hash = (53 * hash) + getChaveHashRemetente().hashCode();
+      hash = (37 * hash) + CHAVEHASHMESA_FIELD_NUMBER;
+      hash = (53 * hash) + getChaveHashMesa().hashCode();
       hash = (37 * hash) + IP_FIELD_NUMBER;
       hash = (53 * hash) + getIp().hashCode();
       hash = (37 * hash) + NOME_FIELD_NUMBER;
       hash = (53 * hash) + getNome().hashCode();
+      hash = (37 * hash) + REALIZA_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getRealiza());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -426,10 +1356,7 @@ public final class ComunicacaoOuterClass {
     }
     /**
      * <pre>
-     *-----------------------
-     *-----REQUISIÇÕES-------
-     *-----------------------
-     *Função entrarMesa
+     *Função criarMesa
      * </pre>
      *
      * Protobuf type {@code criarMesaRequest}
@@ -469,11 +1396,13 @@ public final class ComunicacaoOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        chaveHashRemetente_ = "";
+        chaveHashMesa_ = "";
 
         ip_ = "";
 
         nome_ = "";
+
+        realiza_ = false;
 
         return this;
       }
@@ -501,9 +1430,10 @@ public final class ComunicacaoOuterClass {
       @java.lang.Override
       public stubs.ComunicacaoOuterClass.criarMesaRequest buildPartial() {
         stubs.ComunicacaoOuterClass.criarMesaRequest result = new stubs.ComunicacaoOuterClass.criarMesaRequest(this);
-        result.chaveHashRemetente_ = chaveHashRemetente_;
+        result.chaveHashMesa_ = chaveHashMesa_;
         result.ip_ = ip_;
         result.nome_ = nome_;
+        result.realiza_ = realiza_;
         onBuilt();
         return result;
       }
@@ -552,8 +1482,8 @@ public final class ComunicacaoOuterClass {
 
       public Builder mergeFrom(stubs.ComunicacaoOuterClass.criarMesaRequest other) {
         if (other == stubs.ComunicacaoOuterClass.criarMesaRequest.getDefaultInstance()) return this;
-        if (!other.getChaveHashRemetente().isEmpty()) {
-          chaveHashRemetente_ = other.chaveHashRemetente_;
+        if (!other.getChaveHashMesa().isEmpty()) {
+          chaveHashMesa_ = other.chaveHashMesa_;
           onChanged();
         }
         if (!other.getIp().isEmpty()) {
@@ -563,6 +1493,9 @@ public final class ComunicacaoOuterClass {
         if (!other.getNome().isEmpty()) {
           nome_ = other.nome_;
           onChanged();
+        }
+        if (other.getRealiza() != false) {
+          setRealiza(other.getRealiza());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -593,71 +1526,71 @@ public final class ComunicacaoOuterClass {
         return this;
       }
 
-      private java.lang.Object chaveHashRemetente_ = "";
+      private java.lang.Object chaveHashMesa_ = "";
       /**
-       * <code>string chaveHashRemetente = 1;</code>
+       * <code>string chaveHashMesa = 1;</code>
        */
-      public java.lang.String getChaveHashRemetente() {
-        java.lang.Object ref = chaveHashRemetente_;
+      public java.lang.String getChaveHashMesa() {
+        java.lang.Object ref = chaveHashMesa_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          chaveHashRemetente_ = s;
+          chaveHashMesa_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string chaveHashRemetente = 1;</code>
+       * <code>string chaveHashMesa = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getChaveHashRemetenteBytes() {
-        java.lang.Object ref = chaveHashRemetente_;
+          getChaveHashMesaBytes() {
+        java.lang.Object ref = chaveHashMesa_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          chaveHashRemetente_ = b;
+          chaveHashMesa_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string chaveHashRemetente = 1;</code>
+       * <code>string chaveHashMesa = 1;</code>
        */
-      public Builder setChaveHashRemetente(
+      public Builder setChaveHashMesa(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        chaveHashRemetente_ = value;
+        chaveHashMesa_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string chaveHashRemetente = 1;</code>
+       * <code>string chaveHashMesa = 1;</code>
        */
-      public Builder clearChaveHashRemetente() {
+      public Builder clearChaveHashMesa() {
         
-        chaveHashRemetente_ = getDefaultInstance().getChaveHashRemetente();
+        chaveHashMesa_ = getDefaultInstance().getChaveHashMesa();
         onChanged();
         return this;
       }
       /**
-       * <code>string chaveHashRemetente = 1;</code>
+       * <code>string chaveHashMesa = 1;</code>
        */
-      public Builder setChaveHashRemetenteBytes(
+      public Builder setChaveHashMesaBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        chaveHashRemetente_ = value;
+        chaveHashMesa_ = value;
         onChanged();
         return this;
       }
@@ -799,6 +1732,32 @@ public final class ComunicacaoOuterClass {
         onChanged();
         return this;
       }
+
+      private boolean realiza_ ;
+      /**
+       * <code>bool realiza = 4;</code>
+       */
+      public boolean getRealiza() {
+        return realiza_;
+      }
+      /**
+       * <code>bool realiza = 4;</code>
+       */
+      public Builder setRealiza(boolean value) {
+        
+        realiza_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool realiza = 4;</code>
+       */
+      public Builder clearRealiza() {
+        
+        realiza_ = false;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -867,44 +1826,39 @@ public final class ComunicacaoOuterClass {
         getChaveHashMesaBytes();
 
     /**
-     * <code>string chaveHashRemetente = 2;</code>
-     */
-    java.lang.String getChaveHashRemetente();
-    /**
-     * <code>string chaveHashRemetente = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getChaveHashRemetenteBytes();
-
-    /**
-     * <code>string ip = 3;</code>
+     * <code>string ip = 2;</code>
      */
     java.lang.String getIp();
     /**
-     * <code>string ip = 3;</code>
+     * <code>string ip = 2;</code>
      */
     com.google.protobuf.ByteString
         getIpBytes();
 
     /**
-     * <code>string nome = 4;</code>
+     * <code>string nome = 3;</code>
      */
     java.lang.String getNome();
     /**
-     * <code>string nome = 4;</code>
+     * <code>string nome = 3;</code>
      */
     com.google.protobuf.ByteString
         getNomeBytes();
 
     /**
-     * <code>int32 vitorias = 5;</code>
-     */
-    int getVitorias();
-
-    /**
-     * <code>int32 partidas = 6;</code>
+     * <code>int32 partidas = 4;</code>
      */
     int getPartidas();
+
+    /**
+     * <code>bool realiza = 5;</code>
+     */
+    boolean getRealiza();
+
+    /**
+     * <code>int32 vitorias = 6;</code>
+     */
+    int getVitorias();
   }
   /**
    * <pre>
@@ -924,11 +1878,11 @@ public final class ComunicacaoOuterClass {
     }
     private entrarMesaRequest() {
       chaveHashMesa_ = "";
-      chaveHashRemetente_ = "";
       ip_ = "";
       nome_ = "";
-      vitorias_ = 0;
       partidas_ = 0;
+      realiza_ = false;
+      vitorias_ = 0;
     }
 
     @java.lang.Override
@@ -964,29 +1918,28 @@ public final class ComunicacaoOuterClass {
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              chaveHashRemetente_ = s;
+              ip_ = s;
               break;
             }
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              ip_ = s;
+              nome_ = s;
               break;
             }
-            case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
+            case 32: {
 
-              nome_ = s;
+              partidas_ = input.readInt32();
               break;
             }
             case 40: {
 
-              vitorias_ = input.readInt32();
+              realiza_ = input.readBool();
               break;
             }
             case 48: {
 
-              partidas_ = input.readInt32();
+              vitorias_ = input.readInt32();
               break;
             }
             default: {
@@ -1055,44 +2008,10 @@ public final class ComunicacaoOuterClass {
       }
     }
 
-    public static final int CHAVEHASHREMETENTE_FIELD_NUMBER = 2;
-    private volatile java.lang.Object chaveHashRemetente_;
-    /**
-     * <code>string chaveHashRemetente = 2;</code>
-     */
-    public java.lang.String getChaveHashRemetente() {
-      java.lang.Object ref = chaveHashRemetente_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        chaveHashRemetente_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string chaveHashRemetente = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getChaveHashRemetenteBytes() {
-      java.lang.Object ref = chaveHashRemetente_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        chaveHashRemetente_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int IP_FIELD_NUMBER = 3;
+    public static final int IP_FIELD_NUMBER = 2;
     private volatile java.lang.Object ip_;
     /**
-     * <code>string ip = 3;</code>
+     * <code>string ip = 2;</code>
      */
     public java.lang.String getIp() {
       java.lang.Object ref = ip_;
@@ -1107,7 +2026,7 @@ public final class ComunicacaoOuterClass {
       }
     }
     /**
-     * <code>string ip = 3;</code>
+     * <code>string ip = 2;</code>
      */
     public com.google.protobuf.ByteString
         getIpBytes() {
@@ -1123,10 +2042,10 @@ public final class ComunicacaoOuterClass {
       }
     }
 
-    public static final int NOME_FIELD_NUMBER = 4;
+    public static final int NOME_FIELD_NUMBER = 3;
     private volatile java.lang.Object nome_;
     /**
-     * <code>string nome = 4;</code>
+     * <code>string nome = 3;</code>
      */
     public java.lang.String getNome() {
       java.lang.Object ref = nome_;
@@ -1141,7 +2060,7 @@ public final class ComunicacaoOuterClass {
       }
     }
     /**
-     * <code>string nome = 4;</code>
+     * <code>string nome = 3;</code>
      */
     public com.google.protobuf.ByteString
         getNomeBytes() {
@@ -1157,22 +2076,31 @@ public final class ComunicacaoOuterClass {
       }
     }
 
-    public static final int VITORIAS_FIELD_NUMBER = 5;
-    private int vitorias_;
-    /**
-     * <code>int32 vitorias = 5;</code>
-     */
-    public int getVitorias() {
-      return vitorias_;
-    }
-
-    public static final int PARTIDAS_FIELD_NUMBER = 6;
+    public static final int PARTIDAS_FIELD_NUMBER = 4;
     private int partidas_;
     /**
-     * <code>int32 partidas = 6;</code>
+     * <code>int32 partidas = 4;</code>
      */
     public int getPartidas() {
       return partidas_;
+    }
+
+    public static final int REALIZA_FIELD_NUMBER = 5;
+    private boolean realiza_;
+    /**
+     * <code>bool realiza = 5;</code>
+     */
+    public boolean getRealiza() {
+      return realiza_;
+    }
+
+    public static final int VITORIAS_FIELD_NUMBER = 6;
+    private int vitorias_;
+    /**
+     * <code>int32 vitorias = 6;</code>
+     */
+    public int getVitorias() {
+      return vitorias_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1192,20 +2120,20 @@ public final class ComunicacaoOuterClass {
       if (!getChaveHashMesaBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, chaveHashMesa_);
       }
-      if (!getChaveHashRemetenteBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, chaveHashRemetente_);
-      }
       if (!getIpBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, ip_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, ip_);
       }
       if (!getNomeBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, nome_);
-      }
-      if (vitorias_ != 0) {
-        output.writeInt32(5, vitorias_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, nome_);
       }
       if (partidas_ != 0) {
-        output.writeInt32(6, partidas_);
+        output.writeInt32(4, partidas_);
+      }
+      if (realiza_ != false) {
+        output.writeBool(5, realiza_);
+      }
+      if (vitorias_ != 0) {
+        output.writeInt32(6, vitorias_);
       }
       unknownFields.writeTo(output);
     }
@@ -1219,22 +2147,23 @@ public final class ComunicacaoOuterClass {
       if (!getChaveHashMesaBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, chaveHashMesa_);
       }
-      if (!getChaveHashRemetenteBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, chaveHashRemetente_);
-      }
       if (!getIpBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, ip_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, ip_);
       }
       if (!getNomeBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, nome_);
-      }
-      if (vitorias_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, vitorias_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, nome_);
       }
       if (partidas_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, partidas_);
+          .computeInt32Size(4, partidas_);
+      }
+      if (realiza_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, realiza_);
+      }
+      if (vitorias_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, vitorias_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1254,16 +2183,16 @@ public final class ComunicacaoOuterClass {
       boolean result = true;
       result = result && getChaveHashMesa()
           .equals(other.getChaveHashMesa());
-      result = result && getChaveHashRemetente()
-          .equals(other.getChaveHashRemetente());
       result = result && getIp()
           .equals(other.getIp());
       result = result && getNome()
           .equals(other.getNome());
-      result = result && (getVitorias()
-          == other.getVitorias());
       result = result && (getPartidas()
           == other.getPartidas());
+      result = result && (getRealiza()
+          == other.getRealiza());
+      result = result && (getVitorias()
+          == other.getVitorias());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -1277,16 +2206,17 @@ public final class ComunicacaoOuterClass {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CHAVEHASHMESA_FIELD_NUMBER;
       hash = (53 * hash) + getChaveHashMesa().hashCode();
-      hash = (37 * hash) + CHAVEHASHREMETENTE_FIELD_NUMBER;
-      hash = (53 * hash) + getChaveHashRemetente().hashCode();
       hash = (37 * hash) + IP_FIELD_NUMBER;
       hash = (53 * hash) + getIp().hashCode();
       hash = (37 * hash) + NOME_FIELD_NUMBER;
       hash = (53 * hash) + getNome().hashCode();
-      hash = (37 * hash) + VITORIAS_FIELD_NUMBER;
-      hash = (53 * hash) + getVitorias();
       hash = (37 * hash) + PARTIDAS_FIELD_NUMBER;
       hash = (53 * hash) + getPartidas();
+      hash = (37 * hash) + REALIZA_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getRealiza());
+      hash = (37 * hash) + VITORIAS_FIELD_NUMBER;
+      hash = (53 * hash) + getVitorias();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1426,15 +2356,15 @@ public final class ComunicacaoOuterClass {
         super.clear();
         chaveHashMesa_ = "";
 
-        chaveHashRemetente_ = "";
-
         ip_ = "";
 
         nome_ = "";
 
-        vitorias_ = 0;
-
         partidas_ = 0;
+
+        realiza_ = false;
+
+        vitorias_ = 0;
 
         return this;
       }
@@ -1463,11 +2393,11 @@ public final class ComunicacaoOuterClass {
       public stubs.ComunicacaoOuterClass.entrarMesaRequest buildPartial() {
         stubs.ComunicacaoOuterClass.entrarMesaRequest result = new stubs.ComunicacaoOuterClass.entrarMesaRequest(this);
         result.chaveHashMesa_ = chaveHashMesa_;
-        result.chaveHashRemetente_ = chaveHashRemetente_;
         result.ip_ = ip_;
         result.nome_ = nome_;
-        result.vitorias_ = vitorias_;
         result.partidas_ = partidas_;
+        result.realiza_ = realiza_;
+        result.vitorias_ = vitorias_;
         onBuilt();
         return result;
       }
@@ -1520,10 +2450,6 @@ public final class ComunicacaoOuterClass {
           chaveHashMesa_ = other.chaveHashMesa_;
           onChanged();
         }
-        if (!other.getChaveHashRemetente().isEmpty()) {
-          chaveHashRemetente_ = other.chaveHashRemetente_;
-          onChanged();
-        }
         if (!other.getIp().isEmpty()) {
           ip_ = other.ip_;
           onChanged();
@@ -1532,11 +2458,14 @@ public final class ComunicacaoOuterClass {
           nome_ = other.nome_;
           onChanged();
         }
-        if (other.getVitorias() != 0) {
-          setVitorias(other.getVitorias());
-        }
         if (other.getPartidas() != 0) {
           setPartidas(other.getPartidas());
+        }
+        if (other.getRealiza() != false) {
+          setRealiza(other.getRealiza());
+        }
+        if (other.getVitorias() != 0) {
+          setVitorias(other.getVitorias());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1636,78 +2565,9 @@ public final class ComunicacaoOuterClass {
         return this;
       }
 
-      private java.lang.Object chaveHashRemetente_ = "";
-      /**
-       * <code>string chaveHashRemetente = 2;</code>
-       */
-      public java.lang.String getChaveHashRemetente() {
-        java.lang.Object ref = chaveHashRemetente_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          chaveHashRemetente_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string chaveHashRemetente = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getChaveHashRemetenteBytes() {
-        java.lang.Object ref = chaveHashRemetente_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          chaveHashRemetente_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string chaveHashRemetente = 2;</code>
-       */
-      public Builder setChaveHashRemetente(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        chaveHashRemetente_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string chaveHashRemetente = 2;</code>
-       */
-      public Builder clearChaveHashRemetente() {
-        
-        chaveHashRemetente_ = getDefaultInstance().getChaveHashRemetente();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string chaveHashRemetente = 2;</code>
-       */
-      public Builder setChaveHashRemetenteBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        chaveHashRemetente_ = value;
-        onChanged();
-        return this;
-      }
-
       private java.lang.Object ip_ = "";
       /**
-       * <code>string ip = 3;</code>
+       * <code>string ip = 2;</code>
        */
       public java.lang.String getIp() {
         java.lang.Object ref = ip_;
@@ -1722,7 +2582,7 @@ public final class ComunicacaoOuterClass {
         }
       }
       /**
-       * <code>string ip = 3;</code>
+       * <code>string ip = 2;</code>
        */
       public com.google.protobuf.ByteString
           getIpBytes() {
@@ -1738,7 +2598,7 @@ public final class ComunicacaoOuterClass {
         }
       }
       /**
-       * <code>string ip = 3;</code>
+       * <code>string ip = 2;</code>
        */
       public Builder setIp(
           java.lang.String value) {
@@ -1751,7 +2611,7 @@ public final class ComunicacaoOuterClass {
         return this;
       }
       /**
-       * <code>string ip = 3;</code>
+       * <code>string ip = 2;</code>
        */
       public Builder clearIp() {
         
@@ -1760,7 +2620,7 @@ public final class ComunicacaoOuterClass {
         return this;
       }
       /**
-       * <code>string ip = 3;</code>
+       * <code>string ip = 2;</code>
        */
       public Builder setIpBytes(
           com.google.protobuf.ByteString value) {
@@ -1776,7 +2636,7 @@ public final class ComunicacaoOuterClass {
 
       private java.lang.Object nome_ = "";
       /**
-       * <code>string nome = 4;</code>
+       * <code>string nome = 3;</code>
        */
       public java.lang.String getNome() {
         java.lang.Object ref = nome_;
@@ -1791,7 +2651,7 @@ public final class ComunicacaoOuterClass {
         }
       }
       /**
-       * <code>string nome = 4;</code>
+       * <code>string nome = 3;</code>
        */
       public com.google.protobuf.ByteString
           getNomeBytes() {
@@ -1807,7 +2667,7 @@ public final class ComunicacaoOuterClass {
         }
       }
       /**
-       * <code>string nome = 4;</code>
+       * <code>string nome = 3;</code>
        */
       public Builder setNome(
           java.lang.String value) {
@@ -1820,7 +2680,7 @@ public final class ComunicacaoOuterClass {
         return this;
       }
       /**
-       * <code>string nome = 4;</code>
+       * <code>string nome = 3;</code>
        */
       public Builder clearNome() {
         
@@ -1829,7 +2689,7 @@ public final class ComunicacaoOuterClass {
         return this;
       }
       /**
-       * <code>string nome = 4;</code>
+       * <code>string nome = 3;</code>
        */
       public Builder setNomeBytes(
           com.google.protobuf.ByteString value) {
@@ -1843,41 +2703,15 @@ public final class ComunicacaoOuterClass {
         return this;
       }
 
-      private int vitorias_ ;
-      /**
-       * <code>int32 vitorias = 5;</code>
-       */
-      public int getVitorias() {
-        return vitorias_;
-      }
-      /**
-       * <code>int32 vitorias = 5;</code>
-       */
-      public Builder setVitorias(int value) {
-        
-        vitorias_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 vitorias = 5;</code>
-       */
-      public Builder clearVitorias() {
-        
-        vitorias_ = 0;
-        onChanged();
-        return this;
-      }
-
       private int partidas_ ;
       /**
-       * <code>int32 partidas = 6;</code>
+       * <code>int32 partidas = 4;</code>
        */
       public int getPartidas() {
         return partidas_;
       }
       /**
-       * <code>int32 partidas = 6;</code>
+       * <code>int32 partidas = 4;</code>
        */
       public Builder setPartidas(int value) {
         
@@ -1886,11 +2720,63 @@ public final class ComunicacaoOuterClass {
         return this;
       }
       /**
-       * <code>int32 partidas = 6;</code>
+       * <code>int32 partidas = 4;</code>
        */
       public Builder clearPartidas() {
         
         partidas_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private boolean realiza_ ;
+      /**
+       * <code>bool realiza = 5;</code>
+       */
+      public boolean getRealiza() {
+        return realiza_;
+      }
+      /**
+       * <code>bool realiza = 5;</code>
+       */
+      public Builder setRealiza(boolean value) {
+        
+        realiza_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool realiza = 5;</code>
+       */
+      public Builder clearRealiza() {
+        
+        realiza_ = false;
+        onChanged();
+        return this;
+      }
+
+      private int vitorias_ ;
+      /**
+       * <code>int32 vitorias = 6;</code>
+       */
+      public int getVitorias() {
+        return vitorias_;
+      }
+      /**
+       * <code>int32 vitorias = 6;</code>
+       */
+      public Builder setVitorias(int value) {
+        
+        vitorias_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 vitorias = 6;</code>
+       */
+      public Builder clearVitorias() {
+        
+        vitorias_ = 0;
         onChanged();
         return this;
       }
@@ -1947,6 +2833,701 @@ public final class ComunicacaoOuterClass {
 
   }
 
+  public interface informarResponsavelHashRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:informarResponsavelHashRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string chaveHashRequisicao = 1;</code>
+     */
+    java.lang.String getChaveHashRequisicao();
+    /**
+     * <code>string chaveHashRequisicao = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getChaveHashRequisicaoBytes();
+
+    /**
+     * <code>string chaveHashNovo = 2;</code>
+     */
+    java.lang.String getChaveHashNovo();
+    /**
+     * <code>string chaveHashNovo = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getChaveHashNovoBytes();
+  }
+  /**
+   * <pre>
+   *Função informarResponsavelHash
+   * </pre>
+   *
+   * Protobuf type {@code informarResponsavelHashRequest}
+   */
+  public  static final class informarResponsavelHashRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:informarResponsavelHashRequest)
+      informarResponsavelHashRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use informarResponsavelHashRequest.newBuilder() to construct.
+    private informarResponsavelHashRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private informarResponsavelHashRequest() {
+      chaveHashRequisicao_ = "";
+      chaveHashNovo_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private informarResponsavelHashRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              chaveHashRequisicao_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              chaveHashNovo_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return stubs.ComunicacaoOuterClass.internal_static_informarResponsavelHashRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return stubs.ComunicacaoOuterClass.internal_static_informarResponsavelHashRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              stubs.ComunicacaoOuterClass.informarResponsavelHashRequest.class, stubs.ComunicacaoOuterClass.informarResponsavelHashRequest.Builder.class);
+    }
+
+    public static final int CHAVEHASHREQUISICAO_FIELD_NUMBER = 1;
+    private volatile java.lang.Object chaveHashRequisicao_;
+    /**
+     * <code>string chaveHashRequisicao = 1;</code>
+     */
+    public java.lang.String getChaveHashRequisicao() {
+      java.lang.Object ref = chaveHashRequisicao_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        chaveHashRequisicao_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string chaveHashRequisicao = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getChaveHashRequisicaoBytes() {
+      java.lang.Object ref = chaveHashRequisicao_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        chaveHashRequisicao_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CHAVEHASHNOVO_FIELD_NUMBER = 2;
+    private volatile java.lang.Object chaveHashNovo_;
+    /**
+     * <code>string chaveHashNovo = 2;</code>
+     */
+    public java.lang.String getChaveHashNovo() {
+      java.lang.Object ref = chaveHashNovo_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        chaveHashNovo_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string chaveHashNovo = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getChaveHashNovoBytes() {
+      java.lang.Object ref = chaveHashNovo_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        chaveHashNovo_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getChaveHashRequisicaoBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, chaveHashRequisicao_);
+      }
+      if (!getChaveHashNovoBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, chaveHashNovo_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getChaveHashRequisicaoBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, chaveHashRequisicao_);
+      }
+      if (!getChaveHashNovoBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, chaveHashNovo_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof stubs.ComunicacaoOuterClass.informarResponsavelHashRequest)) {
+        return super.equals(obj);
+      }
+      stubs.ComunicacaoOuterClass.informarResponsavelHashRequest other = (stubs.ComunicacaoOuterClass.informarResponsavelHashRequest) obj;
+
+      boolean result = true;
+      result = result && getChaveHashRequisicao()
+          .equals(other.getChaveHashRequisicao());
+      result = result && getChaveHashNovo()
+          .equals(other.getChaveHashNovo());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CHAVEHASHREQUISICAO_FIELD_NUMBER;
+      hash = (53 * hash) + getChaveHashRequisicao().hashCode();
+      hash = (37 * hash) + CHAVEHASHNOVO_FIELD_NUMBER;
+      hash = (53 * hash) + getChaveHashNovo().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(stubs.ComunicacaoOuterClass.informarResponsavelHashRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *Função informarResponsavelHash
+     * </pre>
+     *
+     * Protobuf type {@code informarResponsavelHashRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:informarResponsavelHashRequest)
+        stubs.ComunicacaoOuterClass.informarResponsavelHashRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return stubs.ComunicacaoOuterClass.internal_static_informarResponsavelHashRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return stubs.ComunicacaoOuterClass.internal_static_informarResponsavelHashRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                stubs.ComunicacaoOuterClass.informarResponsavelHashRequest.class, stubs.ComunicacaoOuterClass.informarResponsavelHashRequest.Builder.class);
+      }
+
+      // Construct using stubs.ComunicacaoOuterClass.informarResponsavelHashRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        chaveHashRequisicao_ = "";
+
+        chaveHashNovo_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return stubs.ComunicacaoOuterClass.internal_static_informarResponsavelHashRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public stubs.ComunicacaoOuterClass.informarResponsavelHashRequest getDefaultInstanceForType() {
+        return stubs.ComunicacaoOuterClass.informarResponsavelHashRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public stubs.ComunicacaoOuterClass.informarResponsavelHashRequest build() {
+        stubs.ComunicacaoOuterClass.informarResponsavelHashRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public stubs.ComunicacaoOuterClass.informarResponsavelHashRequest buildPartial() {
+        stubs.ComunicacaoOuterClass.informarResponsavelHashRequest result = new stubs.ComunicacaoOuterClass.informarResponsavelHashRequest(this);
+        result.chaveHashRequisicao_ = chaveHashRequisicao_;
+        result.chaveHashNovo_ = chaveHashNovo_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof stubs.ComunicacaoOuterClass.informarResponsavelHashRequest) {
+          return mergeFrom((stubs.ComunicacaoOuterClass.informarResponsavelHashRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(stubs.ComunicacaoOuterClass.informarResponsavelHashRequest other) {
+        if (other == stubs.ComunicacaoOuterClass.informarResponsavelHashRequest.getDefaultInstance()) return this;
+        if (!other.getChaveHashRequisicao().isEmpty()) {
+          chaveHashRequisicao_ = other.chaveHashRequisicao_;
+          onChanged();
+        }
+        if (!other.getChaveHashNovo().isEmpty()) {
+          chaveHashNovo_ = other.chaveHashNovo_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        stubs.ComunicacaoOuterClass.informarResponsavelHashRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (stubs.ComunicacaoOuterClass.informarResponsavelHashRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object chaveHashRequisicao_ = "";
+      /**
+       * <code>string chaveHashRequisicao = 1;</code>
+       */
+      public java.lang.String getChaveHashRequisicao() {
+        java.lang.Object ref = chaveHashRequisicao_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          chaveHashRequisicao_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string chaveHashRequisicao = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getChaveHashRequisicaoBytes() {
+        java.lang.Object ref = chaveHashRequisicao_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          chaveHashRequisicao_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string chaveHashRequisicao = 1;</code>
+       */
+      public Builder setChaveHashRequisicao(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        chaveHashRequisicao_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string chaveHashRequisicao = 1;</code>
+       */
+      public Builder clearChaveHashRequisicao() {
+        
+        chaveHashRequisicao_ = getDefaultInstance().getChaveHashRequisicao();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string chaveHashRequisicao = 1;</code>
+       */
+      public Builder setChaveHashRequisicaoBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        chaveHashRequisicao_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object chaveHashNovo_ = "";
+      /**
+       * <code>string chaveHashNovo = 2;</code>
+       */
+      public java.lang.String getChaveHashNovo() {
+        java.lang.Object ref = chaveHashNovo_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          chaveHashNovo_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string chaveHashNovo = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getChaveHashNovoBytes() {
+        java.lang.Object ref = chaveHashNovo_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          chaveHashNovo_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string chaveHashNovo = 2;</code>
+       */
+      public Builder setChaveHashNovo(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        chaveHashNovo_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string chaveHashNovo = 2;</code>
+       */
+      public Builder clearChaveHashNovo() {
+        
+        chaveHashNovo_ = getDefaultInstance().getChaveHashNovo();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string chaveHashNovo = 2;</code>
+       */
+      public Builder setChaveHashNovoBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        chaveHashNovo_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:informarResponsavelHashRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:informarResponsavelHashRequest)
+    private static final stubs.ComunicacaoOuterClass.informarResponsavelHashRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new stubs.ComunicacaoOuterClass.informarResponsavelHashRequest();
+    }
+
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<informarResponsavelHashRequest>
+        PARSER = new com.google.protobuf.AbstractParser<informarResponsavelHashRequest>() {
+      @java.lang.Override
+      public informarResponsavelHashRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new informarResponsavelHashRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<informarResponsavelHashRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<informarResponsavelHashRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public stubs.ComunicacaoOuterClass.informarResponsavelHashRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface requisicaoNaVezRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:requisicaoNaVezRequest)
       com.google.protobuf.MessageOrBuilder {
@@ -1962,34 +3543,29 @@ public final class ComunicacaoOuterClass {
         getChaveHashMesaBytes();
 
     /**
-     * <code>string chaveHashRemetente = 2;</code>
-     */
-    java.lang.String getChaveHashRemetente();
-    /**
-     * <code>string chaveHashRemetente = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getChaveHashRemetenteBytes();
-
-    /**
-     * <code>string ip = 3;</code>
+     * <code>string ip = 2;</code>
      */
     java.lang.String getIp();
     /**
-     * <code>string ip = 3;</code>
+     * <code>string ip = 2;</code>
      */
     com.google.protobuf.ByteString
         getIpBytes();
 
     /**
-     * <code>string nome = 4;</code>
+     * <code>string nome = 3;</code>
      */
     java.lang.String getNome();
     /**
-     * <code>string nome = 4;</code>
+     * <code>string nome = 3;</code>
      */
     com.google.protobuf.ByteString
         getNomeBytes();
+
+    /**
+     * <code>bool realiza = 4;</code>
+     */
+    boolean getRealiza();
   }
   /**
    * <pre>
@@ -2009,9 +3585,9 @@ public final class ComunicacaoOuterClass {
     }
     private requisicaoNaVezRequest() {
       chaveHashMesa_ = "";
-      chaveHashRemetente_ = "";
       ip_ = "";
       nome_ = "";
+      realiza_ = false;
     }
 
     @java.lang.Override
@@ -2047,19 +3623,18 @@ public final class ComunicacaoOuterClass {
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              chaveHashRemetente_ = s;
+              ip_ = s;
               break;
             }
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              ip_ = s;
+              nome_ = s;
               break;
             }
-            case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
+            case 32: {
 
-              nome_ = s;
+              realiza_ = input.readBool();
               break;
             }
             default: {
@@ -2128,44 +3703,10 @@ public final class ComunicacaoOuterClass {
       }
     }
 
-    public static final int CHAVEHASHREMETENTE_FIELD_NUMBER = 2;
-    private volatile java.lang.Object chaveHashRemetente_;
-    /**
-     * <code>string chaveHashRemetente = 2;</code>
-     */
-    public java.lang.String getChaveHashRemetente() {
-      java.lang.Object ref = chaveHashRemetente_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        chaveHashRemetente_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string chaveHashRemetente = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getChaveHashRemetenteBytes() {
-      java.lang.Object ref = chaveHashRemetente_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        chaveHashRemetente_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int IP_FIELD_NUMBER = 3;
+    public static final int IP_FIELD_NUMBER = 2;
     private volatile java.lang.Object ip_;
     /**
-     * <code>string ip = 3;</code>
+     * <code>string ip = 2;</code>
      */
     public java.lang.String getIp() {
       java.lang.Object ref = ip_;
@@ -2180,7 +3721,7 @@ public final class ComunicacaoOuterClass {
       }
     }
     /**
-     * <code>string ip = 3;</code>
+     * <code>string ip = 2;</code>
      */
     public com.google.protobuf.ByteString
         getIpBytes() {
@@ -2196,10 +3737,10 @@ public final class ComunicacaoOuterClass {
       }
     }
 
-    public static final int NOME_FIELD_NUMBER = 4;
+    public static final int NOME_FIELD_NUMBER = 3;
     private volatile java.lang.Object nome_;
     /**
-     * <code>string nome = 4;</code>
+     * <code>string nome = 3;</code>
      */
     public java.lang.String getNome() {
       java.lang.Object ref = nome_;
@@ -2214,7 +3755,7 @@ public final class ComunicacaoOuterClass {
       }
     }
     /**
-     * <code>string nome = 4;</code>
+     * <code>string nome = 3;</code>
      */
     public com.google.protobuf.ByteString
         getNomeBytes() {
@@ -2228,6 +3769,15 @@ public final class ComunicacaoOuterClass {
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
+    }
+
+    public static final int REALIZA_FIELD_NUMBER = 4;
+    private boolean realiza_;
+    /**
+     * <code>bool realiza = 4;</code>
+     */
+    public boolean getRealiza() {
+      return realiza_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -2247,14 +3797,14 @@ public final class ComunicacaoOuterClass {
       if (!getChaveHashMesaBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, chaveHashMesa_);
       }
-      if (!getChaveHashRemetenteBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, chaveHashRemetente_);
-      }
       if (!getIpBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, ip_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, ip_);
       }
       if (!getNomeBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, nome_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, nome_);
+      }
+      if (realiza_ != false) {
+        output.writeBool(4, realiza_);
       }
       unknownFields.writeTo(output);
     }
@@ -2268,14 +3818,15 @@ public final class ComunicacaoOuterClass {
       if (!getChaveHashMesaBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, chaveHashMesa_);
       }
-      if (!getChaveHashRemetenteBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, chaveHashRemetente_);
-      }
       if (!getIpBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, ip_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, ip_);
       }
       if (!getNomeBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, nome_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, nome_);
+      }
+      if (realiza_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, realiza_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2295,12 +3846,12 @@ public final class ComunicacaoOuterClass {
       boolean result = true;
       result = result && getChaveHashMesa()
           .equals(other.getChaveHashMesa());
-      result = result && getChaveHashRemetente()
-          .equals(other.getChaveHashRemetente());
       result = result && getIp()
           .equals(other.getIp());
       result = result && getNome()
           .equals(other.getNome());
+      result = result && (getRealiza()
+          == other.getRealiza());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -2314,12 +3865,13 @@ public final class ComunicacaoOuterClass {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CHAVEHASHMESA_FIELD_NUMBER;
       hash = (53 * hash) + getChaveHashMesa().hashCode();
-      hash = (37 * hash) + CHAVEHASHREMETENTE_FIELD_NUMBER;
-      hash = (53 * hash) + getChaveHashRemetente().hashCode();
       hash = (37 * hash) + IP_FIELD_NUMBER;
       hash = (53 * hash) + getIp().hashCode();
       hash = (37 * hash) + NOME_FIELD_NUMBER;
       hash = (53 * hash) + getNome().hashCode();
+      hash = (37 * hash) + REALIZA_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getRealiza());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2459,11 +4011,11 @@ public final class ComunicacaoOuterClass {
         super.clear();
         chaveHashMesa_ = "";
 
-        chaveHashRemetente_ = "";
-
         ip_ = "";
 
         nome_ = "";
+
+        realiza_ = false;
 
         return this;
       }
@@ -2492,9 +4044,9 @@ public final class ComunicacaoOuterClass {
       public stubs.ComunicacaoOuterClass.requisicaoNaVezRequest buildPartial() {
         stubs.ComunicacaoOuterClass.requisicaoNaVezRequest result = new stubs.ComunicacaoOuterClass.requisicaoNaVezRequest(this);
         result.chaveHashMesa_ = chaveHashMesa_;
-        result.chaveHashRemetente_ = chaveHashRemetente_;
         result.ip_ = ip_;
         result.nome_ = nome_;
+        result.realiza_ = realiza_;
         onBuilt();
         return result;
       }
@@ -2547,10 +4099,6 @@ public final class ComunicacaoOuterClass {
           chaveHashMesa_ = other.chaveHashMesa_;
           onChanged();
         }
-        if (!other.getChaveHashRemetente().isEmpty()) {
-          chaveHashRemetente_ = other.chaveHashRemetente_;
-          onChanged();
-        }
         if (!other.getIp().isEmpty()) {
           ip_ = other.ip_;
           onChanged();
@@ -2558,6 +4106,9 @@ public final class ComunicacaoOuterClass {
         if (!other.getNome().isEmpty()) {
           nome_ = other.nome_;
           onChanged();
+        }
+        if (other.getRealiza() != false) {
+          setRealiza(other.getRealiza());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2657,78 +4208,9 @@ public final class ComunicacaoOuterClass {
         return this;
       }
 
-      private java.lang.Object chaveHashRemetente_ = "";
-      /**
-       * <code>string chaveHashRemetente = 2;</code>
-       */
-      public java.lang.String getChaveHashRemetente() {
-        java.lang.Object ref = chaveHashRemetente_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          chaveHashRemetente_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string chaveHashRemetente = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getChaveHashRemetenteBytes() {
-        java.lang.Object ref = chaveHashRemetente_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          chaveHashRemetente_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string chaveHashRemetente = 2;</code>
-       */
-      public Builder setChaveHashRemetente(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        chaveHashRemetente_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string chaveHashRemetente = 2;</code>
-       */
-      public Builder clearChaveHashRemetente() {
-        
-        chaveHashRemetente_ = getDefaultInstance().getChaveHashRemetente();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string chaveHashRemetente = 2;</code>
-       */
-      public Builder setChaveHashRemetenteBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        chaveHashRemetente_ = value;
-        onChanged();
-        return this;
-      }
-
       private java.lang.Object ip_ = "";
       /**
-       * <code>string ip = 3;</code>
+       * <code>string ip = 2;</code>
        */
       public java.lang.String getIp() {
         java.lang.Object ref = ip_;
@@ -2743,7 +4225,7 @@ public final class ComunicacaoOuterClass {
         }
       }
       /**
-       * <code>string ip = 3;</code>
+       * <code>string ip = 2;</code>
        */
       public com.google.protobuf.ByteString
           getIpBytes() {
@@ -2759,7 +4241,7 @@ public final class ComunicacaoOuterClass {
         }
       }
       /**
-       * <code>string ip = 3;</code>
+       * <code>string ip = 2;</code>
        */
       public Builder setIp(
           java.lang.String value) {
@@ -2772,7 +4254,7 @@ public final class ComunicacaoOuterClass {
         return this;
       }
       /**
-       * <code>string ip = 3;</code>
+       * <code>string ip = 2;</code>
        */
       public Builder clearIp() {
         
@@ -2781,7 +4263,7 @@ public final class ComunicacaoOuterClass {
         return this;
       }
       /**
-       * <code>string ip = 3;</code>
+       * <code>string ip = 2;</code>
        */
       public Builder setIpBytes(
           com.google.protobuf.ByteString value) {
@@ -2797,7 +4279,7 @@ public final class ComunicacaoOuterClass {
 
       private java.lang.Object nome_ = "";
       /**
-       * <code>string nome = 4;</code>
+       * <code>string nome = 3;</code>
        */
       public java.lang.String getNome() {
         java.lang.Object ref = nome_;
@@ -2812,7 +4294,7 @@ public final class ComunicacaoOuterClass {
         }
       }
       /**
-       * <code>string nome = 4;</code>
+       * <code>string nome = 3;</code>
        */
       public com.google.protobuf.ByteString
           getNomeBytes() {
@@ -2828,7 +4310,7 @@ public final class ComunicacaoOuterClass {
         }
       }
       /**
-       * <code>string nome = 4;</code>
+       * <code>string nome = 3;</code>
        */
       public Builder setNome(
           java.lang.String value) {
@@ -2841,7 +4323,7 @@ public final class ComunicacaoOuterClass {
         return this;
       }
       /**
-       * <code>string nome = 4;</code>
+       * <code>string nome = 3;</code>
        */
       public Builder clearNome() {
         
@@ -2850,7 +4332,7 @@ public final class ComunicacaoOuterClass {
         return this;
       }
       /**
-       * <code>string nome = 4;</code>
+       * <code>string nome = 3;</code>
        */
       public Builder setNomeBytes(
           com.google.protobuf.ByteString value) {
@@ -2860,6 +4342,32 @@ public final class ComunicacaoOuterClass {
   checkByteStringIsUtf8(value);
         
         nome_ = value;
+        onChanged();
+        return this;
+      }
+
+      private boolean realiza_ ;
+      /**
+       * <code>bool realiza = 4;</code>
+       */
+      public boolean getRealiza() {
+        return realiza_;
+      }
+      /**
+       * <code>bool realiza = 4;</code>
+       */
+      public Builder setRealiza(boolean value) {
+        
+        realiza_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool realiza = 4;</code>
+       */
+      public Builder clearRealiza() {
+        
+        realiza_ = false;
         onChanged();
         return this;
       }
@@ -2916,8 +4424,8 @@ public final class ComunicacaoOuterClass {
 
   }
 
-  public interface criarMesaResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:criarMesaResponse)
+  public interface atualizarFingerTableResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:atualizarFingerTableResponse)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -2934,40 +4442,29 @@ public final class ComunicacaoOuterClass {
      */
     com.google.protobuf.ByteString
         getMensagemBytes();
-
-    /**
-     * <code>string chaveHashMesa = 3;</code>
-     */
-    java.lang.String getChaveHashMesa();
-    /**
-     * <code>string chaveHashMesa = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getChaveHashMesaBytes();
   }
   /**
    * <pre>
    *-----------------------
    *------RESPOSTAS--------
    *-----------------------
-   *Função criarMesa
+   *Função atualizarFingerTable
    * </pre>
    *
-   * Protobuf type {@code criarMesaResponse}
+   * Protobuf type {@code atualizarFingerTableResponse}
    */
-  public  static final class criarMesaResponse extends
+  public  static final class atualizarFingerTableResponse extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:criarMesaResponse)
-      criarMesaResponseOrBuilder {
+      // @@protoc_insertion_point(message_implements:atualizarFingerTableResponse)
+      atualizarFingerTableResponseOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use criarMesaResponse.newBuilder() to construct.
-    private criarMesaResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use atualizarFingerTableResponse.newBuilder() to construct.
+    private atualizarFingerTableResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private criarMesaResponse() {
+    private atualizarFingerTableResponse() {
       codigo_ = 0;
       mensagem_ = "";
-      chaveHashMesa_ = "";
     }
 
     @java.lang.Override
@@ -2975,7 +4472,7 @@ public final class ComunicacaoOuterClass {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private criarMesaResponse(
+    private atualizarFingerTableResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3005,12 +4502,6 @@ public final class ComunicacaoOuterClass {
               mensagem_ = s;
               break;
             }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              chaveHashMesa_ = s;
-              break;
-            }
             default: {
               if (!parseUnknownFieldProto3(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -3032,15 +4523,15 @@ public final class ComunicacaoOuterClass {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return stubs.ComunicacaoOuterClass.internal_static_criarMesaResponse_descriptor;
+      return stubs.ComunicacaoOuterClass.internal_static_atualizarFingerTableResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return stubs.ComunicacaoOuterClass.internal_static_criarMesaResponse_fieldAccessorTable
+      return stubs.ComunicacaoOuterClass.internal_static_atualizarFingerTableResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              stubs.ComunicacaoOuterClass.criarMesaResponse.class, stubs.ComunicacaoOuterClass.criarMesaResponse.Builder.class);
+              stubs.ComunicacaoOuterClass.atualizarFingerTableResponse.class, stubs.ComunicacaoOuterClass.atualizarFingerTableResponse.Builder.class);
     }
 
     public static final int CODIGO_FIELD_NUMBER = 1;
@@ -3086,40 +4577,6 @@ public final class ComunicacaoOuterClass {
       }
     }
 
-    public static final int CHAVEHASHMESA_FIELD_NUMBER = 3;
-    private volatile java.lang.Object chaveHashMesa_;
-    /**
-     * <code>string chaveHashMesa = 3;</code>
-     */
-    public java.lang.String getChaveHashMesa() {
-      java.lang.Object ref = chaveHashMesa_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        chaveHashMesa_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string chaveHashMesa = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getChaveHashMesaBytes() {
-      java.lang.Object ref = chaveHashMesa_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        chaveHashMesa_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -3140,9 +4597,6 @@ public final class ComunicacaoOuterClass {
       if (!getMensagemBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, mensagem_);
       }
-      if (!getChaveHashMesaBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, chaveHashMesa_);
-      }
       unknownFields.writeTo(output);
     }
 
@@ -3159,9 +4613,6 @@ public final class ComunicacaoOuterClass {
       if (!getMensagemBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, mensagem_);
       }
-      if (!getChaveHashMesaBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, chaveHashMesa_);
-      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -3172,18 +4623,16 @@ public final class ComunicacaoOuterClass {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof stubs.ComunicacaoOuterClass.criarMesaResponse)) {
+      if (!(obj instanceof stubs.ComunicacaoOuterClass.atualizarFingerTableResponse)) {
         return super.equals(obj);
       }
-      stubs.ComunicacaoOuterClass.criarMesaResponse other = (stubs.ComunicacaoOuterClass.criarMesaResponse) obj;
+      stubs.ComunicacaoOuterClass.atualizarFingerTableResponse other = (stubs.ComunicacaoOuterClass.atualizarFingerTableResponse) obj;
 
       boolean result = true;
       result = result && (getCodigo()
           == other.getCodigo());
       result = result && getMensagem()
           .equals(other.getMensagem());
-      result = result && getChaveHashMesa()
-          .equals(other.getChaveHashMesa());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -3199,76 +4648,74 @@ public final class ComunicacaoOuterClass {
       hash = (53 * hash) + getCodigo();
       hash = (37 * hash) + MENSAGEM_FIELD_NUMBER;
       hash = (53 * hash) + getMensagem().hashCode();
-      hash = (37 * hash) + CHAVEHASHMESA_FIELD_NUMBER;
-      hash = (53 * hash) + getChaveHashMesa().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableResponse parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableResponse parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableResponse parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(byte[] data)
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableResponse parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableResponse parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(java.io.InputStream input)
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseDelimitedFrom(java.io.InputStream input)
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseDelimitedFrom(
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3281,7 +4728,7 @@ public final class ComunicacaoOuterClass {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(stubs.ComunicacaoOuterClass.criarMesaResponse prototype) {
+    public static Builder newBuilder(stubs.ComunicacaoOuterClass.atualizarFingerTableResponse prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -3301,726 +4748,29 @@ public final class ComunicacaoOuterClass {
      *-----------------------
      *------RESPOSTAS--------
      *-----------------------
-     *Função criarMesa
+     *Função atualizarFingerTable
      * </pre>
      *
-     * Protobuf type {@code criarMesaResponse}
+     * Protobuf type {@code atualizarFingerTableResponse}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:criarMesaResponse)
-        stubs.ComunicacaoOuterClass.criarMesaResponseOrBuilder {
+        // @@protoc_insertion_point(builder_implements:atualizarFingerTableResponse)
+        stubs.ComunicacaoOuterClass.atualizarFingerTableResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return stubs.ComunicacaoOuterClass.internal_static_criarMesaResponse_descriptor;
+        return stubs.ComunicacaoOuterClass.internal_static_atualizarFingerTableResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return stubs.ComunicacaoOuterClass.internal_static_criarMesaResponse_fieldAccessorTable
+        return stubs.ComunicacaoOuterClass.internal_static_atualizarFingerTableResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                stubs.ComunicacaoOuterClass.criarMesaResponse.class, stubs.ComunicacaoOuterClass.criarMesaResponse.Builder.class);
+                stubs.ComunicacaoOuterClass.atualizarFingerTableResponse.class, stubs.ComunicacaoOuterClass.atualizarFingerTableResponse.Builder.class);
       }
 
-      // Construct using stubs.ComunicacaoOuterClass.criarMesaResponse.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        codigo_ = 0;
-
-        mensagem_ = "";
-
-        chaveHashMesa_ = "";
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return stubs.ComunicacaoOuterClass.internal_static_criarMesaResponse_descriptor;
-      }
-
-      @java.lang.Override
-      public stubs.ComunicacaoOuterClass.criarMesaResponse getDefaultInstanceForType() {
-        return stubs.ComunicacaoOuterClass.criarMesaResponse.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public stubs.ComunicacaoOuterClass.criarMesaResponse build() {
-        stubs.ComunicacaoOuterClass.criarMesaResponse result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public stubs.ComunicacaoOuterClass.criarMesaResponse buildPartial() {
-        stubs.ComunicacaoOuterClass.criarMesaResponse result = new stubs.ComunicacaoOuterClass.criarMesaResponse(this);
-        result.codigo_ = codigo_;
-        result.mensagem_ = mensagem_;
-        result.chaveHashMesa_ = chaveHashMesa_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof stubs.ComunicacaoOuterClass.criarMesaResponse) {
-          return mergeFrom((stubs.ComunicacaoOuterClass.criarMesaResponse)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(stubs.ComunicacaoOuterClass.criarMesaResponse other) {
-        if (other == stubs.ComunicacaoOuterClass.criarMesaResponse.getDefaultInstance()) return this;
-        if (other.getCodigo() != 0) {
-          setCodigo(other.getCodigo());
-        }
-        if (!other.getMensagem().isEmpty()) {
-          mensagem_ = other.mensagem_;
-          onChanged();
-        }
-        if (!other.getChaveHashMesa().isEmpty()) {
-          chaveHashMesa_ = other.chaveHashMesa_;
-          onChanged();
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        stubs.ComunicacaoOuterClass.criarMesaResponse parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (stubs.ComunicacaoOuterClass.criarMesaResponse) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private int codigo_ ;
-      /**
-       * <code>int32 codigo = 1;</code>
-       */
-      public int getCodigo() {
-        return codigo_;
-      }
-      /**
-       * <code>int32 codigo = 1;</code>
-       */
-      public Builder setCodigo(int value) {
-        
-        codigo_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 codigo = 1;</code>
-       */
-      public Builder clearCodigo() {
-        
-        codigo_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object mensagem_ = "";
-      /**
-       * <code>string mensagem = 2;</code>
-       */
-      public java.lang.String getMensagem() {
-        java.lang.Object ref = mensagem_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          mensagem_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string mensagem = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getMensagemBytes() {
-        java.lang.Object ref = mensagem_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          mensagem_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string mensagem = 2;</code>
-       */
-      public Builder setMensagem(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        mensagem_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string mensagem = 2;</code>
-       */
-      public Builder clearMensagem() {
-        
-        mensagem_ = getDefaultInstance().getMensagem();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string mensagem = 2;</code>
-       */
-      public Builder setMensagemBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        mensagem_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object chaveHashMesa_ = "";
-      /**
-       * <code>string chaveHashMesa = 3;</code>
-       */
-      public java.lang.String getChaveHashMesa() {
-        java.lang.Object ref = chaveHashMesa_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          chaveHashMesa_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string chaveHashMesa = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getChaveHashMesaBytes() {
-        java.lang.Object ref = chaveHashMesa_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          chaveHashMesa_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string chaveHashMesa = 3;</code>
-       */
-      public Builder setChaveHashMesa(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        chaveHashMesa_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string chaveHashMesa = 3;</code>
-       */
-      public Builder clearChaveHashMesa() {
-        
-        chaveHashMesa_ = getDefaultInstance().getChaveHashMesa();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string chaveHashMesa = 3;</code>
-       */
-      public Builder setChaveHashMesaBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        chaveHashMesa_ = value;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:criarMesaResponse)
-    }
-
-    // @@protoc_insertion_point(class_scope:criarMesaResponse)
-    private static final stubs.ComunicacaoOuterClass.criarMesaResponse DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new stubs.ComunicacaoOuterClass.criarMesaResponse();
-    }
-
-    public static stubs.ComunicacaoOuterClass.criarMesaResponse getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<criarMesaResponse>
-        PARSER = new com.google.protobuf.AbstractParser<criarMesaResponse>() {
-      @java.lang.Override
-      public criarMesaResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new criarMesaResponse(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<criarMesaResponse> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<criarMesaResponse> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public stubs.ComunicacaoOuterClass.criarMesaResponse getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface informacoesJogoResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:informacoesJogoResponse)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>int32 codigo = 1;</code>
-     */
-    int getCodigo();
-
-    /**
-     * <code>string mensagem = 2;</code>
-     */
-    java.lang.String getMensagem();
-    /**
-     * <code>string mensagem = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getMensagemBytes();
-  }
-  /**
-   * <pre>
-   *Função informacoesJogo
-   * </pre>
-   *
-   * Protobuf type {@code informacoesJogoResponse}
-   */
-  public  static final class informacoesJogoResponse extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:informacoesJogoResponse)
-      informacoesJogoResponseOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use informacoesJogoResponse.newBuilder() to construct.
-    private informacoesJogoResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private informacoesJogoResponse() {
-      codigo_ = 0;
-      mensagem_ = "";
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private informacoesJogoResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-
-              codigo_ = input.readInt32();
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              mensagem_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return stubs.ComunicacaoOuterClass.internal_static_informacoesJogoResponse_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return stubs.ComunicacaoOuterClass.internal_static_informacoesJogoResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              stubs.ComunicacaoOuterClass.informacoesJogoResponse.class, stubs.ComunicacaoOuterClass.informacoesJogoResponse.Builder.class);
-    }
-
-    public static final int CODIGO_FIELD_NUMBER = 1;
-    private int codigo_;
-    /**
-     * <code>int32 codigo = 1;</code>
-     */
-    public int getCodigo() {
-      return codigo_;
-    }
-
-    public static final int MENSAGEM_FIELD_NUMBER = 2;
-    private volatile java.lang.Object mensagem_;
-    /**
-     * <code>string mensagem = 2;</code>
-     */
-    public java.lang.String getMensagem() {
-      java.lang.Object ref = mensagem_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        mensagem_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string mensagem = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getMensagemBytes() {
-      java.lang.Object ref = mensagem_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        mensagem_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (codigo_ != 0) {
-        output.writeInt32(1, codigo_);
-      }
-      if (!getMensagemBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, mensagem_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (codigo_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, codigo_);
-      }
-      if (!getMensagemBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, mensagem_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof stubs.ComunicacaoOuterClass.informacoesJogoResponse)) {
-        return super.equals(obj);
-      }
-      stubs.ComunicacaoOuterClass.informacoesJogoResponse other = (stubs.ComunicacaoOuterClass.informacoesJogoResponse) obj;
-
-      boolean result = true;
-      result = result && (getCodigo()
-          == other.getCodigo());
-      result = result && getMensagem()
-          .equals(other.getMensagem());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + CODIGO_FIELD_NUMBER;
-      hash = (53 * hash) + getCodigo();
-      hash = (37 * hash) + MENSAGEM_FIELD_NUMBER;
-      hash = (53 * hash) + getMensagem().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(stubs.ComunicacaoOuterClass.informacoesJogoResponse prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     *Função informacoesJogo
-     * </pre>
-     *
-     * Protobuf type {@code informacoesJogoResponse}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:informacoesJogoResponse)
-        stubs.ComunicacaoOuterClass.informacoesJogoResponseOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return stubs.ComunicacaoOuterClass.internal_static_informacoesJogoResponse_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return stubs.ComunicacaoOuterClass.internal_static_informacoesJogoResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                stubs.ComunicacaoOuterClass.informacoesJogoResponse.class, stubs.ComunicacaoOuterClass.informacoesJogoResponse.Builder.class);
-      }
-
-      // Construct using stubs.ComunicacaoOuterClass.informacoesJogoResponse.newBuilder()
+      // Construct using stubs.ComunicacaoOuterClass.atualizarFingerTableResponse.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -4048,17 +4798,17 @@ public final class ComunicacaoOuterClass {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return stubs.ComunicacaoOuterClass.internal_static_informacoesJogoResponse_descriptor;
+        return stubs.ComunicacaoOuterClass.internal_static_atualizarFingerTableResponse_descriptor;
       }
 
       @java.lang.Override
-      public stubs.ComunicacaoOuterClass.informacoesJogoResponse getDefaultInstanceForType() {
-        return stubs.ComunicacaoOuterClass.informacoesJogoResponse.getDefaultInstance();
+      public stubs.ComunicacaoOuterClass.atualizarFingerTableResponse getDefaultInstanceForType() {
+        return stubs.ComunicacaoOuterClass.atualizarFingerTableResponse.getDefaultInstance();
       }
 
       @java.lang.Override
-      public stubs.ComunicacaoOuterClass.informacoesJogoResponse build() {
-        stubs.ComunicacaoOuterClass.informacoesJogoResponse result = buildPartial();
+      public stubs.ComunicacaoOuterClass.atualizarFingerTableResponse build() {
+        stubs.ComunicacaoOuterClass.atualizarFingerTableResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -4066,8 +4816,8 @@ public final class ComunicacaoOuterClass {
       }
 
       @java.lang.Override
-      public stubs.ComunicacaoOuterClass.informacoesJogoResponse buildPartial() {
-        stubs.ComunicacaoOuterClass.informacoesJogoResponse result = new stubs.ComunicacaoOuterClass.informacoesJogoResponse(this);
+      public stubs.ComunicacaoOuterClass.atualizarFingerTableResponse buildPartial() {
+        stubs.ComunicacaoOuterClass.atualizarFingerTableResponse result = new stubs.ComunicacaoOuterClass.atualizarFingerTableResponse(this);
         result.codigo_ = codigo_;
         result.mensagem_ = mensagem_;
         onBuilt();
@@ -4108,16 +4858,16 @@ public final class ComunicacaoOuterClass {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof stubs.ComunicacaoOuterClass.informacoesJogoResponse) {
-          return mergeFrom((stubs.ComunicacaoOuterClass.informacoesJogoResponse)other);
+        if (other instanceof stubs.ComunicacaoOuterClass.atualizarFingerTableResponse) {
+          return mergeFrom((stubs.ComunicacaoOuterClass.atualizarFingerTableResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(stubs.ComunicacaoOuterClass.informacoesJogoResponse other) {
-        if (other == stubs.ComunicacaoOuterClass.informacoesJogoResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(stubs.ComunicacaoOuterClass.atualizarFingerTableResponse other) {
+        if (other == stubs.ComunicacaoOuterClass.atualizarFingerTableResponse.getDefaultInstance()) return this;
         if (other.getCodigo() != 0) {
           setCodigo(other.getCodigo());
         }
@@ -4140,11 +4890,11 @@ public final class ComunicacaoOuterClass {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        stubs.ComunicacaoOuterClass.informacoesJogoResponse parsedMessage = null;
+        stubs.ComunicacaoOuterClass.atualizarFingerTableResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (stubs.ComunicacaoOuterClass.informacoesJogoResponse) e.getUnfinishedMessage();
+          parsedMessage = (stubs.ComunicacaoOuterClass.atualizarFingerTableResponse) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -4261,41 +5011,41 @@ public final class ComunicacaoOuterClass {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:informacoesJogoResponse)
+      // @@protoc_insertion_point(builder_scope:atualizarFingerTableResponse)
     }
 
-    // @@protoc_insertion_point(class_scope:informacoesJogoResponse)
-    private static final stubs.ComunicacaoOuterClass.informacoesJogoResponse DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:atualizarFingerTableResponse)
+    private static final stubs.ComunicacaoOuterClass.atualizarFingerTableResponse DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new stubs.ComunicacaoOuterClass.informacoesJogoResponse();
+      DEFAULT_INSTANCE = new stubs.ComunicacaoOuterClass.atualizarFingerTableResponse();
     }
 
-    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse getDefaultInstance() {
+    public static stubs.ComunicacaoOuterClass.atualizarFingerTableResponse getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<informacoesJogoResponse>
-        PARSER = new com.google.protobuf.AbstractParser<informacoesJogoResponse>() {
+    private static final com.google.protobuf.Parser<atualizarFingerTableResponse>
+        PARSER = new com.google.protobuf.AbstractParser<atualizarFingerTableResponse>() {
       @java.lang.Override
-      public informacoesJogoResponse parsePartialFrom(
+      public atualizarFingerTableResponse parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new informacoesJogoResponse(input, extensionRegistry);
+        return new atualizarFingerTableResponse(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<informacoesJogoResponse> parser() {
+    public static com.google.protobuf.Parser<atualizarFingerTableResponse> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<informacoesJogoResponse> getParserForType() {
+    public com.google.protobuf.Parser<atualizarFingerTableResponse> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public stubs.ComunicacaoOuterClass.informacoesJogoResponse getDefaultInstanceForType() {
+    public stubs.ComunicacaoOuterClass.atualizarFingerTableResponse getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -5117,6 +5867,2143 @@ public final class ComunicacaoOuterClass {
 
     @java.lang.Override
     public stubs.ComunicacaoOuterClass.comprarCartaResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface criarMesaResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:criarMesaResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string chaveHashMesa = 1;</code>
+     */
+    java.lang.String getChaveHashMesa();
+    /**
+     * <code>string chaveHashMesa = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getChaveHashMesaBytes();
+
+    /**
+     * <code>int32 codigo = 2;</code>
+     */
+    int getCodigo();
+
+    /**
+     * <code>string mensagem = 3;</code>
+     */
+    java.lang.String getMensagem();
+    /**
+     * <code>string mensagem = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getMensagemBytes();
+  }
+  /**
+   * <pre>
+   *Função criarMesa
+   * </pre>
+   *
+   * Protobuf type {@code criarMesaResponse}
+   */
+  public  static final class criarMesaResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:criarMesaResponse)
+      criarMesaResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use criarMesaResponse.newBuilder() to construct.
+    private criarMesaResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private criarMesaResponse() {
+      chaveHashMesa_ = "";
+      codigo_ = 0;
+      mensagem_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private criarMesaResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              chaveHashMesa_ = s;
+              break;
+            }
+            case 16: {
+
+              codigo_ = input.readInt32();
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              mensagem_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return stubs.ComunicacaoOuterClass.internal_static_criarMesaResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return stubs.ComunicacaoOuterClass.internal_static_criarMesaResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              stubs.ComunicacaoOuterClass.criarMesaResponse.class, stubs.ComunicacaoOuterClass.criarMesaResponse.Builder.class);
+    }
+
+    public static final int CHAVEHASHMESA_FIELD_NUMBER = 1;
+    private volatile java.lang.Object chaveHashMesa_;
+    /**
+     * <code>string chaveHashMesa = 1;</code>
+     */
+    public java.lang.String getChaveHashMesa() {
+      java.lang.Object ref = chaveHashMesa_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        chaveHashMesa_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string chaveHashMesa = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getChaveHashMesaBytes() {
+      java.lang.Object ref = chaveHashMesa_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        chaveHashMesa_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CODIGO_FIELD_NUMBER = 2;
+    private int codigo_;
+    /**
+     * <code>int32 codigo = 2;</code>
+     */
+    public int getCodigo() {
+      return codigo_;
+    }
+
+    public static final int MENSAGEM_FIELD_NUMBER = 3;
+    private volatile java.lang.Object mensagem_;
+    /**
+     * <code>string mensagem = 3;</code>
+     */
+    public java.lang.String getMensagem() {
+      java.lang.Object ref = mensagem_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        mensagem_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string mensagem = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMensagemBytes() {
+      java.lang.Object ref = mensagem_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        mensagem_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getChaveHashMesaBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, chaveHashMesa_);
+      }
+      if (codigo_ != 0) {
+        output.writeInt32(2, codigo_);
+      }
+      if (!getMensagemBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, mensagem_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getChaveHashMesaBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, chaveHashMesa_);
+      }
+      if (codigo_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, codigo_);
+      }
+      if (!getMensagemBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, mensagem_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof stubs.ComunicacaoOuterClass.criarMesaResponse)) {
+        return super.equals(obj);
+      }
+      stubs.ComunicacaoOuterClass.criarMesaResponse other = (stubs.ComunicacaoOuterClass.criarMesaResponse) obj;
+
+      boolean result = true;
+      result = result && getChaveHashMesa()
+          .equals(other.getChaveHashMesa());
+      result = result && (getCodigo()
+          == other.getCodigo());
+      result = result && getMensagem()
+          .equals(other.getMensagem());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CHAVEHASHMESA_FIELD_NUMBER;
+      hash = (53 * hash) + getChaveHashMesa().hashCode();
+      hash = (37 * hash) + CODIGO_FIELD_NUMBER;
+      hash = (53 * hash) + getCodigo();
+      hash = (37 * hash) + MENSAGEM_FIELD_NUMBER;
+      hash = (53 * hash) + getMensagem().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static stubs.ComunicacaoOuterClass.criarMesaResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(stubs.ComunicacaoOuterClass.criarMesaResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *Função criarMesa
+     * </pre>
+     *
+     * Protobuf type {@code criarMesaResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:criarMesaResponse)
+        stubs.ComunicacaoOuterClass.criarMesaResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return stubs.ComunicacaoOuterClass.internal_static_criarMesaResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return stubs.ComunicacaoOuterClass.internal_static_criarMesaResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                stubs.ComunicacaoOuterClass.criarMesaResponse.class, stubs.ComunicacaoOuterClass.criarMesaResponse.Builder.class);
+      }
+
+      // Construct using stubs.ComunicacaoOuterClass.criarMesaResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        chaveHashMesa_ = "";
+
+        codigo_ = 0;
+
+        mensagem_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return stubs.ComunicacaoOuterClass.internal_static_criarMesaResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public stubs.ComunicacaoOuterClass.criarMesaResponse getDefaultInstanceForType() {
+        return stubs.ComunicacaoOuterClass.criarMesaResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public stubs.ComunicacaoOuterClass.criarMesaResponse build() {
+        stubs.ComunicacaoOuterClass.criarMesaResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public stubs.ComunicacaoOuterClass.criarMesaResponse buildPartial() {
+        stubs.ComunicacaoOuterClass.criarMesaResponse result = new stubs.ComunicacaoOuterClass.criarMesaResponse(this);
+        result.chaveHashMesa_ = chaveHashMesa_;
+        result.codigo_ = codigo_;
+        result.mensagem_ = mensagem_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof stubs.ComunicacaoOuterClass.criarMesaResponse) {
+          return mergeFrom((stubs.ComunicacaoOuterClass.criarMesaResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(stubs.ComunicacaoOuterClass.criarMesaResponse other) {
+        if (other == stubs.ComunicacaoOuterClass.criarMesaResponse.getDefaultInstance()) return this;
+        if (!other.getChaveHashMesa().isEmpty()) {
+          chaveHashMesa_ = other.chaveHashMesa_;
+          onChanged();
+        }
+        if (other.getCodigo() != 0) {
+          setCodigo(other.getCodigo());
+        }
+        if (!other.getMensagem().isEmpty()) {
+          mensagem_ = other.mensagem_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        stubs.ComunicacaoOuterClass.criarMesaResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (stubs.ComunicacaoOuterClass.criarMesaResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object chaveHashMesa_ = "";
+      /**
+       * <code>string chaveHashMesa = 1;</code>
+       */
+      public java.lang.String getChaveHashMesa() {
+        java.lang.Object ref = chaveHashMesa_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          chaveHashMesa_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string chaveHashMesa = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getChaveHashMesaBytes() {
+        java.lang.Object ref = chaveHashMesa_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          chaveHashMesa_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string chaveHashMesa = 1;</code>
+       */
+      public Builder setChaveHashMesa(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        chaveHashMesa_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string chaveHashMesa = 1;</code>
+       */
+      public Builder clearChaveHashMesa() {
+        
+        chaveHashMesa_ = getDefaultInstance().getChaveHashMesa();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string chaveHashMesa = 1;</code>
+       */
+      public Builder setChaveHashMesaBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        chaveHashMesa_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int codigo_ ;
+      /**
+       * <code>int32 codigo = 2;</code>
+       */
+      public int getCodigo() {
+        return codigo_;
+      }
+      /**
+       * <code>int32 codigo = 2;</code>
+       */
+      public Builder setCodigo(int value) {
+        
+        codigo_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 codigo = 2;</code>
+       */
+      public Builder clearCodigo() {
+        
+        codigo_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object mensagem_ = "";
+      /**
+       * <code>string mensagem = 3;</code>
+       */
+      public java.lang.String getMensagem() {
+        java.lang.Object ref = mensagem_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          mensagem_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string mensagem = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMensagemBytes() {
+        java.lang.Object ref = mensagem_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          mensagem_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string mensagem = 3;</code>
+       */
+      public Builder setMensagem(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        mensagem_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string mensagem = 3;</code>
+       */
+      public Builder clearMensagem() {
+        
+        mensagem_ = getDefaultInstance().getMensagem();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string mensagem = 3;</code>
+       */
+      public Builder setMensagemBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        mensagem_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:criarMesaResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:criarMesaResponse)
+    private static final stubs.ComunicacaoOuterClass.criarMesaResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new stubs.ComunicacaoOuterClass.criarMesaResponse();
+    }
+
+    public static stubs.ComunicacaoOuterClass.criarMesaResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<criarMesaResponse>
+        PARSER = new com.google.protobuf.AbstractParser<criarMesaResponse>() {
+      @java.lang.Override
+      public criarMesaResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new criarMesaResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<criarMesaResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<criarMesaResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public stubs.ComunicacaoOuterClass.criarMesaResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface informacoesJogoResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:informacoesJogoResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int32 codigo = 1;</code>
+     */
+    int getCodigo();
+
+    /**
+     * <code>string mensagem = 2;</code>
+     */
+    java.lang.String getMensagem();
+    /**
+     * <code>string mensagem = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getMensagemBytes();
+  }
+  /**
+   * <pre>
+   *Função informacoesJogo
+   * </pre>
+   *
+   * Protobuf type {@code informacoesJogoResponse}
+   */
+  public  static final class informacoesJogoResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:informacoesJogoResponse)
+      informacoesJogoResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use informacoesJogoResponse.newBuilder() to construct.
+    private informacoesJogoResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private informacoesJogoResponse() {
+      codigo_ = 0;
+      mensagem_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private informacoesJogoResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              codigo_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              mensagem_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return stubs.ComunicacaoOuterClass.internal_static_informacoesJogoResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return stubs.ComunicacaoOuterClass.internal_static_informacoesJogoResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              stubs.ComunicacaoOuterClass.informacoesJogoResponse.class, stubs.ComunicacaoOuterClass.informacoesJogoResponse.Builder.class);
+    }
+
+    public static final int CODIGO_FIELD_NUMBER = 1;
+    private int codigo_;
+    /**
+     * <code>int32 codigo = 1;</code>
+     */
+    public int getCodigo() {
+      return codigo_;
+    }
+
+    public static final int MENSAGEM_FIELD_NUMBER = 2;
+    private volatile java.lang.Object mensagem_;
+    /**
+     * <code>string mensagem = 2;</code>
+     */
+    public java.lang.String getMensagem() {
+      java.lang.Object ref = mensagem_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        mensagem_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string mensagem = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMensagemBytes() {
+      java.lang.Object ref = mensagem_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        mensagem_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (codigo_ != 0) {
+        output.writeInt32(1, codigo_);
+      }
+      if (!getMensagemBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, mensagem_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (codigo_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, codigo_);
+      }
+      if (!getMensagemBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, mensagem_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof stubs.ComunicacaoOuterClass.informacoesJogoResponse)) {
+        return super.equals(obj);
+      }
+      stubs.ComunicacaoOuterClass.informacoesJogoResponse other = (stubs.ComunicacaoOuterClass.informacoesJogoResponse) obj;
+
+      boolean result = true;
+      result = result && (getCodigo()
+          == other.getCodigo());
+      result = result && getMensagem()
+          .equals(other.getMensagem());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CODIGO_FIELD_NUMBER;
+      hash = (53 * hash) + getCodigo();
+      hash = (37 * hash) + MENSAGEM_FIELD_NUMBER;
+      hash = (53 * hash) + getMensagem().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(stubs.ComunicacaoOuterClass.informacoesJogoResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *Função informacoesJogo
+     * </pre>
+     *
+     * Protobuf type {@code informacoesJogoResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:informacoesJogoResponse)
+        stubs.ComunicacaoOuterClass.informacoesJogoResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return stubs.ComunicacaoOuterClass.internal_static_informacoesJogoResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return stubs.ComunicacaoOuterClass.internal_static_informacoesJogoResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                stubs.ComunicacaoOuterClass.informacoesJogoResponse.class, stubs.ComunicacaoOuterClass.informacoesJogoResponse.Builder.class);
+      }
+
+      // Construct using stubs.ComunicacaoOuterClass.informacoesJogoResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        codigo_ = 0;
+
+        mensagem_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return stubs.ComunicacaoOuterClass.internal_static_informacoesJogoResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public stubs.ComunicacaoOuterClass.informacoesJogoResponse getDefaultInstanceForType() {
+        return stubs.ComunicacaoOuterClass.informacoesJogoResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public stubs.ComunicacaoOuterClass.informacoesJogoResponse build() {
+        stubs.ComunicacaoOuterClass.informacoesJogoResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public stubs.ComunicacaoOuterClass.informacoesJogoResponse buildPartial() {
+        stubs.ComunicacaoOuterClass.informacoesJogoResponse result = new stubs.ComunicacaoOuterClass.informacoesJogoResponse(this);
+        result.codigo_ = codigo_;
+        result.mensagem_ = mensagem_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof stubs.ComunicacaoOuterClass.informacoesJogoResponse) {
+          return mergeFrom((stubs.ComunicacaoOuterClass.informacoesJogoResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(stubs.ComunicacaoOuterClass.informacoesJogoResponse other) {
+        if (other == stubs.ComunicacaoOuterClass.informacoesJogoResponse.getDefaultInstance()) return this;
+        if (other.getCodigo() != 0) {
+          setCodigo(other.getCodigo());
+        }
+        if (!other.getMensagem().isEmpty()) {
+          mensagem_ = other.mensagem_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        stubs.ComunicacaoOuterClass.informacoesJogoResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (stubs.ComunicacaoOuterClass.informacoesJogoResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int codigo_ ;
+      /**
+       * <code>int32 codigo = 1;</code>
+       */
+      public int getCodigo() {
+        return codigo_;
+      }
+      /**
+       * <code>int32 codigo = 1;</code>
+       */
+      public Builder setCodigo(int value) {
+        
+        codigo_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 codigo = 1;</code>
+       */
+      public Builder clearCodigo() {
+        
+        codigo_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object mensagem_ = "";
+      /**
+       * <code>string mensagem = 2;</code>
+       */
+      public java.lang.String getMensagem() {
+        java.lang.Object ref = mensagem_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          mensagem_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string mensagem = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMensagemBytes() {
+        java.lang.Object ref = mensagem_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          mensagem_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string mensagem = 2;</code>
+       */
+      public Builder setMensagem(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        mensagem_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string mensagem = 2;</code>
+       */
+      public Builder clearMensagem() {
+        
+        mensagem_ = getDefaultInstance().getMensagem();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string mensagem = 2;</code>
+       */
+      public Builder setMensagemBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        mensagem_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:informacoesJogoResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:informacoesJogoResponse)
+    private static final stubs.ComunicacaoOuterClass.informacoesJogoResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new stubs.ComunicacaoOuterClass.informacoesJogoResponse();
+    }
+
+    public static stubs.ComunicacaoOuterClass.informacoesJogoResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<informacoesJogoResponse>
+        PARSER = new com.google.protobuf.AbstractParser<informacoesJogoResponse>() {
+      @java.lang.Override
+      public informacoesJogoResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new informacoesJogoResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<informacoesJogoResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<informacoesJogoResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public stubs.ComunicacaoOuterClass.informacoesJogoResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface informarResponsavelHashResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:informarResponsavelHashResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string chaveHash = 1;</code>
+     */
+    java.lang.String getChaveHash();
+    /**
+     * <code>string chaveHash = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getChaveHashBytes();
+
+    /**
+     * <code>string ip = 2;</code>
+     */
+    java.lang.String getIp();
+    /**
+     * <code>string ip = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getIpBytes();
+
+    /**
+     * <code>int32 porta = 3;</code>
+     */
+    int getPorta();
+  }
+  /**
+   * <pre>
+   *Função informarResponsavelHash
+   * </pre>
+   *
+   * Protobuf type {@code informarResponsavelHashResponse}
+   */
+  public  static final class informarResponsavelHashResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:informarResponsavelHashResponse)
+      informarResponsavelHashResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use informarResponsavelHashResponse.newBuilder() to construct.
+    private informarResponsavelHashResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private informarResponsavelHashResponse() {
+      chaveHash_ = "";
+      ip_ = "";
+      porta_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private informarResponsavelHashResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              chaveHash_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              ip_ = s;
+              break;
+            }
+            case 24: {
+
+              porta_ = input.readInt32();
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return stubs.ComunicacaoOuterClass.internal_static_informarResponsavelHashResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return stubs.ComunicacaoOuterClass.internal_static_informarResponsavelHashResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              stubs.ComunicacaoOuterClass.informarResponsavelHashResponse.class, stubs.ComunicacaoOuterClass.informarResponsavelHashResponse.Builder.class);
+    }
+
+    public static final int CHAVEHASH_FIELD_NUMBER = 1;
+    private volatile java.lang.Object chaveHash_;
+    /**
+     * <code>string chaveHash = 1;</code>
+     */
+    public java.lang.String getChaveHash() {
+      java.lang.Object ref = chaveHash_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        chaveHash_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string chaveHash = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getChaveHashBytes() {
+      java.lang.Object ref = chaveHash_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        chaveHash_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int IP_FIELD_NUMBER = 2;
+    private volatile java.lang.Object ip_;
+    /**
+     * <code>string ip = 2;</code>
+     */
+    public java.lang.String getIp() {
+      java.lang.Object ref = ip_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        ip_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string ip = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIpBytes() {
+      java.lang.Object ref = ip_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ip_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PORTA_FIELD_NUMBER = 3;
+    private int porta_;
+    /**
+     * <code>int32 porta = 3;</code>
+     */
+    public int getPorta() {
+      return porta_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getChaveHashBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, chaveHash_);
+      }
+      if (!getIpBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, ip_);
+      }
+      if (porta_ != 0) {
+        output.writeInt32(3, porta_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getChaveHashBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, chaveHash_);
+      }
+      if (!getIpBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, ip_);
+      }
+      if (porta_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, porta_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof stubs.ComunicacaoOuterClass.informarResponsavelHashResponse)) {
+        return super.equals(obj);
+      }
+      stubs.ComunicacaoOuterClass.informarResponsavelHashResponse other = (stubs.ComunicacaoOuterClass.informarResponsavelHashResponse) obj;
+
+      boolean result = true;
+      result = result && getChaveHash()
+          .equals(other.getChaveHash());
+      result = result && getIp()
+          .equals(other.getIp());
+      result = result && (getPorta()
+          == other.getPorta());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CHAVEHASH_FIELD_NUMBER;
+      hash = (53 * hash) + getChaveHash().hashCode();
+      hash = (37 * hash) + IP_FIELD_NUMBER;
+      hash = (53 * hash) + getIp().hashCode();
+      hash = (37 * hash) + PORTA_FIELD_NUMBER;
+      hash = (53 * hash) + getPorta();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(stubs.ComunicacaoOuterClass.informarResponsavelHashResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *Função informarResponsavelHash
+     * </pre>
+     *
+     * Protobuf type {@code informarResponsavelHashResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:informarResponsavelHashResponse)
+        stubs.ComunicacaoOuterClass.informarResponsavelHashResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return stubs.ComunicacaoOuterClass.internal_static_informarResponsavelHashResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return stubs.ComunicacaoOuterClass.internal_static_informarResponsavelHashResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                stubs.ComunicacaoOuterClass.informarResponsavelHashResponse.class, stubs.ComunicacaoOuterClass.informarResponsavelHashResponse.Builder.class);
+      }
+
+      // Construct using stubs.ComunicacaoOuterClass.informarResponsavelHashResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        chaveHash_ = "";
+
+        ip_ = "";
+
+        porta_ = 0;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return stubs.ComunicacaoOuterClass.internal_static_informarResponsavelHashResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public stubs.ComunicacaoOuterClass.informarResponsavelHashResponse getDefaultInstanceForType() {
+        return stubs.ComunicacaoOuterClass.informarResponsavelHashResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public stubs.ComunicacaoOuterClass.informarResponsavelHashResponse build() {
+        stubs.ComunicacaoOuterClass.informarResponsavelHashResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public stubs.ComunicacaoOuterClass.informarResponsavelHashResponse buildPartial() {
+        stubs.ComunicacaoOuterClass.informarResponsavelHashResponse result = new stubs.ComunicacaoOuterClass.informarResponsavelHashResponse(this);
+        result.chaveHash_ = chaveHash_;
+        result.ip_ = ip_;
+        result.porta_ = porta_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof stubs.ComunicacaoOuterClass.informarResponsavelHashResponse) {
+          return mergeFrom((stubs.ComunicacaoOuterClass.informarResponsavelHashResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(stubs.ComunicacaoOuterClass.informarResponsavelHashResponse other) {
+        if (other == stubs.ComunicacaoOuterClass.informarResponsavelHashResponse.getDefaultInstance()) return this;
+        if (!other.getChaveHash().isEmpty()) {
+          chaveHash_ = other.chaveHash_;
+          onChanged();
+        }
+        if (!other.getIp().isEmpty()) {
+          ip_ = other.ip_;
+          onChanged();
+        }
+        if (other.getPorta() != 0) {
+          setPorta(other.getPorta());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        stubs.ComunicacaoOuterClass.informarResponsavelHashResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (stubs.ComunicacaoOuterClass.informarResponsavelHashResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object chaveHash_ = "";
+      /**
+       * <code>string chaveHash = 1;</code>
+       */
+      public java.lang.String getChaveHash() {
+        java.lang.Object ref = chaveHash_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          chaveHash_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string chaveHash = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getChaveHashBytes() {
+        java.lang.Object ref = chaveHash_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          chaveHash_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string chaveHash = 1;</code>
+       */
+      public Builder setChaveHash(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        chaveHash_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string chaveHash = 1;</code>
+       */
+      public Builder clearChaveHash() {
+        
+        chaveHash_ = getDefaultInstance().getChaveHash();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string chaveHash = 1;</code>
+       */
+      public Builder setChaveHashBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        chaveHash_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object ip_ = "";
+      /**
+       * <code>string ip = 2;</code>
+       */
+      public java.lang.String getIp() {
+        java.lang.Object ref = ip_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          ip_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string ip = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIpBytes() {
+        java.lang.Object ref = ip_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ip_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string ip = 2;</code>
+       */
+      public Builder setIp(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        ip_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ip = 2;</code>
+       */
+      public Builder clearIp() {
+        
+        ip_ = getDefaultInstance().getIp();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ip = 2;</code>
+       */
+      public Builder setIpBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        ip_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int porta_ ;
+      /**
+       * <code>int32 porta = 3;</code>
+       */
+      public int getPorta() {
+        return porta_;
+      }
+      /**
+       * <code>int32 porta = 3;</code>
+       */
+      public Builder setPorta(int value) {
+        
+        porta_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 porta = 3;</code>
+       */
+      public Builder clearPorta() {
+        
+        porta_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:informarResponsavelHashResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:informarResponsavelHashResponse)
+    private static final stubs.ComunicacaoOuterClass.informarResponsavelHashResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new stubs.ComunicacaoOuterClass.informarResponsavelHashResponse();
+    }
+
+    public static stubs.ComunicacaoOuterClass.informarResponsavelHashResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<informarResponsavelHashResponse>
+        PARSER = new com.google.protobuf.AbstractParser<informarResponsavelHashResponse>() {
+      @java.lang.Override
+      public informarResponsavelHashResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new informarResponsavelHashResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<informarResponsavelHashResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<informarResponsavelHashResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public stubs.ComunicacaoOuterClass.informarResponsavelHashResponse getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -6365,6 +9252,11 @@ public final class ComunicacaoOuterClass {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_atualizarFingerTableRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_atualizarFingerTableRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_criarMesaRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -6375,10 +9267,25 @@ public final class ComunicacaoOuterClass {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_entrarMesaRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_informarResponsavelHashRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_informarResponsavelHashRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_requisicaoNaVezRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_requisicaoNaVezRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_atualizarFingerTableResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_atualizarFingerTableResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_comprarCartaResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_comprarCartaResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_criarMesaResponse_descriptor;
   private static final 
@@ -6390,10 +9297,10 @@ public final class ComunicacaoOuterClass {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_informacoesJogoResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_comprarCartaResponse_descriptor;
+    internal_static_informarResponsavelHashResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_comprarCartaResponse_fieldAccessorTable;
+      internal_static_informarResponsavelHashResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_passarVezResponse_descriptor;
   private static final 
@@ -6413,31 +9320,44 @@ public final class ComunicacaoOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\021Comunicacao.proto\"H\n\020criarMesaRequest\022" +
-      "\032\n\022chaveHashRemetente\030\001 \001(\t\022\n\n\002ip\030\002 \001(\t\022" +
-      "\014\n\004nome\030\003 \001(\t\"\204\001\n\021entrarMesaRequest\022\025\n\rc" +
-      "haveHashMesa\030\001 \001(\t\022\032\n\022chaveHashRemetente" +
-      "\030\002 \001(\t\022\n\n\002ip\030\003 \001(\t\022\014\n\004nome\030\004 \001(\t\022\020\n\010vito" +
-      "rias\030\005 \001(\005\022\020\n\010partidas\030\006 \001(\005\"e\n\026requisic" +
-      "aoNaVezRequest\022\025\n\rchaveHashMesa\030\001 \001(\t\022\032\n" +
-      "\022chaveHashRemetente\030\002 \001(\t\022\n\n\002ip\030\003 \001(\t\022\014\n" +
-      "\004nome\030\004 \001(\t\"L\n\021criarMesaResponse\022\016\n\006codi" +
-      "go\030\001 \001(\005\022\020\n\010mensagem\030\002 \001(\t\022\025\n\rchaveHashM" +
-      "esa\030\003 \001(\t\";\n\027informacoesJogoResponse\022\016\n\006" +
-      "codigo\030\001 \001(\005\022\020\n\010mensagem\030\002 \001(\t\"S\n\024compra" +
-      "rCartaResponse\022\016\n\006codigo\030\001 \001(\005\022\r\n\005letra\030" +
-      "\002 \001(\t\022\r\n\005naipe\030\003 \001(\t\022\r\n\005valor\030\004 \001(\005\"5\n\021p" +
-      "assarVezResponse\022\016\n\006codigo\030\001 \001(\005\022\020\n\010mens" +
-      "agem\030\002 \001(\t\"4\n\020sairMesaResponse\022\016\n\006codigo" +
-      "\030\001 \001(\005\022\020\n\010mensagem\030\002 \001(\t2\261\002\n\013Comunicacao" +
-      "\0222\n\tcriarMesa\022\021.criarMesaRequest\032\022.criar" +
-      "MesaResponse\022<\n\nentrarMesa\022\022.entrarMesaR" +
-      "equest\032\030.informacoesJogoResponse0\001\022>\n\014co" +
-      "mprarCarta\022\027.requisicaoNaVezRequest\032\025.co" +
-      "mprarCartaResponse\0228\n\tpassarVez\022\027.requis" +
-      "icaoNaVezRequest\032\022.passarVezResponse\0226\n\010" +
-      "sairMesa\022\027.requisicaoNaVezRequest\032\021.sair" +
-      "MesaResponseB\007\n\005stubsb\006proto3"
+      "\n\021Comunicacao.proto\"p\n\033atualizarFingerTa" +
+      "bleRequest\022\027\n\017chaveHashAntigo\030\001 \001(\t\022\025\n\rc" +
+      "haveHashNovo\030\002 \001(\t\022\016\n\006ipNovo\030\003 \001(\t\022\021\n\tpo" +
+      "rtaNovo\030\004 \001(\005\"T\n\020criarMesaRequest\022\025\n\rcha" +
+      "veHashMesa\030\001 \001(\t\022\n\n\002ip\030\002 \001(\t\022\014\n\004nome\030\003 \001" +
+      "(\t\022\017\n\007realiza\030\004 \001(\010\"y\n\021entrarMesaRequest" +
+      "\022\025\n\rchaveHashMesa\030\001 \001(\t\022\n\n\002ip\030\002 \001(\t\022\014\n\004n" +
+      "ome\030\003 \001(\t\022\020\n\010partidas\030\004 \001(\005\022\017\n\007realiza\030\005" +
+      " \001(\010\022\020\n\010vitorias\030\006 \001(\005\"T\n\036informarRespon" +
+      "savelHashRequest\022\033\n\023chaveHashRequisicao\030" +
+      "\001 \001(\t\022\025\n\rchaveHashNovo\030\002 \001(\t\"Z\n\026requisic" +
+      "aoNaVezRequest\022\025\n\rchaveHashMesa\030\001 \001(\t\022\n\n" +
+      "\002ip\030\002 \001(\t\022\014\n\004nome\030\003 \001(\t\022\017\n\007realiza\030\004 \001(\010" +
+      "\"@\n\034atualizarFingerTableResponse\022\016\n\006codi" +
+      "go\030\001 \001(\005\022\020\n\010mensagem\030\002 \001(\t\"S\n\024comprarCar" +
+      "taResponse\022\016\n\006codigo\030\001 \001(\005\022\r\n\005letra\030\002 \001(" +
+      "\t\022\r\n\005naipe\030\003 \001(\t\022\r\n\005valor\030\004 \001(\005\"L\n\021criar" +
+      "MesaResponse\022\025\n\rchaveHashMesa\030\001 \001(\t\022\016\n\006c" +
+      "odigo\030\002 \001(\005\022\020\n\010mensagem\030\003 \001(\t\";\n\027informa" +
+      "coesJogoResponse\022\016\n\006codigo\030\001 \001(\005\022\020\n\010mens" +
+      "agem\030\002 \001(\t\"O\n\037informarResponsavelHashRes" +
+      "ponse\022\021\n\tchaveHash\030\001 \001(\t\022\n\n\002ip\030\002 \001(\t\022\r\n\005" +
+      "porta\030\003 \001(\005\"5\n\021passarVezResponse\022\016\n\006codi" +
+      "go\030\001 \001(\005\022\020\n\010mensagem\030\002 \001(\t\"4\n\020sairMesaRe" +
+      "sponse\022\016\n\006codigo\030\001 \001(\005\022\020\n\010mensagem\030\002 \001(\t" +
+      "2\344\003\n\013Comunicacao\022S\n\024atualizarFingerTable" +
+      "\022\034.atualizarFingerTableRequest\032\035.atualiz" +
+      "arFingerTableResponse\022>\n\014comprarCarta\022\027." +
+      "requisicaoNaVezRequest\032\025.comprarCartaRes" +
+      "ponse\0222\n\tcriarMesa\022\021.criarMesaRequest\032\022." +
+      "criarMesaResponse\022<\n\nentrarMesa\022\022.entrar" +
+      "MesaRequest\032\030.informacoesJogoResponse0\001\022" +
+      "\\\n\027informarResponsavelHash\022\037.informarRes" +
+      "ponsavelHashRequest\032 .informarResponsave" +
+      "lHashResponse\0228\n\tpassarVez\022\027.requisicaoN" +
+      "aVezRequest\032\022.passarVezResponse\0226\n\010sairM" +
+      "esa\022\027.requisicaoNaVezRequest\032\021.sairMesaR" +
+      "esponseB\007\n\005stubsb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6451,50 +9371,74 @@ public final class ComunicacaoOuterClass {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_criarMesaRequest_descriptor =
+    internal_static_atualizarFingerTableRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_atualizarFingerTableRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_atualizarFingerTableRequest_descriptor,
+        new java.lang.String[] { "ChaveHashAntigo", "ChaveHashNovo", "IpNovo", "PortaNovo", });
+    internal_static_criarMesaRequest_descriptor =
+      getDescriptor().getMessageTypes().get(1);
     internal_static_criarMesaRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_criarMesaRequest_descriptor,
-        new java.lang.String[] { "ChaveHashRemetente", "Ip", "Nome", });
+        new java.lang.String[] { "ChaveHashMesa", "Ip", "Nome", "Realiza", });
     internal_static_entrarMesaRequest_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_entrarMesaRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_entrarMesaRequest_descriptor,
-        new java.lang.String[] { "ChaveHashMesa", "ChaveHashRemetente", "Ip", "Nome", "Vitorias", "Partidas", });
+        new java.lang.String[] { "ChaveHashMesa", "Ip", "Nome", "Partidas", "Realiza", "Vitorias", });
+    internal_static_informarResponsavelHashRequest_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_informarResponsavelHashRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_informarResponsavelHashRequest_descriptor,
+        new java.lang.String[] { "ChaveHashRequisicao", "ChaveHashNovo", });
     internal_static_requisicaoNaVezRequest_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_requisicaoNaVezRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_requisicaoNaVezRequest_descriptor,
-        new java.lang.String[] { "ChaveHashMesa", "ChaveHashRemetente", "Ip", "Nome", });
-    internal_static_criarMesaResponse_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_criarMesaResponse_fieldAccessorTable = new
+        new java.lang.String[] { "ChaveHashMesa", "Ip", "Nome", "Realiza", });
+    internal_static_atualizarFingerTableResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_atualizarFingerTableResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_criarMesaResponse_descriptor,
-        new java.lang.String[] { "Codigo", "Mensagem", "ChaveHashMesa", });
-    internal_static_informacoesJogoResponse_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_informacoesJogoResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_informacoesJogoResponse_descriptor,
+        internal_static_atualizarFingerTableResponse_descriptor,
         new java.lang.String[] { "Codigo", "Mensagem", });
     internal_static_comprarCartaResponse_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_comprarCartaResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_comprarCartaResponse_descriptor,
         new java.lang.String[] { "Codigo", "Letra", "Naipe", "Valor", });
+    internal_static_criarMesaResponse_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_criarMesaResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_criarMesaResponse_descriptor,
+        new java.lang.String[] { "ChaveHashMesa", "Codigo", "Mensagem", });
+    internal_static_informacoesJogoResponse_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_informacoesJogoResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_informacoesJogoResponse_descriptor,
+        new java.lang.String[] { "Codigo", "Mensagem", });
+    internal_static_informarResponsavelHashResponse_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_informarResponsavelHashResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_informarResponsavelHashResponse_descriptor,
+        new java.lang.String[] { "ChaveHash", "Ip", "Porta", });
     internal_static_passarVezResponse_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_passarVezResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_passarVezResponse_descriptor,
         new java.lang.String[] { "Codigo", "Mensagem", });
     internal_static_sairMesaResponse_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_sairMesaResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_sairMesaResponse_descriptor,
