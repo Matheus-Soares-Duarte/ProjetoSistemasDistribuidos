@@ -552,8 +552,7 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
                     String mensagemLog = this.getChaveHash() + ":" + mensagem + ":" + jogador.getChaveHashMesa() + ":" + jogador.getIp() + ":" + jogador.getNome();
                     this.escreverNoArquivo(mensagemLog);
 
-                    jogador.setJogou(true);
-                    mesa.acorda();
+                    mesa.passarVez();
                     passarVezResponse
                             .setCodigo(0)
                             .setMensagem("Sucesso ao passar a vez.")
@@ -619,6 +618,10 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
                     String mensagem = "sairMesa";
                     String mensagemLog = this.getChaveHash() + ":" + mensagem + ":" + jogador.getChaveHashMesa() + ":" + jogador.getIp() + ":" + jogador.getNome();
                     this.escreverNoArquivo(mensagemLog);
+
+                    if(mesa.getJogadores().size() == 0) {
+                        this.removerMesa(mesa);
+                    }
                 } else {
                     sairMesaResponse
                             .setCodigo(1)

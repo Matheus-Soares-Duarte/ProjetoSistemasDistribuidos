@@ -12,32 +12,21 @@ public class Mesa implements Serializable {
     private List<Jogador> jogadores = new ArrayList<Jogador>();
     private Baralho baralho = new Baralho();
     private ConexaoServidor servidor;
-    private boolean iniciada;
 
     public Mesa(String chaveHash, ConexaoServidor servidor){
         this.setChaveHash(chaveHash);
         this.setServidor(servidor);
-        this.setIniciada(false);
-
-        Dealer dealer = new Dealer(this);
-        new Thread(dealer).start();
     }
 
     void setBaralho(Baralho baralho){ this.baralho = baralho; }
     void setChaveHash(String chaveHash){ this.chaveHash = chaveHash; }
-    void setIniciada(boolean iniciada){ this.iniciada = iniciada; }
     void setServidor(ConexaoServidor servidor) { this.servidor = servidor; }
     void setJogadores(List<Jogador> jogadores){ this.jogadores = jogadores; }
 
     synchronized Baralho getBaralho(){ return this.baralho; }
     String getChaveHash() { return this.chaveHash; }
-    Boolean getIniciada() { return this.iniciada; }
     ConexaoServidor getServidor() { return servidor; }
     List<Jogador> getJogadores(){ return this.jogadores; }
-
-    synchronized void acorda(){
-        notifyAll();
-    }
 
     boolean addJogador(Jogador jogador){
         ComunicacaoOuterClass.informacoesJogoResponse.Builder resposta = ComunicacaoOuterClass.informacoesJogoResponse.newBuilder();
@@ -51,17 +40,15 @@ public class Mesa implements Serializable {
                 resposta.setCodigo(0).setMensagem("Esperando novos jogadores para iniciar o jogo!").build();
                 this.enviarResposta(resposta.build(), jogador);
             } else {
-                if (this.getIniciada()) {
-                    resposta.setCodigo(3).setMensagem("Comprar Cartas Iniciais").build();
-                    this.enviarResposta(resposta.build(), jogador);
-                }
-
                 if (this.getJogadores().size() > 1) {
                     resposta.setCodigo(0).setMensagem("O Jogador " + jogador.getNome() + " acaba de entrar na sala " + this.getChaveHash() + "!").build();
                     this.enviarRespostaTodos(resposta.build());
                 }
-                if (this.getJogadores().size() == 2 && !this.getIniciada()) {
-                    this.acorda();
+                if (this.getJogadores().size() == 2) {
+                    this.iniciarRodada();
+                } else if(this.getJogadores().size()>2){
+                    resposta.setCodigo(3).setMensagem("Comprar Cartas Iniciais").build();
+                    this.enviarResposta(resposta.build(), jogador);
                 }
             }
             return true;
@@ -91,14 +78,6 @@ public class Mesa implements Serializable {
             }
         }
         return i;
-    }
-
-    synchronized void dorme(){
-        try {
-            this.wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     boolean enviarResposta(ComunicacaoOuterClass.informacoesJogoResponse resposta, Jogador jogador){
@@ -153,6 +132,50 @@ public class Mesa implements Serializable {
         }
     }
 
+    public void iniciarRodada(){
+        ComunicacaoOuterClass.informacoesJogoResponse.Builder resposta = ComunicacaoOuterClass.informacoesJogoResponse.newBuilder();
+
+        this.reiniciarRodada();
+        resposta.setCodigo(4).setMensagem("ReiniciarRodada").build();
+        this.enviarRespostaTodos(resposta.build());
+
+        if(this.getJogadores().size() == 1) {
+            resposta.setCodigo(0).setMensagem("Erro: Não existem jogadores suficientes na mesa para iniciar a rodada.").build();
+            this.enviarResposta(resposta.build(), this.getJogadores().get(0));
+        } else {
+            resposta.setCodigo(0).setMensagem("\n--------------INICIANDO JOGO--------------").build();
+            this.enviarRespostaTodos(resposta.build());
+
+            resposta.setCodigo(3).setMensagem("Comprar Cartas Iniciais").build();
+            this.enviarRespostaTodos(resposta.build());
+            resposta.setCodigo(0).setMensagem("Vez do Jogador " + this.getJogadores().get(0).getNome() + ".").build();
+            this.enviarRespostaTodos(resposta.build());
+
+            resposta.setCodigo(2).setMensagem("Sua Vez").build();
+            this.enviarResposta(resposta.build(), this.getJogadores().get(0));
+        }
+    }
+
+    public void passarVez() {
+        int indexJogadorComVez = this.buscaJogadorVez();
+        if (indexJogadorComVez == this.getJogadores().size() || indexJogadorComVez+1 == this.getJogadores().size()) {
+            this.verificarVitoria();
+            this.score();
+            this.iniciarRodada();
+        } else {
+            Jogador jogador = this.getJogadores().get(indexJogadorComVez);
+            jogador.setJogou(true);
+
+            Jogador proxJogadorComVez = this.getJogadores().get(indexJogadorComVez+1);
+            ComunicacaoOuterClass.informacoesJogoResponse.Builder resposta = ComunicacaoOuterClass.informacoesJogoResponse.newBuilder();
+            resposta.setCodigo(0).setMensagem("Vez do Jogador " + proxJogadorComVez.getNome() + ".").build();
+            this.enviarRespostaTodos(resposta.build());
+
+            resposta.setCodigo(2).setMensagem("Sua Vez").build();
+            this.enviarResposta(resposta.build(), proxJogadorComVez);
+        }
+    }
+
     void reiniciarRodada(){
         for (Jogador jogador : this.getJogadores() ){
             for (Carta carta : jogador.getCartas()) {
@@ -168,6 +191,15 @@ public class Mesa implements Serializable {
         int index = this.getJogadores().indexOf(jogador);
         if(index>=0){
             int indexVez = this.buscaJogadorVez();
+            System.err.println("SAIDA DA SALA: " + jogador.getNome() + " saiu da sala " + this.getChaveHash() + "! Existe(em) " + this.getJogadores().size() + " Jogador(es) nessa Sala.");
+            ComunicacaoOuterClass.informacoesJogoResponse.Builder resposta = ComunicacaoOuterClass.informacoesJogoResponse.newBuilder();
+            resposta.setCodigo(0).setMensagem("O Jogador "+jogador.getNome()+ " acaba de abandonar a partida.").build();
+            this.enviarRespostaTodos(resposta.build());
+
+            if(index==indexVez){
+                this.passarVez();
+            }
+
             for (Carta carta : jogador.getCartas()) {
                 this.getBaralho().addCarta(carta);
             }
@@ -176,14 +208,6 @@ public class Mesa implements Serializable {
             this.getJogadores().remove(jogador);
             this.getBaralho().embaralhar();
 
-            System.err.println("SAIDA DA SALA: " + jogador.getNome() + " saiu da sala " + this.getChaveHash() + "! Existe(em) " + this.getJogadores().size() + " Jogador(es) nessa Sala.");
-            ComunicacaoOuterClass.informacoesJogoResponse.Builder resposta = ComunicacaoOuterClass.informacoesJogoResponse.newBuilder();
-            resposta.setCodigo(0).setMensagem("O Jogador "+jogador.getNome()+ " acaba de abandonar a partida.").build();
-            this.enviarRespostaTodos(resposta.build());
-
-            if(index==indexVez){
-                this.acorda();
-            }
             return true;
         }
         return false;
