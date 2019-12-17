@@ -235,29 +235,6 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
         responseObserver.onCompleted();
     }
 
-    public void reconexaoComprarCarta(String cartaLetra,String cartaNaipe,int cartaValor,String chaveHashMesa,String IpJogador,String NomeJogador,ConexaoServidor conexao) {
-
-        int indexMesa = buscaMesa( chaveHashMesa );
-        Carta carta = new Carta(cartaLetra,cartaNaipe,cartaValor);
-
-        if(indexMesa>=0){
-            Mesa mesa = conexao.getMesas().get(indexMesa);
-            Jogador jogador = mesa.buscaJogador(IpJogador, NomeJogador);
-            if(jogador!=null){
-
-                jogador.comprarCarta(carta);
-
-            } else {
-
-                carta.setLetra("");
-                carta.setNaipe("");
-                carta.setValor(0);
-            }
-        }
-
-    }
-
-
     public ComunicacaoGrpc.ComunicacaoBlockingStub criarCanalGRPC(String ipServidor, int portaServidor){
         if(!ipServidor.equals("") && portaServidor>0 && portaServidor<65365) {
             int loop = 0;
@@ -378,19 +355,6 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
         responseObserver.onCompleted();
     }
 
-    public void reconexaoCriarMesa( ConexaoServidor conexao,String chaveHashMesa,String IpJogador,String NomeJogador) {
-        Mesa mesa =  new Mesa(chaveHashMesa, conexao);
-        conexao.getMesas().add(mesa);
-
-        System.out.println("CRIAÇÃO DE SALA: Sucesso ao tentar criar a sala "+conexao.getMesas().size()+"! Existe(em) "+conexao.getMesas().size()+" Sala(s) aberta(s) neste Servidor.");
-
-        Jogador jogador = new Jogador();
-        jogador.setIp(IpJogador);
-        jogador.setNome(NomeJogador);
-        jogador.setChaveHashMesa(chaveHashMesa);
-
-    }
-
     public Repasse descobrirRepasse(String chaveHashRequisicao){
         Repasse repasse = new Repasse();
         if(this.getFingerTable()!=null) {
@@ -449,35 +413,25 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
 
         int index = buscaMesa( chaveHashMesa );
         ComunicacaoOuterClass.informacoesJogoResponse.Builder resposta = ComunicacaoOuterClass.informacoesJogoResponse.newBuilder();
-        if(index>=0 || this.getFingerTable()==null || request.getRealiza())
-        {
-            Jogador jogadorComparar = this.getMesas().get(index).buscaJogador(jogador.getIp(),jogador.getNome());
-            if(jogadorComparar == null)
-            {
-                if(index<0){
-                    System.err.println("ENTRADA NA SALA: Erro na tentativa do Jogador "+jogador.getNome()+" entrar na sala "+chaveHashMesa+"! " +
-                            "Pois essa Sala não existe.");
-                    resposta.setCodigo(-1).setMensagem("Erro: A Sala "+chaveHashMesa+" não existe!");
-                    responseObserver.onNext(resposta.build());
-                } else {
-                    if (this.getMesas().get(index).addJogador(jogador)) {
-                        System.out.println("ENTRADA NA SALA: O Jogador " + jogador.getNome() + " acaba de entrar na sala " + chaveHashMesa + "! " +
-                                "Existe(em) " + this.getMesas().get(index).getJogadores().size() + " Jogador(es) nessa Sala.");
-                        String mensagem = "entrarMesa:"+ request.getPartidas() +":" + request.getVitorias() ;
-                        String mensagemLog = this.getChaveHash() + ":" + mensagem + ":" + jogador.getChaveHashMesa() + ":" + jogador.getIp() + ":" + jogador.getNome();
-                        this.escreverNoArquivo(mensagemLog);
-                    } else {
-                        System.err.println("ENTRADA NA SALA: Erro na tentativa do Jogador " + jogador.getNome() + " entrar na sala " + chaveHashMesa + "! " +
-                                "Pois ja existe(em) " + this.getMesas().get(index).getJogadores().size() + " Jogador(es) nessa Sala.");
-                        resposta.setCodigo(-2).setMensagem("Erro: Sala com quantidade maxima de jogadores.");
-                        responseObserver.onNext(resposta.build());
-                    }
-                }
-            }else
-            {
-                jogadorComparar.setResponseObserver(responseObserver);
-                resposta.setCodigo(0).setMensagem("Reconectado na sala com sucesso!");
+        if(index>=0 || this.getFingerTable()==null || request.getRealiza()){
+            if(index<0){
+                System.err.println("ENTRADA NA SALA: Erro na tentativa do Jogador "+jogador.getNome()+" entrar na sala "+chaveHashMesa+"! " +
+                        "Pois essa Sala não existe.");
+                resposta.setCodigo(-1).setMensagem("Erro: A Sala "+chaveHashMesa+" não existe!");
                 responseObserver.onNext(resposta.build());
+            } else {
+                if (this.getMesas().get(index).addJogador(jogador)) {
+                    System.out.println("ENTRADA NA SALA: O Jogador " + jogador.getNome() + " acaba de entrar na sala " + chaveHashMesa + "! " +
+                            "Existe(em) " + this.getMesas().get(index).getJogadores().size() + " Jogador(es) nessa Sala.");
+                    String mensagem = "entrarMesa";
+                    String mensagemLog = this.getChaveHash() + ":" + mensagem + ":" + jogador.getChaveHashMesa() + ":" + jogador.getIp() + ":" + jogador.getNome();
+                    this.escreverNoArquivo(mensagemLog);
+                } else {
+                    System.err.println("ENTRADA NA SALA: Erro na tentativa do Jogador " + jogador.getNome() + " entrar na sala " + chaveHashMesa + "! " +
+                            "Pois ja existe(em) " + this.getMesas().get(index).getJogadores().size() + " Jogador(es) nessa Sala.");
+                    resposta.setCodigo(-2).setMensagem("Erro: Sala com quantidade maxima de jogadores.");
+                    responseObserver.onNext(resposta.build());
+                }
             }
         } else {
             Repasse repasse = this.descobrirRepasse(request.getChaveHashMesa());
@@ -502,32 +456,6 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
                     responseObserver.onNext(respostaOutroServidor);
                 }
             } catch (StatusRuntimeException e){  }
-        }
-    }
-
-    public void reconexaoEntrarMesa(String chaveHashMesa,String IpJogador,String NomeJogador,Integer NumeroPartidas,Integer NumeroVitorias, ConexaoServidor conexaoServidor)
-    {
-        Jogador jogador = new Jogador();
-        jogador.setIp( IpJogador );
-        jogador.setNome( NomeJogador );
-        jogador.setPartidas(NumeroPartidas );
-        jogador.setVitorias( NumeroVitorias );
-
-        int index = buscaMesa( chaveHashMesa );
-        if(index>=0){
-            if( conexaoServidor.getMesas().get(index).addJogador(jogador) )
-            {
-                System.out.println("ENTRADA NA SALA: O Jogador " + jogador.getNome() + " acaba de entrar na sala " + chaveHashMesa + "! " +
-                        "Existe(em) " + conexaoServidor.getMesas().get(index).getJogadores().size() + " Jogador(es) nessa Sala.");
-
-            } else {
-                System.err.println("ENTRADA NA SALA: Erro na tentativa do Jogador " + jogador.getNome() + " entrar na sala " + chaveHashMesa + "! " +
-                        "Pois ja existe(em) " + conexaoServidor.getMesas().get(index).getJogadores().size() + " Jogador(es) nessa Sala.");
-
-            }
-        } else {
-            System.err.println("ENTRADA NA SALA: Erro na tentativa do Jogador "+jogador.getNome()+" entrar na sala "+chaveHashMesa+"! " +
-                    "Pois essa Sala não existe.");
         }
     }
 
@@ -654,46 +582,6 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
             responseObserver.onNext(passarVezResponse);
         }
         responseObserver.onCompleted();
-    }
-
-    public void reconexaoPassarVez(String chaveHashMesa, String IpJogador, String NomeJogador,ConexaoServidor conexao)
-    {
-        int indexMesa = buscaMesa( chaveHashMesa );
-
-        if(indexMesa>=0)
-        {
-            Mesa mesa = conexao.getMesas().get(indexMesa);
-            Jogador jogador = mesa.buscaJogador(IpJogador, NomeJogador);
-            if(jogador!=null)
-            {
-
-                System.out.println("Passou a vez: " + IpJogador + " Nome: " + NomeJogador);
-                jogador.setJogou(true);
-            }else
-            {
-                System.out.println("Nao passou a vez: " + IpJogador + " Nome: " + NomeJogador);
-                jogador.setJogou(false);
-            }
-        }else
-        {
-            System.out.println("Mesa nao encontrada " + chaveHashMesa + "Jogador: " +IpJogador + "Nome: " +NomeJogador+"nao esta nessa mesa" );
-        }
-
-    }
-    public void reconexaoSairMesa(String chaveHashMesa,String IpJogador, String NomeJogador,ConexaoServidor conexao) {
-
-        int indexMesa = buscaMesa( chaveHashMesa );
-
-        if(indexMesa>=0){
-            Mesa mesa = conexao.getMesas().get(indexMesa);
-            Jogador jogador = mesa.buscaJogador(IpJogador, NomeJogador);
-            if(jogador!=null && mesa.retirarJogador(jogador)){
-
-                System.out.println("Sucesso ao sair da mesa.");
-
-            }
-        }
-
     }
 
     void removerMesa(Mesa mesa) {

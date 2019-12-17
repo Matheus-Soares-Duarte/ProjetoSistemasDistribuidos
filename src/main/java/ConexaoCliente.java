@@ -223,18 +223,10 @@ public class ConexaoCliente implements Serializable {
                 switch (e.getStatus().getCode()) {
                     case UNAVAILABLE:
                         System.err.println("Sistema Indisponivel no momento. "+loop+" Tentativa de reenvio.");
-
-                        try
-                        {
-                            Thread.sleep(3000);
-                        } catch (InterruptedException ex)
-                        {
-                            ex.printStackTrace();
+                        try {
+                            sleep(10000);
+                        } catch (InterruptedException ex) {
                         }
-
-                        //Tenta criar canal com o servidor
-                        this.criarCanalGRPC(this.getIpServidor());
-
                         break;
                     default:
                         System.err.println("Erro não tratado "+e.getStatus().getCode()+". "+loop+" Tentativa de reenvio.");
