@@ -4,7 +4,7 @@ import io.grpc.StatusRuntimeException;
 import stubs.ComunicacaoGrpc;
 import stubs.ComunicacaoOuterClass;
 
-import java.io.*;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Properties;
@@ -12,8 +12,6 @@ import java.util.Properties;
 import static java.lang.Thread.sleep;
 
 public class ConexaoCliente implements Serializable {
-    private String diretorioRecuperacao;
-    private String diretorioRecuperacaoCliente;
     private String ipServidor;
     private Jogador jogador;
     private int porta;
@@ -21,21 +19,27 @@ public class ConexaoCliente implements Serializable {
 
     public ConexaoCliente(){
         Properties properties = ManipuladorArquivo.arquivoConfiguracao();
-        this.setDiretorioRecuperacao( properties.getProperty("Diretorio.Recuperacao") );
-        this.setDiretorioRecuperacaoCliente( properties.getProperty("Diretorio.RecuperacaoCliente") );
         this.setIpServidor( properties.getProperty("Ip.Servidor") );
-        this.setPorta( Integer.parseInt(properties.getProperty("Porta.TCP")) );
+        if(ipServidor.isEmpty()) {
+            System.err.println("CONFIGURAÇÃO: É necessario informar o IP do Servidor para iniciar o cliente. " +
+                    "Por favor verifique os dados informados no arquivo de configuração!");
+            System.exit(0);
+        }
+
+        try {
+            this.setPorta( Integer.parseInt(properties.getProperty("Porta.Servidor")) );
+        } catch (NumberFormatException e) {
+            System.err.println("CONFIGURAÇÃO: É necessario informar a Porta do Servidor para iniciar o cliente. " +
+                    "Por favor verifique os dados informados no arquivo de configuração!");
+            System.exit(0);
+        }
     }
 
-    public String getDiretorioRecuperacao() { return diretorioRecuperacao; }
-    public String getDiretorioRecuperacaoCliente() { return diretorioRecuperacaoCliente; }
     public String getIpServidor() { return ipServidor; }
     public Jogador getJogador() { return jogador; }
     public int getPorta() { return porta; }
     public ComunicacaoGrpc.ComunicacaoBlockingStub getServidor() { return servidor; }
 
-    public void setDiretorioRecuperacao(String diretorioRecuperacao) { this.diretorioRecuperacao = diretorioRecuperacao; }
-    public void setDiretorioRecuperacaoCliente(String diretorioRecuperacaoCliente) { this.diretorioRecuperacaoCliente = diretorioRecuperacaoCliente; }
     public void setIpServidor(String ipServidor) { this.ipServidor = ipServidor; }
     public void setJogador(Jogador jogador) { this.jogador = jogador; }
     public void setPorta(int porta) { this.porta = porta; }
@@ -85,14 +89,6 @@ public class ConexaoCliente implements Serializable {
         }
     }
 
-    synchronized void escreverNoArquivo(String tipo, boolean escreverSnapshoot){
-        String mensagemLog = this.getJogador().getIp()+":"+this.getJogador().getNome()+":"+tipo+":"+this.getJogador().getChaveHashMesa();
-        String diretorio = this.getDiretorioRecuperacao()+"\\"+this.getDiretorioRecuperacaoCliente();
-        ManipuladorArquivo.criarDiretorio(this.getDiretorioRecuperacao());
-        ManipuladorArquivo.criarDiretorio(diretorio);
-        ManipuladorArquivo.escreverLog(this, diretorio, mensagemLog, escreverSnapshoot);
-    }
-
     void realizaRequisicao(String tipo, Object request){
         int loop = 0;
         while (loop < 3) {
@@ -110,7 +106,6 @@ public class ConexaoCliente implements Serializable {
                                     .setRealiza(false)
                                     .setVitorias(this.getJogador().getVitorias())
                                     .build();
-                            this.escreverNoArquivo(tipo, false);
                             this.realizaRequisicao("entrar", entrarMesaRequest);
                         } else {
                             this.getJogador().getMenu().escolhaInicial(this);
@@ -130,10 +125,8 @@ public class ConexaoCliente implements Serializable {
                         for (Iterator<ComunicacaoOuterClass.informacoesJogoResponse> it = informacoesJogoResponse; it.hasNext(); ) {
                             ComunicacaoOuterClass.informacoesJogoResponse resposta = it.next();
                             if(resposta.getCodigo()==5){ //sucesso ao entrar na mesa
-                                this.escreverNoArquivo(tipo, false);
                             } else if(resposta.getCodigo()==4){ //reiniciar rodada
                                 this.getJogador().devolverCartas();
-                                this.escreverNoArquivo(resposta.getMensagem(), true);
                             } else if(resposta.getCodigo()==3){ //comprar cartas iniciais
                                 for(int i=0; i<2; i++){
                                     this.realizaRequisicao("comprar", requisicaoNaVezRequest);
@@ -144,7 +137,7 @@ public class ConexaoCliente implements Serializable {
                                 this.getJogador().getMenu().escolhaNaVez(this.getJogador(), this);
                             } else if(resposta.getCodigo()==1) { //vitoria
                                 this.getJogador().addVitoria();
-                                this.escreverNoArquivo(resposta.getMensagem(), false);
+
                             } else if(resposta.getCodigo()==0) { //mensagem de mudança na mesa
                                 System.out.println(resposta.getMensagem());
                             } else {
@@ -164,7 +157,6 @@ public class ConexaoCliente implements Serializable {
                         if (comprarCartaResponse.getCodigo()==0){
                             Carta carta = new Carta(comprarCartaResponse.getLetra(), comprarCartaResponse.getNaipe(), comprarCartaResponse.getValor());
                             this.getJogador().comprarCarta(carta);
-                            this.escreverNoArquivo(tipo+":"+carta.getLetra()+":"+carta.getNaipe()+":"+carta.getValor(), false);
 
                             if(this.getJogador().getCartas().size() > 2){
                                 this.getJogador().mostrarCartas();
@@ -193,7 +185,6 @@ public class ConexaoCliente implements Serializable {
                         if (passarVezResponse.getCodigo()==0){
                             this.getJogador().setJogou(true);
                             this.getJogador().addPartida();
-                            this.escreverNoArquivo(tipo, false);
                         } else {
                             System.err.println(passarVezResponse.getMensagem());
                             this.getJogador().getMenu().escolhaNaVez(this.getJogador(), this);
@@ -202,7 +193,6 @@ public class ConexaoCliente implements Serializable {
                     case "sair":
                         ComunicacaoOuterClass.sairMesaResponse sairMesaResponse = this.getServidor().sairMesa((ComunicacaoOuterClass.requisicaoNaVezRequest) request);
                         if (sairMesaResponse.getCodigo()==0){
-                            this.escreverNoArquivo(tipo, true);
                             this.getJogador().devolverCartas();
                             this.getJogador().setChaveHashMesa("");
                             System.out.println(sairMesaResponse.getMensagem());

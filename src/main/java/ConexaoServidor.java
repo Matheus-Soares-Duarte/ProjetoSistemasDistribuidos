@@ -1,23 +1,24 @@
-import io.grpc.*;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
 import stubs.ComunicacaoGrpc;
 import stubs.ComunicacaoOuterClass;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.net.*;
-import java.util.*;
+import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Properties;
 
 import static java.lang.Thread.sleep;
 
 public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase implements Serializable {
     private int bytesHash;
     private String chaveHash;
-    private String diretorioRecuperacao;
-    private String diretorioRecuperacaoServidor;
-    private boolean escreverSnapshot;
-    private List<Finger> fingerTable;
+   private List<Finger> fingerTable;
     private String ip;
     private String ipServidorEntrada;
     private BigInteger maiorNumeroServidor;
@@ -32,8 +33,6 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
             e.printStackTrace();
         }
         Properties properties = ManipuladorArquivo.arquivoConfiguracao();
-        this.setDiretorioRecuperacao( properties.getProperty("Diretorio.Recuperacao") );
-        this.setDiretorioRecuperacaoServidor( properties.getProperty("Diretorio.RecuperacaoServidor") );
         this.setIpServidorEntrada( properties.getProperty("Ip.Servidor") );
         this.setPorta( Integer.parseInt(properties.getProperty("Porta.TCP")) );
         this.setPortaServidorEntrada( Integer.parseInt(properties.getProperty("Porta.Servidor")) );
@@ -53,17 +52,12 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
         }
         this.setMaiorNumeroServidor(calculaMaiorSevidor());
         this.setChaveHash( ChaveHash.gerarChave(this.getIp()+" "+this.getPorta(), this.getBytesHash()) );
-        this.setMesas( new ArrayList<Mesa>() );
+        this.setMesas( new ArrayList<>() );
         this.criarFingerTable();
-
-        new Thread( new TemporizadorSnapshot(this, Integer.parseInt(properties.getProperty("Tempo.Snapshot"))*1000 ) ).start();
     }
 
     public int getBytesHash() { return this.bytesHash; }
     public String getChaveHash() { return this.chaveHash; }
-    public String getDiretorioRecuperacao() { return diretorioRecuperacao; }
-    public String getDiretorioRecuperacaoServidor() { return diretorioRecuperacaoServidor; }
-    public boolean getEscreverSnapshot() { return escreverSnapshot; }
     public List<Finger> getFingerTable() { return fingerTable; }
     public String getIp() { return ip; }
     public String getIpServidorEntrada() { return ipServidorEntrada; }
@@ -74,9 +68,6 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
 
     public void setBytesHash(int bytesHash){ this.bytesHash = bytesHash; }
     public void setChaveHash(String chaveHash){ this.chaveHash = chaveHash; }
-    public void setDiretorioRecuperacao(String diretorioRecuperacao) { this.diretorioRecuperacao = diretorioRecuperacao; }
-    public void setDiretorioRecuperacaoServidor(String diretorioRecuperacaoServidor) { this.diretorioRecuperacaoServidor = diretorioRecuperacaoServidor; }
-    public void setEscreverSnapshot(boolean escreverSnapshot) { this.escreverSnapshot = escreverSnapshot; }
     public void setFingerTable(List<Finger> fingerTable) { this.fingerTable = fingerTable; }
     public void setIp(String ip) { this.ip = ip; }
     public void setIpServidorEntrada(String ipServidorEntrada) { this.ipServidorEntrada = ipServidorEntrada; }
@@ -84,10 +75,6 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
     public void setMesas(List<Mesa> mesas){ this.mesas = mesas; }
     public void setPorta(int porta) { this.porta = porta; }
     public void setPortaServidorEntrada(int portaServidorEntrada) { this.portaServidorEntrada = portaServidorEntrada; }
-
-    synchronized void acorda(){
-        notifyAll();
-    }
 
     @Override
     public void atualizarFingerTable(ComunicacaoOuterClass.atualizarFingerTableRequest request, StreamObserver<ComunicacaoOuterClass.atualizarFingerTableResponse> responseObserver) {
@@ -203,9 +190,6 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
                             .setNaipe(carta.getNaipe())
                             .setValor(carta.getValor())
                             .build();
-                    String mensagem = "comprarCarta" + ":" + carta.getLetra() + ":" + carta.getNaipe() + ":" + carta.getValor();
-                    String mensagemLog = this.getChaveHash() + ":" + mensagem + ":" + jogador.getChaveHashMesa() + ":" + jogador.getIp() + ":" + jogador.getNome();
-                    this.escreverNoArquivo(mensagemLog);
                 } else {
                     comprarCartaResponse
                             .setCodigo(-2)
@@ -265,7 +249,7 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
 
     public void criarFingerTable(){
         if(!this.getIpServidorEntrada().equals("") && this.getPortaServidorEntrada()>0 && this.getPortaServidorEntrada()<65365) {
-            List<Finger> fingerTable = new ArrayList<Finger>();
+            List<Finger> fingerTable = new ArrayList<>();
             ComunicacaoGrpc.ComunicacaoBlockingStub servidor = criarCanalGRPC(this.getIpServidorEntrada(), this.getPortaServidorEntrada());
             if (servidor != null) {
                 System.out.println("CONFIGURAÇÃO: Criando Finger Table.");
@@ -323,10 +307,6 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
                 Mesa mesa = new Mesa(chaveHashMesa, this);
                 this.getMesas().add(mesa);
                 System.out.println("CRIAÇÃO DE SALA: Sucesso ao tentar criar a sala " + chaveHashMesa + "! Existe(em) " + this.getMesas().size() + " Sala(s) aberta(s) neste Servidor.");
-
-                String mensagem = "criarMesa";
-                String mensagemLog = this.getChaveHash() + ":" + mensagem + ":" + chaveHashMesa + ":" + request.getIp() + ":" + request.getNome();
-                this.escreverNoArquivo(mensagemLog);
 
                 String msg = "A sala " + chaveHashMesa + " foi criada com sucesso!";
                 resposta.setCodigo(0).setMensagem(msg).setChaveHashMesa(chaveHashMesa);
@@ -393,14 +373,6 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
         return repasse;
     }
 
-    synchronized void dorme(){
-        try {
-            this.wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void entrarMesa(ComunicacaoOuterClass.entrarMesaRequest request, StreamObserver<ComunicacaoOuterClass.informacoesJogoResponse> responseObserver) {
         String chaveHashMesa = request.getChaveHashMesa();
@@ -423,9 +395,6 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
                 if (this.getMesas().get(index).addJogador(jogador)) {
                     System.out.println("ENTRADA NA SALA: O Jogador " + jogador.getNome() + " acaba de entrar na sala " + chaveHashMesa + "! " +
                             "Existe(em) " + this.getMesas().get(index).getJogadores().size() + " Jogador(es) nessa Sala.");
-                    String mensagem = "entrarMesa";
-                    String mensagemLog = this.getChaveHash() + ":" + mensagem + ":" + jogador.getChaveHashMesa() + ":" + jogador.getIp() + ":" + jogador.getNome();
-                    this.escreverNoArquivo(mensagemLog);
                 } else {
                     System.err.println("ENTRADA NA SALA: Erro na tentativa do Jogador " + jogador.getNome() + " entrar na sala " + chaveHashMesa + "! " +
                             "Pois ja existe(em) " + this.getMesas().get(index).getJogadores().size() + " Jogador(es) nessa Sala.");
@@ -456,20 +425,6 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
                     responseObserver.onNext(respostaOutroServidor);
                 }
             } catch (StatusRuntimeException e){  }
-        }
-    }
-
-    synchronized void escreverNoArquivo(String mensagemLog){
-        String diretorio = this.getDiretorioRecuperacao()+"\\"+this.getDiretorioRecuperacaoServidor();
-        ManipuladorArquivo.criarDiretorio(this.getDiretorioRecuperacao());
-        ManipuladorArquivo.criarDiretorio(diretorio);
-
-        if(this.getEscreverSnapshot()) {
-            ManipuladorArquivo.escreverLog(this, diretorio, mensagemLog, true);
-            this.setEscreverSnapshot(false);
-            this.acorda();
-        } else{
-            ManipuladorArquivo.escreverLog(this, diretorio, mensagemLog, false);
         }
     }
 
@@ -548,10 +503,6 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
                 Mesa mesa = this.getMesas().get(indexMesa);
                 Jogador jogador = mesa.buscaJogador(request.getIp(), request.getNome());
                 if (jogador != null) {
-                    String mensagem = "passarVez";
-                    String mensagemLog = this.getChaveHash() + ":" + mensagem + ":" + jogador.getChaveHashMesa() + ":" + jogador.getIp() + ":" + jogador.getNome();
-                    this.escreverNoArquivo(mensagemLog);
-
                     jogador.setJogou(true);
                     mesa.acorda();
                     passarVezResponse
@@ -589,9 +540,6 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
         if (mesa != null) {
             this.getMesas().remove(mesa);
             System.err.println("EXCLUSÃO DE SALA: A Sala " + mesa.getChaveHash() + " acaba de ser excluida, pois não existem jogadores nela! Existe(em) " + this.getMesas().size() + " Sala(s) neste Servidor.");
-            String mensagem = "removerMesa";
-            String mensagemLog = this.getChaveHash()+":"+mensagem+":"+mesa.getChaveHash();
-            this.escreverNoArquivo(mensagemLog);
         }
     }
 
@@ -616,9 +564,6 @@ public class ConexaoServidor extends ComunicacaoGrpc.ComunicacaoImplBase impleme
                             .setCodigo(0)
                             .setMensagem("Sucesso ao sair da mesa.")
                             .build();
-                    String mensagem = "sairMesa";
-                    String mensagemLog = this.getChaveHash() + ":" + mensagem + ":" + jogador.getChaveHashMesa() + ":" + jogador.getIp() + ":" + jogador.getNome();
-                    this.escreverNoArquivo(mensagemLog);
                 } else {
                     sairMesaResponse
                             .setCodigo(1)
