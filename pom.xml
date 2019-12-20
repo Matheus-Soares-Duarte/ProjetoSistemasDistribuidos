@@ -56,7 +56,50 @@
             <version>5.5.1</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>io.atomix.copycat</groupId>
+            <artifactId>copycat-server</artifactId>
+            <version>1.1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>io.atomix.copycat</groupId>
+            <artifactId>copycat-client</artifactId>
+            <version>1.1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>io.atomix.catalyst</groupId>
+            <artifactId>catalyst-netty</artifactId>
+            <version>1.1.1</version>
+        </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>server0</id>
+            <activation>
+                <property>
+                    <name>server0</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>Servidor</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <build>
         <defaultGoal>clean generate-sources compile test install</defaultGoal>

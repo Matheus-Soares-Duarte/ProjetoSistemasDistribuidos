@@ -24,8 +24,11 @@ public class ManipuladorArquivo {
                 FileWriter fw = new FileWriter(arquivo);
                 BufferedWriter bw = new BufferedWriter(fw);
 
+                bw.write("Ips.Servidores.Cluster = 127.0.0.1 127.0.0.1 127.0.0.1\n");
+                bw.write("Portas.Servidores.Cluster = 6000 6001 6002\n");
                 bw.write("Ip.Servidor = \n");
                 bw.write("Porta.Servidor = 12345\n");
+                bw.write("Id.Cluster = 0\n");
                 bw.write("Porta.TCP = 12345\n");
                 bw.write("Quantidade.BytesHash = 16\n");
 
